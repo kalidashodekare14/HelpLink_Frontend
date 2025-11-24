@@ -1,9 +1,13 @@
 "use client"
-import { Box, Button, Checkbox, Container, Divider, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Container, Divider, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
+import toast, { Toaster } from 'react-hot-toast';
+import { redirect, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 
 type Inputs = {
@@ -13,19 +17,39 @@ type Inputs = {
 
 const LoginComponent = () => {
 
+    const router = useRouter();
+    const [loading, setLoading] = useState<boolean>(false);
+
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm<Inputs>()
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        const loginData = {
-            email: data.email,
-            password: data.password
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        try {
+            const loginData = {
+                email: data.email,
+                password: data.password,
+                redirect: false,
+            }
+            setLoading(true);
+            const res = await signIn('credentials', loginData)
+            if (res?.status === 200) {
+                toast('Login Successfully 🎉');
+                router.push("/")
+            }
+            if (res?.ok === false || res?.status === 401) {
+                console.log("Sign In Error")
+                toast.error('Login Failed ❌');
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error('Login Failed ❌');
+        } finally {
+            setLoading(false);
         }
-        console.log('checking data', loginData);
+
     }
 
     return (
@@ -81,7 +105,11 @@ const LoginComponent = () => {
                                     bgcolor: "#0048e8",
                                     color: "white"
                                 }}
-                            >Login</Button>
+                            >
+                                {loading ? <CircularProgress size={30} color="inherit" /> : "Login"}
+                            </Button>
+
+
                         </Box>
                         <Typography sx={{ my: "5px" }}>Don't have an account? <Link href={"/signup"}>Sign Up Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
@@ -111,6 +139,7 @@ const LoginComponent = () => {
                     </Box>
                 </form>
             </Box>
+            <Toaster />
         </Container >
     );
 };

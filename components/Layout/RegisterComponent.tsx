@@ -19,8 +19,6 @@ const RegisterComponent = () => {
 
     const [isRole, setIsRole] = useState<string>("");
 
-    console.log('checking prev', isRole);
-
     const handleReceiver = () => {
         setIsRole("receiver");
     }
@@ -47,7 +45,7 @@ const RegisterComponent = () => {
             password: data.password,
             role: isRole
         }
-
+        
     }
 
     return (
