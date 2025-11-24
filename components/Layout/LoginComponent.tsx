@@ -6,7 +6,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import toast, { Toaster } from 'react-hot-toast';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 
@@ -36,7 +36,7 @@ const LoginComponent = () => {
             setLoading(true);
             const res = await signIn('credentials', loginData)
             if (res?.status === 200) {
-                toast('Login Successfully 🎉');
+                toast.success('Login Successfully 🎉');
                 router.push("/")
             }
             if (res?.ok === false || res?.status === 401) {

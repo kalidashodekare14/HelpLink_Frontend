@@ -3,14 +3,31 @@ import HorizontalSplitIcon from '@mui/icons-material/HorizontalSplit';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Avatar, Box, Button, Container, Menu, MenuItem, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { signOut, useSession } from 'next-auth/react';
+import { Image } from '@mui/icons-material';
 
 const Navbar = () => {
 
-    const [toggle, setToggle] = useState<boolean>(false)
-    const [isSticky, setIsSticky] = useState<boolean>(false)
-    const pathname = usePathname()
+    const [toggle, setToggle] = useState<boolean>(false);
+    const [isSticky, setIsSticky] = useState<boolean>(false);
+    const pathname = usePathname();
+    const { data: session } = useSession();
+
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        signOut()
+    }
 
 
     const handleToggle = () => {
@@ -60,7 +77,7 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll)
         }
     }, [])
-    
+
 
     return (
         <Box
@@ -108,14 +125,52 @@ const Navbar = () => {
                     gap: "80px",
                     fontSize: "19px"
                 }}>
-                    <Link href={"/signin"}>
-                        <Button variant='outlined'
-                            sx={{
-                                bgcolor: "#0048e8",
-                                color: "white"
-                            }}
-                        >Login</Button>
-                    </Link>
+                    {
+                        session ? (
+                            <>
+                                <Avatar
+                                    id="basic-button"
+                                    aria-controls={open ? 'basic-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
+                                    sx={{ cursor: 'pointer' }}
+                                >
+                                    {session?.user?.image ? (
+                                        <img src={session?.user?.image} alt='' />
+                                    ) : (
+                                        <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
+                                    )
+                                    }
+                                </Avatar>
+                                <Menu
+                                    id="basic-menu"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleClose}
+                                    slotProps={{
+                                        list: {
+                                            'aria-labelledby': 'basic-button',
+                                        },
+                                    }}
+                                >
+                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                </Menu>
+                            </>
+                        ) : (
+                            <Link href={"/signin"}>
+                                <Button variant='outlined'
+                                    sx={{
+                                        bgcolor: "#0048e8",
+                                        color: "white"
+                                    }}
+                                >Login</Button>
+                            </Link>
+                        )
+                    }
+
                     {
                         toggle ? (
                             <CloseIcon

@@ -1,11 +1,13 @@
 "use client"
-import { Box, Button, Checkbox, Container, Divider, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Container, Divider, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import { Form, SubmitHandler, useForm } from 'react-hook-form';
+import {  SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 
 type Inputs = {
@@ -18,6 +20,8 @@ const RegisterComponent = () => {
 
 
     const [isRole, setIsRole] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter()
 
     const handleReceiver = () => {
         setIsRole("receiver");
@@ -34,18 +38,31 @@ const RegisterComponent = () => {
         formState: { errors },
     } = useForm<Inputs>()
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        if (isRole.length < 1) {
-            toast.error('Please select your role.');
-            return
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        try {
+            if (isRole.length < 1) {
+                toast.error('Please select your role.');
+                return
+            }
+            const registerData = {
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                role: isRole
+            }
+            setLoading(true)
+            const res = await axios.post("http://localhost:5000/api/v1/auth/register", registerData);
+            if (res.status === 200) {
+                toast.success('Register Successfully 🎉');
+                router.push("/signin")
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error('Login Failed ❌');
+        } finally {
+            setLoading(false);
         }
-        const registerData = {
-            name: data.name,
-            email: data.email,
-            password: data.password,
-            role: isRole
-        }
-        
     }
 
     return (
@@ -106,7 +123,9 @@ const RegisterComponent = () => {
                                     bgcolor: "#0048e8",
                                     color: "white"
                                 }}
-                            >Register</Button>
+                            >
+                                {loading ? <CircularProgress size={30} color="inherit" /> : "Register"}
+                            </Button>
                         </Box>
                         <Typography sx={{ my: "5px" }}>Already have an account? <Link href={"/signin"}>Sign In Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
