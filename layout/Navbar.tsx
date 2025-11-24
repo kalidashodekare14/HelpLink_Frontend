@@ -1,0 +1,176 @@
+"use client"
+import HorizontalSplitIcon from '@mui/icons-material/HorizontalSplit';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { Box, Button, Container, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+
+const Navbar = () => {
+
+    const [toggle, setToggle] = useState<boolean>(false)
+    const [isSticky, setIsSticky] = useState<boolean>(false)
+    const pathname = usePathname()
+
+
+    const handleToggle = () => {
+        setToggle(!toggle)
+    }
+
+    const navgicaton = [
+        {
+            "id": "1",
+            "name": "Home",
+            "path": "/"
+        },
+        {
+            "id": "2",
+            "name": "About",
+            "path": "/about"
+        },
+        {
+            "id": "3",
+            "name": "Service",
+            "path": "/services"
+        },
+        {
+            "id": "4",
+            "name": "Doctors",
+            "path": "/doctors"
+        },
+        {
+            "id": "5",
+            "name": "Blog",
+            "path": "/blog"
+        },
+        {
+            "id": "6",
+            "name": "Contact",
+            "path": "/contact"
+        },
+    ]
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const isTop = window.scrollY < 150;
+            setIsSticky(!isTop)
+        }
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
+    return (
+        <Container
+            sx={{
+                position: isSticky ? "sticky" : "static",
+                top: isSticky ? 0 : "auto",
+                zIndex: isSticky ? 50 : "auto",
+                backgroundColor: isSticky ? "rgba(255, 255, 255, 0.73)" : "white",
+                boxShadow: isSticky ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
+                backdropFilter: isSticky ? "blur(12px)" : "none",
+                transition: "all 0.3s ease",
+                opacity: isSticky ? 1 : 1
+            }}
+        >
+            <Box
+                sx={{
+                    zIndex: "50",
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    py: "12px"
+                }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        justifyItems: "center",
+                        gap: "80px"
+                    }}>
+                    <h1 className='text-3xl'>HelpLink</h1>
+                    <ul className='hidden lg:flex items-center gap-5 text-[16px]'>
+                        {
+                            navgicaton.map((navi) => (
+                                <Link className={`${pathname == navi.path && "text-[#307bc4] border-b-2 border-[#307bc4]"} hover:text-[#307bc4]`} key={navi.id} href={navi.path}>
+                                    <li className='font-rubik'>{navi.name}</li>
+                                </Link>
+                            ))
+                        }
+                    </ul>
+                </Box>
+                <Box sx={{
+                    display: "flex",
+                    justifyItems: "center",
+                    gap: "80px",
+                    fontSize: "19px"
+                }}>
+                    <Button variant='outlined'
+                        sx={{
+                            bgcolor: "#0048e8",
+                            color: "white"
+                        }}
+                    >Login</Button>
+                    {
+                        toggle ? (
+                            <CloseIcon
+                                onClick={handleToggle}
+                                sx={{
+                                    display: {
+
+                                        sm: "inline-block",
+                                        md: "inline-block",
+                                        lg: "none"
+                                    }
+                                }}
+                            />
+                        ) : (
+                            <HorizontalSplitIcon
+                                onClick={handleToggle}
+                                sx={{
+                                    display: {
+
+                                        sm: "inline-block",
+                                        md: "inline-block",
+                                        lg: "none"
+                                    }
+                                }}
+                            />
+                        )
+                    }
+
+
+                </Box>
+                <Box
+                    sx={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        height: "100vh",
+                        width: "75%",
+                        background: "#307bc4",
+                        color: "white",
+                        zIndex: 999,
+                        p: "25px",
+                        display: { xs: "flex", lg: "none" },
+                        flexDirection: "column",
+                        gap: "30px",
+                        fontSize: "19px",
+                        transform: toggle ? "translateX(0)" : "translateX(-100%)",
+                        transition: "transform 0.7s ease"
+                    }}>
+                    {
+                        navgicaton.map((navi) => (
+                            <Link className={`${pathname == navi.path && "text-white border-b-2 border-[#000000]"} hover:text-[#307bc4]`} key={navi.id} href={navi.path}>
+                                <Typography className='font-rubik'>{navi.name}</Typography>
+                            </Link>
+                        ))
+                    }
+                </Box>
+            </Box>
+        </Container>
+    );
+};
+
+export default Navbar;
