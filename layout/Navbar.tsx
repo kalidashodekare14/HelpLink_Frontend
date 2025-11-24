@@ -71,7 +71,8 @@ const Navbar = () => {
                 boxShadow: isSticky ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
                 backdropFilter: isSticky ? "blur(12px)" : "none",
                 transition: "all 0.3s ease",
-                opacity: isSticky ? 1 : 1
+                opacity: isSticky ? 1 : 1,
+                bgcolor: "white"
             }}
         >
             <Box
@@ -106,12 +107,14 @@ const Navbar = () => {
                     gap: "80px",
                     fontSize: "19px"
                 }}>
-                    <Button variant='outlined'
-                        sx={{
-                            bgcolor: "#0048e8",
-                            color: "white"
-                        }}
-                    >Login</Button>
+                    <Link href={"/signin"}>
+                        <Button variant='outlined'
+                            sx={{
+                                bgcolor: "#0048e8",
+                                color: "white"
+                            }}
+                        >Login</Button>
+                    </Link>
                     {
                         toggle ? (
                             <CloseIcon

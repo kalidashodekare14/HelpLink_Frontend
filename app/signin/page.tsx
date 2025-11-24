@@ -1,12 +1,12 @@
-import { Container } from '@mui/material';
-import React from 'react';
+import LoginComponent from "@/components/Layout/LoginComponent";
 
-const LoginPage = () => {
+
+const SignInPage = () => {
     return (
-        <Container>
-                Hello world
-        </Container>
+        <div>
+            <LoginComponent />
+        </div>
     );
 };
 
-export default LoginPage;
+export default SignInPage;
