@@ -60,9 +60,10 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll)
         }
     }, [])
+    
 
     return (
-        <Container
+        <Box
             sx={{
                 position: isSticky ? "sticky" : "static",
                 top: isSticky ? 0 : "auto",
@@ -75,7 +76,7 @@ const Navbar = () => {
                 bgcolor: "white"
             }}
         >
-            <Box
+            <Container
                 sx={{
                     zIndex: "50",
                     width: "100%",
@@ -171,8 +172,8 @@ const Navbar = () => {
                         ))
                     }
                 </Box>
-            </Box>
-        </Container>
+            </Container>
+        </Box>
     );
 };
 

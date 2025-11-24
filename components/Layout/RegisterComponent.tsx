@@ -37,9 +37,7 @@ const RegisterComponent = () => {
     } = useForm<Inputs>()
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        // console.log(data)
         if (isRole.length < 1) {
-
             toast.error('Please select your role.');
             return
         }
@@ -49,6 +47,7 @@ const RegisterComponent = () => {
             password: data.password,
             role: isRole
         }
+
     }
 
     return (
@@ -117,8 +116,7 @@ const RegisterComponent = () => {
                         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}>
                             <Box sx={{
                                 border: "1px solid #bbbb",
-                                width: "12%",
-                                height: "8vh",
+                                p: "10px",
                                 borderRadius: "100%",
                                 display: "flex",
                                 justifyContent: "center",
@@ -128,8 +126,7 @@ const RegisterComponent = () => {
                             </Box>
                             <Box sx={{
                                 border: "1px solid #bbbb",
-                                width: "12%",
-                                height: "8vh",
+                                p: "10px",
                                 borderRadius: "100%",
                                 display: "flex",
                                 justifyContent: "center",
