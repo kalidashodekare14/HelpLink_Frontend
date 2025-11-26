@@ -36,35 +36,26 @@ const Navbar = () => {
 
     const navgicaton = [
         {
-            "id": "1",
+            "id": 1,
             "name": "Home",
             "path": "/"
         },
         {
-            "id": "2",
-            "name": "About",
+            "id": 2,
+            "name": "Campaigns",
+            "path": "/campaigns"
+        },
+        {
+            "id": 3,
+            "name": "About Us",
             "path": "/about"
         },
         {
-            "id": "3",
-            "name": "Service",
-            "path": "/services"
-        },
-        {
-            "id": "4",
-            "name": "Doctors",
-            "path": "/doctors"
-        },
-        {
-            "id": "5",
-            "name": "Blog",
-            "path": "/blog"
-        },
-        {
-            "id": "6",
+            "id": 4,
             "name": "Contact",
             "path": "/contact"
         },
+        
     ]
 
     useEffect(() => {
