@@ -1,6 +1,6 @@
 import HomeIcon from '@mui/icons-material/Home';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import CampaignIcon from '@mui/icons-material/Campaign';
 
 export const AdminRoutes = [
     {
@@ -19,6 +19,6 @@ export const AdminRoutes = [
         id: 3,
         name: "Manage Campaign",
         path: "/dashboard/manage_campaign",
-        icon: AddToPhotosIcon
+        icon: CampaignIcon
     },
 ]
