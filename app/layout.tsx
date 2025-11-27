@@ -4,6 +4,9 @@ import "./globals.css";
 import Navbar from "@/layout/Navbar";
 import AuthProvider from "@/auth/AuthProvider";
 import { ReduxtProviderWrapper } from "@/components/ReduxProviderWrapper";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { Rubik } from "next/font/google";
+import ThemeRegistry from "@/utils/ThemeRegistry";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +17,17 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"]
+})
+
+const theme = createTheme({
+  typography: {
+    fontFamily: rubik.style.fontFamily
+  }
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,12 +42,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rubik.className} antialiased`}
       >
         <AuthProvider>
           <ReduxtProviderWrapper>
-            <Navbar />
-            {children}
+            <ThemeRegistry>
+              <Navbar />
+              {children}
+            </ThemeRegistry>
           </ReduxtProviderWrapper>
         </AuthProvider>
 

@@ -1,4 +1,4 @@
-import { ICampaignResponse } from "@/types/public";
+import { ICampaignDetailsResponse, ICampaignResponse } from "@/types/public";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface TotalCampaignQuery {
@@ -19,10 +19,17 @@ export const publicService = createApi({
                 method: "GET",
                 params
             })
+        }),
+        getCampaignDetails: builder.query<ICampaignDetailsResponse, string>({
+            query: (id) => ({
+                url: `/campaign_details/${id}`,
+                method: "GET",
+            })
         })
     })
 })
 
 export const {
-    useGetTotalCampaignsQuery
+    useGetTotalCampaignsQuery,
+    useGetCampaignDetailsQuery
 } = publicService

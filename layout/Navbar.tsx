@@ -13,6 +13,7 @@ const Navbar = () => {
     const [toggle, setToggle] = useState<boolean>(false);
     const [isSticky, setIsSticky] = useState<boolean>(false);
     const pathname = usePathname();
+    const isDashboardRoute = pathname.startsWith('/dashboard')
     const { data: session } = useSession();
 
 
@@ -55,7 +56,7 @@ const Navbar = () => {
             "name": "Contact",
             "path": "/contact"
         },
-        
+
     ]
 
     useEffect(() => {
@@ -81,7 +82,8 @@ const Navbar = () => {
                 backdropFilter: isSticky ? "blur(12px)" : "none",
                 transition: "all 0.3s ease",
                 opacity: isSticky ? 1 : 1,
-                bgcolor: "white"
+                bgcolor: "white",
+                display: isDashboardRoute ? "none" : "block"
             }}
         >
             <Container
@@ -145,8 +147,10 @@ const Navbar = () => {
                                         },
                                     }}
                                 >
-                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                                    <MenuItem>Profile</MenuItem>
+                                    <Link href={"/help_request"}>
+                                        <MenuItem>Help Request</MenuItem>
+                                    </Link>
                                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                 </Menu>
                             </>

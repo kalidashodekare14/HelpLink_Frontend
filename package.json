@@ -13,6 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.5",
+    "@mui/joy": "^5.0.0-beta.52",
     "@mui/material": "^7.3.5",
     "@reduxjs/toolkit": "^2.11.0",
     "axios": "^1.13.2",
@@ -22,7 +23,8 @@
     "react-dom": "19.2.0",
     "react-hook-form": "^7.66.1",
     "react-hot-toast": "^2.6.0",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

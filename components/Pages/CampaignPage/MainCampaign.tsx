@@ -3,8 +3,8 @@
 import { useGetTotalCampaignsQuery } from "@/state/services/publicService/campaignsService";
 import { useEffect, useState } from "react";
 import address from '@bangladeshi/bangladesh-address'
-import CampaignFilter from "../CampaignFilter";
-import CampaignsComponent from "../CampaignsComponent";
+import CampaignFilter from "./CampaignFilter";
+import CampaignsComponent from "./CampaignsComponent";
 
 const MainCampaign = () => {
 

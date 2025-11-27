@@ -1,5 +1,7 @@
 "use client"
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, FormControl, InputLabel, MenuItem, Pagination, Select, TextField, Typography } from "@mui/material";
+import Link from "next/link";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 type campaignChindren = {
     totalCampaign: any,
@@ -31,17 +33,23 @@ const CampaignsComponent = ({ totalCampaign, setPage }: any) => {
                                 image={campaign?.image[0]}
                                 title="green iguana"
                             />
-                            <CardContent>
+                            <CardContent sx={{
+                                display: "flex",
+                                flexDirection: 'column',
+                                gap: "10px"
+                            }}>
                                 <Typography gutterBottom fontWeight={"bold"} component="div">
                                     {campaign?.title}
                                 </Typography>
                                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                                    {campaign?.description}
+                                    {campaign?.description.slice(0, 80)}...
                                 </Typography>
-                                <Typography>{campaign.location.division} → {campaign.location.district} → {campaign.location.upazila}  </Typography>
+                                <Typography>{campaign.location.division}  <ArrowRightIcon /> {campaign.location.district}  <ArrowRightIcon /> {campaign.location.upazila}  </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button variant='outlined'>Donate</Button>
+                                <Link href={`/campaigns/${campaign?._id}`}>
+                                    <Button variant='outlined'>Donate</Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     ))

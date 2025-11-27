@@ -39,3 +39,10 @@ export interface ICampaignResponse {
         data: ICampaign[];
     };
 }
+
+export interface ICampaignDetailsResponse {
+    success: boolean;
+    message: string;
+    data: ICampaign;
+
+}
