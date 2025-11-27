@@ -1,6 +1,7 @@
 "use client"
-import Header from "@/components/Dashboard/Header";
-import Sidebar from "@/components/Dashboard/Sidebar";
+
+import Header from "@/components/Dashboard/VolunteerDashboard/Header";
+import Sidebar from "@/components/Dashboard/VolunteerDashboard/Sidebar";
 import { Box } from "@mui/material";
 import { useState } from "react";
 

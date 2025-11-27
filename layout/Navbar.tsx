@@ -13,9 +13,9 @@ const Navbar = () => {
     const [toggle, setToggle] = useState<boolean>(false);
     const [isSticky, setIsSticky] = useState<boolean>(false);
     const pathname = usePathname();
-    const isDashboardRoute = pathname.startsWith('/dashboard')
-    const { data: session } = useSession();
+    const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar")
 
+    const { data: session } = useSession();
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
