@@ -1,35 +1,62 @@
 "use client"
-import { Box, Button, Container, FormControl, FormGroup, FormHelperText, Input, InputLabel, MenuItem, Select, TextareaAutosize, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, FormControl, FormGroup, FormHelperText, Input, InputLabel, MenuItem, Select, TextareaAutosize, TextField, Typography } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from "react-hook-form";
 import useBDLocationRequest from "@/hooks/useBDLocationRequest";
+import { useHelpRequestMutation } from "@/state/services/receiverService/receiverService";
+import { useSession } from "next-auth/react";
+import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
 
 type Inputs = {
     title: string
     category: string
-    description: string
+    description: string,
+    address: string
 }
 
 const HelpRquest = () => {
-    
+
     const { division, district, upazila, divisions, districts, upazilas, setDivision, setDistrict, setUpazila } = useBDLocationRequest()
-    console.log('checking data', division, district, upazila)
+    const { data: session } = useSession();
+    const [helpRequest, { isSuccess, isLoading, error }] = useHelpRequestMutation()
+    const [loading, setLoading] = useState<boolean>(false);
 
     const {
         register,
         handleSubmit,
-        watch,
+        reset,
         formState: { errors },
     } = useForm<Inputs>()
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data)
-        const requstData = {
-            title: data.title,
-            category: data.category,
-            description: data.description
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        try {
+            const requstData = {
+                title: data.title,
+                category: data.category,
+                description: data.description,
+                location: {
+                    division: division,
+                    district: district,
+                    upazila: upazila,
+                    address: data.address
+                },
+                receiver_email: session?.user?.email
+
+            }
+            setLoading(true)
+            await helpRequest(requstData);
+            if (isSuccess) {
+                reset()
+
+                toast.success('Your Request Successfully')
+            }
+
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false);
         }
 
-        console.log('checking data', requstData)
     }
 
     return (
@@ -56,7 +83,7 @@ const HelpRquest = () => {
                 sx={{
                     display: "flex",
                     gap: "10px",
-                    flexDirection: { lg: "row", sm: 'column-reverse' }
+                    flexDirection: { lg: "row", xs: "column" }
                 }}
             >
                 <Box
@@ -66,7 +93,7 @@ const HelpRquest = () => {
                     gap={"50px"}
                 >
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <FormGroup >
+                        <FormGroup>
                             <Box sx={{
                                 display: "flex",
                                 alignItems: "center",
@@ -103,6 +130,7 @@ const HelpRquest = () => {
                         </FormGroup>
                         <Box sx={{
                             display: "flex",
+                            flexDirection: { lg: "row", xs: "column" },
                             alignItems: "center",
                             gap: "5px",
                             my: "10px"
@@ -160,6 +188,18 @@ const HelpRquest = () => {
                             </FormControl>
                         </Box>
                         <Box
+                            sx={{ width: "100%" }}
+                        >
+                            <TextField
+                                id="outlined-multiline-static"
+                                label="Address"
+                                multiline
+                                rows={2}
+                                sx={{ width: "100%" }}
+                                {...register("address", { required: true })}
+                            />
+                        </Box>
+                        <Box
                             sx={{
                                 width: "100%",
                                 display: "flex",
@@ -176,6 +216,7 @@ const HelpRquest = () => {
                                     width: "50%"
                                 }}
                             >
+                                <CircularProgress size={30} color="inherit" />
                                 Request Submit
                             </Button>
                         </Box>
@@ -212,6 +253,7 @@ const HelpRquest = () => {
                     </Box>
                 </Box>
             </Box>
+            <Toaster />
         </Container >
     );
 };

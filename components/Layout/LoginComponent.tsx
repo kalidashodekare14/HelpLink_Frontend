@@ -108,8 +108,6 @@ const LoginComponent = () => {
                             >
                                 {loading ? <CircularProgress size={30} color="inherit" /> : "Login"}
                             </Button>
-
-
                         </Box>
                         <Typography sx={{ my: "5px" }}>Don't have an account? <Link href={"/signup"}>Sign Up Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
