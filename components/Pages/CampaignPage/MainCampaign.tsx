@@ -1,5 +1,4 @@
 "use client"
-
 import { useGetTotalCampaignsQuery } from "@/state/services/publicService/campaignsService";
 import { useEffect, useState } from "react";
 import address from '@bangladeshi/bangladesh-address'

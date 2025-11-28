@@ -35,8 +35,6 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                     justifyContent: "center",
                     alignItems: "center",
                     px: "20%",
-
-
                 }}
             >
                 <Box sx={{
