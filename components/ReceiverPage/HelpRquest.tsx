@@ -216,8 +216,9 @@ const HelpRquest = () => {
                                     width: "50%"
                                 }}
                             >
-                                <CircularProgress size={30} color="inherit" />
-                                Request Submit
+                                {
+                                    loading ? <CircularProgress size={30} color="inherit" /> : " Request Submit"
+                                }
                             </Button>
                         </Box>
                     </form>

@@ -12,8 +12,16 @@ export const receiverService = createApi({
                 method: "POST",
                 body
             })
+        }),
+        requestTrack: builder.query({
+            query: (email) => (
+                {
+                    url: `/receiver_track_request/${email}`,
+                    method: "GET",
+                }
+            )
         })
     })
 })
 
-export const { useHelpRequestMutation } = receiverService;
+export const { useHelpRequestMutation, useRequestTrackQuery } = receiverService;

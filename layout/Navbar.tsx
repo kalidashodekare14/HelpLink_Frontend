@@ -151,6 +151,9 @@ const Navbar = () => {
                                     <Link href={"/help_request"}>
                                         <MenuItem>Help Request</MenuItem>
                                     </Link>
+                                    <Link href={"/request_track"}>
+                                        <MenuItem>Request Track</MenuItem>
+                                    </Link>
                                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                 </Menu>
                             </>
