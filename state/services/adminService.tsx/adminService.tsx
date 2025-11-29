@@ -6,10 +6,11 @@ export const adminService = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/admin" }),
     tagTypes: ["Users"],
     endpoints: (builder) => ({
-        totalUserManage: builder.query<any, void>({
-            query: () => ({
+        totalUserManage: builder.query<any, { search: string, role: string, status: boolean | undefined }>({
+            query: (params) => ({
                 url: `/total_users`,
                 method: "GET",
+                params
             }),
             providesTags: ["Users"]
         }),

@@ -10,9 +10,18 @@ const paginationModel = { page: 0, pageSize: 5 };
 import Swal from 'sweetalert2'
 
 const ManageUserComponent = () => {
+    
+    const [roleFilter, setRoleFilter] = useState<string>("");
+    const [statusFilter, setStatusFilter] = useState<boolean | undefined>();
+    const [search, setSearch] = useState<string>("")
 
     // total user fetched
-    const { data: totalUserManage, isLoading, error } = useTotalUserManageQuery();
+    const query = {
+        search: search,
+        role: roleFilter,
+        status: statusFilter
+    }
+    const { data: totalUserManage, isLoading, error } = useTotalUserManageQuery(query);
     const userRows = totalUserManage?.data?.map((user: any) => ({
         id: user._id,
         joinDate: new Date(user.createdAt).toLocaleDateString(),
@@ -235,6 +244,15 @@ const ManageUserComponent = () => {
     ];
 
 
+    const handleRoleFilter = (value: any) => {
+        console.log('checking data', value);
+        setRoleFilter(value);
+    }
+    const handleStatusFilter = (value: any) => {
+        setStatusFilter(value);
+    }
+
+
     return (
         <Box sx={{ p: "20px" }}>
             <Typography fontSize={25}>User Management</Typography>
@@ -247,19 +265,20 @@ const ManageUserComponent = () => {
                 p: "10px",
                 my: "10px"
             }}>
-                <TextField size="small" id="outlined-basic" label="Search..." variant="outlined" />
+                <TextField onChange={(event) => setSearch(event?.target.value)} size="small" id="outlined-basic" label="Search..." variant="outlined" />
                 <FormControl sx={{ width: "10%" }} size='small'>
                     <InputLabel id="demo-simple-select-label">Role</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        // value={age}
-                        label="Age"
-                    // onChange={handleChange}
+                        value={roleFilter}
+                        label="role"
+                        onChange={(event) => handleRoleFilter(event.target.value)}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={"receiver"}>Receiver</MenuItem>
+                        <MenuItem value={"donor"}>Donor</MenuItem>
+                        <MenuItem value={"volunteer"}>Volunteer</MenuItem>
+                        <MenuItem value={"admin"}>Admin</MenuItem>
                     </Select>
                 </FormControl>
                 <FormControl sx={{ width: "10%" }} size='small'>
@@ -267,13 +286,11 @@ const ManageUserComponent = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        // value={age}
                         label="Age"
-                    // onChange={handleChange}
+                        onChange={(event) => handleStatusFilter(event.target.value)}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={"true"}>Active</MenuItem>
+                        <MenuItem value={"false"}>Unactive</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
