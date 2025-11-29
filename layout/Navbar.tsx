@@ -16,6 +16,8 @@ const Navbar = () => {
     const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar")
 
     const { data: session } = useSession();
+    type Role = "volunteer" | "receiver" | "donor" | "admin"
+    const [isRole, setIsRole] = useState<Role>("receiver")
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -148,12 +150,18 @@ const Navbar = () => {
                                     }}
                                 >
                                     <MenuItem>Profile</MenuItem>
-                                    <Link href={"/help_request"}>
-                                        <MenuItem>Help Request</MenuItem>
-                                    </Link>
-                                    <Link href={"/request_track"}>
-                                        <MenuItem>Request Track</MenuItem>
-                                    </Link>
+                                    {
+                                        isRole === "receiver" && (
+                                            <>
+                                                <Link href={"/help_request"}>
+                                                    <MenuItem>Help Request</MenuItem>
+                                                </Link>
+                                                <Link href={"/request_track"}>
+                                                    <MenuItem>Request Track</MenuItem>
+                                                </Link>
+                                            </>
+                                        )
+                                    }
                                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                 </Menu>
                             </>

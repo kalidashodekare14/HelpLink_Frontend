@@ -1,17 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { publicService } from "./services/publicService/campaignsService";
 import { receiverService } from "./services/receiverService/receiverService";
+import { donorService } from "./services/donorService.tsx/donorService";
 
 
 export const store = configureStore({
     reducer: {
         [publicService.reducerPath]: publicService.reducer,
         [receiverService.reducerPath]: receiverService.reducer,
+        [donorService.reducerPath]: donorService.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(publicService.middleware)
             .concat(receiverService.middleware)
+            .concat(donorService.middleware)
 });
 
 

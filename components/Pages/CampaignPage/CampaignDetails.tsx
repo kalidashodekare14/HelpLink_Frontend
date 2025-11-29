@@ -23,13 +23,14 @@ const CampaignDetails = () => {
 
 
     return (
-        <Container sx={{ py: 10 }}>
+        <Container sx={{ py: 5 }}>
             <Box sx={{
                 display: "flex",
+                flexDirection: { xs: "column", lg: "row" },
                 gap: "10px"
             }}>
                 <Box sx={{
-                    width: "50%",
+                    width: { sx: "100%", lg: "50%" },
                     border: "1px solid #bbb",
                     backgroundColor: "white",
                     boxShadow: 2,
@@ -43,7 +44,7 @@ const CampaignDetails = () => {
                                 </SwiperSlide>
                             ))
                         }
-                        
+
 
                     </Swiper>
                 </Box>
