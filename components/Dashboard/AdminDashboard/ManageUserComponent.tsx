@@ -4,15 +4,15 @@ import { Box, Button, FormControl, InputLabel, Menu, MenuItem, Select, TextField
 import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { useTotalUserManageQuery } from "@/state/services/adminService.tsx/adminService";
+import { useTotalUserManageQuery, useUserRoleManageMutation } from "@/state/services/adminService.tsx/adminService";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Noto_Sans_Imperial_Aramaic } from "next/font/google";
 const paginationModel = { page: 0, pageSize: 5 };
+import Swal from 'sweetalert2'
 
 const ManageUserComponent = () => {
 
-
-    const { data: totalUserManage, isLoading, error } = useTotalUserManageQuery()
+    // total user fetched
+    const { data: totalUserManage, isLoading, error } = useTotalUserManageQuery();
     const userRows = totalUserManage?.data?.map((user: any) => ({
         id: user._id,
         joinDate: new Date(user.createdAt).toLocaleDateString(),
@@ -20,8 +20,11 @@ const ManageUserComponent = () => {
         ...user
     }))
 
+
+    // user role change
+    const [userRoleManage, { isLoading: roleLoading, isSuccess, error: roleError }] = useUserRoleManageMutation()
+
     const columns: GridColDef[] = [
-        // { field: '_id', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Full Name', width: 130 },
         { field: 'email', headerName: 'Email', width: 200 },
         {
@@ -85,6 +88,42 @@ const ManageUserComponent = () => {
                 const handleClose = () => {
                     setAnchorEl(null);
                 };
+
+                const handleRoleAccess = async (datas: any) => {
+                    try {
+                        const { id, role } = datas
+                        console.log('chekcing id', id);
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "You want to change roles.",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, Change it!"
+                        }).then(async (result) => {
+                            if (result.isConfirmed) {
+
+                                const result = await userRoleManage({ id: id, role: role })
+                                console.log('checking result', result);
+                                if ("data" in result) {
+                                    Swal.fire({
+                                        title: "Updated!",
+                                        text: "Your role change successfully.",
+                                        icon: "success"
+                                    });
+                                    console.log('donor change successfully')
+                                }
+                            }
+                        });
+
+                        handleClose()
+                    } catch (error) {
+                        console.log(error)
+                    }
+
+                }
+
                 return (
                     <>
                         <Button
@@ -107,10 +146,10 @@ const ManageUserComponent = () => {
                                 },
                             }}
                         >
-                            <MenuItem onClick={handleClose}>Receiver</MenuItem>
-                            <MenuItem onClick={handleClose}>Donor</MenuItem>
-                            <MenuItem onClick={handleClose}>Volunteer</MenuItem>
-                            <MenuItem onClick={handleClose}>Admin</MenuItem>
+                            <MenuItem onClick={() => handleRoleAccess({ role: "receiver", id: params.row._id })}>Receiver</MenuItem>
+                            <MenuItem onClick={() => handleRoleAccess({ role: "donor", id: params.row._id })}>Donor</MenuItem>
+                            <MenuItem onClick={() => handleRoleAccess({ role: "volunteer", id: params.row._id })}>Volunteer</MenuItem>
+                            <MenuItem onClick={() => handleRoleAccess({ role: "admin", id: params.row._id })}>Admin</MenuItem>
                         </Menu>
                     </>
                 )
