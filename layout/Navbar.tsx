@@ -17,7 +17,7 @@ const Navbar = () => {
 
     const { data: session } = useSession();
     type Role = "volunteer" | "receiver" | "donor" | "admin"
-    const [isRole, setIsRole] = useState<Role>("receiver")
+    const [isRole, setIsRole] = useState<Role>("donor")
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -158,6 +158,15 @@ const Navbar = () => {
                                                 </Link>
                                                 <Link href={"/request_track"}>
                                                     <MenuItem>Request Track</MenuItem>
+                                                </Link>
+                                            </>
+                                        )
+                                    }
+                                    {
+                                        isRole === "donor" && (
+                                            <>
+                                                <Link href={"/donate_track"}>
+                                                    <MenuItem>Donate Track</MenuItem>
                                                 </Link>
                                             </>
                                         )

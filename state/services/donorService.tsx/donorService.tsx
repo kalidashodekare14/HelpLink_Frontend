@@ -12,9 +12,15 @@ export const donorService = createApi({
                 method: "POST",
                 body: data
             })
+        }),
+        donateTrack: builder.query({
+            query: (email) => ({
+                url: `/donate_track/${email}`,
+                method: "GET"
+            })
         })
     })
 })
 
 
-export const { useJoinCampaignMutation } = donorService;
+export const { useJoinCampaignMutation, useDonateTrackQuery } = donorService;
