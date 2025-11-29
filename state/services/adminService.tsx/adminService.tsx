@@ -20,9 +20,17 @@ export const adminService = createApi({
                 body: { role }
             }),
             invalidatesTags: ["Users"]
+        }),
+        userStatusManage: builder.mutation<any, { id: string, status: string }>({
+            query: ({ id, status }) => ({
+                url: `/user_active/${id}`,
+                method: "PATCH",
+                body: { status }
+            }),
+            invalidatesTags: ["Users"]
         })
     })
 })
 
 
-export const { useTotalUserManageQuery, useUserRoleManageMutation } = adminService;
+export const { useTotalUserManageQuery, useUserRoleManageMutation, useUserStatusManageMutation } = adminService;

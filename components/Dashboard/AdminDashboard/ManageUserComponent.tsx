@@ -4,7 +4,7 @@ import { Box, Button, FormControl, InputLabel, Menu, MenuItem, Select, TextField
 import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { useTotalUserManageQuery, useUserRoleManageMutation } from "@/state/services/adminService.tsx/adminService";
+import { useTotalUserManageQuery, useUserRoleManageMutation, useUserStatusManageMutation } from "@/state/services/adminService.tsx/adminService";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 const paginationModel = { page: 0, pageSize: 5 };
 import Swal from 'sweetalert2'
@@ -23,6 +23,8 @@ const ManageUserComponent = () => {
 
     // user role change
     const [userRoleManage, { isLoading: roleLoading, isSuccess, error: roleError }] = useUserRoleManageMutation()
+    // user status change
+    const [userStatusManage, { isLoading: statusLoading, error: statusError }] = useUserStatusManageMutation()
 
     const columns: GridColDef[] = [
         { field: 'name', headerName: 'Full Name', width: 130 },
@@ -105,14 +107,12 @@ const ManageUserComponent = () => {
                             if (result.isConfirmed) {
 
                                 const result = await userRoleManage({ id: id, role: role })
-                                console.log('checking result', result);
                                 if ("data" in result) {
                                     Swal.fire({
                                         title: "Updated!",
                                         text: "Your role change successfully.",
                                         icon: "success"
                                     });
-                                    console.log('donor change successfully')
                                 }
                             }
                         });
@@ -169,6 +169,39 @@ const ManageUserComponent = () => {
                 const handleClose = () => {
                     setAnchorEl(null);
                 };
+
+                const handleStatusChange = async (datas: any) => {
+                    try {
+                        const { id, status } = datas;
+
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "Do you want to change status?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, Change it!"
+                        }).then(async (result) => {
+                            if (result.isConfirmed) {
+
+                                const result = await userStatusManage({ id: id, status: status })
+                                if ("data" in result) {
+                                    Swal.fire({
+                                        title: "Updated!",
+                                        text: "Your status change successfully.",
+                                        icon: "success"
+                                    });
+                                }
+                            }
+                        });
+
+                        handleClose()
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+
                 return (
                     <>
                         <Button
@@ -191,8 +224,8 @@ const ManageUserComponent = () => {
                                 },
                             }}
                         >
-                            <MenuItem onClick={handleClose}>Active</MenuItem>
-                            <MenuItem onClick={handleClose}>Unactive</MenuItem>
+                            <MenuItem onClick={() => handleStatusChange({ status: true, id: params.row._id })}>Active</MenuItem>
+                            <MenuItem onClick={() => handleStatusChange({ status: false, id: params.row._id })}>Unactive</MenuItem>
                         </Menu>
                     </>
                 )
