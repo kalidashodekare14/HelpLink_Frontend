@@ -14,13 +14,13 @@ export const AdminRoutes = [
     {
         id: 2,
         name: "Manage User",
-        path: "admin_dashboard/manage_user",
+        path: "/admin_dashboard/manage_user",
         icon: GroupAddIcon
     },
     {
         id: 3,
         name: "Manage Campaign",
-        path: "admin_dashboard/manage_campaign",
+        path: "/admin_dashboard/manage_campaign",
         icon: CampaignIcon
     },
 ]
