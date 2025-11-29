@@ -6,6 +6,7 @@ export const adminService = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/admin" }),
     tagTypes: ["Users"],
     endpoints: (builder) => ({
+        // User Management
         totalUserManage: builder.query<any, { search: string, role: string, status: boolean | undefined }>({
             query: (params) => ({
                 url: `/total_users`,
@@ -29,9 +30,31 @@ export const adminService = createApi({
                 body: { status }
             }),
             invalidatesTags: ["Users"]
+        }),
+        // Campaign Management
+        totalCamgaignManage: builder.query<any, void>({
+            query: () => ({
+                url: "/total_campaign",
+                method: "GET",
+            }),
+            providesTags: ["Users"]
+        }),
+        campaignRequestStatusManage: builder.mutation({
+            query: ({ id, req_status }) => ({
+                url: `/campaign_request_status/${id}`,
+                method: "PATCH",
+                body: { request_status: req_status }
+            }),
+            invalidatesTags: ["Users"]
         })
     })
 })
 
 
-export const { useTotalUserManageQuery, useUserRoleManageMutation, useUserStatusManageMutation } = adminService;
+export const {
+    useTotalUserManageQuery,
+    useUserRoleManageMutation,
+    useUserStatusManageMutation,
+    useTotalCamgaignManageQuery,
+    useCampaignRequestStatusManageMutation
+} = adminService;
