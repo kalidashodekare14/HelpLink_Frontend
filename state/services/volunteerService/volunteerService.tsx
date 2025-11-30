@@ -21,11 +21,20 @@ export const volunteerService = createApi({
             }),
             invalidatesTags: ["volunteer_campaign"]
         }),
+        campaignDeliveryStatusChange: builder.mutation({
+            query: ({ id, delivery_status }) => ({
+                url: `/delivery_status/${id}`,
+                method: "PATCH",
+                body: { delivery_status }
+            }),
+            invalidatesTags: ["volunteer_campaign"]
+        }),
     })
 })
 
 
 export const {
     useTotalCampaignsQuery,
-    useCampaignRequestStatusChangeMutation
+    useCampaignRequestStatusChangeMutation,
+    useCampaignDeliveryStatusChangeMutation
 } = volunteerService;
