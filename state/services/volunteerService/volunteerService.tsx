@@ -6,10 +6,11 @@ export const volunteerService = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/volunteer" }),
     tagTypes: ["volunteer_campaign"],
     endpoints: (builder) => ({
-        totalCampaigns: builder.query<any, void>({
-            query: () => ({
+        totalCampaigns: builder.query<any, { search: string, request_status: string, delivery_status: string }>({
+            query: (params) => ({
                 url: "/total_campaign",
                 method: "GET",
+                params
             }),
             providesTags: ["volunteer_campaign"]
         }),

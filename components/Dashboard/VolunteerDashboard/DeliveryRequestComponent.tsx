@@ -15,7 +15,12 @@ const DeliveryRequestComponent = () => {
     const [deliveryStatus, setDeliveryStatus] = useState<string>("");
 
     // Total campaign fetched
-    const { data: allCampaignsData, isLoading, error } = useTotalCampaignsQuery()
+    const query = {
+        search: search,
+        request_status: "",
+        delivery_status: deliveryStatus
+    }
+    const { data: allCampaignsData, isLoading, error } = useTotalCampaignsQuery(query)
     const campaignRows = allCampaignsData?.data?.map((campaign: any) => ({
         id: campaign._id,
         ...campaign,

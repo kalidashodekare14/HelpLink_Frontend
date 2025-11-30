@@ -14,10 +14,14 @@ const VerifyRequestComponent = () => {
 
     const [search, setSearch] = useState<string>("");
     const [requestStatus, setRequestStatus] = useState<string>("");
-    const [deliveryStatus, setDeliveryStatus] = useState<string>("");
 
     // Total campaign fetched
-    const { data: allCampaignsData, isLoading, error } = useTotalCampaignsQuery()
+    const query = {
+        search: search,
+        request_status: requestStatus,
+        delivery_status: ""
+    }
+    const { data: allCampaignsData, isLoading, error } = useTotalCampaignsQuery(query)
     const campaignRows = allCampaignsData?.data?.map((campaign: any) => ({
         id: campaign._id,
         ...campaign,
