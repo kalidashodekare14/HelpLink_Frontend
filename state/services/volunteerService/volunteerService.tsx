@@ -6,6 +6,14 @@ export const volunteerService = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/volunteer" }),
     tagTypes: ["volunteer_campaign"],
     endpoints: (builder) => ({
+        // Overview Management
+        volOverviewManage: builder.query<any, void>({
+            query: () => ({
+                url: "/volunteer_overview",
+                method: "GET",
+            })
+        }),
+        // Total Campaign
         totalCampaigns: builder.query<any, { search: string, request_status: string, delivery_status: string }>({
             query: (params) => ({
                 url: "/total_campaign",
@@ -35,6 +43,7 @@ export const volunteerService = createApi({
 
 
 export const {
+    useVolOverviewManageQuery,
     useTotalCampaignsQuery,
     useCampaignRequestStatusChangeMutation,
     useCampaignDeliveryStatusChangeMutation
