@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "state/services/donorService", "state/services/adminService"  ],
   "exclude": ["node_modules"]
 }

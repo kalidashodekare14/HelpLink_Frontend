@@ -7,7 +7,7 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { DefaultizedPieValueType } from '@mui/x-charts/models';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
-import { useOverviewManageQuery } from "@/state/services/adminService.tsx/adminService";
+import { useOverviewManageQuery } from "@/state/services/adminService/adminService";
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];

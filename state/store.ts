@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { publicService } from "./services/publicService/campaignsService";
 import { receiverService } from "./services/receiverService/receiverService";
-import { donorService } from "./services/donorService.tsx/donorService";
-import { adminService } from "./services/adminService.tsx/adminService";
+import { donorService } from "./services/donorService/donorService";
+import { adminService } from "./services/adminService/adminService";
+import { volunteerService } from "./services/volunteerService/volunteerService";
 
 
 export const store = configureStore({
@@ -11,6 +12,8 @@ export const store = configureStore({
         [receiverService.reducerPath]: receiverService.reducer,
         [donorService.reducerPath]: donorService.reducer,
         [adminService.reducerPath]: adminService.reducer,
+        [volunteerService.reducerPath]: volunteerService.reducer,
+
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
@@ -18,6 +21,7 @@ export const store = configureStore({
             .concat(receiverService.middleware)
             .concat(donorService.middleware)
             .concat(adminService.middleware)
+            .concat(volunteerService.middleware)
 });
 
 

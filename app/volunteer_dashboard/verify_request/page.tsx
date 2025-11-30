@@ -1,7 +1,9 @@
+import VerifyRequestComponent from "@/components/Dashboard/VolunteerDashboard/VerifyRequestComponent";
+
 const verifyRequest = () => {
     return (
         <div>
-            <h1>Verify Request</h1>
+            <VerifyRequestComponent />
         </div>
     );
 };

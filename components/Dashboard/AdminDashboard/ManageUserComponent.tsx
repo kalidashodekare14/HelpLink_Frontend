@@ -4,7 +4,7 @@ import { Box, Button, FormControl, InputLabel, Menu, MenuItem, Select, TextField
 import { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import { useTotalUserManageQuery, useUserRoleManageMutation, useUserStatusManageMutation } from "@/state/services/adminService.tsx/adminService";
+import { useTotalUserManageQuery, useUserRoleManageMutation, useUserStatusManageMutation } from "@/state/services/adminService/adminService";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 const paginationModel = { page: 0, pageSize: 5 };
 import Swal from 'sweetalert2'

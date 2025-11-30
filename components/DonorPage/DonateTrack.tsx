@@ -3,7 +3,7 @@
 import { Box, Button, Container, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useState } from "react";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useDonateTrackQuery } from "@/state/services/donorService.tsx/donorService";
+import { useDonateTrackQuery } from "@/state/services/donorService/donorService";
 import { useSession } from "next-auth/react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 

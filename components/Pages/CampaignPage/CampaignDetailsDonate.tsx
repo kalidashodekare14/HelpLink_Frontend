@@ -1,5 +1,5 @@
 "use client"
-import { useJoinCampaignMutation } from '@/state/services/donorService.tsx/donorService';
+import { useJoinCampaignMutation } from '@/state/services/donorService/donorService';
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';

@@ -21,7 +21,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             <Sidebar isToggle={isToggle} handleToggleDrawer={handleToggleDrawer} />
             <Box sx={{
                 flexGrow: 1,
-                ml: { lg: "240px", xs: 0 }
+                ml: { lg: "240px", xs: 0 },
+                overflow: "hidden"
             }}>
                 <Header handleToggleDrawer={handleToggleDrawer} />
                 {children}
