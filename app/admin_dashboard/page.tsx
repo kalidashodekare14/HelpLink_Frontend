@@ -1,9 +1,9 @@
-import React from 'react';
+import OverviewComponent from '@/components/Dashboard/AdminDashboard/OverviewComponent';
 
 const dashboardPage = () => {
     return (
         <div>
-
+            <OverviewComponent />
         </div>
     );
 };

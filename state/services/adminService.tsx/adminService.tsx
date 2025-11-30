@@ -6,6 +6,13 @@ export const adminService = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/admin" }),
     tagTypes: ["Users"],
     endpoints: (builder) => ({
+        // Overview Management
+        overviewManage: builder.query<any, void>({
+            query: () => ({
+                url: "/overview_info",
+                method: "GET",
+            })
+        }),
         // User Management
         totalUserManage: builder.query<any, { search: string, role: string, status: boolean | undefined }>({
             query: (params) => ({
@@ -66,6 +73,7 @@ export const adminService = createApi({
 
 
 export const {
+    useOverviewManageQuery,
     useTotalUserManageQuery,
     useUserRoleManageMutation,
     useUserStatusManageMutation,
