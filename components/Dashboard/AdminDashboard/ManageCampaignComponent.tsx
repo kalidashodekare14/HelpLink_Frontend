@@ -1,7 +1,7 @@
 "use client"
 
 import { useCampaignDeliveryStatusManageMutation, useCampaignRequestStatusManageMutation, useTotalCamgaignManageQuery } from "@/state/services/adminService.tsx/adminService";
-import { Box, Button, Menu, MenuItem, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, Menu, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -14,9 +14,18 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 const ManageCampaignComponent = () => {
 
-    const [search, setSearch] = useState<string>("")
+    const [search, setSearch] = useState<string>("");
+    const [requestStatus, setRequestStatus] = useState<string>("");
+    const [deliveryStatus, setDeliveryStatus] = useState<string>("");
+
+    const query = {
+        search: search,
+        request_status: requestStatus,
+        delivery_status: deliveryStatus
+    }
+
     // total campaign data fatched
-    const { data: totalCampaign, isLoading, error } = useTotalCamgaignManageQuery();
+    const { data: totalCampaign, isLoading, error } = useTotalCamgaignManageQuery(query);
     // campaign request status change api
     const [campaignRequestStatusManage, { isLoading: requestLoading, error: requestError }] = useCampaignRequestStatusManageMutation()
     // campaign delivery status change api
@@ -85,7 +94,35 @@ const ManageCampaignComponent = () => {
                 </>
             )
         },
-        { field: 'delivery_status', headerName: 'Delivery Status ', width: 130 },
+        {
+            field: 'delivery_status',
+            headerName: 'Delivery Status ',
+            width: 130,
+            renderCell: (params) => (
+                <>
+                    {
+                        params.value === "Assigned" && (
+                            <span className="bg-[#bc6c25] p-2 rounded-full text-white">Assigned</span>
+                        )
+                    }
+                    {
+                        params.value === "Picked Up" && (
+                            <span className="bg-[#219ebc] p-2 rounded-full text-white">Approved</span>
+                        )
+                    }
+                    {
+                        params.value === "Delivered" && (
+                            <span className="bg-[#1d3557] p-2 rounded-full text-white">Delivered</span>
+                        )
+                    }
+                    {
+                        params.value === "Cancelled" && (
+                            <span className="bg-[#dc2f02] p-2 rounded-full text-white">Rejected</span>
+                        )
+                    }
+                </>
+            )
+        },
         {
             field: 'Request Action',
             headerName: 'Request Action',
@@ -238,19 +275,59 @@ const ManageCampaignComponent = () => {
     ];
 
 
+    const handleRequestStatus = (value: any) => {
+        console.log('checking requst status', value);
+        setRequestStatus(value);
+    }
+    const handleDeliveryStatus = (value: any) => {
+        console.log('checking delivery status', value);
+        setDeliveryStatus(value)
+    }
+
+
     return (
         <Box sx={{ p: "20px" }}>
             <Typography fontSize={25}>User Campaign</Typography>
             <Typography>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
             <Box sx={{
                 display: "flex",
+                flexDirection: { xs: "column", lg: "row" },
                 alignItems: "center",
                 gap: "20px",
                 border: "1px solid #bbbb",
                 p: "10px",
                 my: "10px"
             }}>
-                <TextField onChange={(event) => setSearch(event?.target.value)} size="small" id="outlined-basic" label="Search..." variant="outlined" />
+                <TextField sx={{ width: { xs: "100%", lg: "30%" } }} onChange={(event) => setSearch(event?.target.value)} size="small" id="outlined-basic" label="Search (title, category, location)" variant="outlined" />
+                <FormControl sx={{ width: { xs: "100%", lg: "15%" } }} size='small'>
+                    <InputLabel id="demo-simple-select-label">Request Status</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={requestStatus}
+                        label="role"
+                        onChange={(event) => handleRequestStatus(event.target.value)}
+                    >
+                        <MenuItem value={"Pending"}>Pending</MenuItem>
+                        <MenuItem value={"Approved"}>Approved</MenuItem>
+                        <MenuItem value={"Rejected"}>Rejected</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl sx={{ width: { xs: "100%", lg: "15%" } }} size='small'>
+                    <InputLabel id="demo-simple-select-label">Delivery Status</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Age"
+                        value={deliveryStatus}
+                        onChange={(event) => handleDeliveryStatus(event.target.value)}
+                    >
+                        <MenuItem value={"Assigned"}>Assigned</MenuItem>
+                        <MenuItem value={"Picked Up"}>Picked Up</MenuItem>
+                        <MenuItem value={"Delivered"}>Delivered</MenuItem>
+                        <MenuItem value={"Cancelled"}>Cancelled</MenuItem>
+                    </Select>
+                </FormControl>
             </Box>
             {/* Table */}
             <Paper sx={{ height: 400, width: '100%' }}>

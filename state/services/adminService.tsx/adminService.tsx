@@ -15,7 +15,7 @@ export const adminService = createApi({
             }),
             providesTags: ["Users"]
         }),
-        
+
         userRoleManage: builder.mutation<any, { id: string, role: string }>({
             query: ({ id, role }) => ({
                 url: `/user_role/${id}`,
@@ -35,10 +35,11 @@ export const adminService = createApi({
         }),
 
         // Campaign Management
-        totalCamgaignManage: builder.query<any, void>({
-            query: () => ({
+        totalCamgaignManage: builder.query<any, { search: string, request_status: string, delivery_status: string }>({
+            query: (params) => ({
                 url: "/total_campaign",
                 method: "GET",
+                params
             }),
             providesTags: ["Users"]
         }),

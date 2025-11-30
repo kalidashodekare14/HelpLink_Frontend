@@ -10,7 +10,7 @@ const paginationModel = { page: 0, pageSize: 5 };
 import Swal from 'sweetalert2'
 
 const ManageUserComponent = () => {
-    
+
     const [roleFilter, setRoleFilter] = useState<string>("");
     const [statusFilter, setStatusFilter] = useState<boolean | undefined>();
     const [search, setSearch] = useState<string>("")
@@ -259,14 +259,15 @@ const ManageUserComponent = () => {
             <Typography>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
             <Box sx={{
                 display: "flex",
+                flexDirection: { xs: "column", lg: "row" },
                 alignItems: "center",
                 gap: "20px",
                 border: "1px solid #bbbb",
                 p: "10px",
                 my: "10px"
             }}>
-                <TextField onChange={(event) => setSearch(event?.target.value)} size="small" id="outlined-basic" label="Search..." variant="outlined" />
-                <FormControl sx={{ width: "10%" }} size='small'>
+                <TextField sx={{ width: { xs: "100%", lg: "30%" } }} onChange={(event) => setSearch(event?.target.value)} size="small" id="outlined-basic" label="Search..." variant="outlined" />
+                <FormControl sx={{ width: { xs: "100%", lg: "15%" } }} size='small'>
                     <InputLabel id="demo-simple-select-label">Role</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -281,7 +282,7 @@ const ManageUserComponent = () => {
                         <MenuItem value={"admin"}>Admin</MenuItem>
                     </Select>
                 </FormControl>
-                <FormControl sx={{ width: "10%" }} size='small'>
+                <FormControl sx={{ width: { xs: "100%", lg: "15%" } }} size='small'>
                     <InputLabel id="demo-simple-select-label">Status</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
