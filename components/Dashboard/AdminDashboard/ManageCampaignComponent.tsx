@@ -1,6 +1,6 @@
 "use client"
 
-import { useCampaignRequestStatusManageMutation, useTotalCamgaignManageQuery } from "@/state/services/adminService.tsx/adminService";
+import { useCampaignDeliveryStatusManageMutation, useCampaignRequestStatusManageMutation, useTotalCamgaignManageQuery } from "@/state/services/adminService.tsx/adminService";
 import { Box, Button, Menu, MenuItem, Paper, TextField, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
@@ -19,6 +19,8 @@ const ManageCampaignComponent = () => {
     const { data: totalCampaign, isLoading, error } = useTotalCamgaignManageQuery();
     // campaign request status change api
     const [campaignRequestStatusManage, { isLoading: requestLoading, error: requestError }] = useCampaignRequestStatusManageMutation()
+    // campaign delivery status change api
+    const [campaignDeliveryStatusManage, { isLoading: deliveryLoading, error: deliveryError }] = useCampaignDeliveryStatusManageMutation()
 
     const campaignRows = totalCampaign?.data?.map((campaign: any) => ({
         id: campaign._id,
@@ -100,7 +102,7 @@ const ManageCampaignComponent = () => {
 
                 const handleRequestStatus = async (datas: any) => {
                     try {
-                        const { id, req_status } = datas;
+                        const { id, request_status } = datas;
                         Swal.fire({
                             title: "Are you sure?",
                             text: "Do you want to change the request status?",
@@ -111,7 +113,7 @@ const ManageCampaignComponent = () => {
                             confirmButtonText: "Yes, Change it!"
                         }).then(async (result) => {
                             if (result.isConfirmed) {
-                                const result = await campaignRequestStatusManage({ id, req_status })
+                                const result = await campaignRequestStatusManage({ id, request_status })
                                 if ('data' in result) {
                                     Swal.fire({
                                         title: "Update!",
@@ -121,8 +123,6 @@ const ManageCampaignComponent = () => {
                                 }
                             }
                         });
-
-
                         handleClose()
                     } catch (error) {
                         console.log(error)
@@ -151,9 +151,9 @@ const ManageCampaignComponent = () => {
                                 },
                             }}
                         >
-                            <MenuItem onClick={() => handleRequestStatus({ req_status: "Pending", id: params.row._id })}>Pending</MenuItem>
-                            <MenuItem onClick={() => handleRequestStatus({ req_status: "Approved", id: params.row._id })}>Approved</MenuItem>
-                            <MenuItem onClick={() => handleRequestStatus({ req_status: "Rejected", id: params.row._id })}>Rejected</MenuItem>
+                            <MenuItem onClick={() => handleRequestStatus({ request_status: "Pending", id: params.row._id })}>Pending</MenuItem>
+                            <MenuItem onClick={() => handleRequestStatus({ request_status: "Approved", id: params.row._id })}>Approved</MenuItem>
+                            <MenuItem onClick={() => handleRequestStatus({ request_status: "Rejected", id: params.row._id })}>Rejected</MenuItem>
                         </Menu>
                     </>
                 )
@@ -175,7 +175,28 @@ const ManageCampaignComponent = () => {
 
                 const handleDelivaryStatus = async (datas: any) => {
                     try {
-                        const { id, devli_status } = datas;
+                        const { id, delivery_status } = datas;
+                        console.log('checking delivery status', delivery_status);
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "Do you want to change the delivery status?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes, Change it!"
+                        }).then(async (result) => {
+                            if (result.isConfirmed) {
+                                const result = await campaignDeliveryStatusManage({ id, delivery_status })
+                                if ('data' in result) {
+                                    Swal.fire({
+                                        title: "Update!",
+                                        text: "Your delivery status update successfully",
+                                        icon: "success"
+                                    });
+                                }
+                            }
+                        });
 
                         handleClose()
                     } catch (error) {
@@ -205,10 +226,10 @@ const ManageCampaignComponent = () => {
                                 },
                             }}
                         >
-                            <MenuItem onClick={() => handleDelivaryStatus({ devli_status: "Assigned", id: params.row._id })}>Assigned</MenuItem>
-                            <MenuItem onClick={() => handleDelivaryStatus({ devli_status: "Picked Up", id: params.row._id })}>Picked Up</MenuItem>
-                            <MenuItem onClick={() => handleDelivaryStatus({ devli_status: "Delivered", id: params.row._id })}>Delivered</MenuItem>
-                            <MenuItem onClick={() => handleDelivaryStatus({ devli_status: "Cancelled", id: params.row._id })}>Cancelled</MenuItem>
+                            <MenuItem onClick={() => handleDelivaryStatus({ delivery_status: "Assigned", id: params.row._id })}>Assigned</MenuItem>
+                            <MenuItem onClick={() => handleDelivaryStatus({ delivery_status: "Picked Up", id: params.row._id })}>Picked Up</MenuItem>
+                            <MenuItem onClick={() => handleDelivaryStatus({ delivery_status: "Delivered", id: params.row._id })}>Delivered</MenuItem>
+                            <MenuItem onClick={() => handleDelivaryStatus({ delivery_status: "Cancelled", id: params.row._id })}>Cancelled</MenuItem>
                         </Menu>
                     </>
                 )

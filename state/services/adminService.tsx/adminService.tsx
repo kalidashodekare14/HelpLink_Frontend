@@ -15,6 +15,7 @@ export const adminService = createApi({
             }),
             providesTags: ["Users"]
         }),
+        
         userRoleManage: builder.mutation<any, { id: string, role: string }>({
             query: ({ id, role }) => ({
                 url: `/user_role/${id}`,
@@ -23,6 +24,7 @@ export const adminService = createApi({
             }),
             invalidatesTags: ["Users"]
         }),
+
         userStatusManage: builder.mutation<any, { id: string, status: string }>({
             query: ({ id, status }) => ({
                 url: `/user_active/${id}`,
@@ -31,6 +33,7 @@ export const adminService = createApi({
             }),
             invalidatesTags: ["Users"]
         }),
+
         // Campaign Management
         totalCamgaignManage: builder.query<any, void>({
             query: () => ({
@@ -39,11 +42,21 @@ export const adminService = createApi({
             }),
             providesTags: ["Users"]
         }),
+
         campaignRequestStatusManage: builder.mutation({
-            query: ({ id, req_status }) => ({
+            query: ({ id, request_status }) => ({
                 url: `/campaign_request_status/${id}`,
                 method: "PATCH",
-                body: { request_status: req_status }
+                body: { request_status: request_status }
+            }),
+            invalidatesTags: ["Users"]
+        }),
+
+        campaignDeliveryStatusManage: builder.mutation({
+            query: ({ id, delivery_status }) => ({
+                url: `/campaign_delivery_status/${id}`,
+                method: "PATCH",
+                body: { delivery_status }
             }),
             invalidatesTags: ["Users"]
         })
@@ -56,5 +69,6 @@ export const {
     useUserRoleManageMutation,
     useUserStatusManageMutation,
     useTotalCamgaignManageQuery,
-    useCampaignRequestStatusManageMutation
+    useCampaignRequestStatusManageMutation,
+    useCampaignDeliveryStatusManageMutation
 } = adminService;
