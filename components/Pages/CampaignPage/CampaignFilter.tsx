@@ -49,7 +49,6 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                     bgcolor: "white",
                     width: "100%",
                 }}>
-                    {/* <Typography fontSize={20}>Filter</Typography> */}
                     <Box sx={{
                         display: "flex",
                         justifyContent: "center",

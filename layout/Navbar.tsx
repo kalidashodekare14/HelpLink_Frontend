@@ -149,7 +149,9 @@ const Navbar = () => {
                                         },
                                     }}
                                 >
-                                    <MenuItem>Profile</MenuItem>
+                                    <Link href={"/profile"}>
+                                        <MenuItem>Profile</MenuItem>
+                                    </Link>
                                     {
                                         isRole === "receiver" && (
                                             <>
