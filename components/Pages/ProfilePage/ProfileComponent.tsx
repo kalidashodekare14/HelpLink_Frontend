@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, Box, Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, CircularProgress, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import useProfileBDLocation from "@/hooks/useProfileBDLocation";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useProfileImageUploadMutation, useProfleInfoQuery, useProfleInfoUpdateMutation } from "@/state/services/profileService/profileService";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 type Inputs = {
     name: string,
@@ -29,6 +30,8 @@ const ProfileComponent = () => {
     const [profleInfoUpdate, { isLoading: updateLoading, error: updateError }] = useProfleInfoUpdateMutation()
     // Profile Image Upload API
     const [profileImageUpload, { isLoading: pImageLoading, error: pImageError }] = useProfileImageUploadMutation()
+    // Image loading 
+    const [imageLoading, setImageLoading] = useState<boolean>(false);
     // Toggle State
     const [infoToggle, setInfoToggle] = useState<boolean>(false);
 
@@ -103,17 +106,24 @@ const ProfileComponent = () => {
 
 
     const handleImageUpload = async (event: any) => {
-        const formData = new FormData();
-        formData.append("image", event.target.files[0]);
-        const imageInfo = {
-            email: session?.user?.email,
-            data: formData
-        }
-        const result = await profileImageUpload(imageInfo)
-        if ("data" in result) {
+        try {
+            const formData = new FormData();
+            formData.append("image", event.target.files[0]);
+            const imageInfo = {
+                email: session?.user?.email,
+                data: formData
+            }
+            setImageLoading(true);
+            const result = await profileImageUpload(imageInfo)
+            if ("data" in result) {
 
+            }
+            console.log('checking image data', result)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setImageLoading(false);
         }
-        console.log('checking image data', result)
     }
 
 
@@ -152,21 +162,61 @@ const ProfileComponent = () => {
                             alignItems: "center",
                             gap: "10px"
                         }}>
-                            {
-                                profileData?.image ? (
-                                    <Avatar
-                                        alt="Remy Sharp"
-                                        src={profileData?.image}
-                                        sx={{
-                                            width: 120,
-                                            height: 120,
-                                            border: '1px solid #bbbb'
-                                        }}
-                                    />
-                                ) : (
-                                    <AccountCircleIcon sx={{ border: '1px solid #bbbb', fontSize: "130px", borderRadius: "100%" }} />
-                                )
-                            }
+                            <Box sx={{ position: "relative" }}>
+                                {
+                                    profileData?.image ? (
+                                        <Avatar
+                                            alt="Remy Sharp"
+                                            src={profileData?.image}
+                                            sx={{
+                                                width: 120,
+                                                height: 120,
+                                                border: '1px solid #bbbb'
+                                            }}
+                                        />
+                                    ) : (
+                                        < AccountCircleIcon sx={{ fontSize: "132px", borderRadius: "100%" }} />
+                                    )
+                                }
+                                {
+                                    imageLoading ? (
+                                        <Box
+                                            sx={{
+                                                position: "absolute",
+                                                right: "15px",
+                                                bottom: "15px",
+                                                bgcolor: "white",
+                                                fontSize: "35px",
+                                                p: "5px",
+                                                borderRadius: "100%",
+                                            }}
+                                        >
+                                            <CircularProgress
+                                                size="30px"
+                                                color="success"
+                                            />
+                                        </Box>
+
+                                    ) : (
+                                        <Box
+                                            onClick={() => (document.querySelector('input[type="file"]') as HTMLInputElement)?.click()}
+                                        >
+                                            <CameraAltIcon sx={{
+                                                position: "absolute",
+                                                right: "15px",
+                                                bottom: "15px",
+                                                bgcolor: "white",
+                                                fontSize: "35px",
+                                                p: "5px",
+                                                borderRadius: "100%",
+                                                cursor: "pointer"
+                                            }} />
+                                            <input hidden onChange={(event) => handleImageUpload(event)} type="file" />
+                                        </Box>
+                                    )
+                                }
+
+                            </Box>
                             <Box sx={{}}>
                                 <Typography fontSize={"25px"}>{profileData?.name}</Typography>
                                 <Typography sx={{
@@ -177,7 +227,6 @@ const ProfileComponent = () => {
                                 </Typography>
                             </Box>
                         </Box>
-                        <input onChange={(event) => handleImageUpload(event)} type="file" />
                         <Box>
                             {
                                 infoToggle && (
