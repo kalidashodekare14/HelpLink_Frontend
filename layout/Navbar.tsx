@@ -13,7 +13,7 @@ const Navbar = () => {
     const [toggle, setToggle] = useState<boolean>(false);
     const [isSticky, setIsSticky] = useState<boolean>(false);
     const pathname = usePathname();
-    const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar")
+    const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
 
     const { data: session } = useSession();
     type Role = "volunteer" | "receiver" | "donor" | "admin"

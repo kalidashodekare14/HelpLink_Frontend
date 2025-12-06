@@ -1,0 +1,26 @@
+
+
+export const ROLE_ROUTES: Record<string, string[]> = {
+    admin: [
+        "/admin_dashboard",
+        "/admin_dashboard/manage_user",
+        "/admin_dashboard/manage_campaign",
+    ],
+    volunteer: [
+        "/volunteer_dashboard",
+        "/volunteer_dashboard/verify_request",
+        "/volunteer_dashboard/manage_delivery"
+    ],
+    donor: [
+        "/profile",
+        "/donate_track",
+    ],
+    receiver: [
+        "/profile",
+        "/request_track",
+        "/help_request",
+    ]
+} as const;
+
+
+export type UserRole = keyof typeof ROLE_ROUTES;
