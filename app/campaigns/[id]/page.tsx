@@ -1,5 +1,5 @@
-import CampaignDetails from "@/components/Pages/CampaignPage/CampaignDetails";
-import CampaignDetailsDonate from "@/components/Pages/CampaignPage/CampaignDetailsDonate";
+import CampaignDetails from "@/components/campaigns/CampaignDetails";
+import CampaignDetailsDonate from "@/components/campaigns/CampaignDetailsDonate";
 
 
 const campaignDetails = () => {

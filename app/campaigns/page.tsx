@@ -1,4 +1,4 @@
-import MainCampaign from "@/components/Pages/CampaignPage/MainCampaign";
+import MainCampaign from "@/components/campaigns/MainCampaign";
 
 const campaignsPage = () => {
     return (
