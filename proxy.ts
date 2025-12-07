@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from 'next/server'
 import { ROLE_ROUTES, UserRole } from "./lib/role_routes";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     let token = request.cookies.get('next-auth.session-token');
 
     const tokenVerify = await getToken({ req: request, secret: process.env.NEXT_JWT_SECRET });
