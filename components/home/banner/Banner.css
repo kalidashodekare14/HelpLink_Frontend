@@ -1,0 +1,11 @@
+.banner1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0.308), rgba(0, 0, 0, 0.5)),  url("/Home/banner1.jpg");
+}
+
+.banner2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0.308), rgba(0, 0, 0, 0.5)),  url("/Home/banner2.jpg");
+}
+
+.banner3 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.363), rgba(0, 0, 0, 0.308), rgba(0, 0, 0, 0.5)),  url("/Home/banner3.jpg");
+}
