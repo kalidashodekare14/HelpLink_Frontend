@@ -2,13 +2,15 @@
 
 import Banner from "./banner/Banner";
 import OurMission from "./ourMission/OurMission";
-import SuccessInfo from "./successInfo/SuccessInfo";
+import ServiceInfo from "./ServiceInfo/ServiceInfo";
+import SuccessInfo from "./SuccessInfo/SuccessInfo";
 
 const MainHome = () => {
     return (
         <div>
             <Banner />
             <OurMission />
+            <ServiceInfo />
             <SuccessInfo />
         </div>
     );
