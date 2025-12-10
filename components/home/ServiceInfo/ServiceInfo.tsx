@@ -14,7 +14,7 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 
 const ServiceInfo = () => {
     return (
-        <Container sx={{ bgcolor: "#f5f5f5" }}>
+        <Container maxWidth={"lg"} sx={{ bgcolor: "#f5f5f5" }}>
             <Box sx={{
                 p: { xs: "20px", md: "40px" },
             }}>
@@ -108,7 +108,7 @@ const ServiceInfo = () => {
                             Medical Help
                         </Typography>
 
-                        <Typography className='chil-text'>We provide medical assistance to those in need, ensuring access to essential healthcare services.</Typography>
+                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}>We provide medical assistance to those in need, ensuring access to essential healthcare services.</Typography>
                         <Button
                             variant='outlined'
                             sx={{
@@ -158,7 +158,7 @@ const ServiceInfo = () => {
                             <FastfoodIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
                         </Box>
                         <Typography className='chil-text' sx={{ fontSize: "30px", mt: "40px" }}>Healthy Foods</Typography>
-                        <Typography className='chil-text'> We distribute nutritious food to communities facing food insecurity, promoting health and well-being.</Typography>
+                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}> We distribute nutritious food to communities facing food insecurity, promoting health and well-being.</Typography>
                         <Button
                             variant='outlined'
                             sx={{
@@ -208,7 +208,7 @@ const ServiceInfo = () => {
                             <MenuBookIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
                         </Box>
                         <Typography className='chil-text' sx={{ fontSize: "30px", mt: "40px" }}>Education</Typography>
-                        <Typography className='chil-text'> We support educational initiatives to empower individuals and communities through knowledge and learning.</Typography>
+                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}> We support educational initiatives to empower individuals and communities through knowledge and learning.</Typography>
                         <Button
                             variant='outlined'
                             sx={{
@@ -258,7 +258,7 @@ const ServiceInfo = () => {
                             <HomeWorkIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
                         </Box>
                         <Typography className='chil-text' sx={{ fontSize: "30px", mt: "40px" }}>Residence</Typography>
-                        <Typography className='chil-text'> We provide safe and secure housing solutions for individuals and families in need.</Typography>
+                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}> We provide safe and secure housing solutions for individuals and families in need.</Typography>
                         <Button
                             variant='outlined'
                             sx={{

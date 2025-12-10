@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const OurMission = () => {
     return (
-        <Container sx={{ my: "40px" }}>
+        <Container maxWidth={"lg"} sx={{ my: "40px" }}>
             <Box sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },

@@ -1,5 +1,6 @@
 "use client";
 
+import AskQuestion from "./AskQuestion/AskQuestion";
 import Banner from "./banner/Banner";
 import OurMission from "./ourMission/OurMission";
 import ServiceInfo from "./ServiceInfo/ServiceInfo";
@@ -12,6 +13,7 @@ const MainHome = () => {
             <OurMission />
             <ServiceInfo />
             <SuccessInfo />
+            <AskQuestion />
         </div>
     );
 };

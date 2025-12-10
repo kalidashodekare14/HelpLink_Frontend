@@ -8,7 +8,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 const SuccessInfo = () => {
     return (
-        <Container>
+        <Container maxWidth={"lg"}>
             <Box sx={{
                 display: "grid",
                 gridTemplateColumns: { xs: "1fr 1fr", md: "1fr 1fr 1fr 1fr" },
