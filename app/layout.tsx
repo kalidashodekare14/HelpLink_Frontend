@@ -7,6 +7,7 @@ import { ReduxtProviderWrapper } from "@/components/ReduxProviderWrapper";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Rubik } from "next/font/google";
 import ThemeRegistry from "@/utils/ThemeRegistry";
+import Footer from "@/layout/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({
             <ThemeRegistry>
               <Navbar />
               {children}
+              <Footer />
             </ThemeRegistry>
           </ReduxtProviderWrapper>
         </AuthProvider>

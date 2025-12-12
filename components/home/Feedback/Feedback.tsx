@@ -93,10 +93,11 @@ const Feedback = () => {
                 <Typography sx={{ color: "#FB8500" }}>Testimonials</Typography>
                 <Typography sx={{ fontSize: "30px", fontWeight: "500" }}>Some Clients Feedback?</Typography>
             </Box>
-            <Box sx={{my: "30px"}}>
+            <Box sx={{ my: "30px" }}>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
+                    loop={true}
                     breakpoints={{
                         640: {
                             slidesPerView: 2,
@@ -124,9 +125,9 @@ const Feedback = () => {
                                     border: "1px solid #bbbb",
                                     p: "10px",
                                     borderRadius: "5px",
-                                   bgcolor: "white"
+                                    bgcolor: "white"
                                 }}>
-                                    <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                                         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                             <img className="w-16 rounded-full border-4 border-[#FB8500]" src={review.image} alt="" />
                                             <Box>
@@ -134,7 +135,7 @@ const Feedback = () => {
                                                 <Typography sx={{ fontSize: "15px", color: "#4e4e4e" }}>{review.location}</Typography>
                                             </Box>
                                         </Box>
-                                        <FormatQuoteIcon sx={{fontSize: "80px"}} />
+                                        <FormatQuoteIcon sx={{ fontSize: "80px" }} />
                                     </Box>
                                     <Box>
                                         <Typography sx={{ color: "#4e4e4e", px: "20px", py: "15px" }}>{review.review.slice(0, 300)}...</Typography>
