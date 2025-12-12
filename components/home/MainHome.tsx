@@ -2,6 +2,7 @@
 
 import AskQuestion from "./AskQuestion/AskQuestion";
 import Banner from "./banner/Banner";
+import Feedback from "./Feedback/Feedback";
 import OurMission from "./ourMission/OurMission";
 import OurVolunteer from "./OurVolunteer/OurVolunteer";
 import ServiceInfo from "./ServiceInfo/ServiceInfo";
@@ -16,6 +17,7 @@ const MainHome = () => {
             <SuccessInfo />
             <AskQuestion />
             <OurVolunteer />
+            <Feedback />
         </div>
     );
 };
