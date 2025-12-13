@@ -149,10 +149,12 @@ const OurVolunteer = () => {
                     {
                         volunteerData.map(volunteer => (
                             <SwiperSlide>
-                                <Box sx={{
+                                <Box className="duration-300" sx={{
                                     position: "relative",
+                                    transform: "1s",
                                     "&:hover .vInfo": {
-                                        visibility: "visible",
+                                        opacity: "100%",
+                                        transform: "1s",
                                     }
                                 }}>
                                     <img className="w-full h-[300px] z-10 rounded-3xl" src={volunteer.image} alt="" />
@@ -168,14 +170,37 @@ const OurVolunteer = () => {
                                         borderRadius: "5px",
                                         boxShadow: "0 0 5px rgba(0,0,0,0.2)",
                                         whiteSpace: "nowrap",
-                                        visibility: "hidden"
+                                        // visibility: "hidden",
+                                        opacity: 0
+
                                     }}>
-                                        <Typography sx={{ fontSize: "19px", fontWeight: "500" }}>{volunteer?.name}</Typography>
-                                        <Typography>{volunteer?.title}</Typography>
-                                        <Box>
-                                            <FacebookIcon />
-                                            <TwitterIcon />
-                                            <InstagramIcon />
+                                        <Typography sx={{ fontSize: "19px", fontWeight: "500", my: "5px" }}>{volunteer?.name}</Typography>
+                                        <Typography sx={{ my: "5px" }}>{volunteer?.title}</Typography>
+                                        <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                            <FacebookIcon sx={{
+                                                fontSize: "40px",
+                                                border: "1px solid #fb8500",
+                                                boxShadow: 3,
+                                                color: "#000000",
+                                                borderRadius: "50%",
+                                                p: "5px"
+                                            }} />
+                                            <TwitterIcon sx={{
+                                                fontSize: "40px",
+                                                border: "1px solid #fb8500",
+                                                boxShadow: 3,
+                                                color: "#000000",
+                                                borderRadius: "50%",
+                                                p: "5px"
+                                            }} />
+                                            <InstagramIcon sx={{
+                                                fontSize: "40px",
+                                                border: "1px solid #fb8500",
+                                                boxShadow: 3,
+                                                color: "#000000",
+                                                borderRadius: "50%",
+                                                p: "5px"
+                                            }} />
                                         </Box>
                                     </Box>
                                 </Box>
