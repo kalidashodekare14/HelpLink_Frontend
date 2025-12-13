@@ -118,106 +118,107 @@ const Navbar = () => {
                 <Box sx={{
                     display: "flex",
                     justifyItems: "center",
-                    gap: "80px",
+                    alignItems: "center",
+                    gap: "10px",
                     fontSize: "19px"
                 }}>
-                    {
-                        session ? (
-                            <>
-                                <Avatar
-                                    id="basic-button"
-                                    aria-controls={open ? 'basic-menu' : undefined}
-                                    aria-haspopup="true"
-                                    aria-expanded={open ? 'true' : undefined}
-                                    onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
-                                    sx={{ cursor: 'pointer' }}
-                                >
-                                    {session?.user?.image ? (
-                                        <img src={session?.user?.image} alt='' />
-                                    ) : (
-                                        <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
-                                    )
-                                    }
-                                </Avatar>
-                                <Menu
-                                    id="basic-menu"
-                                    anchorEl={anchorEl}
-                                    open={open}
-                                    onClose={handleClose}
-                                    slotProps={{
-                                        list: {
-                                            'aria-labelledby': 'basic-button',
-                                        },
-                                    }}
-                                >
-                                    <Link href={"/profile"}>
-                                        <MenuItem>Profile</MenuItem>
-                                    </Link>
-                                    {
-                                        isRole === "receiver" && (
-                                            <>
-                                                <Link href={"/help_request"}>
-                                                    <MenuItem>Help Request</MenuItem>
-                                                </Link>
-                                                <Link href={"/request_track"}>
-                                                    <MenuItem>Request Track</MenuItem>
-                                                </Link>
-                                            </>
+                    <Box>
+                        {
+                            session ? (
+                                <>
+                                    <Avatar
+                                        id="basic-button"
+                                        aria-controls={open ? 'basic-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                        onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
+                                        sx={{ cursor: 'pointer' }}
+                                    >
+                                        {session?.user?.image ? (
+                                            <img src={session?.user?.image} alt='' />
+                                        ) : (
+                                            <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
                                         )
-                                    }
-                                    {
-                                        isRole === "donor" && (
-                                            <>
-                                                <Link href={"/donate_track"}>
-                                                    <MenuItem>Donate Track</MenuItem>
-                                                </Link>
-                                            </>
-                                        )
-                                    }
-                                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                                </Menu>
-                            </>
-                        ) : (
-                            <Link href={"/signin"}>
-                                <Button variant='outlined'
+                                        }
+                                    </Avatar>
+                                    <Menu
+                                        id="basic-menu"
+                                        anchorEl={anchorEl}
+                                        open={open}
+                                        onClose={handleClose}
+                                        slotProps={{
+                                            list: {
+                                                'aria-labelledby': 'basic-button',
+                                            },
+                                        }}
+                                    >
+                                        <Link href={"/profile"}>
+                                            <MenuItem>Profile</MenuItem>
+                                        </Link>
+                                        {
+                                            isRole === "receiver" && (
+                                                <>
+                                                    <Link href={"/help_request"}>
+                                                        <MenuItem>Help Request</MenuItem>
+                                                    </Link>
+                                                    <Link href={"/request_track"}>
+                                                        <MenuItem>Request Track</MenuItem>
+                                                    </Link>
+                                                </>
+                                            )
+                                        }
+                                        {
+                                            isRole === "donor" && (
+                                                <>
+                                                    <Link href={"/donate_track"}>
+                                                        <MenuItem>Donate Track</MenuItem>
+                                                    </Link>
+                                                </>
+                                            )
+                                        }
+                                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                    </Menu>
+                                </>
+                            ) : (
+                                <Link href={"/signin"}>
+                                    <Button variant='outlined'
+                                        sx={{
+                                            bgcolor: "#0048e8",
+                                            color: "white"
+                                        }}
+                                    >Login</Button>
+                                </Link>
+                            )
+                        }
+                    </Box>
+                    <Box>
+                        {
+                            toggle ? (
+                                <CloseIcon
+                                    onClick={handleToggle}
                                     sx={{
-                                        bgcolor: "#0048e8",
-                                        color: "white"
+                                        display: {
+
+                                            sm: "inline-block",
+                                            md: "inline-block",
+                                            lg: "none"
+                                        }
                                     }}
-                                >Login</Button>
-                            </Link>
-                        )
-                    }
-
-                    {
-                        toggle ? (
-                            <CloseIcon
-                                onClick={handleToggle}
-                                sx={{
-                                    display: {
-
-                                        sm: "inline-block",
-                                        md: "inline-block",
-                                        lg: "none"
-                                    }
-                                }}
-                            />
-                        ) : (
-                            <HorizontalSplitIcon
-                                onClick={handleToggle}
-                                sx={{
-                                    display: {
-
-                                        sm: "inline-block",
-                                        md: "inline-block",
-                                        lg: "none"
-                                    }
-                                }}
-                            />
-                        )
-                    }
-
-
+                                />
+                            ) : (
+                                <HorizontalSplitIcon
+                                    onClick={handleToggle}
+                                    sx={{
+                                        display: {
+                                            sm: "inline-block",
+                                            md: "inline-block",
+                                            lg: "none"
+                                        }
+                                    }}
+                                />
+                            )
+                        }
+                    </Box>
                 </Box>
                 <Box
                     sx={{
@@ -226,7 +227,7 @@ const Navbar = () => {
                         left: 0,
                         height: "100vh",
                         width: "75%",
-                        background: "#307bc4",
+                        background: "#B26E20",
                         color: "white",
                         zIndex: 999,
                         p: "25px",
