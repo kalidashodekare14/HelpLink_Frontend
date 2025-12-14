@@ -5,6 +5,7 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ChatIcon from '@mui/icons-material/Chat';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import CountUp from 'react-countup';
 
 const SuccessInfo = () => {
     return (
@@ -35,7 +36,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        500+
+                        <CountUp start={0} end={500} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Team Members
@@ -59,7 +60,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        1200+
+                        <CountUp start={0} end={1200} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Client's Review
@@ -83,7 +84,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        100+
+                        <CountUp start={0} end={100} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Winning Awards
@@ -107,7 +108,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        100+
+                        <CountUp start={0} end={100} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Happy Clients

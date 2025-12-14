@@ -108,7 +108,7 @@ const Navbar = () => {
                     <ul className='hidden lg:flex items-center gap-5 text-[16px]'>
                         {
                             navgicaton.map((navi) => (
-                                <Link className={`${pathname == navi.path && "text-[#307bc4] border-b-2 border-[#307bc4]"} hover:text-[#307bc4]`} key={navi.id} href={navi.path}>
+                                <Link className={`${pathname == navi.path && "text-[#FB8500] border-b-2 border-[#FB8500]"} hover:text-[#FB8500]`} key={navi.id} href={navi.path}>
                                     <li className='font-rubik'>{navi.name}</li>
                                 </Link>
                             ))
@@ -240,7 +240,7 @@ const Navbar = () => {
                     }}>
                     {
                         navgicaton.map((navi) => (
-                            <Link className={`${pathname == navi.path && "text-white border-b-2 border-[#000000]"} hover:text-[#307bc4]`} key={navi.id} href={navi.path}>
+                            <Link className={`${pathname == navi.path && "text-white border-b-2 border-[#000000]"} hover:text-[#FB8500]`} key={navi.id} href={navi.path}>
                                 <Typography className='font-rubik'>{navi.name}</Typography>
                             </Link>
                         ))

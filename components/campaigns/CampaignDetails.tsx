@@ -1,7 +1,7 @@
 "use client"
 
 import { useGetCampaignDetailsQuery } from "@/state/services/publicService/campaignsService";
-import { Box, Button, Container, List, ListItem, Typography } from "@mui/material";
+import { Box, Button, Container, List, ListItem, ListItemButton, ListItemIcon, Typography } from "@mui/material";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useParams } from "next/navigation";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,10 +9,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import CategoryIcon from '@mui/icons-material/Category';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { useState } from "react";
 
 const CampaignDetails = () => {
 
@@ -21,6 +28,41 @@ const CampaignDetails = () => {
     const detailsData = campaignDetails?.data
 
 
+    const [open, setOpen] = useState<boolean>(false);
+
+    const toggleDrawer = (newOpen: boolean) => () => {
+        setOpen(newOpen);
+    };
+
+    const DrawerList = (
+        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+            <List>
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
+    );
 
     return (
         <Container sx={{ py: 5 }}>
@@ -89,7 +131,7 @@ const CampaignDetails = () => {
                         <MyLocationIcon />
                         <Typography fontSize={"16px"}>Addrress: {detailsData?.location?.address}</Typography>
                     </Box>
-                    <Button variant='outlined'
+                    <Button onClick={toggleDrawer(true)} variant='outlined'
                         sx={{
                             bgcolor: "#0048e8",
                             color: "white",
@@ -97,6 +139,9 @@ const CampaignDetails = () => {
                         }}>Donate Here</Button>
                 </Box>
             </Box>
+            <Drawer open={open} onClose={toggleDrawer(false)}>
+                {DrawerList}
+            </Drawer>
         </Container>
     );
 };
