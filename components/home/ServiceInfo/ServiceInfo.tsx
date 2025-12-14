@@ -13,6 +13,34 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 
 const ServiceInfo = () => {
+
+    const serviceData = [
+        {
+            id: 1,
+            title: "Medical Help",
+            description: "We provide medical assistance to those in need, ensuring access to essential healthcare services.",
+            icon: MedicalServicesIcon
+        },
+        {
+            id: 2,
+            title: "Healthy Foods",
+            description: "We distribute nutritious food to communities facing food insecurity, promoting health and well-being.",
+            icon: FastfoodIcon
+        },
+        {
+            id: 3,
+            title: "Education",
+            description: "We support educational initiatives to empower individuals and communities through knowledge and learning.",
+            icon: FastfoodIcon
+        },
+        {
+            id: 4,
+            title: "Residence",
+            description: "We provide safe and secure housing solutions for individuals and families in need.",
+            icon: FastfoodIcon
+        },
+    ]
+
     return (
         <Container maxWidth={"lg"} sx={{ bgcolor: "#f5f5f5" }}>
             <Box sx={{
@@ -41,239 +69,90 @@ const ServiceInfo = () => {
                 </Typography>
             </Box>
             <Swiper
-                slidesPerView={3}
+                slidesPerView={1}
                 spaceBetween={10}
                 loop={true}
                 pagination={{
                     clickable: true,
                 }}
                 breakpoints={{
-                    10: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    },
                     640: {
                         slidesPerView: 2,
-                        spaceBetween: 10,
+                        spaceBetween: 20,
                     },
                     768: {
                         slidesPerView: 2,
-                        spaceBetween: 10,
+                        spaceBetween: 40,
                     },
                     1024: {
                         slidesPerView: 3,
-                        spaceBetween: 10,
+                        spaceBetween: 40,
                     },
                 }}
                 modules={[Pagination]}
                 className="mySwiper"
             >
-                <SwiperSlide className='m-10'>
-                    <Box sx={{
-                        bgcolor: "white",
-                        p: "20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        gap: "10px",
-                        my: "20px",
-                        position: "relative",
-                        borderRadius: "10px",
-                        transition: "all 0.3s ease-in-out",
-                        '&:hover': {
-                            bgcolor: '#B76200',
+                {
+                    serviceData.map(service => (
+                        <SwiperSlide>
+                            <Box sx={{
+                                bgcolor: "white",
+                                p: "20px",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "10px",
+                                textAlign: "center",
+                                my: "50px",
+                                position: "relative",
+                                borderRadius: "10px",
+                                transition: "all 0.3s ease-in-out",
+                                '&:hover': {
+                                    bgcolor: '#B76200',
 
-                        },
-                        '&:hover .chil-text': {
-                            color: 'white',
-                        },
-                    }}>
-                        <Box className="icon-wapper" sx={{
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "50%",
-                            p: "30px",
-                            position: "absolute",
-                            top: "-50px",
-                            bgcolor: "white",
-                            border: '2px solid #fb8500',
-                        }}>
-                            <MedicalServicesIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
-                        </Box>
-                        <Typography className='chil-text' sx={{
-                            fontSize: "30px",
-                            mt: "40px",
-                        }}>
-                            Medical Help
-                        </Typography>
+                                },
+                                '&:hover .chil-text': {
+                                    color: 'white',
+                                },
+                            }}>
+                                <Box className="icon-wapper" sx={{
+                                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                                    borderRadius: "50%",
+                                    p: "30px",
+                                    position: "absolute",
+                                    top: "-50px",
+                                    bgcolor: "white",
+                                    border: '2px solid #fb8500',
+                                }}>
+                                    <service.icon sx={{ fontSize: "40px", color: "#fb8500", }} />
+                                </Box>
+                                <Typography className='chil-text' sx={{
+                                    fontSize: "30px",
+                                    mt: "40px",
+                                }}>
+                                    {service.title}
+                                </Typography>
 
-                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}>We provide medical assistance to those in need, ensuring access to essential healthcare services.</Typography>
-                        <Button
-                            variant='outlined'
-                            sx={{
-                                bgcolor: "#fb8500",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "20px",
-                                p: "10px 30px",
-                                my: "20px",
-                            }}
-                        >
-                            Learn More
-                        </Button>
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide className='m-10'>
-                    <Box sx={{
-                        bgcolor: "white",
-                        p: "20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        gap: "10px",
-                        my: "20px",
-                        position: "relative",
-                        borderRadius: "10px",
-                        transition: "all 0.3s ease-in-out",
-                        '&:hover': {
-                            bgcolor: '#B76200',
+                                <Typography className='chil-text' sx={{ color: "#4e4e4e", }}>{service.description}</Typography>
+                                <Button
+                                    variant='outlined'
+                                    sx={{
+                                        bgcolor: "#fb8500",
+                                        color: "white",
+                                        border: "none",
+                                        borderRadius: "20px",
+                                        p: "10px 30px",
+                                        my: "20px",
+                                    }}
+                                >
+                                    Learn More
+                                </Button>
+                            </Box>
+                        </SwiperSlide>
+                    ))
+                }
 
-                        },
-                        '&:hover .chil-text': {
-                            color: 'white',
-                        },
-                    }}>
-                        <Box sx={{
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "50%",
-                            p: "30px",
-                            position: "absolute",
-                            top: "-50px",
-                            bgcolor: "white",
-                            border: '2px solid #fb8500',
-                        }}>
-                            <FastfoodIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
-                        </Box>
-                        <Typography className='chil-text' sx={{ fontSize: "30px", mt: "40px" }}>Healthy Foods</Typography>
-                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}> We distribute nutritious food to communities facing food insecurity, promoting health and well-being.</Typography>
-                        <Button
-                            variant='outlined'
-                            sx={{
-                                bgcolor: "#fb8500",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "20px",
-                                p: "10px 30px",
-                                my: "20px",
-                            }}
-                        >
-                            Learn More
-                        </Button>
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide className='m-10'>
-                    <Box sx={{
-                        bgcolor: "white",
-                        p: "20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        gap: "10px",
-                        my: "20px",
-                        position: "relative",
-                        borderRadius: "10px",
-                        transition: "all 0.3s ease-in-out",
-                        '&:hover': {
-                            bgcolor: '#B76200',
-
-                        },
-                        '&:hover .chil-text': {
-                            color: 'white',
-                        },
-                    }}>
-                        <Box sx={{
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "50%",
-                            p: "30px",
-                            position: "absolute",
-                            top: "-50px",
-                            bgcolor: "white",
-                            border: '2px solid #fb8500',
-                        }}>
-                            <MenuBookIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
-                        </Box>
-                        <Typography className='chil-text' sx={{ fontSize: "30px", mt: "40px" }}>Education</Typography>
-                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}> We support educational initiatives to empower individuals and communities through knowledge and learning.</Typography>
-                        <Button
-                            variant='outlined'
-                            sx={{
-                                bgcolor: "#fb8500",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "20px",
-                                p: "10px 30px",
-                                my: "20px",
-                            }}
-                        >
-                            Learn More
-                        </Button>
-                    </Box>
-                </SwiperSlide>
-                <SwiperSlide className='m-10'>
-                    <Box sx={{
-                        bgcolor: "white",
-                        p: "20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        textAlign: "center",
-                        gap: "10px",
-                        my: "20px",
-                        position: "relative",
-                        borderRadius: "10px",
-                        transition: "all 0.3s ease-in-out",
-                        '&:hover': {
-                            bgcolor: '#B76200',
-
-                        },
-                        '&:hover .chil-text': {
-                            color: 'white',
-                        },
-                    }}>
-                        <Box sx={{
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "50%",
-                            p: "30px",
-                            position: "absolute",
-                            top: "-50px",
-                            bgcolor: "white",
-                            border: '2px solid #fb8500',
-                        }}>
-                            <HomeWorkIcon sx={{ fontSize: "40px", color: "#fb8500", }} />
-                        </Box>
-                        <Typography className='chil-text' sx={{ fontSize: "30px", mt: "40px" }}>Residence</Typography>
-                        <Typography className='chil-text' sx={{color: "#4e4e4e",}}> We provide safe and secure housing solutions for individuals and families in need.</Typography>
-                        <Button
-                            variant='outlined'
-                            sx={{
-                                bgcolor: "#fb8500",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "20px",
-                                p: "10px 30px",
-                                my: "20px",
-                            }}
-                        >
-                            Learn More
-                        </Button>
-                    </Box>
-                </SwiperSlide>
             </Swiper >
         </Container >
     );
