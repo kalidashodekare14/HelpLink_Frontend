@@ -31,13 +31,13 @@ const ServiceInfo = () => {
             id: 3,
             title: "Education",
             description: "We support educational initiatives to empower individuals and communities through knowledge and learning.",
-            icon: FastfoodIcon
+            icon: MenuBookIcon
         },
         {
             id: 4,
             title: "Residence",
             description: "We provide safe and secure housing solutions for individuals and families in need.",
-            icon: FastfoodIcon
+            icon: HomeWorkIcon
         },
     ]
 

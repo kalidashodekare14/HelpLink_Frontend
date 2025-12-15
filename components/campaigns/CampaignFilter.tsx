@@ -27,7 +27,7 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                 sx={{
                     height: "300px",
                     // backgroundColor: "red"
-                    backgroundImage: "url('https://i.ibb.co.com/4RKTCkZ6/volunteer-helping-with-donation-box.jpg')",
+                    backgroundImage: "/Campaign/banner.jpg",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     p: "10px",
