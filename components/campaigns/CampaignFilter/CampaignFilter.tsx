@@ -2,6 +2,7 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
+import './CampaignFilter.css';
 
 type locationType = {
     divisions: string[],
@@ -16,6 +17,7 @@ type locationType = {
     handleSearch: (searchValue: string) => void
 }
 
+
 const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistrict, setUpazila, division, district, upazila, handleSearch }: locationType) => {
 
     const [searchValue, setSearchValue] = useState<string>("");
@@ -24,10 +26,9 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
     return (
         <div>
             <Box
+                className="banner"
                 sx={{
                     height: "300px",
-                    // backgroundColor: "red"
-                    backgroundImage: "/Campaign/banner.jpg",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     p: "10px",

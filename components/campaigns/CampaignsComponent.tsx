@@ -1,7 +1,8 @@
 "use client"
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, FormControl, InputLabel, MenuItem, Pagination, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Divider, FormControl, InputLabel, MenuItem, Pagination, Select, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 type campaignChindren = {
     totalCampaign: any,
@@ -38,19 +39,59 @@ const CampaignsComponent = ({ totalCampaign, setPage }: any) => {
                                 flexDirection: 'column',
                                 gap: "10px"
                             }}>
-                                <Typography gutterBottom fontWeight={"bold"} component="div">
+                                <Typography gutterBottom fontWeight={"bold"} fontSize={"18px"} component="div">
                                     {campaign?.title}
                                 </Typography>
                                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                                     {campaign?.description.slice(0, 80)}...
                                 </Typography>
-                                <Typography>{campaign.location.division}  <ArrowRightIcon /> {campaign.location.district}  <ArrowRightIcon /> {campaign.location.upazila}  </Typography>
+                                <Divider></Divider>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "10px" }}>
+                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                        <ArrowRightIcon />
+                                        <Typography>Division:</Typography>
+                                    </Box>
+                                    <Typography>{campaign.location.division}</Typography>
+                                </Box>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                        <ArrowRightIcon />
+                                        <Typography>District:</Typography>
+                                    </Box>
+                                    <Typography>{campaign.location.district}</Typography>
+                                </Box>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                        <ArrowRightIcon />
+                                        <Typography>Upazila:</Typography>
+                                    </Box>
+                                    <Typography>{campaign.location.upazila}</Typography>
+                                </Box>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: "2px" }}>
+                                    <LocationOnIcon />
+                                    <Typography>{campaign.location.address}</Typography>
+                                </Box>
                             </CardContent>
-                            <CardActions>
+                            <Box sx={{ my: "10px", mx: "10px" }}>
                                 <Link href={`/campaigns/${campaign?._id}`}>
-                                    <Button variant='outlined'>Donate</Button>
+                                    <Button
+                                        variant='outlined'
+                                        sx={{
+                                            width: "100%",
+                                            bgcolor: "#fb8500",
+                                            borderColor: "#fb8500",
+                                            color: "white",
+                                            p: "10px 30px",
+                                            '&:hover': {
+                                                bgcolor: "#fb8500",
+                                                borderColor: "#fb8500",
+                                            }
+                                        }}
+                                    >
+                                        Donate Now
+                                    </Button>
                                 </Link>
-                            </CardActions>
+                            </Box>
                         </Card>
                     ))
                 }
