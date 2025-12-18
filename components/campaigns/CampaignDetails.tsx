@@ -36,7 +36,7 @@ const CampaignDetails = () => {
                     campaignLoading ? (
                         <Box sx={{ width: { sx: "100%", lg: "50%" } }}>
                             <Skeleton variant="rectangular" sx={{
-                                width: { sx: "100%", lg: "50%" },
+                                width: { sx: "100%", lg: "100%" },
                                 height: { xs: "250px", lg: "450px" },
                                 borderRadius: "16px"
                             }} />

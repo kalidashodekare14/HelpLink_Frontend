@@ -27,7 +27,7 @@ const MainCampaign = () => {
         upazila: upazila,
         page: page
     }
-    const { data: totalCampaign, isLoading, error } = useGetTotalCampaignsQuery(query)
+    const { data: totalCampaign, isLoading: campaignLoading, error: campaignError } = useGetTotalCampaignsQuery(query)
 
 
     const handleSearch = (searchValue: string) => {
@@ -78,6 +78,7 @@ const MainCampaign = () => {
             />
             <CampaignsComponent
                 totalCampaign={totalCampaign}
+                campaignLoading={campaignLoading}
                 // Pagination
                 setPage={setPage}
             />
