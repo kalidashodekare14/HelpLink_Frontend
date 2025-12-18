@@ -35,7 +35,7 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    px: "20%",
+                    px: { xs: "2%", lg: "20%" },
                 }}
             >
                 <Box sx={{
@@ -77,8 +77,8 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                     </Box>
                     <Box sx={{
                         width: "100%",
-                        display: "flex",
-                        justifyItems: "center",
+                        display: "grid",
+                        gridTemplateColumns: { xs: "1fr 1fr", md: "1fr 1fr 1fr", lg: "1fr 1fr 1fr 1fr" },
                         gap: "5px"
                     }}>
                         <FormControl fullWidth>
@@ -91,6 +91,9 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                                 size="small"
                                 onChange={(e) => setDivision(e.target.value)}
                             >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
                                 {
                                     divisions.map((div: string) => (
                                         <MenuItem key={div} value={div}>{div}</MenuItem>
@@ -108,6 +111,9 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                                 size="small"
                                 onChange={(e) => setDistrict(e.target.value)}
                             >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
                                 {
                                     districts.map((dist: string) => (
                                         <MenuItem key={dist} value={dist}>{dist}</MenuItem>
@@ -125,6 +131,9 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                                 size="small"
                                 onChange={(e) => setUpazila(e.target.value)}
                             >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
                                 {
                                     upazilas.map((upz: string) => (
                                         <MenuItem key={upz} value={upz}>{upz}</MenuItem>
@@ -142,6 +151,9 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                                 size="small"
                             // onChange={handleChange}
                             >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
                                 <MenuItem value={10}>High</MenuItem>
                                 <MenuItem value={20}>Medium</MenuItem>
                                 <MenuItem value={30}>Low</MenuItem>
