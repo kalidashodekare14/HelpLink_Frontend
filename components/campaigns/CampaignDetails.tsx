@@ -16,7 +16,9 @@ import CategoryIcon from '@mui/icons-material/Category';
 
 const CampaignDetails = () => {
 
-    const { id } = useParams()
+    // Dynamic id
+    const { id } = useParams();
+    // Campaign Details RKTQuery
     const { data: campaignDetails, isLoading: campaignLoading, error: campaignError } = useGetCampaignDetailsQuery(id ? String(id) : skipToken);
     const detailsData = campaignDetails?.data
 

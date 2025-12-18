@@ -181,12 +181,22 @@ const Navbar = () => {
                                 </>
                             ) : (
                                 <Link href={"/signin"}>
-                                    <Button variant='outlined'
+                                    <Button
+                                        type='submit'
+                                        variant='outlined'
                                         sx={{
-                                            bgcolor: "#0048e8",
-                                            color: "white"
+                                            width: "100%",
+                                            bgcolor: "#fb8500",
+                                            borderColor: "#fb8500",
+                                            color: "white",
+                                            '&:hover': {
+                                                bgcolor: "#fb8500",
+                                                borderColor: "#fb8500",
+                                            },
                                         }}
-                                    >Login</Button>
+                                    >
+                                        Login
+                                    </Button>
                                 </Link>
                             )
                         }

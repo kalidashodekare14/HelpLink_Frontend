@@ -3,7 +3,7 @@ import { Box, Button, Checkbox, CircularProgress, Container, Divider, TextField,
 import Link from 'next/link';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import {  SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
@@ -116,12 +116,18 @@ const RegisterComponent = () => {
                         >
                             <Button
                                 type='submit'
-                                variant="outlined"
+                                variant='outlined'
                                 sx={{
-                                    py: "10px",
                                     width: "50%",
-                                    bgcolor: "#0048e8",
-                                    color: "white"
+                                    bgcolor: "#fb8500",
+                                    borderColor: "#fb8500",
+                                    color: "white",
+                                    px: "10px",
+                                    py: "10px",
+                                    '&:hover': {
+                                        bgcolor: "#fb8500",
+                                        borderColor: "#fb8500",
+                                    },
                                 }}
                             >
                                 {loading ? <CircularProgress size={30} color="inherit" /> : "Register"}
