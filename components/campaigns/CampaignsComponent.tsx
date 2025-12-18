@@ -130,103 +130,122 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                             }
                         </>
                     ) : (
-
-                        totalCampaign?.data?.data.map((campaign: any) => (
-                            <Card key={campaign._id} sx={{ maxWidth: 345 }}>
-                                <CardMedia
-                                    sx={{ height: 200 }}
-                                    image={campaign?.image[0]}
-                                    title="green iguana"
-                                />
-                                <CardContent sx={{
-                                    display: "flex",
-                                    flexDirection: 'column',
-                                    gap: "10px"
-                                }}>
-                                    <Typography gutterBottom fontWeight={"bold"} fontSize={"18px"} component="div">
-                                        {campaign?.title}
-                                    </Typography>
-                                    <Typography sx={{ color: 'text.secondary', fontSize: "16px" }}>
-                                        {campaign?.description.slice(0, 80)}...
-                                    </Typography>
-                                    <Divider></Divider>
-                                    <Box >
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: "10px", my: "5px" }}>
-                                            <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                <LocationOnIcon sx={{ fontSize: "21px" }} />
-                                                <Typography sx={{ fontSize: "16px" }}>Location</Typography>
+                        totalCampaign?.data?.data && (
+                            totalCampaign?.data?.data.map((campaign: any) => (
+                                <Card key={campaign._id} sx={{ maxWidth: 345 }}>
+                                    <CardMedia
+                                        sx={{ height: 200 }}
+                                        image={campaign?.image[0]}
+                                        title="green iguana"
+                                    />
+                                    <CardContent sx={{
+                                        display: "flex",
+                                        flexDirection: 'column',
+                                        gap: "10px"
+                                    }}>
+                                        <Typography gutterBottom fontWeight={"bold"} fontSize={"18px"} component="div">
+                                            {campaign?.title}
+                                        </Typography>
+                                        <Typography sx={{ color: 'text.secondary', fontSize: "16px" }}>
+                                            {campaign?.description.slice(0, 80)}...
+                                        </Typography>
+                                        <Divider></Divider>
+                                        <Box >
+                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", my: "5px" }}>
+                                                <Box sx={{ display: "flex", alignItems: "center", }}>
+                                                    <LocationOnIcon sx={{ fontSize: "21px" }} />
+                                                    <Typography sx={{ fontSize: "16px" }}>Location</Typography>
+                                                </Box>
+                                            </Box>
+                                            <Box>
+                                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
+                                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                                        <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                        <Typography sx={{ fontSize: "15px" }}>Division:</Typography>
+                                                    </Box>
+                                                    <Typography sx={{ fontSize: "15px" }}>{campaign.location.division}</Typography>
+                                                </Box>
+                                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
+                                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                                        <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                        <Typography>District:</Typography>
+                                                    </Box>
+                                                    <Typography sx={{ fontSize: "15px" }}>{campaign.location.district}</Typography>
+                                                </Box>
+                                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
+                                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                                        <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                        <Typography>Upazila:</Typography>
+                                                    </Box>
+                                                    <Typography sx={{ fontSize: "15px" }}>{campaign.location.upazila}</Typography>
+                                                </Box>
+                                                <Box sx={{ display: "flex", alignItems: "center", gap: "2px", color: 'text.secondary' }}>
+                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                    <Typography sx={{ fontSize: "15px" }}>{campaign.location.address}</Typography>
+                                                </Box>
                                             </Box>
                                         </Box>
-                                        <Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography sx={{ fontSize: "15px" }}>Division:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{campaign.location.division}</Typography>
-                                            </Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography>District:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{campaign.location.district}</Typography>
-                                            </Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography>Upazila:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{campaign.location.upazila}</Typography>
-                                            </Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "2px", color: 'text.secondary' }}>
-                                                <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                <Typography sx={{ fontSize: "15px" }}>{campaign.location.address}</Typography>
-                                            </Box>
-                                        </Box>
-                                    </Box>
-                                </CardContent>
-                                <Box sx={{ my: "10px", mx: "10px" }}>
-                                    <Link href={`/campaigns/${campaign?._id}`}>
-                                        <Button
-                                            variant='outlined'
-                                            sx={{
-                                                width: "100%",
-                                                bgcolor: "#fb8500",
-                                                borderColor: "#fb8500",
-                                                color: "white",
-                                                p: "10px 30px",
-                                                '&:hover': {
+                                    </CardContent>
+                                    <Box sx={{ my: "10px", mx: "10px" }}>
+                                        <Link href={`/campaigns/${campaign?._id}`}>
+                                            <Button
+                                                variant='outlined'
+                                                sx={{
+                                                    width: "100%",
                                                     bgcolor: "#fb8500",
                                                     borderColor: "#fb8500",
-                                                }
-                                            }}
-                                        >
-                                            Donate Now
-                                        </Button>
-                                    </Link>
-                                </Box>
-                            </Card>
-                        ))
-
+                                                    color: "white",
+                                                    p: "10px 30px",
+                                                    '&:hover': {
+                                                        bgcolor: "#fb8500",
+                                                        borderColor: "#fb8500",
+                                                    }
+                                                }}
+                                            >
+                                                Donate Now
+                                            </Button>
+                                        </Link>
+                                    </Box>
+                                </Card>
+                            ))
+                        )
                     )
                 }
             </Box>
+            {
+                !totalCampaign?.data?.data && !campaignLoading && (
+                    <Box sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "400px"
+                    }}>
+                        <Box>
+                            <Typography sx={{ fontSize: "30px" }}>Data not found.</Typography>
+                            <img className="w-60" src="/Campaign/no_data.png" alt="" />
+                        </Box>
+                    </Box>
+                )
+            }
             {/* Pagination */}
-            <Box sx={{
-                my: 5,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-                <Pagination
-                    count={totalCampaign?.data.totalPages}
-                    onChange={(e, value) => setPage(value)}
-                    variant="outlined"
-                    shape="rounded"
+            {
+                totalCampaign?.data?.data && (
+                    <Box sx={{
+                        my: 5,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
+                        <Pagination
+                            count={totalCampaign?.data.totalPages}
+                            onChange={(e, value) => setPage(value)}
+                            variant="outlined"
+                            shape="rounded"
 
-                />
-            </Box>
+                        />
+                    </Box>
+                )
+            }
         </Container>
     );
 };
