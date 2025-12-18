@@ -46,30 +46,30 @@ const CampaignsComponent = ({ totalCampaign, setPage }: any) => {
                                     {campaign?.description.slice(0, 80)}...
                                 </Typography>
                                 <Divider></Divider>
-                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "10px" }}>
-                                    <Box sx={{ display: "flex", alignItems: "center", }}>
-                                        <ArrowRightIcon />
-                                        <Typography>Division:</Typography>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", }}>
+                                    <Box sx={{ display: "flex", alignItems: "center",}}>
+                                        <ArrowRightIcon sx={{fontSize: "20px"}} />
+                                        <Typography sx={{fontSize: "15px"}}>Division:</Typography>
                                     </Box>
-                                    <Typography>{campaign.location.division}</Typography>
+                                    <Typography sx={{fontSize: "15px"}}>{campaign.location.division}</Typography>
                                 </Box>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                     <Box sx={{ display: "flex", alignItems: "center", }}>
-                                        <ArrowRightIcon />
+                                        <ArrowRightIcon sx={{fontSize: "20px"}} />
                                         <Typography>District:</Typography>
                                     </Box>
-                                    <Typography>{campaign.location.district}</Typography>
+                                    <Typography sx={{fontSize: "15px"}}>{campaign.location.district}</Typography>
                                 </Box>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                     <Box sx={{ display: "flex", alignItems: "center", }}>
-                                        <ArrowRightIcon />
+                                        <ArrowRightIcon sx={{fontSize: "20px"}} />
                                         <Typography>Upazila:</Typography>
                                     </Box>
-                                    <Typography>{campaign.location.upazila}</Typography>
+                                    <Typography sx={{fontSize: "15px"}}>{campaign.location.upazila}</Typography>
                                 </Box>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: "2px" }}>
-                                    <LocationOnIcon />
-                                    <Typography>{campaign.location.address}</Typography>
+                                    <LocationOnIcon sx={{fontSize: "20px"}} />
+                                    <Typography sx={{fontSize: "15px"}}>{campaign.location.address}</Typography>
                                 </Box>
                             </CardContent>
                             <Box sx={{ my: "10px", mx: "10px" }}>
