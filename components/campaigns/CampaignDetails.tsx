@@ -155,7 +155,7 @@ const CampaignDetails = () => {
                                     ""
                                 )
                             }
-                            <Button
+                            {/* <Button
                                 variant='outlined'
                                 sx={{
                                     width: "50%",
@@ -171,7 +171,7 @@ const CampaignDetails = () => {
                                 }}
                             >
                                 Donate Now
-                            </Button>
+                            </Button> */}
                         </Box>
                     )
                 }
