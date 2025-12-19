@@ -3,6 +3,7 @@ import AboutBanner from './AboutBanner/AboutBanner';
 import AboutMission from './AboutMission';
 import SuccessInfo from '../home/SuccessInfo/SuccessInfo';
 import AboutAskQuestion from './AboutAskQuestion';
+import AboutOurVolunteer from './AboutOurVolunteer';
 
 const MainAbout = () => {
     return (
@@ -10,6 +11,7 @@ const MainAbout = () => {
             <AboutBanner />
             <AboutMission />
             <SuccessInfo />
+            <AboutOurVolunteer />
             <AboutAskQuestion />
         </div>
     );
