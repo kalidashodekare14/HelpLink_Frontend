@@ -17,52 +17,6 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
     return (
         <Container>
             <Box sx={{ width: "25%" }}>
-                {/* <Card sx={{ border: "1px solid #bbbb" }}>
-                    <Skeleton variant="rectangular" sx={{
-                        width: "100%",
-                        height: "200px"
-                    }} />
-                    <Box sx={{ mx: "20px", my: "20px" }}>
-                        <Skeleton variant="rectangular" sx={{
-                            width: "100%",
-                            height: "30px",
-                            my: "10px"
-                        }} />
-                        <Skeleton variant="rectangular" sx={{
-                            width: "100%",
-                            height: "60px",
-                            my: "10px"
-                        }} />
-                        <Box>
-                            <Skeleton variant="rectangular" sx={{
-                                width: "90%",
-                                height: "20px",
-                                my: "10px"
-                            }} />
-                            <Skeleton variant="rectangular" sx={{
-                                width: "80%",
-                                height: "20px",
-                                my: "10px"
-                            }} />
-                            <Skeleton variant="rectangular" sx={{
-                                width: "80%",
-                                height: "20px",
-                                my: "10px"
-                            }} />
-                            <Skeleton variant="rectangular" sx={{
-                                width: "80%",
-                                height: "20px",
-                                my: "10px"
-                            }} />
-                        </Box>
-                        <Skeleton variant="rectangular" sx={{
-                            width: "100%",
-                            height: "50px",
-                            my: "10px",
-                            borderRadius: "5px"
-                        }} />
-                    </Box>
-                </Card> */}
             </Box>
             <Box sx={{
                 display: "grid",

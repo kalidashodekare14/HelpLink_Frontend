@@ -1,9 +1,9 @@
-import React from 'react';
+import MainContact from '@/components/contact/MainContact';
 
 const contactPage = () => {
     return (
         <div>
-            
+            <MainContact />
         </div>
     );
 };
