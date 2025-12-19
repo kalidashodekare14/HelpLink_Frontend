@@ -2,6 +2,8 @@
 
 import { Box, Button, Container, Stack, TextField, Typography } from "@mui/material";
 import CallIcon from '@mui/icons-material/Call';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationPinIcon from '@mui/icons-material/LocationPin';
 
 const ContactForm = () => {
     return (
@@ -29,7 +31,7 @@ const ContactForm = () => {
                         </Box>
                         <Box sx={{ border: "1px solid #bbbb", p: "20px", borderRadius: "10px" }}>
                             <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                <CallIcon sx={{ fontSize: "30px" }} />
+                                <EmailIcon sx={{ fontSize: "30px" }} />
                                 <Box>
                                     <Typography sx={{ fontSize: "20px" }}>Email Us:</Typography>
                                     <Typography sx={{ color: 'text.secondary' }}>helplink@gmail.com</Typography>
@@ -38,7 +40,7 @@ const ContactForm = () => {
                         </Box>
                         <Box sx={{ border: "1px solid #bbbb", p: "20px", borderRadius: "10px" }}>
                             <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                <CallIcon sx={{ fontSize: "30px" }} />
+                                <LocationPinIcon sx={{ fontSize: "30px" }} />
                                 <Box>
                                     <Typography sx={{ fontSize: "20px" }}>Location:</Typography>
                                     <Typography sx={{ color: 'text.secondary' }}>Dhaka, Bangladesh</Typography>
