@@ -1,11 +1,13 @@
 "use client"
 
+import { Container } from "@mui/material";
+
 
 const ContactMap = () => {
     return (
-        <div>
+        <Container maxWidth="lg">
            
-        </div>
+        </Container>
     );
 };
 
