@@ -21,7 +21,8 @@ const OurMission = () => {
                             <img className="w-[324px] lg:h-[250px] h-[150px] rounded-br-2xl" src="/Home/mission/img3.jpg" alt="" />
                         </Box>
                     </Box>
-                    <img className="w-40 h-40 rounded-full absolute top-[30%] left-[35%]" src="/Home/mission/promise.jpg" alt="" />
+                    
+                    {/* <img className="w-40 h-40 rounded-full absolute top-[30%] left-[35%]" src="/Home/mission/promise.jpg" alt="" /> */}
                 </Box>
                 <Box sx={{
                     width: { xs: "100%", md: "50%"},

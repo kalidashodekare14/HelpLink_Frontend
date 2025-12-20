@@ -1,6 +1,6 @@
 "use client"
 import { useJoinCampaignMutation } from '@/state/services/donorService/donorService';
-import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
@@ -67,7 +67,7 @@ const CampaignDetailsDonate = () => {
         }
     }
 
-    
+
     // Donation Form
     const {
         register,
@@ -171,32 +171,54 @@ const CampaignDetailsDonate = () => {
                                     label="Amount"
                                 />
                             </FormControl>
-                            <Box>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={bikash}
-                                            onClick={() => handlePaymentMethod("Bikash")}
-                                        />
-                                    }
-                                    label="Bikash" />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={nagad}
-                                            onClick={() => handlePaymentMethod("Nagad")}
-                                        />
-                                    }
-                                    label="Nagad" />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={sslCommerz}
-                                            onClick={() => handlePaymentMethod("SSLCommerz")}
-                                        />
-                                    }
-                                    label="SSLCommerz" />
-                            </Box>
+                            <Stack direction={"row"} alignItems={"center"} my={"20px"} gap={"10px"}>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        cursor: "pointer",
+                                        border: bikash ? "2px solid #FB8500" : "",
+                                        p: "2px",
+                                    }}
+                                    onClick={() => handlePaymentMethod("Bikash")}
+                                >
+                                    {/* <Checkbox
+                                        checked={bikash}
+                                        onClick={() => handlePaymentMethod("Bikash")}
+                                    /> */}
+                                    <img className='w-10 h-10' src="/Campaign/bKash.png" alt="" />
+                                </Box>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        cursor: "pointer",
+                                        border: nagad ? "2px solid #FB8500" : "",
+                                        p: "2px",
+                                    }}
+                                    onClick={() => handlePaymentMethod("Nagad")}
+                                >
+                                    {/* <Checkbox
+                                        checked={nagad}
+                                        onClick={() => handlePaymentMethod("Nagad")}
+                                    /> */}
+                                    <img className='w-32 h-10' src="/Campaign/nagad.png" alt="" />
+                                </Box>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        cursor: "pointer",
+                                        border: sslCommerz ? "2px solid #FB8500" : "",
+                                        p: "2px",
+
+                                    }}
+                                    onClick={() => handlePaymentMethod("SSLCommerz")}
+                                >
+                                    {/* <Checkbox
+                                        checked={sslCommerz}
+                                        onClick={() => handlePaymentMethod("SSLCommerz")}
+                                    /> */}
+                                    <img className='w-40 h-10' src="/Campaign/sslcommerz.png" alt="" />
+                                </Box>
+                            </Stack>
                             {
                                 paymentError && <Typography color='#c1121f'>Please select payment method</Typography>
                             }

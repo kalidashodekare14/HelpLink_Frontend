@@ -18,7 +18,7 @@ const Navbar = () => {
 
     const { data: session } = useSession();
 
-    const [isRole, setIsRole] = useState<Role>("donor")
+    const [isRole, setIsRole] = useState<Role>("donor");
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -116,13 +116,14 @@ const Navbar = () => {
                         }
                     </ul>
                 </Box>
-                <Box sx={{
-                    display: "flex",
-                    justifyItems: "center",
-                    alignItems: "center",
-                    gap: "10px",
-                    fontSize: "19px"
-                }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyItems: "center",
+                        alignItems: "center",
+                        gap: "10px",
+                        fontSize: "19px"
+                    }}>
                     <Box>
                         {
                             session ? (

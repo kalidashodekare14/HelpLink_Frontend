@@ -89,8 +89,8 @@ const Banner = () => {
                                         </Typography>
                                         <Typography sx={{
                                             fontSize: { xs: "10px", lg: "18px" },
-                                            color: "white",
-                                            my: "20px"
+                                            color: "#C8C8C8",
+                                            my: "20px",
                                         }}>{info.description}</Typography>
                                     </Box>
                                     <Box sx={{ my: "20px" }}>
