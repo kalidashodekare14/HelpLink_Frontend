@@ -11,15 +11,20 @@ import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+    const pathname = usePathname();
+    const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
+
     return (
         <Box className={"footer_image"} sx={{
             // height: "600px",
             backgroundSize: "cover",
             backgroundPosition: "center",
             color: "white",
-            p: "20px"
+            p: "20px",
+            display: isDashboardRoute ? "none" : "block"
         }}>
             <Container maxWidth="lg">
                 <Box sx={{
@@ -28,7 +33,7 @@ const Footer = () => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     my: "30px",
-                    gap: "10px"
+                    gap: "10px",
                 }}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <CallIcon sx={{

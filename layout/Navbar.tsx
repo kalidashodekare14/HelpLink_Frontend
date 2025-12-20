@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { Avatar, Box, Button, Container, Menu, MenuItem, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { signOut, useSession } from 'next-auth/react';
-import { Image } from '@mui/icons-material';
+
+type Role = "volunteer" | "receiver" | "donor" | "admin"
 
 const Navbar = () => {
 
@@ -16,7 +17,7 @@ const Navbar = () => {
     const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
 
     const { data: session } = useSession();
-    type Role = "volunteer" | "receiver" | "donor" | "admin"
+
     const [isRole, setIsRole] = useState<Role>("donor")
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
