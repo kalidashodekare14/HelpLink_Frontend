@@ -7,6 +7,7 @@ import OurMission from "./ourMission/OurMission";
 import OurVolunteer from "./OurVolunteer/OurVolunteer";
 import ServiceInfo from "./ServiceInfo/ServiceInfo";
 import SuccessInfo from "./SuccessInfo/SuccessInfo";
+import SuccessProject from "./SuccessProject/SuccessProject";
 
 const MainHome = () => {
     return (
@@ -15,6 +16,7 @@ const MainHome = () => {
             <OurMission />
             <ServiceInfo />
             <SuccessInfo />
+            <SuccessProject />
             <AskQuestion />
             <OurVolunteer />
             <Feedback />
