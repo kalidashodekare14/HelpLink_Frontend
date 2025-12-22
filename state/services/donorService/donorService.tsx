@@ -20,6 +20,13 @@ export const donorService = createApi({
                 body: data
             })
         }),
+        sslCommerzPayment: builder.mutation({
+            query: (data: any) => ({
+                url: "/sslcommerz_payment",
+                method: "POST",
+                body: data
+            })
+        }),
         donateTrack: builder.query({
             query: (email) => ({
                 url: `/donate_track/${email}`,
@@ -30,4 +37,9 @@ export const donorService = createApi({
 })
 
 
-export const { useJoinCampaignMutation, useDonateTrackQuery, useBikashPaymentMutation } = donorService;
+export const {
+    useJoinCampaignMutation,
+    useDonateTrackQuery,
+    useBikashPaymentMutation,
+    useSslCommerzPaymentMutation
+} = donorService;

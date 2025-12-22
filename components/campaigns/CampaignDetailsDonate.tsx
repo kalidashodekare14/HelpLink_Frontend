@@ -1,5 +1,5 @@
 "use client"
-import { useBikashPaymentMutation, useJoinCampaignMutation } from '@/state/services/donorService/donorService';
+import { useBikashPaymentMutation, useJoinCampaignMutation, useSslCommerzPaymentMutation } from '@/state/services/donorService/donorService';
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
@@ -22,6 +22,9 @@ const CampaignDetailsDonate = () => {
     const [joinCampaign, { isLoading, isSuccess, error }] = useJoinCampaignMutation();
     // Bikash Payment RKtQuery 
     const [bikashPayment, { isLoading: bkashLoading, isSuccess: bkashPaySuccess, error: bkashError }] = useBikashPaymentMutation()
+    // SSLCommerz Payment RKTQuery
+    const [sslCommerzPayment, { isLoading: sslLoading, isSuccess: sslSuccess, error: sslError }] = useSslCommerzPaymentMutation()
+
     // dynamic id
     const { id } = useParams();
     // Payment Method value state
@@ -102,24 +105,17 @@ const CampaignDetailsDonate = () => {
                     window.location.href = res.data.bkashURL
                 }
             }
+            // SSLCommerz Payment System
+            if (sslCommerz) {
+                const res = await sslCommerzPayment(donorData).unwrap();
+                if ("data" in res) {
+                    console.log('SSLCommerz Data', res);
+                    window.location.href = res.data.GatewayPageURL
+                }
+            }
 
-
-            // const donorData = {
-            //     donor_name: data.name,
-            //     donor_email: data.email,
-            //     message: data.message,
-            //     amount: Number(data.amount),
-            //     request_status: "Paid",
-            //     payment_method: isPaymentMethod || ""
-            // }
-            // await joinCampaign({ id: id, data: donorData })
-
-            // if (isSuccess) {
-            //     reset()
-            //     toast.success('Your Donate Successfully');
-            // }
         } catch (error) {
-
+            console.log('Payment Error', error);
         } finally {
 
         }
