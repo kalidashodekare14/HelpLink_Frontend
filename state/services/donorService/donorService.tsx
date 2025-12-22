@@ -13,6 +13,13 @@ export const donorService = createApi({
                 body: data
             })
         }),
+        bikashPayment: builder.mutation({
+            query: (data: any) => ({
+                url: "/bikash_payment",
+                method: "POST",
+                body: data
+            })
+        }),
         donateTrack: builder.query({
             query: (email) => ({
                 url: `/donate_track/${email}`,
@@ -23,4 +30,4 @@ export const donorService = createApi({
 })
 
 
-export const { useJoinCampaignMutation, useDonateTrackQuery } = donorService;
+export const { useJoinCampaignMutation, useDonateTrackQuery, useBikashPaymentMutation } = donorService;

@@ -1,5 +1,5 @@
 "use client"
-import { useJoinCampaignMutation } from '@/state/services/donorService/donorService';
+import { useBikashPaymentMutation, useJoinCampaignMutation } from '@/state/services/donorService/donorService';
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
@@ -20,6 +20,8 @@ const CampaignDetailsDonate = () => {
     const { data: session } = useSession();
     // Campaign Join RKTQuery 
     const [joinCampaign, { isLoading, isSuccess, error }] = useJoinCampaignMutation();
+    // Bikash Payment RKtQuery 
+    const [bikashPayment, { isLoading: bkashLoading, isSuccess: bkashPaySuccess, error: bkashError }] = useBikashPaymentMutation()
     // dynamic id
     const { id } = useParams();
     // Payment Method value state
@@ -31,7 +33,6 @@ const CampaignDetailsDonate = () => {
     // Payment Error state
     const [paymentError, setPaymentError] = useState<boolean>(false);
 
-    console.log('checking payment status', isPaymentMethod)
 
     // Payment checkbox handle function
     const handlePaymentMethod = (value: string) => {
@@ -77,24 +78,46 @@ const CampaignDetailsDonate = () => {
     } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
+            // Payment method filed validation
             if (isPaymentMethod.length < 1) {
                 setPaymentError(true);
             } else {
                 setPaymentError(false);
             }
+            // Form Information
             const donorData = {
+                campaign_id: id,
                 donor_name: data.name,
                 donor_email: data.email,
                 message: data.message,
-                amount: Number(data.amount),
-                request_status: "Paid",
+                amount: data.amount,
+                payment_status: "Pending",
                 payment_method: isPaymentMethod || ""
             }
-            await joinCampaign({ id: id, data: donorData })
-            if (isSuccess) {
-                reset()
-                toast.success('Your Donate Successfully');
+            // Bikash Payment System
+            if (bikash) {
+                const res = await bikashPayment(donorData).unwrap();
+                if ("data" in res) {
+                    console.log('checking data', res);
+                    window.location.href = res.data.bkashURL
+                }
             }
+
+
+            // const donorData = {
+            //     donor_name: data.name,
+            //     donor_email: data.email,
+            //     message: data.message,
+            //     amount: Number(data.amount),
+            //     request_status: "Paid",
+            //     payment_method: isPaymentMethod || ""
+            // }
+            // await joinCampaign({ id: id, data: donorData })
+
+            // if (isSuccess) {
+            //     reset()
+            //     toast.success('Your Donate Successfully');
+            // }
         } catch (error) {
 
         } finally {
@@ -167,7 +190,7 @@ const CampaignDetailsDonate = () => {
                                     {...register("amount", { required: true })}
                                     error={!!errors.amount}
                                     id="outlined-adornment-amount"
-                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                    startAdornment={<InputAdornment position="start">৳</InputAdornment>}
                                     label="Amount"
                                 />
                             </FormControl>
@@ -185,7 +208,7 @@ const CampaignDetailsDonate = () => {
                                         checked={bikash}
                                         onClick={() => handlePaymentMethod("Bikash")}
                                     /> */}
-                                    <img className='w-10 h-10' src="/Campaign/bKash.png" alt="" />
+                                    <img className='w-20 h-10' src="/Campaign/bKash.png" alt="" />
                                 </Box>
                                 <Box
                                     sx={{
@@ -200,7 +223,7 @@ const CampaignDetailsDonate = () => {
                                         checked={nagad}
                                         onClick={() => handlePaymentMethod("Nagad")}
                                     /> */}
-                                    <img className='w-32 h-10' src="/Campaign/nagad.png" alt="" />
+                                    <img className='w-20 h-10' src="/Campaign/nagad.png" alt="" />
                                 </Box>
                                 <Box
                                     sx={{
@@ -216,7 +239,7 @@ const CampaignDetailsDonate = () => {
                                         checked={sslCommerz}
                                         onClick={() => handlePaymentMethod("SSLCommerz")}
                                     /> */}
-                                    <img className='w-40 h-10' src="/Campaign/sslcommerz.png" alt="" />
+                                    <img className='w-30 h-10' src="/Campaign/sslcommerz.png" alt="" />
                                 </Box>
                             </Stack>
                             {
