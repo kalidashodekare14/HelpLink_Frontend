@@ -6,6 +6,103 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDonateTrackQuery } from "@/state/services/donorService/donorService";
 import { useSession } from "next-auth/react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+
+
+const columns: GridColDef[] = [
+    {
+        field: 'image',
+        headerName: 'Image',
+        width: 70,
+        renderCell: (params) => (
+            <img
+                src={params.value}
+                alt="Campaign"
+                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+            />
+        ),
+    },
+    { field: 'campaign_name', headerName: 'Campaign Name', width: 250 },
+    { field: 'category', headerName: 'Category', width: 130 },
+    {
+        field: 'amount',
+        headerName: 'Amount',
+        type: 'number',
+        width: 100,
+        renderCell: (params) => {
+            console.log(params.value);
+            return (
+                <div>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: "5px", mb: "5px" }}>
+                        {Array.isArray(params.value) ? (
+                            params.value.map((value: number, index: number) => (
+                                <Typography key={index}>৳ {value}</Typography>
+                            ))
+                        ) : (
+                            <span>৳ {params.value}</span>
+                        )}
+                    </Box>
+                </div>
+            )
+        }
+    },
+    {
+        field: 'payment_status',
+        headerName: 'Payment Status',
+        width: 130,
+        renderCell: (params) => (
+            <div>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: "5px", mb: "5px" }}>
+                    {Array.isArray(params.value) ? (
+                        params.value.map((value: string, index: number) => (
+                            <Typography key={index}>{value}</Typography>
+                        ))
+                    ) : (
+                        <span>{params.value}</span>
+                    )}
+                </Box>
+            </div>
+        )
+    },
+    {
+        field: 'payment_method',
+        headerName: 'Payment Method',
+        width: 200,
+        renderCell: (params) => (
+            <div>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: "5px", mb: "5px" }}>
+                    {Array.isArray(params.value) ? (
+                        params.value.map((value: string, index: number) => (
+                            <Typography key={index}>{value}</Typography>
+                        ))
+                    ) : (
+                        <span>{params.value}</span>
+                    )}
+                </Box>
+            </div>
+        )
+    },
+    {
+        field: 'donate_date',
+        headerName: 'Donate Date',
+        width: 130,
+        renderCell: (params) => (
+            <div>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: "5px", mb: "5px" }}>
+                    {Array.isArray(params.value) ? (
+                        params.value.map((value: string, index: number) => (
+                            <Typography key={index}>{value}</Typography>
+                        ))
+                    ) : (
+                        <span>{params.value}</span>
+                    )}
+                </Box>
+            </div>
+        )
+    },
+];
+
+const paginationModel = { page: 0, pageSize: 5 };
 
 const DonateTrack = () => {
 
@@ -14,16 +111,19 @@ const DonateTrack = () => {
     // Donate Track Data Fetched 
     const { data: donateTrack, isLoading, error } = useDonateTrackQuery(session?.user?.email);
     const donateData = donateTrack?.data
-    // Menu DropDown
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // Data Grid Rows
+    const rows = donateData?.map((data: any, index: number) => ({
+        id: index + 1,
+        image: data.image,
+        campaign_name: data.title,
+        category: data.category,
+        amount: data.donationDetails.map((d: any) => d.amount) || 0,
+        payment_status: data.donationDetails.map((d: any) => d.payment_status) || "N/A",
+        payment_method: data.donationDetails.map((d: any) => d.payment_method) || "N/A",
+        donate_date: data.donationDetails.map((d: any) => d.date ? new Date(d.date).toLocaleDateString() : "N/A"),
+    })) || [];
+
 
     return (
         <Container>
@@ -44,95 +144,16 @@ const DonateTrack = () => {
                 <Typography sx={{ fontSize: { lg: "40px", sm: "15px" } }}>Donate Track</Typography>
             </Box>
             {/* Table */}
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Campaign Name</TableCell>
-                            <TableCell align="right">Category</TableCell>
-                            <TableCell align="right">Address</TableCell>
-                            <TableCell align="right">Amount</TableCell>
-                            <TableCell align="right">Payment Status</TableCell>
-                            <TableCell align="right">Payment Method</TableCell>
-                            <TableCell align="right">Donate Date</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            donateData?.length > 0 ? (
-                                donateData.map((data: any) => (
-                                    <TableRow
-                                        key={data._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {data.title}
-                                        </TableCell>
-                                        <TableCell align="right">{data.category}</TableCell>
-                                        <TableCell align="right" component="th" scope="row">
-                                            <Box sx={{
-                                                display: "grid",
-                                                gridTemplateColumns: "auto 24px auto 24px auto 24px",
-                                            }}>
-                                                {data.location.division}
-                                                <ArrowRightIcon />
-                                                <Typography>{data.location.district}</Typography>
-                                                <ArrowRightIcon />
-                                                <Typography>{data.location.upazila}</Typography>
-                                            </Box>
-                                            <Typography> {data.location.address}</Typography>
-                                        </TableCell>
-                                        <TableCell align="right" component="th" scope="row">
-                                            {
-                                                data.donors.length > 0 ? (
-                                                    data.donors.map((donate: any) => (
-                                                        <Typography>$ {donate.amount}</Typography>
-                                                    ))
-                                                ) : (
-                                                    "0"
-                                                )
-                                            }
-                                        </TableCell>
-                                        <TableCell align="right" component="th" scope="row">
-                                            {
-                                                data.donors.length > 0 ? (
-                                                    data.donors.map((donate: any) => (
-                                                        <Typography>{donate.payment_status}</Typography>
-                                                    ))
-                                                ) : (
-                                                    "0"
-                                                )
-                                            }
-                                        </TableCell>
-                                        <TableCell align="right" component="th" scope="row">
-                                            {
-                                                data.donors.length > 0 ? (
-                                                    data.donors.map((donate: any) => (
-                                                        <Typography>{donate.payment_method}</Typography>
-                                                    ))
-                                                ) : (
-                                                    "0"
-                                                )
-                                            }
-                                        </TableCell>
-                                        <TableCell align="right" component="th" scope="row">
-                                            {
-                                                data.donors.length > 0 ? (
-                                                    data.donors.map((donate: any) => (
-                                                        <Typography>{new Date(donate.date).toLocaleDateString()}</Typography>
-                                                    ))
-                                                ) : (
-                                                    "0"
-                                                )
-                                            }
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            ) : ("")
-                        }
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <Paper sx={{ height: 400, width: '100%', my: "20px" }}>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    initialState={{ pagination: { paginationModel } }}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                    sx={{ border: 0 }}
+                />
+            </Paper>
         </Container>
     );
 };
