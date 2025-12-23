@@ -99,7 +99,7 @@ const DeliveryRequestComponent = () => {
                     }
                     {
                         params.value === "Picked Up" && (
-                            <span className="bg-[#219ebc] p-2 rounded-full text-white">Approved</span>
+                            <span className="bg-[#219ebc] p-2 rounded-full text-white">Picked Up</span>
                         )
                     }
                     {
@@ -109,7 +109,7 @@ const DeliveryRequestComponent = () => {
                     }
                     {
                         params.value === "Cancelled" && (
-                            <span className="bg-[#dc2f02] p-2 rounded-full text-white">Rejected</span>
+                            <span className="bg-[#dc2f02] p-2 rounded-full text-white">Cancelled</span>
                         )
                     }
                 </>
@@ -128,7 +128,7 @@ const DeliveryRequestComponent = () => {
                 const handleClose = () => {
                     setAnchorEl(null);
                 };
-
+                // Delivery status change handler
                 const handleDelivaryStatus = async (datas: any) => {
                     try {
                         const { id, delivery_status } = datas;

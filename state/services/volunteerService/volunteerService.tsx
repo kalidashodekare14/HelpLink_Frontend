@@ -1,22 +1,20 @@
+import { baseApi } from "@/state/baseApi";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-export const volunteerService = createApi({
-    reducerPath: "volunteerService",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/volunteer" }),
-    tagTypes: ["volunteer_campaign"],
+export const volunteerService = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         // Overview Management
         volOverviewManage: builder.query<any, void>({
             query: () => ({
-                url: "/volunteer_overview",
+                url: "/api/v1/volunteer/volunteer_overview",
                 method: "GET",
             })
         }),
         // Total Campaign
         totalCampaigns: builder.query<any, { search: string, request_status: string, delivery_status: string }>({
             query: (params) => ({
-                url: "/total_campaign",
+                url: "/api/v1/volunteer/total_campaign",
                 method: "GET",
                 params
             }),
@@ -24,7 +22,7 @@ export const volunteerService = createApi({
         }),
         campaignRequestStatusChange: builder.mutation({
             query: ({ id, request_status }) => ({
-                url: `/request_status/${id}`,
+                url: `/api/v1/volunteer/request_status/${id}`,
                 method: "PATCH",
                 body: { request_status }
             }),
@@ -32,7 +30,7 @@ export const volunteerService = createApi({
         }),
         campaignDeliveryStatusChange: builder.mutation({
             query: ({ id, delivery_status }) => ({
-                url: `/delivery_status/${id}`,
+                url: `/api/v1/volunteer/delivery_status/${id}`,
                 method: "PATCH",
                 body: { delivery_status }
             }),
