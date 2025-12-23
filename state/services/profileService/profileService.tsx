@@ -1,28 +1,27 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "@/state/baseApi";
+// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const profileService = createApi({
-    reducerPath: "profileService",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/profile" }),
-    tagTypes: ["profile"],
+
+export const profileService = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        profleInfo: builder.query({
+        profileInfo: builder.query({
             query: (email) => ({
-                url: `/user_profile/${email}`,
+                url: `/api/v1/profile/user_profile/${email}`,
                 method: "GET"
             }),
             providesTags: ["profile"],
         }),
         profileImageUpload: builder.mutation({
             query: ({ email, data }) => ({
-                url: `/image_upload/${email}`,
+                url: `/api/v1/profile/image_upload/${email}`,
                 method: "POST",
                 body: data
             }),
             invalidatesTags: ["profile"],
         }),
-        profleInfoUpdate: builder.mutation({
+        profileInfoUpdate: builder.mutation({
             query: ({ email, data }) => ({
-                url: `/user_info_update/${email}`,
+                url: `/api/v1/profile/user_info_update/${email}`,
                 method: "PATCH",
                 body: data
             }),
@@ -32,7 +31,7 @@ export const profileService = createApi({
 })
 
 export const {
-    useProfleInfoQuery,
+    useProfileInfoQuery,
     useProfileImageUploadMutation,
-    useProfleInfoUpdateMutation
+    useProfileInfoUpdateMutation
 } = profileService

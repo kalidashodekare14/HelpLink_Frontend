@@ -5,7 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import useProfileBDLocation from "@/hooks/useProfileBDLocation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useProfileImageUploadMutation, useProfleInfoQuery, useProfleInfoUpdateMutation } from "@/state/services/profileService/profileService";
+import { useProfileImageUploadMutation, useProfileInfoQuery, useProfileInfoUpdateMutation, } from "@/state/services/profileService/profileService";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
@@ -24,10 +24,10 @@ const ProfileComponent = () => {
     // user session
     const { data: session } = useSession();
     // Profile Info fetched 
-    const { data: profileInfo, isLoading, error } = useProfleInfoQuery(session?.user?.email);
+    const { data: profileInfo, isLoading, error } = useProfileInfoQuery(session?.user?.email);
     const profileData = profileInfo?.data
     // Profile Info Update API
-    const [profleInfoUpdate, { isLoading: updateLoading, error: updateError }] = useProfleInfoUpdateMutation()
+    const [profleInfoUpdate, { isLoading: updateLoading, error: updateError }] = useProfileInfoUpdateMutation()
     // Profile Image Upload API
     const [profileImageUpload, { isLoading: pImageLoading, error: pImageError }] = useProfileImageUploadMutation()
     // Image loading 
