@@ -57,8 +57,11 @@ export const authOptions = {
             return token;
         },
         async session({ session, token }: { session: any; token: any }) {
-            if (token) session.user.accessToken = token.accessToken;
-            return session;
+            if (token) {
+                session.accessToken = token.accessToken as string;
+                session.user.role = token.role;
+                return session;
+            }
         }
     }
 
