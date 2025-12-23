@@ -10,6 +10,8 @@ export async function proxy(request: NextRequest) {
     const role = tokenVerify?.role as UserRole;
     const pathname = request.nextUrl.pathname;
 
+    console.log('role and pathname in middleware:', role, pathname);
+
     if (!token) {
         return NextResponse.redirect(new URL('/signin', request.url));
     }
