@@ -5,26 +5,27 @@ import { receiverService } from "./services/receiverService/receiverService";
 import { donorService } from "./services/donorService/donorService";
 import { adminService } from "./services/adminService/adminService";
 import { volunteerService } from "./services/volunteerService/volunteerService";
+import { baseApi } from "./baseApi";
 
 
 export const store = configureStore({
     reducer: {
-        [profileService.reducerPath]: profileService.reducer,
-        [publicService.reducerPath]: publicService.reducer,
-        [receiverService.reducerPath]: receiverService.reducer,
-        [donorService.reducerPath]: donorService.reducer,
-        [adminService.reducerPath]: adminService.reducer,
-        [volunteerService.reducerPath]: volunteerService.reducer,
+        [baseApi.reducerPath]: baseApi.reducer,
+        // [publicService.reducerPath]: publicService.reducer,
+        // [receiverService.reducerPath]: receiverService.reducer,
+        // [donorService.reducerPath]: donorService.reducer,
+        // [adminService.reducerPath]: adminService.reducer,
+        // [volunteerService.reducerPath]: volunteerService.reducer,
 
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
-            .concat(profileService.middleware)
-            .concat(publicService.middleware)
-            .concat(receiverService.middleware)
-            .concat(donorService.middleware)
-            .concat(adminService.middleware)
-            .concat(volunteerService.middleware)
+            .concat(baseApi.middleware)
+    // .concat(publicService.middleware)
+    // .concat(receiverService.middleware)
+    // .concat(donorService.middleware)
+    // .concat(adminService.middleware)
+    // .concat(volunteerService.middleware)
 });
 
 
