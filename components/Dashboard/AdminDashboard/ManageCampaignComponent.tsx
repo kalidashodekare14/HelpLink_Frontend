@@ -107,7 +107,7 @@ const ManageCampaignComponent = () => {
                     }
                     {
                         params.value === "Picked Up" && (
-                            <span className="bg-[#219ebc] p-2 rounded-full text-white">Approved</span>
+                            <span className="bg-[#219ebc] p-2 rounded-full text-white">Picked Up</span>
                         )
                     }
                     {
@@ -117,7 +117,7 @@ const ManageCampaignComponent = () => {
                     }
                     {
                         params.value === "Cancelled" && (
-                            <span className="bg-[#dc2f02] p-2 rounded-full text-white">Rejected</span>
+                            <span className="bg-[#dc2f02] p-2 rounded-full text-white">Cancelled</span>
                         )
                     }
                 </>

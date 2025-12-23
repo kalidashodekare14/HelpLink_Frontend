@@ -18,7 +18,7 @@ const Navbar = () => {
 
     const { data: session } = useSession();
 
-    const [isRole, setIsRole] = useState<Role>("volunteer");
+    const [isRole, setIsRole] = useState<Role>("admin");
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
