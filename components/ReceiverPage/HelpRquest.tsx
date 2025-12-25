@@ -3,10 +3,11 @@ import { Box, Button, CircularProgress, Container, FormControl, FormGroup, FormH
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from "react-hook-form";
 import useBDLocationRequest from "@/hooks/useBDLocationRequest";
-import { useHelpRequestMutation } from "@/state/services/receiverService/receiverService";
+import { useCampaignUploadImagesMutation, useHelpRequestMutation } from "@/state/services/receiverService/receiverService";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import axios from "axios";
 
 type Inputs = {
     title: string
@@ -21,6 +22,34 @@ const HelpRquest = () => {
     const { data: session } = useSession();
     const [helpRequest, { isSuccess, isLoading, error }] = useHelpRequestMutation()
     const [loading, setLoading] = useState<boolean>(false);
+    const [campaignUploadImages, { isSuccess: campaignUploadSuccess, isLoading: campaignUploadLoading, error: campaignUploadError }] = useCampaignUploadImagesMutation();
+    const [uploadImaLoading, setUploadImageLoading] = useState<boolean>(false);
+    const [selectedImages, setSelectedImages] = useState<string[]>([]);
+    const [imageValidationError, setImageValidationError] = useState<boolean>(false);
+
+    // image upload handler
+    const handleImageUpload = async (e: any) => {
+        if (!e.target.files) return;
+        const files = Array.from(e.target.files);
+        const formData = new FormData()
+        files.forEach((file: any) => formData.append('files', file));
+        try {
+            setUploadImageLoading(true);
+            const response = await campaignUploadImages(formData).unwrap();
+            if ("data" in response) {
+                setSelectedImages(response.data);
+                setImageValidationError(false);
+            }
+            console.log(response);
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setUploadImageLoading(false);
+        }
+    }
+
+
 
     const {
         register,
@@ -30,7 +59,11 @@ const HelpRquest = () => {
     } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
+            if (selectedImages.length === 0) {
+                return setImageValidationError(true);
+            }
             const requstData = {
+                image: selectedImages,
                 title: data.title,
                 category: data.category,
                 description: data.description,
@@ -40,8 +73,7 @@ const HelpRquest = () => {
                     upazila: upazila,
                     address: data.address
                 },
-                receiver_email: session?.user?.email
-
+                receiver_email: session?.user?.email,
             }
             setLoading(true)
             const res = await helpRequest(requstData).unwrap();
@@ -57,6 +89,9 @@ const HelpRquest = () => {
         }
 
     }
+
+
+
 
     return (
         <Container>
@@ -82,7 +117,8 @@ const HelpRquest = () => {
                 sx={{
                     display: "flex",
                     gap: "10px",
-                    flexDirection: { lg: "row", xs: "column" }
+                    flexDirection: { lg: "row", xs: "column" },
+                    my: "20px"
                 }}
             >
                 <Box
@@ -119,6 +155,9 @@ const HelpRquest = () => {
                                         label="Age"
                                     // onChange={handleChange}
                                     >
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
                                         <MenuItem value={"Medical Help"}>Medical Help</MenuItem>
                                         <MenuItem value={"Healthy Foods"}>Healthy Foods</MenuItem>
                                         <MenuItem value={"Education"}>Education</MenuItem>
@@ -243,7 +282,7 @@ const HelpRquest = () => {
                     <Box
                         onClick={() => (document.querySelector('input[type="file"]') as HTMLInputElement)?.click()}
                         sx={{
-                            border: "2px dotted #bbbb",
+                            border: imageValidationError ? "2px dotted red" : "1px solid #bbbb",
                             p: "10px",
                             cursor: "pointer"
                         }}
@@ -254,10 +293,34 @@ const HelpRquest = () => {
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
-                            <CloudUploadIcon sx={{ fontSize: "50px" }} />
+                            {
+                                uploadImaLoading ? (
+                                    <CircularProgress size={40} color="inherit" />
+                                ) : (
+                                    <CloudUploadIcon sx={{ fontSize: "50px" }} />
+                                )
+                            }
                             <Typography>Select image to upload</Typography>
-                            <input hidden type="file" />
+                            <input onChange={(event) => handleImageUpload(event)} hidden multiple type="file" />
+                            <Typography color="textSecondary">Image size: 10 MB</Typography>
                         </Box>
+                    </Box>
+                    <Box sx={{
+                        display: "grid",
+                        gridTemplateColumns: "1fr 1fr",
+                        gap: "5px",
+                        my: "10px"
+                    }}>
+                        {
+                            imageValidationError && (
+                                <Typography sx={{ fontSize: "16px", fontWeight: "400", color: "#c1121f" }}>Please upload images</Typography>
+                            )
+                        }
+                        {
+                            selectedImages.map((img: string, index: number) => (
+                                <img key={index} src={img} alt={`uploaded-${index}`} style={{ width: "100%", height: "100px", objectFit: "cover" }} />
+                            ))
+                        }
                     </Box>
                 </Box>
             </Box>

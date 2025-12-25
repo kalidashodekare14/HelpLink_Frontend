@@ -12,6 +12,14 @@ export const receiverService = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["receiver"],
         }),
+        campaignUploadImages: builder.mutation({
+            query: (formData) => ({
+                url: "/api/v1/receiver/campaign_image_upload",
+                method: "POST",
+                body: formData,
+            }),
+            invalidatesTags: ["receiver"],
+        }),
         requestTrack: builder.query({
             query: (email) => (
                 {
@@ -24,4 +32,4 @@ export const receiverService = baseApi.injectEndpoints({
     })
 })
 
-export const { useHelpRequestMutation, useRequestTrackQuery } = receiverService;
+export const { useHelpRequestMutation, useCampaignUploadImagesMutation, useRequestTrackQuery } = receiverService;
