@@ -23,9 +23,15 @@ const HelpRquest = () => {
     const [helpRequest, { isSuccess, isLoading, error }] = useHelpRequestMutation()
     const [loading, setLoading] = useState<boolean>(false);
     const [campaignUploadImages, { isSuccess: campaignUploadSuccess, isLoading: campaignUploadLoading, error: campaignUploadError }] = useCampaignUploadImagesMutation();
+    const [isCategory, setIsCategory] = useState<string>("");
     const [uploadImaLoading, setUploadImageLoading] = useState<boolean>(false);
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [imageValidationError, setImageValidationError] = useState<boolean>(false);
+
+    // category change handler
+    const handleCategoryChange = (event: any) => {
+        setIsCategory(event.target.value);
+    };
 
     // image upload handler
     const handleImageUpload = async (e: any) => {
@@ -79,6 +85,11 @@ const HelpRquest = () => {
             const res = await helpRequest(requstData).unwrap();
             if ("data" in res) {
                 reset()
+                setSelectedImages([]);
+                setUpazila("");
+                setDistrict("");
+                setDivision("");
+                setIsCategory("");
                 toast.success('Your Request Successfully')
             }
 
@@ -151,9 +162,9 @@ const HelpRquest = () => {
                                         {...register("category", { required: true })}
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        // value={age}
+                                        value={isCategory}
                                         label="Age"
-                                    // onChange={handleChange}
+                                        onChange={handleCategoryChange}
                                     >
                                         <MenuItem value="">
                                             <em>None</em>
