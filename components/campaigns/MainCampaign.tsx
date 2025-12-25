@@ -11,7 +11,10 @@ const MainCampaign = () => {
     const [district, setDistrict] = useState<string>("");
     const [upazila, setUpazila] = useState<string>("");
     const [search, setSearch] = useState<string>("");
+    const [severity, setSeverity] = useState<string>("");
+    console.log('checking severity', severity);
 
+    // Location Data Fetch
     const [divisions, setDivisions] = useState<string[]>([]);
     const [districts, setDistricts] = useState<string[]>([]);
     const [upazilas, setUpazilas] = useState<string[]>([]);
@@ -22,6 +25,7 @@ const MainCampaign = () => {
     // Campaign Data Fetch
     const query = {
         search: search,
+        severity: severity,
         division: division,
         district: district,
         upazila: upazila,
@@ -73,8 +77,9 @@ const MainCampaign = () => {
                 district={district}
                 upazila={upazila}
                 // search
-                // setSearch={setSearch}
                 handleSearch={handleSearch}
+                // severity
+                setSeverity={setSeverity}
             />
             <CampaignsComponent
                 totalCampaign={totalCampaign}

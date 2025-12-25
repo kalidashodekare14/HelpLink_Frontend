@@ -1,5 +1,5 @@
+import { baseApi } from "@/state/baseApi";
 import { ICampaignDetailsResponse, ICampaignResponse } from "@/types/public";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface TotalCampaignQuery {
     search?: string;
@@ -9,20 +9,18 @@ interface TotalCampaignQuery {
 }
 
 
-export const publicService = createApi({
-    reducerPath: "publicService",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1/public" }),
+export const publicService = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getTotalCampaigns: builder.query<ICampaignResponse, TotalCampaignQuery, void>({
             query: (params) => ({
-                url: "/total_campaign",
+                url: "/api/v1/public/total_campaign",
                 method: "GET",
                 params
             })
         }),
         getCampaignDetails: builder.query<ICampaignDetailsResponse, string>({
             query: (id) => ({
-                url: `/campaign_details/${id}`,
+                url: `/api/v1/public/campaign_details/${id}`,
                 method: "GET",
             })
         })

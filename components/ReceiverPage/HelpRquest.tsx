@@ -44,10 +44,9 @@ const HelpRquest = () => {
 
             }
             setLoading(true)
-            await helpRequest(requstData);
-            if (isSuccess) {
+            const res = await helpRequest(requstData).unwrap();
+            if ("data" in res) {
                 reset()
-
                 toast.success('Your Request Successfully')
             }
 
@@ -110,15 +109,23 @@ const HelpRquest = () => {
                                     }}
                                     {...register("title", { required: true })}
                                 />
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Request Title"
-                                    variant="outlined"
-                                    sx={{
-                                        width: "100%"
-                                    }}
-                                    {...register("category", { required: true })}
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                    <Select
+                                        {...register("category", { required: true })}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        // value={age}
+                                        label="Age"
+                                    // onChange={handleChange}
+                                    >
+                                        <MenuItem value={"Medical Help"}>Medical Help</MenuItem>
+                                        <MenuItem value={"Healthy Foods"}>Healthy Foods</MenuItem>
+                                        <MenuItem value={"Education"}>Education</MenuItem>
+                                        <MenuItem value={"Clothes"}>Clothes</MenuItem>
+                                        <MenuItem value={"Residence"}>Residence</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Box>
                             <TextField
                                 id="outlined-multiline-static"

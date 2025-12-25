@@ -1,5 +1,5 @@
 "use client"
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Divider, FormControl, InputLabel, makeStyles, MenuItem, Pagination, Select, Skeleton, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Divider, FormControl, InputLabel, makeStyles, MenuItem, Pagination, Select, Skeleton, Stack, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -105,11 +105,15 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                         </Typography>
                                         <Divider></Divider>
                                         <Box >
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", my: "5px" }}>
+                                            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", my: "5px" }}>
                                                 <Box sx={{ display: "flex", alignItems: "center", }}>
                                                     <LocationOnIcon sx={{ fontSize: "21px" }} />
                                                     <Typography sx={{ fontSize: "16px" }}>Location</Typography>
                                                 </Box>
+                                                <Stack direction="row" alignItems={"center"} spacing={1}>
+                                                    <Typography>Severity:</Typography>
+                                                    <Typography sx={{color: 'text.secondary'}}>{campaign?.situation?.severity}</Typography>
+                                                </Stack>
                                             </Box>
                                             <Box>
                                                 <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
@@ -117,7 +121,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                                         <ArrowRightIcon sx={{ fontSize: "20px" }} />
                                                         <Typography sx={{ fontSize: "15px" }}>Division:</Typography>
                                                     </Box>
-                                                    <Typography sx={{ fontSize: "15px" }}>{campaign.location.division}</Typography>
+                                                    <Typography sx={{ fontSize: "15px",  }}>{campaign.location.division}</Typography>
                                                 </Box>
                                                 <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
                                                     <Box sx={{ display: "flex", alignItems: "center", }}>

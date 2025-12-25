@@ -1,5 +1,5 @@
 "use client"
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
 import './CampaignFilter.css';
@@ -14,12 +14,25 @@ type locationType = {
     division: string
     district: string
     upazila: string,
-    handleSearch: (searchValue: string) => void
+    handleSearch: (searchValue: string) => void,
+    setSeverity: (value: string) => void,
 }
 
 
-const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistrict, setUpazila, division, district, upazila, handleSearch }: locationType) => {
-
+const CampaignFilter = (
+    {
+        divisions,
+        districts,
+        upazilas,
+        setDivision,
+        setDistrict,
+        setUpazila,
+        division,
+        district,
+        upazila,
+        handleSearch,
+        setSeverity
+    }: locationType) => {
     const [searchValue, setSearchValue] = useState<string>("");
 
 
@@ -38,25 +51,27 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                     px: { xs: "2%", lg: "20%" },
                 }}
             >
-                <Box sx={{
-                    border: "1px solid #bbbb",
-                    my: "10px",
-                    p: "10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyItems: "center",
-                    alignItems: "center",
-                    gap: "10px",
-                    bgcolor: "white",
-                    width: "100%",
-                }}>
-                    <Box sx={{
+                <Box
+                    sx={{
+                        border: "1px solid #bbbb",
+                        my: "10px",
+                        p: "10px",
                         display: "flex",
-                        justifyContent: "center",
+                        flexDirection: "column",
+                        justifyItems: "center",
                         alignItems: "center",
+                        gap: "10px",
+                        bgcolor: "white",
                         width: "100%",
-                        position: "relative"
                     }}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "100%",
+                            position: "relative"
+                        }}>
                         <TextField onChange={(e) => setSearchValue(e.target.value)} sx={{
                             width: "100%",
                             zIndex: "10px"
@@ -142,21 +157,21 @@ const CampaignFilter = ({ divisions, districts, upazilas, setDivision, setDistri
                             </Select>
                         </FormControl>
                         <FormControl fullWidth>
-                            <InputLabel size="small" id="demo-simple-select-label">Situation</InputLabel>
+                            <InputLabel size="small" id="demo-simple-select-label">Severity</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 // value={age}
                                 label="Age"
                                 size="small"
-                            // onChange={handleChange}
+                                onChange={(e: SelectChangeEvent<string>) => setSeverity(e.target.value)}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value={10}>High</MenuItem>
-                                <MenuItem value={20}>Medium</MenuItem>
-                                <MenuItem value={30}>Low</MenuItem>
+                                <MenuItem value={"High"}>High</MenuItem>
+                                <MenuItem value={"Medium"}>Medium</MenuItem>
+                                <MenuItem value={"Low"}>Low</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>
