@@ -1,7 +1,8 @@
 "use client"
-import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Drawer, Stack, Typography, } from "@mui/material";
 import { VolunteerRoutes } from "@/utils/NavigationRoute";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 type sidebarProps = {
     isToggle: boolean,
     handleToggleDrawer: (newOpen: boolean) => () => void
@@ -10,6 +11,7 @@ type sidebarProps = {
 const Sidebar = ({ isToggle, handleToggleDrawer }: sidebarProps) => {
 
     const drawerWidth = 240;
+    const pathname = usePathname();
 
     const drawerContent = (
         <Box sx={{
@@ -20,7 +22,7 @@ const Sidebar = ({ isToggle, handleToggleDrawer }: sidebarProps) => {
             <Box sx={{ textAlign: 'center' }}>
                 <Typography sx={{ fontSize: "25px", p: 1, }}>HelpLink</Typography>
             </Box>
-            <List>
+            <Stack spacing={1}>
                 {
                     VolunteerRoutes.map(nav => (
                         <Link key={nav.id} href={nav.path}>
@@ -35,6 +37,7 @@ const Sidebar = ({ isToggle, handleToggleDrawer }: sidebarProps) => {
                                 "&:hover": {
                                     bgcolor: "#C4DDD9",
                                 },
+                                bgcolor: pathname === nav.path ? "#C4DDD9" : "inherit"
                             }}>
                                 <nav.icon />
                                 <Typography>{nav.name}</Typography>
@@ -42,7 +45,7 @@ const Sidebar = ({ isToggle, handleToggleDrawer }: sidebarProps) => {
                         </Link>
                     ))
                 }
-            </List>
+            </Stack>
         </Box>
     );
 
