@@ -18,14 +18,23 @@ type Inputs = {
 
 const HelpRquest = () => {
 
+    // Location request hook
     const { division, district, upazila, divisions, districts, upazilas, setDivision, setDistrict, setUpazila } = useBDLocationRequest()
+    // Session data
     const { data: session } = useSession();
-    const [helpRequest, { isSuccess, isLoading, error }] = useHelpRequestMutation()
+    // Help request mutation
+    const [helpRequest, { isSuccess, isLoading, error }] = useHelpRequestMutation();
+    // Loading state
     const [loading, setLoading] = useState<boolean>(false);
-    const [campaignUploadImages, { isSuccess: campaignUploadSuccess, isLoading: campaignUploadLoading, error: campaignUploadError }] = useCampaignUploadImagesMutation();
+    // Category state
     const [isCategory, setIsCategory] = useState<string>("");
+    //    Image upload mutation
+    const [campaignUploadImages, { isSuccess: campaignUploadSuccess, isLoading: campaignUploadLoading, error: campaignUploadError }] = useCampaignUploadImagesMutation();
+    // Image upload state
     const [uploadImaLoading, setUploadImageLoading] = useState<boolean>(false);
+    // Selected images state
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
+    // Image validation error state
     const [imageValidationError, setImageValidationError] = useState<boolean>(false);
 
     // category change handler
@@ -56,7 +65,7 @@ const HelpRquest = () => {
     }
 
 
-
+    // form submit handler
     const {
         register,
         handleSubmit,
@@ -128,10 +137,11 @@ const HelpRquest = () => {
                 sx={{
                     display: "flex",
                     gap: "10px",
-                    flexDirection: { lg: "row", xs: "column" },
+                    flexDirection: { lg: "row", xs: "column-reverse" },
                     my: "20px"
                 }}
             >
+                {/* Form Info */}
                 <Box
                     width={"100%"}
                     display={"flex"}
@@ -142,12 +152,14 @@ const HelpRquest = () => {
                         <FormGroup>
                             <Box sx={{
                                 display: "flex",
+                                flexDirection: { lg: "row", xs: "column" },
                                 alignItems: "center",
                                 gap: "10px",
                                 my: "5px",
                                 width: "100%"
                             }}>
                                 <TextField
+                                    error={errors.title ? true : false}
                                     id="outlined-basic"
                                     label="Request Title"
                                     variant="outlined"
@@ -159,6 +171,7 @@ const HelpRquest = () => {
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Category</InputLabel>
                                     <Select
+                                        error={errors.category ? true : false}
                                         {...register("category", { required: true })}
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
@@ -178,6 +191,7 @@ const HelpRquest = () => {
                                 </FormControl>
                             </Box>
                             <TextField
+                                error={errors.description ? true : false}
                                 id="outlined-multiline-static"
                                 label="Description"
                                 multiline
@@ -248,6 +262,7 @@ const HelpRquest = () => {
                             sx={{ width: "100%" }}
                         >
                             <TextField
+                                error={errors.address ? true : false}
                                 id="outlined-multiline-static"
                                 label="Address"
                                 multiline
