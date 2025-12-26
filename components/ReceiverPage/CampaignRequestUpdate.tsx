@@ -1,33 +1,38 @@
 "use client"
-import { Box, Button, CircularProgress, Container, FormControl, FormGroup, InputLabel, MenuItem, Select, TextareaAutosize, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, FormControl, FormGroup, FormHelperText, Input, InputLabel, MenuItem, Select, TextareaAutosize, TextField, Typography } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from "react-hook-form";
 import useBDLocationRequest from "@/hooks/useBDLocationRequest";
-import { useCampaignUploadImagesMutation, useHelpRequestMutation } from "@/state/services/receiverService/receiverService";
+import { useCampaignRequestInfoQuery, useCampaignRequestUpdateMutation, useCampaignUploadImagesMutation, useHelpRequestMutation } from "@/state/services/receiverService/receiverService";
 import { useSession } from "next-auth/react";
 import toast, { Toaster } from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 type Inputs = {
     title: string
     category: string
     description: string,
     address: string
-}
+};
 
-const HelpRquest = () => {
+const CampaignRequestUpdate = () => {
 
     // Location request hook
     const { division, district, upazila, divisions, districts, upazilas, setDivision, setDistrict, setUpazila } = useBDLocationRequest()
     // Session data
     const { data: session } = useSession();
-    // Help request mutation
-    const [helpRequest, { isSuccess, isLoading, error }] = useHelpRequestMutation();
+    const { id } = useParams();
+    const router = useRouter();
+    // Help request update mutation
+    const { data: campaignRequestData, isLoading: campaignRequestDataLoading, error: campaignRequestDataError } = useCampaignRequestInfoQuery(id);
+    // Campaign request update mutation
+    const [campaignRequestUpdate, { isSuccess: campaignRequestUpdateSuccess, isLoading: campaignRequestUpdateLoading, error: campaignRequestUpdateError }] = useCampaignRequestUpdateMutation();
     // Loading state
     const [loading, setLoading] = useState<boolean>(false);
     // Category state
     const [isCategory, setIsCategory] = useState<string>("");
-    // Image upload mutation
+    //    Image upload mutation
     const [campaignUploadImages, { isSuccess: campaignUploadSuccess, isLoading: campaignUploadLoading, error: campaignUploadError }] = useCampaignUploadImagesMutation();
     // Image upload state
     const [uploadImaLoading, setUploadImageLoading] = useState<boolean>(false);
@@ -40,6 +45,29 @@ const HelpRquest = () => {
     const handleCategoryChange = (event: any) => {
         setIsCategory(event.target.value);
     };
+
+    // set default values useEffect
+    useEffect(() => {
+        setIsCategory(campaignRequestData?.data?.category || "");
+    }, [campaignRequestData?.data?.category])
+    // set location useEffect
+    useEffect(() => {
+        setDivision(campaignRequestData?.data?.location?.division || "");
+    }, [campaignRequestData?.data?.location?.division])
+    // set district useEffect
+    useEffect(() => {
+        setDistrict(campaignRequestData?.data?.location?.district || "");
+    }, [campaignRequestData?.data?.location?.district])
+    // set upazila useEffect
+    useEffect(() => {
+        setUpazila(campaignRequestData?.data?.location?.upazila || "");
+    }, [campaignRequestData?.data?.location?.upazila])
+    // set images useEffect
+    useEffect(() => {
+        setSelectedImages(campaignRequestData?.data?.image || []);
+    }, [campaignRequestData?.data?.image])
+    console.log('upazila:', district);
+
 
     // image upload handler
     const handleImageUpload = async (e: any) => {
@@ -89,17 +117,14 @@ const HelpRquest = () => {
                 },
                 receiver_email: session?.user?.email,
             }
+            console.log('checking requstData', requstData);
             setLoading(true)
-            const res = await helpRequest(requstData).unwrap();
-            if ("data" in res) {
-                reset()
-                setSelectedImages([]);
-                setUpazila("");
-                setDistrict("");
-                setDivision("");
-                setIsCategory("");
-                toast.success('Your Request Successfully')
-            }
+            const response = await campaignRequestUpdate({ id: id, updateData: requstData }).unwrap();
+            console.log('checking response', response);
+            // if ("data" in response) {
+            //     toast.success('Your Request Successfully');
+            //     router.push("/request_track")
+            // }
 
         } catch (error) {
             console.log(error)
@@ -108,9 +133,6 @@ const HelpRquest = () => {
         }
 
     }
-
-
-
 
     return (
         <Container>
@@ -165,6 +187,7 @@ const HelpRquest = () => {
                                     sx={{
                                         width: "100%"
                                     }}
+                                    defaultValue={campaignRequestData?.data?.title}
                                     {...register("title", { required: true })}
                                 />
                                 <FormControl fullWidth>
@@ -190,6 +213,7 @@ const HelpRquest = () => {
                                 </FormControl>
                             </Box>
                             <TextField
+                                defaultValue={campaignRequestData?.data?.description}
                                 error={errors.description ? true : false}
                                 id="outlined-multiline-static"
                                 label="Description"
@@ -261,6 +285,7 @@ const HelpRquest = () => {
                             sx={{ width: "100%" }}
                         >
                             <TextField
+                                defaultValue={campaignRequestData?.data?.location?.address}
                                 error={errors.address ? true : false}
                                 id="outlined-multiline-static"
                                 label="Address"
@@ -358,4 +383,4 @@ const HelpRquest = () => {
     );
 };
 
-export default HelpRquest;
+export default CampaignRequestUpdate;

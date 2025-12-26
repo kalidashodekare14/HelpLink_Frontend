@@ -28,8 +28,31 @@ export const receiverService = baseApi.injectEndpoints({
                 }
             ),
             providesTags: ["receiver"],
-        })
+        }),
+        campaignRequestInfo: builder.query({
+            query: (id) => (
+                {
+                    url: `/api/v1/receiver/campaign_request_info/${id}`,
+                    method: "GET",
+                }
+            ),
+            providesTags: ["receiver"],
+        }),
+        campaignRequestUpdate: builder.mutation({
+            query: ({ id, updateData }) => ({
+                url: `/api/v1/receiver/campaign_request_update/${id}`,
+                method: "PATCH",
+                body: updateData
+            }),
+            invalidatesTags: ["receiver"],
+        }),
     })
 })
 
-export const { useHelpRequestMutation, useCampaignUploadImagesMutation, useRequestTrackQuery } = receiverService;
+export const {
+    useHelpRequestMutation,
+    useCampaignUploadImagesMutation,
+    useRequestTrackQuery,
+    useCampaignRequestInfoQuery,
+    useCampaignRequestUpdateMutation
+} = receiverService;
