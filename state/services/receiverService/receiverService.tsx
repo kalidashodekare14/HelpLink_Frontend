@@ -46,6 +46,13 @@ export const receiverService = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["receiver"],
         }),
+        campaignRequestDelete: builder.mutation({
+            query: (id) => ({
+                url: `/api/v1/receiver/campaign_request_delete/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["receiver"],
+        })
     })
 })
 
@@ -54,5 +61,6 @@ export const {
     useCampaignUploadImagesMutation,
     useRequestTrackQuery,
     useCampaignRequestInfoQuery,
-    useCampaignRequestUpdateMutation
+    useCampaignRequestUpdateMutation,
+    useCampaignRequestDeleteMutation
 } = receiverService;

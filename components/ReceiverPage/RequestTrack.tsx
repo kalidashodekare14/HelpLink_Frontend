@@ -1,12 +1,14 @@
 "use client"
 import { Box, Button, Container, Menu, MenuItem, Paper, Typography } from "@mui/material";
 import { useState } from "react";
-import { useRequestTrackQuery } from "@/state/services/receiverService/receiverService";
+import { useCampaignRequestDeleteMutation, useRequestTrackQuery } from "@/state/services/receiverService/receiverService";
 import { useSession } from "next-auth/react";
 import { DataGrid } from "@mui/x-data-grid";
 import { GridColDef } from "@mui/x-data-grid";
 import { GridMoreVertIcon } from "@mui/x-data-grid";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 
 
@@ -19,6 +21,8 @@ const RequestTrack = () => {
     // Request Track Data 
     const { data: reqTrackData, isLoading: reqTrackLoading, error } = useRequestTrackQuery(session?.user?.email);
     const requestData = reqTrackData?.data
+    // Campaign Request Delete
+    const [campaignRequestDelete, { isLoading: campaignDeleteLoading, error: campaignDeleteError }] = useCampaignRequestDeleteMutation();
 
     const rows = requestData?.map((data: any, index: number) => ({
         id: data._id,
@@ -105,7 +109,6 @@ const RequestTrack = () => {
             headerName: 'Action',
             width: 100,
             renderCell: (params) => {
-                console.log('checking params', params);
                 // Menu DropDown
                 const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
                 const open = Boolean(anchorEl);
@@ -115,6 +118,37 @@ const RequestTrack = () => {
                 const handleClose = () => {
                     setAnchorEl(null);
                 };
+
+                const handleDeleteCampaign = async (id: string) => {
+                    handleClose()
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You want to delete the campaign?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then(async (result) => {
+                        if (result.isConfirmed) {
+                            const res = await campaignRequestDelete(id).unwrap();
+                            console.log('checking delete data', res.data)
+                            if ("data" in res) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your campaign has been deleted.",
+                                    icon: "success"
+                                });
+                            }
+
+                        }
+                    });
+
+
+
+                }
+
+
                 return (
                     <>
                         <Button
@@ -140,7 +174,7 @@ const RequestTrack = () => {
                             <Link href={`/request_track/${params.id}`}>
                                 <MenuItem onClick={handleClose}>Edit</MenuItem>
                             </Link>
-                            <MenuItem onClick={handleClose}>Delete</MenuItem>
+                            <MenuItem onClick={() => handleDeleteCampaign(String(params.id))}>Delete</MenuItem>
                         </Menu>
                     </>
                 )
