@@ -3,9 +3,10 @@ import HorizontalSplitIcon from '@mui/icons-material/HorizontalSplit';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { Avatar, Box, Button, Container, Menu, MenuItem, Typography } from '@mui/material';
+import { Avatar, Box, Button, Container, Menu, MenuItem, Skeleton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { signOut, useSession } from 'next-auth/react';
+import { useUserRoleQuery } from '@/state/services/userRole/userRole';
 
 type Role = "volunteer" | "receiver" | "donor" | "admin"
 
@@ -18,7 +19,9 @@ const Navbar = () => {
 
     const { data: session } = useSession();
 
-    const [isRole, setIsRole] = useState<Role>("receiver");
+    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery();
+    const isRole = roleData?.data?.role
+    console.log('checking role', isRole);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -154,29 +157,77 @@ const Navbar = () => {
                                             },
                                         }}
                                     >
-                                        <Link href={"/profile"}>
-                                            <MenuItem>Profile</MenuItem>
-                                        </Link>
                                         {
-                                            isRole === "receiver" && (
-                                                <>
-                                                    <Link href={"/help_request"}>
-                                                        <MenuItem>Help Request</MenuItem>
+                                            roleLoading ? (
+                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                                            ) : (
+                                                isRole === "receiver" || isRole === "donor" && (
+                                                    <Link href={"/profile"}>
+                                                        <MenuItem>Profile</MenuItem>
                                                     </Link>
-                                                    <Link href={"/request_track"}>
-                                                        <MenuItem>Request Track</MenuItem>
-                                                    </Link>
-                                                </>
+                                                )
+
                                             )
                                         }
+
                                         {
-                                            isRole === "donor" && (
-                                                <>
-                                                    <Link href={"/donate_track"}>
-                                                        <MenuItem>Donate Track</MenuItem>
-                                                    </Link>
-                                                </>
+                                            roleLoading ? (
+                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                                            ) : (
+                                                isRole === "receiver" && (
+                                                    <>
+                                                        <Link href={"/help_request"}>
+                                                            <MenuItem>Help Request</MenuItem>
+                                                        </Link>
+                                                        <Link href={"/request_track"}>
+                                                            <MenuItem>Request Track</MenuItem>
+                                                        </Link>
+                                                    </>
+                                                )
                                             )
+
+                                        }
+                                        {
+                                            roleLoading ? (
+                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                                            ) : (
+                                                isRole === "donor" && (
+                                                    <>
+                                                        <Link href={"/donate_track"}>
+                                                            <MenuItem>Donate Track</MenuItem>
+                                                        </Link>
+                                                    </>
+                                                )
+                                            )
+
+                                        }
+                                        {
+                                            roleLoading ? (
+                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                                            ) : (
+                                                isRole === "admin" && (
+                                                    <>
+                                                        <Link href={"/admin_dashboard"}>
+                                                            <MenuItem>Dashboard</MenuItem>
+                                                        </Link>
+                                                    </>
+                                                )
+                                            )
+
+                                        }
+                                        {
+                                            roleLoading ? (
+                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                                            ) : (
+                                                isRole === "volunteer" && (
+                                                    <>
+                                                        <Link href={"/volunteer_dashboard"}>
+                                                            <MenuItem>Dashboard</MenuItem>
+                                                        </Link>
+                                                    </>
+                                                )
+                                            )
+
                                         }
                                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                     </Menu>
@@ -258,8 +309,8 @@ const Navbar = () => {
                         ))
                     }
                 </Box>
-            </Container>
-        </Box>
+            </Container >
+        </Box >
     );
 };
 
