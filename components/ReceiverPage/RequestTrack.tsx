@@ -17,7 +17,7 @@ const RequestTrack = () => {
     // User Session
     const { data: session } = useSession();
     // Request Track Data 
-    const { data: reqTrackData, isLoading, error } = useRequestTrackQuery(session?.user?.email);
+    const { data: reqTrackData, isLoading: reqTrackLoading, error } = useRequestTrackQuery(session?.user?.email);
     const requestData = reqTrackData?.data
 
     const rows = requestData?.map((data: any, index: number) => ({
@@ -28,7 +28,9 @@ const RequestTrack = () => {
         division: data.location.division,
         district: data.location.district,
         upazila: data.location.upazila,
-        address: data.location.address
+        address: data.location.address,
+        request_status: data.request_status,
+        delivery_status: data.delivery_status
     })) || [];
 
 
@@ -45,6 +47,59 @@ const RequestTrack = () => {
         { field: 'district', headerName: 'District', width: 110 },
         { field: 'upazila', headerName: 'Upazila', width: 110 },
         { field: 'address', headerName: 'Address', width: 150 },
+        {
+            field: 'request_status',
+            headerName: 'Request Status',
+            width: 130,
+            renderCell: (params) => (
+                <>
+                    {
+                        params.value === "Pending" && (
+                            <span className="bg-[#bfd200] p-2 rounded-full text-white">Pending</span>
+                        )
+                    }
+                    {
+                        params.value === "Approved" && (
+                            <span className="bg-[#2a9d8f] p-2 rounded-full text-white">Approved</span>
+                        )
+                    }
+                    {
+                        params.value === "Rejected" && (
+                            <span className="bg-[#e76f51] p-2 rounded-full text-white">Rejected</span>
+                        )
+                    }
+                </>
+            )
+        },
+        {
+            field: 'delivery_status',
+            headerName: 'Delivery Status ',
+            width: 130,
+            renderCell: (params) => (
+                <>
+                    {
+                        params.value === "Assigned" && (
+                            <span className="bg-[#bc6c25] p-2 rounded-full text-white">Assigned</span>
+                        )
+                    }
+                    {
+                        params.value === "Picked Up" && (
+                            <span className="bg-[#219ebc] p-2 rounded-full text-white">Picked Up</span>
+                        )
+                    }
+                    {
+                        params.value === "Delivered" && (
+                            <span className="bg-[#1d3557] p-2 rounded-full text-white">Delivered</span>
+                        )
+                    }
+                    {
+                        params.value === "Cancelled" && (
+                            <span className="bg-[#dc2f02] p-2 rounded-full text-white">Cancelled</span>
+                        )
+                    }
+                </>
+            )
+        },
         {
             field: 'action',
             headerName: 'Action',
@@ -117,6 +172,10 @@ const RequestTrack = () => {
                 <DataGrid
                     rows={rows}
                     columns={columns}
+                    loading={reqTrackLoading}
+                    localeText={{
+                        noRowsLabel: "No Campaigns Found",
+                    }}
                     initialState={{ pagination: { paginationModel } }}
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
