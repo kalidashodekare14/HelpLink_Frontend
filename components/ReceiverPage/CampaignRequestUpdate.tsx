@@ -151,7 +151,7 @@ const CampaignRequestUpdate = () => {
                     mb: "3%"
                 }}
             >
-                <Typography sx={{ fontSize: { lg: "40px", sm: "15px" } }}>Help Request</Typography>
+                <Typography sx={{ fontSize: { lg: "40px", sm: "15px" } }}>Help Request Update</Typography>
             </Box>
             <Box
                 width={"100%"}

@@ -37,20 +37,20 @@ const RequestTrack = () => {
 
     const columns: GridColDef[] = [
         {
-            field: 'image', headerName: 'Image', width: 100, renderCell: (params) => (
+            field: 'image', headerName: 'Image', width: 80, renderCell: (params) => (
                 <img src={params.value} alt="Request" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
             )
         },
-        { field: 'title', headerName: 'Request Title', width: 150 },
-        { field: 'category', headerName: 'Category', width: 150 },
+        { field: 'title', headerName: 'Request Title', width: 120 },
+        { field: 'category', headerName: 'Category', width: 120 },
         { field: 'division', headerName: 'Division', width: 110 },
         { field: 'district', headerName: 'District', width: 110 },
         { field: 'upazila', headerName: 'Upazila', width: 110 },
-        { field: 'address', headerName: 'Address', width: 150 },
+        { field: 'address', headerName: 'Address', width: 120 },
         {
             field: 'request_status',
             headerName: 'Request Status',
-            width: 130,
+            width: 120,
             renderCell: (params) => (
                 <>
                     {
@@ -74,7 +74,7 @@ const RequestTrack = () => {
         {
             field: 'delivery_status',
             headerName: 'Delivery Status ',
-            width: 130,
+            width: 120,
             renderCell: (params) => (
                 <>
                     {
@@ -103,7 +103,7 @@ const RequestTrack = () => {
         {
             field: 'action',
             headerName: 'Action',
-            width: 150,
+            width: 100,
             renderCell: (params) => {
                 console.log('checking params', params);
                 // Menu DropDown
