@@ -26,6 +26,7 @@ const CampaignRequestUpdate = () => {
     const router = useRouter();
     // Help request update mutation
     const { data: campaignRequestData, isLoading: campaignRequestDataLoading, error: campaignRequestDataError } = useCampaignRequestInfoQuery(id);
+    console.log('checking data', campaignRequestData);
     // Campaign request update mutation
     const [campaignRequestUpdate, { isSuccess: campaignRequestUpdateSuccess, isLoading: campaignRequestUpdateLoading, error: campaignRequestUpdateError }] = useCampaignRequestUpdateMutation();
     // Loading state
@@ -121,10 +122,10 @@ const CampaignRequestUpdate = () => {
             setLoading(true)
             const response = await campaignRequestUpdate({ id: id, updateData: requstData }).unwrap();
             console.log('checking response', response);
-            // if ("data" in response) {
-            //     toast.success('Your Request Successfully');
-            //     router.push("/request_track")
-            // }
+            if ("data" in response) {
+                toast.success('Your Request Successfully');
+                router.push("/request_track")
+            }
 
         } catch (error) {
             console.log(error)
