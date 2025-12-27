@@ -8,7 +8,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { signOut, useSession } from 'next-auth/react';
 import { useUserRoleQuery } from '@/state/services/userRole/userRole';
 
-type Role = "volunteer" | "receiver" | "donor" | "admin"
 
 const Navbar = () => {
 
@@ -17,11 +16,13 @@ const Navbar = () => {
     const pathname = usePathname();
     const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
 
-    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery();
-    const isRole = roleData?.data?.role
-    console.log('checking role', isRole);
+    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery(undefined, {
+        skip: status !== "authenticated"
+    });
+    const userInfo = roleData?.data
+    console.log('checking user info', userInfo);
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -119,6 +120,7 @@ const Navbar = () => {
                         }
                     </ul>
                 </Box>
+
                 <Box
                     sx={{
                         display: "flex",
@@ -127,6 +129,7 @@ const Navbar = () => {
                         gap: "10px",
                         fontSize: "19px"
                     }}>
+                    {/* Avatar Toggle */}
                     <Box>
                         {
                             session ? (
@@ -139,10 +142,10 @@ const Navbar = () => {
                                         onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
                                         sx={{ cursor: 'pointer' }}
                                     >
-                                        {session?.user?.image ? (
-                                            <img src={session?.user?.image} alt='' />
+                                        {userInfo?.image ? (
+                                            <img src={userInfo?.image} alt='' />
                                         ) : (
-                                            <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
+                                            <Typography>{userInfo?.name ? userInfo.name[0] : null}</Typography>
                                         )
                                         }
                                     </Avatar>
@@ -161,7 +164,7 @@ const Navbar = () => {
                                             roleLoading ? (
                                                 <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
                                             ) : (
-                                                isRole === "receiver" || isRole === "donor" && (
+                                                (userInfo?.role === "receiver" || userInfo?.role === "donor") && (
                                                     <Link href={"/profile"}>
                                                         <MenuItem>Profile</MenuItem>
                                                     </Link>
@@ -174,7 +177,7 @@ const Navbar = () => {
                                             roleLoading ? (
                                                 <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
                                             ) : (
-                                                isRole === "receiver" && (
+                                                userInfo?.role === "receiver" && (
                                                     <>
                                                         <Link href={"/help_request"}>
                                                             <MenuItem>Help Request</MenuItem>
@@ -191,7 +194,7 @@ const Navbar = () => {
                                             roleLoading ? (
                                                 <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
                                             ) : (
-                                                isRole === "donor" && (
+                                                userInfo?.role === "donor" && (
                                                     <>
                                                         <Link href={"/donate_track"}>
                                                             <MenuItem>Donate Track</MenuItem>
@@ -205,7 +208,7 @@ const Navbar = () => {
                                             roleLoading ? (
                                                 <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
                                             ) : (
-                                                isRole === "admin" && (
+                                                userInfo?.role === "admin" && (
                                                     <>
                                                         <Link href={"/admin_dashboard"}>
                                                             <MenuItem>Dashboard</MenuItem>
@@ -219,7 +222,7 @@ const Navbar = () => {
                                             roleLoading ? (
                                                 <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
                                             ) : (
-                                                isRole === "volunteer" && (
+                                                userInfo?.role === "volunteer" && (
                                                     <>
                                                         <Link href={"/volunteer_dashboard"}>
                                                             <MenuItem>Dashboard</MenuItem>
@@ -254,6 +257,7 @@ const Navbar = () => {
                             )
                         }
                     </Box>
+                    {/*Toggle Icon */}
                     <Box>
                         {
                             toggle ? (
@@ -283,6 +287,7 @@ const Navbar = () => {
                         }
                     </Box>
                 </Box>
+                {/* Response Routes */}
                 <Box
                     sx={{
                         position: "fixed",

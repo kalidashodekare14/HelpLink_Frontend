@@ -9,7 +9,8 @@ export const userRoleService = baseApi.injectEndpoints({
                 url: `/api/v1/public/user_role`,
                 method: "GET",
             }),
-        })
+            providesTags: ["userRole"]
+        }),
     })
 })
 
