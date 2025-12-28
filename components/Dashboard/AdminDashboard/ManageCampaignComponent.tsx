@@ -1,7 +1,7 @@
 "use client"
 
 import { useCampaignDeliveryStatusManageMutation, useCampaignRequestStatusManageMutation, useTotalCamgaignManageQuery } from "@/state/services/adminService/adminService";
-import { Box, Button, FormControl, InputLabel, Menu, MenuItem, Paper, Select, styled, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, Menu, MenuItem, Paper, Select, Stack, styled, TextField, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -90,6 +90,37 @@ const ManageCampaignComponent = () => {
     }))
 
     const columns: GridColDef[] = [
+        {
+            field: 'severity',
+            headerName: 'Severity',
+            width: 130,
+            renderCell: (params) => {
+                return (
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "5px", pt: "15px" }}>
+                        {
+                            params?.row?.situation?.severity === "High" && (
+                                <Typography className="h-5 w-5 rounded-full bg-red-500"></Typography>
+                            )
+                        }
+                        {
+                            params?.row?.situation?.severity === "Medium" && (
+                                <Typography className="h-5 w-5 rounded-full bg-[#ffb703]"></Typography>
+                            )
+                        }
+                        {
+                            params?.row?.situation?.severity === "Low" && (
+                                <Typography className="h-5 w-5 rounded-full bg-[#0077b6]"></Typography>
+                            )
+                        }
+                        <Typography>
+                            {
+                                params?.row?.situation?.severity
+                            }
+                        </Typography>
+                    </Box>
+                )
+            }
+        },
         { field: 'title', headerName: 'Title', width: 130 },
         { field: 'category', headerName: 'Category', width: 130 },
         {

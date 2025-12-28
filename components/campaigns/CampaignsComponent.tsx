@@ -88,10 +88,26 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                             totalCampaign?.data?.data.map((campaign: any) => (
                                 <Card key={campaign._id} sx={{ maxWidth: 345 }}>
                                     <CardMedia
-                                        sx={{ height: 200 }}
+                                        sx={{ height: 200, position: "relative" }}
                                         image={campaign?.image[0]}
                                         title="green iguana"
-                                    />
+                                    >
+                                        {
+                                            campaign?.situation?.severity === "High" && (
+                                                <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-red-500 opacity-75"></span>
+                                            )
+                                        }
+                                        {
+                                            campaign?.situation?.severity === "Medium" && (
+                                                <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-[#ffb703] opacity-75"></span>
+                                            )
+                                        }
+                                        {
+                                            campaign?.situation?.severity === "Low" && (
+                                                <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-[#0077b6] opacity-75"></span>
+                                            )
+                                        }
+                                    </CardMedia>
                                     <CardContent sx={{
                                         display: "flex",
                                         flexDirection: 'column',
@@ -111,10 +127,25 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                                     <Typography sx={{ fontSize: "16px" }}>Location</Typography>
                                                 </Box>
                                                 <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <LabelIcon sx={{ fontSize: "21px", color: "#FB8500" }} />
+                                                    {/* <LabelIcon sx={{ fontSize: "21px", color: "#FB8500" }} /> */}
                                                     <Stack direction="row" alignItems={"center"} spacing={"5px"}>
                                                         <Typography>Severity:</Typography>
                                                         <Typography sx={{ color: 'text.secondary' }}>{campaign?.situation?.severity}</Typography>
+                                                        {
+                                                            campaign?.situation?.severity === "High" && (
+                                                                <Typography className="h-5 w-5 rounded-full bg-red-500"></Typography>
+                                                            )
+                                                        }
+                                                        {
+                                                            campaign?.situation?.severity === "Medium" && (
+                                                                <Typography className="h-5 w-5 rounded-full bg-[#ffb703]"></Typography>
+                                                            )
+                                                        }
+                                                        {
+                                                            campaign?.situation?.severity === "Low" && (
+                                                                <Typography className="h-5 w-5 rounded-full bg-[#0077b6]"></Typography>
+                                                            )
+                                                        }
                                                     </Stack>
                                                 </Box>
 
@@ -208,7 +239,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                     </Box>
                 )
             }
-        </Container>
+        </Container >
     );
 };
 
