@@ -24,7 +24,7 @@ export const publicService = baseApi.injectEndpoints({
                 method: "GET",
             })
         }),
-        weatherRiskTrack: builder.query({
+        weatherRiskTrack: builder.query<any, void>({
             query: () => ({
                 url: `/api/v1/public/weather_risk_track`,
                 method: 'GET',
