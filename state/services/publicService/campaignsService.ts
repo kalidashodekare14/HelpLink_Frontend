@@ -23,11 +23,18 @@ export const publicService = baseApi.injectEndpoints({
                 url: `/api/v1/public/campaign_details/${id}`,
                 method: "GET",
             })
+        }),
+        weatherRiskTrack: builder.query({
+            query: () => ({
+                url: `/api/v1/public/weather_risk_track`,
+                method: 'GET',
+            })
         })
     })
 })
 
 export const {
     useGetTotalCampaignsQuery,
-    useGetCampaignDetailsQuery
+    useGetCampaignDetailsQuery,
+    useWeatherRiskTrackQuery
 } = publicService
