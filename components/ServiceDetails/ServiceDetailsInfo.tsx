@@ -39,9 +39,26 @@ const ServiceDetailsInfo = () => {
     return (
         <Container maxWidth="lg">
             <Box>
-                <img className='w-full h-[400px]' src={serviceInfo?.image} alt="" />
-                <Typography sx={{ fontSize: "30px", my: "20px", textTransform: "uppercase" }}>{serviceInfo?.title}</Typography>
-                <Typography sx={{ my: "20px", lineHeight: "30px", color: "text.secondary" }}>{serviceInfo?.description}</Typography>
+                {
+                    serviceInfo ? (
+                        <>
+                            <img className='w-full h-[400px]' src={serviceInfo?.image} alt="" />
+                            <Typography sx={{ fontSize: "30px", my: "20px", textTransform: "uppercase" }}>{serviceInfo?.title}</Typography>
+                            <Typography sx={{ my: "20px", lineHeight: "30px", color: "text.secondary" }}>{serviceInfo?.description}</Typography>
+                        </>
+                    ) : (
+                        <Box sx={{
+                            height: "400px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
+                            <Typography sx={{fontSize: "20px"}}>No Data</Typography>
+                        </Box>
+                    )
+                }
+
             </Box>
         </Container>
     );
