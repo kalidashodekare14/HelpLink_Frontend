@@ -14,11 +14,11 @@ const AboutMission = () => {
                 <Box sx={{ position: "relative" }}>
                     <Box sx={{ display: "flex", alignItems: "center", }}>
                         <Box>
-                            <img className="w-72 lg:h-[500px] h-[300px] rounded-tl-2xl rounded-bl-2xl" src="/Home/mission/img1.jpg" alt="" />
+                            <img className="w-72 lg:h-[600px] h-[300px] rounded-tl-2xl rounded-bl-2xl" src="/Home/mission/img1.jpg" alt="" />
                         </Box>
                         <Box>
-                            <img className="w-[324px] lg:h-[250px] h-[150px] rounded-tr-2xl" src="/Home/mission/img2.jpg" alt="" />
-                            <img className="w-[324px] lg:h-[250px] h-[150px] rounded-br-2xl" src="/Home/mission/img3.jpg" alt="" />
+                            <img className="w-[324px] lg:h-[300px] h-[150px] rounded-tr-2xl" src="/Home/mission/img2.jpg" alt="" />
+                            <img className="w-[324px] lg:h-[300px] h-[150px] rounded-br-2xl" src="/Home/mission/img3.jpg" alt="" />
                         </Box>
                     </Box>
                     <img className="w-40 h-40 rounded-full absolute top-[30%] left-[35%]" src="/Home/mission/promise.jpg" alt="" />
@@ -45,7 +45,12 @@ const AboutMission = () => {
                         color: "#4e4e4e",
                         fontWeight: "400",
                     }}>
-                        Business tailored it design, management & support services business agency elit, sed do eiusmod tempor.
+                        Support our mission to bring hope and help to those in need.
+                        Your contribution provides medical care, nutritious food, education, and safe shelter for vulnerable communities.
+                        Together, we can reduce suffering, restore dignity, and create lasting positive change.
+                        Your support empowers families to overcome challenges and rebuild their lives.
+                        By standing with us, you become a source of strength and compassion.
+                        Every donation makes a real difference and helps build a better future for all.
                     </Typography>
                     <Divider sx={{ my: "20px" }} />
                     <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", my: "30px" }}>

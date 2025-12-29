@@ -9,6 +9,7 @@ import { Pagination, Navigation } from 'swiper/modules';
 import { Box, Button, Container, Typography } from '@mui/material';
 // Custom CSS
 import './Banner.css';
+import Link from 'next/link';
 
 
 const Banner = () => {
@@ -94,21 +95,23 @@ const Banner = () => {
                                         }}>{info.description}</Typography>
                                     </Box>
                                     <Box sx={{ my: "20px" }}>
-                                        <Button
-                                            variant='outlined'
-                                            sx={{
-                                                // bgcolor: "#fb8500",
-                                                borderColor: "#fb8500",
-                                                color: "white",
-                                                p: "10px 30px",
-                                                '&:hover': {
-                                                    bgcolor: "#fb8500",
+                                        <Link href={"/campaigns"}>
+                                            <Button
+                                                variant='outlined'
+                                                sx={{
+                                                    // bgcolor: "#fb8500",
                                                     borderColor: "#fb8500",
-                                                }
-                                            }}
-                                        >
-                                            Donate Now
-                                        </Button>
+                                                    color: "white",
+                                                    p: "10px 30px",
+                                                    '&:hover': {
+                                                        bgcolor: "#fb8500",
+                                                        borderColor: "#fb8500",
+                                                    }
+                                                }}
+                                            >
+                                                Donate Now
+                                            </Button>
+                                        </Link>
                                     </Box>
                                 </Container>
 

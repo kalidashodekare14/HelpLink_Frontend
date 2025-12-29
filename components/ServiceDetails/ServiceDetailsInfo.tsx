@@ -1,12 +1,7 @@
 "use client"
 import { Box, Container, Typography } from '@mui/material';
 import { useParams } from 'next/navigation';
-// type serviceType = {
-//     id: string;
-//     title: string;
-//     description: string;
-//     image: string;
-// }
+
 
 const ServiceDetailsInfo = () => {
     const { id } = useParams();

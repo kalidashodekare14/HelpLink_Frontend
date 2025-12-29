@@ -3,6 +3,7 @@
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import Link from "next/link";
 const OurMission = () => {
     return (
         <Container maxWidth={"lg"} sx={{ my: "40px" }}>
@@ -81,22 +82,24 @@ const OurMission = () => {
                             <Typography>Compassion in Action</Typography>
                         </Box>
                     </Box>
-                    <Button
-                        variant='outlined'
-                        sx={{
-                            // bgcolor: "#fb8500",
-                            borderColor: "#fb8500",
-                            color: "black",
-                            p: "10px 30px",
-                            my: "20px",
-                            '&:hover': {
-                                bgcolor: "#fb8500",
+                    <Link href={"/about"}>
+                        <Button
+                            variant='outlined'
+                            sx={{
+                                // bgcolor: "#fb8500",
                                 borderColor: "#fb8500",
-                            }
-                        }}
-                    >
-                        About More
-                    </Button>
+                                color: "black",
+                                p: "10px 30px",
+                                my: "20px",
+                                '&:hover': {
+                                    bgcolor: "#fb8500",
+                                    borderColor: "#fb8500",
+                                }
+                            }}
+                        >
+                            About More
+                        </Button>
+                    </Link>
                 </Box>
             </Box>
         </Container>
