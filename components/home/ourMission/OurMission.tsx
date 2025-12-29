@@ -2,7 +2,7 @@
 
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 const OurMission = () => {
     return (
         <Container maxWidth={"lg"} sx={{ my: "40px" }}>
@@ -21,11 +21,17 @@ const OurMission = () => {
                             <img className="w-[324px] lg:h-[250px] h-[150px] rounded-br-2xl" src="/Home/mission/img3.jpg" alt="" />
                         </Box>
                     </Box>
-                    
-                    {/* <img className="w-40 h-40 rounded-full absolute top-[30%] left-[35%]" src="/Home/mission/promise.jpg" alt="" /> */}
+                    {/* <PlayArrowIcon sx={{
+                        fontSize: "80px",
+                        width: "40px",
+                        height: "40",
+                        position: "absolute",
+                        top: 0
+                    }} /> */}
+
                 </Box>
                 <Box sx={{
-                    width: { xs: "100%", md: "50%"},
+                    width: { xs: "100%", md: "50%" },
 
                 }}
                 >

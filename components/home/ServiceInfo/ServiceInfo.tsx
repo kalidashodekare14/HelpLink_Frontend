@@ -11,30 +11,31 @@ import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import Link from 'next/link';
 
 const ServiceInfo = () => {
 
     const serviceData = [
         {
-            id: 1,
+            id: "medical_help",
             title: "Medical Help",
             description: "We provide medical assistance to those in need, ensuring access to essential healthcare services.",
             icon: MedicalServicesIcon
         },
         {
-            id: 2,
+            id: "healthy_food",
             title: "Healthy Foods",
             description: "We distribute nutritious food to communities facing food insecurity, promoting health and well-being.",
             icon: FastfoodIcon
         },
         {
-            id: 3,
+            id: "education_support",
             title: "Education",
             description: "We support educational initiatives to empower individuals and communities through knowledge and learning.",
             icon: MenuBookIcon
         },
         {
-            id: 4,
+            id: "residence_support",
             title: "Residence",
             description: "We provide safe and secure housing solutions for individuals and families in need.",
             icon: HomeWorkIcon
@@ -135,19 +136,21 @@ const ServiceInfo = () => {
                                 </Typography>
 
                                 <Typography className='chil-text' sx={{ color: "#4e4e4e", }}>{service.description}</Typography>
-                                <Button
-                                    variant='outlined'
-                                    sx={{
-                                        bgcolor: "#fb8500",
-                                        color: "white",
-                                        border: "none",
-                                        borderRadius: "20px",
-                                        p: "10px 30px",
-                                        my: "20px",
-                                    }}
-                                >
-                                    Learn More
-                                </Button>
+                                <Link href={`/service-details/${service.id}`}>
+                                    <Button
+                                        variant='outlined'
+                                        sx={{
+                                            bgcolor: "#fb8500",
+                                            color: "white",
+                                            border: "none",
+                                            borderRadius: "20px",
+                                            p: "10px 30px",
+                                            my: "20px",
+                                        }}
+                                    >
+                                        Learn More
+                                    </Button>
+                                </Link>
                             </Box>
                         </SwiperSlide>
                     ))
