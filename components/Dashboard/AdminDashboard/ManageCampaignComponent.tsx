@@ -69,11 +69,14 @@ const ManageCampaignComponent = () => {
     const [search, setSearch] = useState<string>("");
     const [requestStatus, setRequestStatus] = useState<string>("");
     const [deliveryStatus, setDeliveryStatus] = useState<string>("");
+    const [situation, setSitiuation] = useState<string>("");
+    console.log('checking situation', situation)
 
     const query = {
         search: search,
         request_status: requestStatus,
-        delivery_status: deliveryStatus
+        delivery_status: deliveryStatus,
+        situation: situation
     }
 
     // total campaign data fatched
@@ -366,7 +369,9 @@ const ManageCampaignComponent = () => {
         console.log('checking delivery status', value);
         setDeliveryStatus(value)
     }
-
+    const handleSituation = (value: any) => {
+        setSitiuation(value)
+    }
 
     return (
         <Box sx={{ p: "20px" }}>
@@ -415,6 +420,23 @@ const ManageCampaignComponent = () => {
                         <MenuItem value={"Picked Up"}>Picked Up</MenuItem>
                         <MenuItem value={"Delivered"}>Delivered</MenuItem>
                         <MenuItem value={"Cancelled"}>Cancelled</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl sx={{ width: { xs: "100%", lg: "15%" } }} size='small'>
+                    <InputLabel id="demo-simple-select-label">Severity</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Age"
+                        value={situation}
+                        onChange={(event) => handleSituation(event.target.value)}
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={"Low"}>Low</MenuItem>
+                        <MenuItem value={"Medium"}>Medium</MenuItem>
+                        <MenuItem value={"High"}>High</MenuItem>
                     </Select>
                 </FormControl>
             </Box>
