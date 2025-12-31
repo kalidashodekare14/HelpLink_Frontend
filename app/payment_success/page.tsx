@@ -1,6 +1,7 @@
 "use client"
 
-import { Box, Container } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
 
 const payment_success = () => {
     return (
@@ -10,10 +11,22 @@ const payment_success = () => {
             alignItems: "center",
             height: "500px",
         }}>
-            <Box>
-                <h1>Payment Successful</h1>
-                <p>Thank you for your payment. Your transaction has been completed successfully.</p>
-            </Box>
+            <Stack
+                display={"flex"}
+                flexDirection={"column"}
+                justifyItems={"center"}
+                alignItems={"center"}
+                gap={"10px"}
+            >
+                <CheckIcon sx={{
+                    bgcolor: "#06d6a0",
+                    color: "white",
+                    fontSize: "80px",
+                    borderRadius: "50%"
+                }} />
+                <Typography>Payment Successful</Typography>
+                <Typography>Thank you, Your Payment has been successfully.</Typography>
+            </Stack>
         </Container>
     );
 };

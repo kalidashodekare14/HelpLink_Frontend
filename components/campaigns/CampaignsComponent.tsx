@@ -92,7 +92,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                         image={campaign?.image[0]}
                                         title="green iguana"
                                     >
-                                        {
+                                        {/* {
                                             campaign?.situation?.severity === "High" && (
                                                 <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-red-500 opacity-75"></span>
                                             )
@@ -106,7 +106,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                             campaign?.situation?.severity === "Low" && (
                                                 <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-[#0077b6] opacity-75"></span>
                                             )
-                                        }
+                                        } */}
                                     </CardMedia>
                                     <CardContent sx={{
                                         display: "flex",
