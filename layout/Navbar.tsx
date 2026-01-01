@@ -17,7 +17,7 @@ const Navbar = () => {
     const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
 
     const { data: session, status } = useSession();
-
+    console.log('checking session', session);
     const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery(undefined, {
         skip: status !== "authenticated"
     });

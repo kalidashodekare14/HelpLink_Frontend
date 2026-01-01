@@ -8,6 +8,7 @@ import { signIn } from 'next-auth/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import SocialLogin from './SocialLogin';
 
 
 type Inputs = {
@@ -117,7 +118,8 @@ const LoginComponent = () => {
                         </Box>
                         <Typography sx={{ my: "5px" }}>Don't have an account? <Link href={"/signup"}>Sign Up Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
-                        <Typography sx={{ textAlign: "center" }}>Or Continue With Account</Typography>
+                        <SocialLogin />
+                        {/* <Typography sx={{ textAlign: "center" }}>Or Continue With Account</Typography>
                         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}>
                             <Box sx={{
                                 border: "1px solid #bbbb",
@@ -127,7 +129,13 @@ const LoginComponent = () => {
                                 justifyContent: "center",
                                 alignItems: "center",
                             }}>
-                                <GoogleIcon />
+                                <GoogleIcon
+                                    // onClick={() =>handle}
+                                    sx={{
+                                        color: "#4285F4",
+                                        cursor: "pointer"
+                                    }}
+                                />
                             </Box>
                             <Box sx={{
                                 border: "1px solid #bbbb",
@@ -139,7 +147,7 @@ const LoginComponent = () => {
                             }}>
                                 <FacebookIcon />
                             </Box>
-                        </Box>
+                        </Box> */}
                     </Box>
                 </form>
             </Box>
