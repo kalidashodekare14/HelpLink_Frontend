@@ -70,7 +70,7 @@ const ManageCampaignComponent = () => {
     const [requestStatus, setRequestStatus] = useState<string>("");
     const [deliveryStatus, setDeliveryStatus] = useState<string>("");
     const [situation, setSitiuation] = useState<string>("");
-    console.log('checking situation', situation)
+
 
     const query = {
         search: search,

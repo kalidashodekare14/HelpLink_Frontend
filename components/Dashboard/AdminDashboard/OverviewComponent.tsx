@@ -45,7 +45,7 @@ const OverviewComponent = () => {
 
     const { data: overviewInfo, isLoading, error } = useOverviewManageQuery();
     const overviewData = overviewInfo?.data
-    console.log('checking overview', overviewData);
+
 
     return (
         <Box sx={{ mx: "10px", my: "10px" }}>

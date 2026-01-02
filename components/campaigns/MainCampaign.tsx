@@ -12,7 +12,7 @@ const MainCampaign = () => {
     const [upazila, setUpazila] = useState<string>("");
     const [search, setSearch] = useState<string>("");
     const [severity, setSeverity] = useState<string>("");
-    console.log('checking severity', severity);
+
 
     // Location Data Fetch
     const [divisions, setDivisions] = useState<string[]>([]);
@@ -20,7 +20,7 @@ const MainCampaign = () => {
     const [upazilas, setUpazilas] = useState<string[]>([]);
 
     const [page, setPage] = useState<number>(1);
-    console.log('checking page', page);
+
 
     // Campaign Data Fetch
     const query = {
