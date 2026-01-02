@@ -166,7 +166,7 @@ const ProfileComponent = () => {
                                 {
                                     profileData?.image ? (
                                         <Avatar
-                                            alt="Remy Sharp"
+                                            alt={profileData?.name}
                                             src={profileData?.image}
                                             sx={{
                                                 width: 120,

@@ -154,7 +154,7 @@ const Navbar = () => {
                                         {userInfo?.image ? (
                                             <img src={userInfo?.image} alt='' />
                                         ) : (
-                                            <Typography>{userInfo?.name ? userInfo.name[0] : null}</Typography>
+                                            <Typography sx={{ fontSize: "20px", color: "black" }}>{userInfo?.name ? userInfo.name[0] : null}</Typography>
                                         )
                                         }
                                     </Avatar>

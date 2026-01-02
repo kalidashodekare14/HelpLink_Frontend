@@ -8,6 +8,7 @@ import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import SocialLogin from './SocialLogin';
 
 
 type Inputs = {
@@ -135,29 +136,7 @@ const RegisterComponent = () => {
                         </Box>
                         <Typography sx={{ my: "5px" }}>Already have an account? <Link href={"/signin"}>Sign In Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
-                        <Typography sx={{ textAlign: "center" }}>Or Continue With Account</Typography>
-                        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}>
-                            <Box sx={{
-                                border: "1px solid #bbbb",
-                                p: "10px",
-                                borderRadius: "100%",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
-                                <GoogleIcon />
-                            </Box>
-                            <Box sx={{
-                                border: "1px solid #bbbb",
-                                p: "10px",
-                                borderRadius: "100%",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
-                                <FacebookIcon />
-                            </Box>
-                        </Box>
+                        <SocialLogin />
                     </Box>
                 </form>
             </Box>

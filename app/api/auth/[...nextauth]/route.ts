@@ -67,15 +67,11 @@ export const authOptions = {
                         },
                         { withCredentials: true }
                     );
-                    console.log('Social login response data:', res.data);
-                    console.log('Social login response token:', res.data?.data?.token);
-                    console.log('Social login response role:', res.data?.data.user?.role);
                     user.token = res.data?.data?.token
                     user.role = res.data.data?.user?.role
                     return true
                 } catch (error) {
                     console.log(error);
-                    // return false;
                 }
             }
             return true;
