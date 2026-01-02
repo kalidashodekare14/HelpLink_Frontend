@@ -126,7 +126,7 @@ const ServiceInfo = () => {
                                     bgcolor: "white",
                                     border: '2px solid #fb8500',
                                 }}>
-                                    <service.icon sx={{ fontSize: "40px", color: "#fb8500", }} />
+                                    <service.icon sx={{ fontSize: "30px", color: "#fb8500", }} />
                                 </Box>
                                 <Typography className='chil-text' sx={{
                                     fontSize: "30px",

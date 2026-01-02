@@ -26,10 +26,10 @@ const SuccessInfo = () => {
                     gap: "2px",
                 }}>
                     <HandshakeIcon sx={{
-                        fontSize: "110px",
+                        fontSize: "100px",
                         bgcolor: "#fb8500",
                         color: "#fff",
-                        p: "30px",
+                        p: "20px",
                         borderRadius: "100%",
                     }} />
                     <Typography variant="h5" sx={{
@@ -50,11 +50,12 @@ const SuccessInfo = () => {
                     gap: "2px",
                 }}>
                     <ChatIcon sx={{
-                        fontSize: "110px",
+                        fontSize: "100px",
                         bgcolor: "#fb8500",
                         color: "#fff",
-                        p: "30px",
+                        p: "20px",
                         borderRadius: "100%",
+                        mb: "5px"
                     }} />
                     <Typography variant="h5" sx={{
                         fontSize: "30px",
@@ -74,11 +75,12 @@ const SuccessInfo = () => {
                     gap: "2px",
                 }}>
                     <EmojiEventsIcon sx={{
-                        fontSize: "110px",
+                        fontSize: "100px",
                         bgcolor: "#fb8500",
                         color: "#fff",
-                        p: "30px",
+                        p: "20px",
                         borderRadius: "100%",
+                        mb: "5px"
                     }} />
                     <Typography variant="h5" sx={{
                         fontSize: "30px",
@@ -98,11 +100,12 @@ const SuccessInfo = () => {
                     gap: "2px",
                 }}>
                     <PeopleAltIcon sx={{
-                        fontSize: "110px",
+                        fontSize: "100px",
                         bgcolor: "#fb8500",
                         color: "#fff",
-                        p: "30px",
+                        p: "20px",
                         borderRadius: "100%",
+                        mb: "5px"
                     }} />
                     <Typography variant="h5" sx={{
                         fontSize: "30px",
