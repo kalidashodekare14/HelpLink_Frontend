@@ -24,7 +24,7 @@ export const authOptions = {
                     if (!email || !password) return null;
 
                     const res = await axios.post(
-                        "http://localhost:5000/api/v1/auth/login",
+                        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/login`,
                         {
                             email: email,
                             password: password
@@ -59,7 +59,7 @@ export const authOptions = {
             if (account.provider === "google") {
                 try {
                     const res = await axios.post(
-                        "http://localhost:5000/api/v1/auth/social_login",
+                        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/social_login`,
                         {
                             name: user?.name,
                             email: user?.email,

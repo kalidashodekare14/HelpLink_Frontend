@@ -52,7 +52,7 @@ const RegisterComponent = () => {
                 role: isRole
             }
             setLoading(true)
-            const res = await axios.post("http://localhost:5000/api/v1/auth/register", registerData);
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/register`, registerData);
             if (res.status === 200) {
                 toast.success('Register Successfully 🎉');
                 router.push("/signin")
