@@ -2,14 +2,25 @@
 import { Box, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SocialLogin = () => {
 
+    const session = useSession();
+    const router = useRouter();
+    console.log('checking only session', session)
+
     const handleSocialLogin = async (provider: string) => {
-        const res = await signIn(provider);
-        console.log("checking social data", res);
+        signIn(provider);
     }
+
+    if (session.status === "authenticated") {
+        toast.success('Login Successfully 🎉');
+        router.push("/")
+    }
+
 
     return (
         <div>
@@ -54,6 +65,7 @@ const SocialLogin = () => {
                     />
                 </Box>
             </Box>
+            <Toaster />
         </div>
     );
 };

@@ -11,19 +11,22 @@ import { useUserRoleQuery } from '@/state/services/userRole/userRole';
 
 const Navbar = () => {
 
+    // Responsive toggle state
     const [toggle, setToggle] = useState<boolean>(false);
+    //  Sticky State 
     const [isSticky, setIsSticky] = useState<boolean>(false);
+    // Pathname hook
     const pathname = usePathname();
+    // dashboard route track
     const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
-
+    // Session Data
     const { data: session, status } = useSession();
-    console.log('checking session', session);
+    // user backend data
     const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery(undefined, {
         skip: status !== "authenticated"
     });
     const userInfo = roleData?.data
-    console.log('checking user info', userInfo);
-
+    // Dropdown state and function
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,16 +35,16 @@ const Navbar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
+    // Logout function
     const handleLogout = () => {
         signOut()
     }
 
-
+    // Toggle function
     const handleToggle = () => {
         setToggle(!toggle)
     }
-
+    // Page routes
     const navgicaton = [
         {
             "id": 1,
@@ -71,6 +74,7 @@ const Navbar = () => {
 
     ]
 
+    // Sticky useEffect
     useEffect(() => {
         const handleScroll = () => {
             const isTop = window.scrollY < 150;

@@ -2,6 +2,7 @@ import axios from "axios"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
+import { signIn } from "next-auth/react";
 
 export const authOptions = {
     secret: process.env.NEXT_JWT_SECRET,
@@ -54,6 +55,31 @@ export const authOptions = {
         })
     ],
     callbacks: {
+        async signIn({ user, account }: { user: any, account: any }) {
+            if (account.provider === "google") {
+                try {
+                    const res = await axios.post(
+                        "http://localhost:5000/api/v1/auth/social_login",
+                        {
+                            name: user?.name,
+                            email: user?.email,
+                            image: user?.image,
+                        },
+                        { withCredentials: true }
+                    );
+                    console.log('Social login response data:', res.data);
+                    console.log('Social login response token:', res.data?.data?.token);
+                    console.log('Social login response role:', res.data?.data.user?.role);
+                    user.token = res.data?.data?.token
+                    user.role = res.data.data?.user?.role
+                    return true
+                } catch (error) {
+                    console.log(error);
+                    // return false;
+                }
+            }
+            return true;
+        },
         async jwt({ token, user }: { token: any, user: any }) {
             if (user) {
                 token.accessToken = user.token;
@@ -67,7 +93,7 @@ export const authOptions = {
                 session.user.role = token.role;
                 return session;
             }
-        }
+        },
     },
 
 
