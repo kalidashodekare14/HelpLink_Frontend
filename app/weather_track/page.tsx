@@ -1,6 +1,6 @@
 import WeatherTrack from "@/components/WeatherTrack/WeatherTrack";
 
-const weatherTrack = () => {
+export default function weatherTrackPage() {
     return (
         <div>
             <WeatherTrack />
@@ -8,4 +8,3 @@ const weatherTrack = () => {
     );
 };
 
-export default weatherTrack;

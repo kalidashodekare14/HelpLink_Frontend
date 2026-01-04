@@ -10,7 +10,6 @@ const SocialLogin = () => {
 
     const session = useSession();
     const router = useRouter();
-    console.log('checking only session', session)
 
     const handleSocialLogin = async (provider: string) => {
         signIn(provider);
