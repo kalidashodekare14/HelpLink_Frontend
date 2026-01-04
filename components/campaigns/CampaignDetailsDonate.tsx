@@ -102,7 +102,10 @@ const CampaignDetailsDonate = () => {
                 const res = await bikashPayment(donorData).unwrap();
                 if ("data" in res) {
                     console.log('checking data', res);
-                    window.location.href = res.data.bkashURL
+                    if (typeof location !== 'undefined') {
+                        window.location.href = res.data.bkashURL
+                    }
+
                 }
             }
             // SSLCommerz Payment System
@@ -110,7 +113,9 @@ const CampaignDetailsDonate = () => {
                 const res = await sslCommerzPayment(donorData).unwrap();
                 if ("data" in res) {
                     console.log('SSLCommerz Data', res);
-                    window.location.href = res.data.GatewayPageURL
+                    if (typeof location !== 'undefined') {
+                        window.location.href = res.data.GatewayPageURL
+                    }
                 }
             }
 
