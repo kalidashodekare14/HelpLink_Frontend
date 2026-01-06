@@ -1,9 +1,10 @@
 "use client"
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Divider, FormControl, InputLabel, makeStyles, MenuItem, Pagination, Select, Skeleton, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, Container, Divider, Pagination, Skeleton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LabelIcon from '@mui/icons-material/Label';
+import Image from "next/image";
 type campaignChindren = {
     totalCampaign: any,
     setPage: (event: number) => void
@@ -13,6 +14,8 @@ type campaignChindren = {
 const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) => {
 
     const loadingCard: any = 10
+
+    console.log("campaigns data", totalCampaign);
 
     return (
         <Container>
@@ -87,31 +90,15 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                         totalCampaign?.data?.data && (
                             totalCampaign?.data?.data.map((campaign: any) => (
                                 <Card key={campaign._id} sx={{ maxWidth: 345 }}>
-                                    <CardMedia
-                                        sx={{ height: 200, position: "relative" }}
-                                        image={campaign?.image[0]}
-                                        title="green iguana"
-                                    >
-                                        {/* {
-                                            campaign?.situation?.severity === "High" && (
-                                                <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-red-500 opacity-75"></span>
-                                            )
-                                        }
-                                        {
-                                            campaign?.situation?.severity === "Medium" && (
-                                                <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-[#ffb703] opacity-75"></span>
-                                            )
-                                        }
-                                        {
-                                            campaign?.situation?.severity === "Low" && (
-                                                <span className="absolute -left-5 inline-flex h-20 w-20 animate-ping rounded-full bg-[#0077b6] opacity-75"></span>
-                                            )
-                                        } */}
-                                    </CardMedia>
-                                    <CardContent sx={{
-                                        display: "flex",
-                                        flexDirection: 'column',
-                                        gap: "10px"
+                                    <Image
+                                        src={campaign?.image[0]}
+                                        alt={campaign?.title}
+                                        width={500}
+                                        height={300}
+                                        className="h-52 w-full object-cover"
+                                    />
+                                    <Box sx={{
+                                        p: "10px"
                                     }}>
                                         <Typography gutterBottom fontWeight={"bold"} fontSize={"18px"} component="div">
                                             {campaign?.title}
@@ -120,7 +107,9 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                             {campaign?.description.slice(0, 80)}...
                                         </Typography>
                                         <Divider></Divider>
-                                        <Box >
+                                        <Box sx={{
+
+                                        }}>
                                             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", my: "5px" }}>
                                                 <Box sx={{ display: "flex", alignItems: "center", }}>
                                                     <LocationOnIcon sx={{ fontSize: "21px", color: "#FB8500" }} />
@@ -178,7 +167,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                                 </Box>
                                             </Box>
                                         </Box>
-                                    </CardContent>
+                                    </Box>
                                     <Box sx={{ my: "10px", mx: "10px" }}>
                                         <Link href={`/campaigns/${campaign?._id}`}>
                                             <Button
