@@ -2,6 +2,7 @@
 
 import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Box, Button, Container, Typography } from "@mui/material";
 import { GridExpandMoreIcon } from "@mui/x-data-grid";
+import Image from "next/image";
 
 const AboutAskQuestion = () => {
     return (
@@ -67,10 +68,28 @@ const AboutAskQuestion = () => {
                 </Box>
                 <Box sx={{ width: { xs: "100%", lg: "50%" }, display: "flex", height: { xs: "300px", lg: "500px" }, gap: "10px" }}>
                     <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                        <img className="w-full  h-full lg:h-[50%] border-8 border-[#c9c9c9] rounded-2xl" src="/Home/question/img1.jpeg" alt="" />
-                        <img className="w-full h-full lg:h-[50%] border-8 border-[#c9c9c9] rounded-2xl" src="/Home/question/img2.jpg" alt="" />
+                        <Image
+                            className="w-full  h-full lg:h-[50%] border-8 border-[#c9c9c9] rounded-2xl"
+                            src="/Home/question/img1.jpeg"
+                            width={500}
+                            height={300}
+                            alt=""
+                        />
+                        <Image
+                            className="w-full h-full lg:h-[50%] border-8 border-[#c9c9c9] rounded-2xl"
+                            src="/Home/question/img2.jpg"
+                            width={500}
+                            height={300}
+                            alt=""
+                        />
                     </Box>
-                    <img className="w-full lg:w-[50%]  border-8 border-[#c9c9c9] rounded-2xl" src="/Home/question/img1.jpg" alt="" />
+                    <Image
+                        className="w-full lg:w-[50%]  border-8 border-[#c9c9c9] rounded-2xl"
+                        src="/Home/question/img1.jpg"
+                        width={500}
+                        height={300}
+                        alt=""
+                    />
                 </Box>
             </Box>
         </Container>
