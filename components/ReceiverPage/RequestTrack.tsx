@@ -188,7 +188,7 @@ const RequestTrack = () => {
             <Box
                 sx={{
                     height: "200px",
-                    backgroundImage: "url('https://i.ibb.co.com/SwPChsW7/covid-concept-with-colorful-hands.jpg')",
+                    backgroundImage: "url('/Profile/profile.jpg')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     p: "10px",
