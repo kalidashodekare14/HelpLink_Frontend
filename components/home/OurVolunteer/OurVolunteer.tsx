@@ -12,6 +12,7 @@ import { Pagination } from 'swiper/modules';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import Image from "next/image";
 
 const OurVolunteer = () => {
 
@@ -157,7 +158,13 @@ const OurVolunteer = () => {
                                         transform: "1s",
                                     }
                                 }}>
-                                    <img className="w-full h-[300px] z-10 rounded-3xl" src={volunteer.image} alt="" />
+                                    <Image
+                                        className="w-full h-75 z-10 rounded-3xl"
+                                        src={volunteer.image}
+                                        width={500}
+                                        height={300}
+                                        alt=""
+                                    />
                                     <Box className={"vInfo"} sx={{
                                         position: "absolute",
                                         bottom: "10px",
