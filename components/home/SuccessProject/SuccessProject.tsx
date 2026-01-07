@@ -11,8 +11,14 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination } from 'swiper/modules';
+import Image from "next/image";
 
 const SuccessProject = () => {
+
+
+
+
+
 
 
 
@@ -20,31 +26,23 @@ const SuccessProject = () => {
     const successPro = [
         {
             "id": 1,
-            "image": "https://i.ibb.co.com/sdLxBz1G/img1.jpg"
+            "image": "https://i.postimg.cc/cL3k6C5w/img1.jpg"
         },
         {
             "id": 2,
-            "image": "https://i.ibb.co.com/B5RTRL8y/img2.jpg"
+            "image": "https://i.postimg.cc/V5QMhf9n/img2.jpg"
         },
         {
             "id": 3,
-            "image": "https://i.ibb.co.com/Q3JVk1g8/img3.jpg"
+            "image": "https://i.postimg.cc/Rq5fYS11/img3.jpg"
         },
         {
             "id": 4,
-            "image": "https://i.ibb.co.com/bgky9fMh/fdfdf.jpg"
+            "image": "https://i.postimg.cc/d1fG8mhQ/diverse-people-refugee-camps.jpg"
         },
         {
             "id": 5,
-            "image": "https://i.ibb.co.com/sdXs4BQh/ph-61993-242130.jpg"
-        },
-        {
-            "id": 6,
-            "image": "https://i.ibb.co.com/svx09MT9/diverse-people-refugee-camps.jpg"
-        },
-        {
-            "id": 7,
-            "image": "https://i.ibb.co.com/qVryzw1/charity-foodbank-volunteer-group.jpg"
+            "image": "https://i.postimg.cc/gJ73vqx0/fdfdf.jpg"
         },
     ]
 
@@ -54,7 +52,7 @@ const SuccessProject = () => {
 
 
     return (
-        <Container maxWidth="lg" sx={{mb: "80px"}}>
+        <Container maxWidth="lg" sx={{ mb: "80px" }}>
             <Box>
                 <Typography sx={{
                     color: "#fb8500",
@@ -64,9 +62,9 @@ const SuccessProject = () => {
                 <Typography
                     sx={{
                         textAlign: "center",
-                         fontSize: "30px",
-                         fontWeight: "400",
-                         my: "5px"
+                        fontSize: "30px",
+                        fontWeight: "400",
+                        my: "5px"
                     }}
                 >Our Recent Project</Typography>
             </Box>
@@ -98,7 +96,13 @@ const SuccessProject = () => {
                         successPro.map(success => (
                             <SwiperSlide key={success.id}>
                                 <Box>
-                                    <img className="h-72 w-full rounded-2xl" src={success?.image} alt="" />
+                                    <Image
+                                        className="h-72 w-full rounded-2xl"
+                                        src={success?.image}
+                                        width={500}
+                                        height={300}
+                                        alt="Success"
+                                    />
                                 </Box>
                             </SwiperSlide>
                         ))

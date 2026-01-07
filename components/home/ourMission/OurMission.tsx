@@ -4,6 +4,7 @@ import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import Link from "next/link";
+import Image from "next/image";
 const OurMission = () => {
     return (
         <Container maxWidth={"lg"} sx={{ my: "40px" }}>
@@ -15,11 +16,26 @@ const OurMission = () => {
                 <Box sx={{ position: "relative" }}>
                     <Box sx={{ display: "flex", alignItems: "center", }}>
                         <Box>
-                            <img className="w-72 lg:h-[500px] h-[300px] rounded-tl-2xl rounded-bl-2xl" src="/Home/mission/img1.jpg" alt="" />
+                            <Image
+                                className="w-72 lg:h-125 h-75 rounded-tl-2xl rounded-bl-2xl"
+                                src="/Home/mission/img1.jpg"
+                                width={500}
+                                height={300}
+                                alt="" />
                         </Box>
                         <Box>
-                            <img className="w-[324px] lg:h-[250px] h-[150px] rounded-tr-2xl" src="/Home/mission/img2.jpg" alt="" />
-                            <img className="w-[324px] lg:h-[250px] h-[150px] rounded-br-2xl" src="/Home/mission/img3.jpg" alt="" />
+                            <Image
+                                className="w-81 lg:h-62.5 h-37.5 rounded-tr-2xl"
+                                src="/Home/mission/img2.jpg"
+                                width={500}
+                                height={300}
+                                alt="" />
+                            <Image
+                                className="w-81 lg:h-62.5 h-37.5 rounded-br-2xl"
+                                src="/Home/mission/img3.jpg"
+                                width={500}
+                                height={300}
+                                alt="" />
                         </Box>
                     </Box>
                     {/* <PlayArrowIcon sx={{
