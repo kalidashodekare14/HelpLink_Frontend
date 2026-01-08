@@ -7,7 +7,8 @@ import { useDonateTrackQuery } from "@/state/services/donorService/donorService"
 import { useSession } from "next-auth/react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const columns: GridColDef[] = [
     {
@@ -55,7 +56,33 @@ const columns: GridColDef[] = [
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: "5px", mb: "5px" }}>
                     {Array.isArray(params.value) ? (
                         params.value.map((value: string, index: number) => (
-                            <Typography key={index}>{value}</Typography>
+                            <>
+                                {
+                                    value === "Paid" && (
+                                        <Box sx={{ display: "flex" }}>
+                                            <CheckCircleIcon sx={{ color: "#00B400" }} />
+                                            <Typography key={index}>{value}</Typography>
+                                        </Box>
+                                    )
+                                }
+                                {
+                                    value === "Unpaid" && (
+                                        <Box sx={{ display: "flex" }}>
+                                            <CancelIcon sx={{ color: "#ef233c" }} />
+                                            <Typography key={index}>{value}</Typography>
+                                        </Box>
+                                    )
+                                }
+                                
+                                {
+                                    value === "Pending" && (
+                                        <Box sx={{ display: "flex" }}>
+                                            <CancelIcon sx={{ color: "#ef233c" }} />
+                                            <Typography key={index}>{value}</Typography>
+                                        </Box>
+                                    )
+                                }
+                            </>
                         ))
                     ) : (
                         <span>{params.value}</span>
@@ -73,9 +100,34 @@ const columns: GridColDef[] = [
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: "5px", mb: "5px" }}>
                     {Array.isArray(params.value) ? (
                         params.value.map((value: string, index: number) => (
-                            <Typography key={index}>{value}</Typography>
+                            <>
+                                {
+                                    value === "SSLCommerz" && (
+                                        <Typography sx={{ bgcolor: "#2859A6", color: "white", px: "5px" }}>{value}</Typography>
+                                    )
+                                }
+                                {
+                                    value === "Bikash" && (
+                                        <Typography sx={{ bgcolor: "#CA1F50", color: "white", px: "5px" }}>{value}</Typography>
+                                    )
+                                }
+                                {
+                                    value === "Nagad" && (
+                                        <Typography sx={{ bgcolor: "#ED872B", color: "white", px: "5px" }}>{value}</Typography>
+                                    )
+                                }
+                            </>
+                            // <Typography key={index}>{value}</Typography>
                         ))
                     ) : (
+                        // <>
+                        //     {
+                        //         params.value === "SSLCommerz" && (
+                        //             <Typography sx={{bgcolor: "#2859A6", color: "white"}}>{params.value}</Typography>
+                        //         )
+                        //     }
+
+                        // </>
                         <span>{params.value}</span>
                     )}
                 </Box>
