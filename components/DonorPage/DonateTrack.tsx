@@ -73,7 +73,7 @@ const columns: GridColDef[] = [
                                         </Box>
                                     )
                                 }
-                                
+
                                 {
                                     value === "Pending" && (
                                         <Box sx={{ display: "flex" }}>
@@ -161,7 +161,7 @@ const DonateTrack = () => {
     // User Session
     const { data: session } = useSession();
     // Donate Track Data Fetched 
-    const { data: donateTrack, isLoading, error } = useDonateTrackQuery(session?.user?.email);
+    const { data: donateTrack, isLoading: donateTracLoading, error } = useDonateTrackQuery(session?.user?.email);
     const donateData = donateTrack?.data
     // Data Grid Rows
     const rows = donateData?.map((data: any, index: number) => ({
@@ -199,6 +199,10 @@ const DonateTrack = () => {
                 <DataGrid
                     rows={rows}
                     columns={columns}
+                    loading={donateTracLoading}
+                    localeText={{
+                        noRowsLabel: "No Donate Data Found",
+                    }}
                     initialState={{ pagination: { paginationModel } }}
                     pageSizeOptions={[5, 10]}
                     checkboxSelection
