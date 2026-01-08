@@ -1,6 +1,6 @@
 "use client"
 import { useBikashPaymentMutation, useJoinCampaignMutation, useSslCommerzPaymentMutation } from '@/state/services/donorService/donorService';
-import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -37,7 +37,7 @@ const CampaignDetailsDonate = () => {
     const [sslCommerz, setSSLCommerz] = useState<boolean>(false);
     // Payment Error state
     const [paymentError, setPaymentError] = useState<boolean>(false);
-
+    const [paymentLoading, setPaymentLoading] = useState<boolean>(false);
 
     // Payment checkbox handle function
     const handlePaymentMethod = (value: string) => {
@@ -100,6 +100,7 @@ const CampaignDetailsDonate = () => {
                 payment_status: "Pending",
                 payment_method: isPaymentMethod || ""
             }
+            setPaymentLoading(true);
             // Bikash Payment System
             if (bikash) {
                 const res = await bikashPayment(donorData).unwrap();
@@ -125,7 +126,7 @@ const CampaignDetailsDonate = () => {
         } catch (error) {
             console.log('Payment Error', error);
         } finally {
-
+            setPaymentLoading(false);
         }
 
     }
@@ -287,7 +288,12 @@ const CampaignDetailsDonate = () => {
                                         my: "10px"
                                     }}
                                 >
-                                    Donate Here
+                                    {
+                                        paymentLoading ? (
+                                            <CircularProgress size={"30px"} color="inherit" />
+                                        ) : ("Donate Here")
+                                    }
+
                                 </Button>
                             </Box>
                         </Box>
