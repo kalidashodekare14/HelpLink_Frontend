@@ -10,6 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 type Inputs = {
     name: string
+    phone_number: string
     email: string
     message: string
     amount: string
@@ -92,6 +93,7 @@ const CampaignDetailsDonate = () => {
             const donorData = {
                 campaign_id: id,
                 donor_name: data.name,
+                phone_number: Number(data.phone_number),
                 donor_email: data.email,
                 message: data.message,
                 amount: data.amount,
@@ -156,16 +158,29 @@ const CampaignDetailsDonate = () => {
                     }}>
                         <Typography sx={{ py: "10px" }} fontSize={"20px"}>Personal Information</Typography>
                         <Box sx={{ width: "100%" }}>
+                            <TextField
+                                {...register("name", { required: true, })}
+                                sx={{
+                                    width: "100%",
+                                    mb: "10px"
+                                }}
+                                error={!!errors.name}
+                                id="outlined-basic"
+                                label="Full Name"
+                                variant="outlined"
+                                helperText={!!errors.name && "Full name is required"}
+                            />
                             <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                 <TextField
-                                    {...register("name", { required: true })}
+                                    {...register("phone_number", { required: true, minLength: 11, maxLength: 11 })}
                                     sx={{
                                         width: "100%"
                                     }}
-                                    error={!!errors.name}
-                                    id="outlined-basic"
-                                    label="Full Name"
-                                    variant="outlined" />
+                                    error={!!errors.phone_number}
+                                    label="Mobile Number"
+                                    variant="outlined"
+                                    helperText={!!errors.phone_number && "Mobile number minimum and maximum 11 digits"}
+                                />
                                 <TextField
                                     {...register("email", { required: true })}
                                     value={session?.user?.email}
@@ -174,6 +189,7 @@ const CampaignDetailsDonate = () => {
                                     }}
                                     error={!!errors.email}
                                     id="outlined-basic" label="Email"
+                                    helperText={!!errors.email && "Email is required"}
                                     variant="outlined" />
                             </Box>
                             <TextField
@@ -184,6 +200,7 @@ const CampaignDetailsDonate = () => {
                                 label="Message"
                                 multiline
                                 maxRows={4}
+                                helperText={!!errors.message && "Messege is required"}
 
                             />
                             <FormControl fullWidth>
@@ -194,6 +211,7 @@ const CampaignDetailsDonate = () => {
                                     id="outlined-adornment-amount"
                                     startAdornment={<InputAdornment position="start">৳</InputAdornment>}
                                     label="Amount"
+
                                 />
                             </FormControl>
                             <Stack direction={"row"} alignItems={"center"} my={"20px"} gap={"10px"}>
@@ -286,7 +304,7 @@ const CampaignDetailsDonate = () => {
                 </Box>
             </form>
             <Toaster />
-        </Container>
+        </Container >
     );
 };
 
