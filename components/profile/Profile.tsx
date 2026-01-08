@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, Box, Button, CircularProgress, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, CircularProgress, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, Skeleton, Stack, TextField, Typography } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import useProfileBDLocation from "@/hooks/useProfileBDLocation";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ const ProfileComponent = () => {
     // user session
     const { data: session } = useSession();
     // Profile Info fetched 
-    const { data: profileInfo, isLoading, error } = useProfileInfoQuery(session?.user?.email);
+    const { data: profileInfo, isLoading: profileDataLoading, error } = useProfileInfoQuery(session?.user?.email);
     const profileData = profileInfo?.data
     // Profile Info Update API
     const [profleInfoUpdate, { isLoading: updateLoading, error: updateError }] = useProfileInfoUpdateMutation()
@@ -162,88 +162,111 @@ const ProfileComponent = () => {
                             alignItems: "center",
                             gap: "10px"
                         }}>
-                            <Box sx={{ position: "relative" }}>
-                                {
-                                    profileData?.image ? (
-                                        <Avatar
-                                            alt={profileData?.name}
-                                            src={profileData?.image}
-                                            sx={{
-                                                width: 120,
-                                                height: 120,
-                                                border: '1px solid #bbbb'
-                                            }}
-                                        />
-                                    ) : (
-                                        < AccountCircleIcon sx={{ fontSize: "132px", borderRadius: "100%" }} />
-                                    )
-                                }
-
-
-                                {
-                                    infoToggle && (
-                                        imageLoading ? (
-                                            <Box
-                                                sx={{
-                                                    position: "absolute",
-                                                    right: "15px",
-                                                    bottom: "15px",
-                                                    bgcolor: "white",
-                                                    fontSize: "2px",
-                                                    p: "5px",
-                                                    borderRadius: "100%",
-                                                }}
-                                            >
-                                                <CircularProgress
-                                                    size="30px"
-                                                    color="success"
+                            {
+                                profileDataLoading ? (
+                                    <Skeleton variant="circular" width={120} height={120} />
+                                ) : (
+                                    <Box sx={{ position: "relative" }}>
+                                        {
+                                            profileData?.image ? (
+                                                <Avatar
+                                                    alt={profileData?.name}
+                                                    src={profileData?.image}
+                                                    sx={{
+                                                        width: 120,
+                                                        height: 120,
+                                                        border: '1px solid #bbbb'
+                                                    }}
                                                 />
-                                            </Box>
+                                            ) : (
+                                                < AccountCircleIcon sx={{ fontSize: "132px", borderRadius: "100%" }} />
+                                            )
+                                        }
 
-                                        ) : (
-                                            <Box
-                                                onClick={() => (document.querySelector('input[type="file"]') as HTMLInputElement)?.click()}
-                                            >
-                                                <CameraAltIcon sx={{
-                                                    position: "absolute",
-                                                    right: "15px",
-                                                    bottom: "15px",
-                                                    bgcolor: "white",
-                                                    fontSize: "35px",
-                                                    p: "5px",
-                                                    borderRadius: "100%",
-                                                    cursor: "pointer"
-                                                }} />
-                                                <input hidden onChange={(event) => handleImageUpload(event)} type="file" />
-                                            </Box>
-                                        )
-                                    )
 
-                                }
+                                        {
+                                            infoToggle && (
+                                                imageLoading ? (
+                                                    <Box
+                                                        sx={{
+                                                            position: "absolute",
+                                                            right: "15px",
+                                                            bottom: "15px",
+                                                            bgcolor: "white",
+                                                            fontSize: "2px",
+                                                            p: "5px",
+                                                            borderRadius: "100%",
+                                                        }}
+                                                    >
+                                                        <CircularProgress
+                                                            size="30px"
+                                                            color="success"
+                                                        />
+                                                    </Box>
 
-                            </Box>
-                            <Box sx={{}}>
-                                <Typography fontSize={"25px"}>{profileData?.name}</Typography>
-                                <Typography sx={{
-                                    mt: "5px",
-                                    color: "#bbbbb"
-                                }}>
-                                    {profileData?.email}
-                                </Typography>
-                            </Box>
+                                                ) : (
+                                                    <Box
+                                                        onClick={() => (document.querySelector('input[type="file"]') as HTMLInputElement)?.click()}
+                                                    >
+                                                        <CameraAltIcon sx={{
+                                                            position: "absolute",
+                                                            right: "15px",
+                                                            bottom: "15px",
+                                                            bgcolor: "white",
+                                                            fontSize: "35px",
+                                                            p: "5px",
+                                                            borderRadius: "100%",
+                                                            cursor: "pointer"
+                                                        }} />
+                                                        <input hidden onChange={(event) => handleImageUpload(event)} type="file" />
+                                                    </Box>
+                                                )
+                                            )
+
+                                        }
+
+                                    </Box>
+                                )
+                            }
+                            {
+                                profileDataLoading ? (
+                                    <Stack spacing={1}>
+                                        <Skeleton variant="rectangular" width={210} height={30} />
+                                        <Skeleton variant="rectangular" width={230} height={30} />
+                                    </Stack>
+                                ) : (
+                                    <Box sx={{}}>
+                                        <Typography fontSize={"25px"}>{profileData?.name}</Typography>
+                                        <Typography sx={{
+                                            mt: "5px",
+                                            color: "#bbbbb"
+                                        }}>
+                                            {profileData?.email}
+                                        </Typography>
+                                    </Box>
+                                )
+                            }
+
                         </Box>
+                        {/* Butttons */}
                         <Box>
                             {
                                 infoToggle && (
                                     <Box sx={{ display: 'flex', alignItems: "center", gap: "10px" }}>
-                                        <Button type="submit" variant='outlined'>Save</Button>
-                                        <Button onClick={() => setInfoToggle(false)} variant='outlined'>Cancel</Button>
+                                        <Button sx={{ bgcolor: "#FB8500", color: "white", border: "0" }} type="submit" variant='outlined'>Save</Button>
+                                        <Button sx={{ color: "black", fontWeight: "400", border: "1px solid #FB8500" }} onClick={() => setInfoToggle(false)} variant='outlined'>Cancel</Button>
                                     </Box>
                                 )
                             }
                             {
                                 !infoToggle && (
-                                    <Button onClick={handleToggle} variant='outlined'>Edit</Button>
+                                    <>
+                                        {
+                                            !profileDataLoading && (
+                                                <Button sx={{ bgcolor: "#FB8500", color: "white", border: "0" }} onClick={handleToggle} variant='outlined'>Edit</Button>
+                                            )
+                                        }
+                                    </>
                                 )
                             }
                         </Box>
@@ -269,7 +292,8 @@ const ProfileComponent = () => {
                                         size="small"
                                         id="outlined-basic"
                                         label="Full Name"
-                                        variant="outlined" />
+                                        variant="outlined"
+                                    />
                                     <FormControl error={!!errors?.gender} size="small" fullWidth>
                                         <InputLabel id="demo-simple-select-label">Male</InputLabel>
                                         <Select
@@ -369,82 +393,104 @@ const ProfileComponent = () => {
                         ) : (
                             // Profile Info 
                             <Box sx={{ my: "20px" }}>
-                                <Typography fontSize={20} my={1}>Personal Info</Typography>
+                                {
+                                    profileDataLoading ? (
+                                        <Skeleton sx={{ mb: "10px" }} variant="rectangular" width={"20%"} height={30} />
+                                    ) : (
+                                        <Typography fontSize={20} my={1}>Personal Info</Typography>
+                                    )
+                                }
                                 <Box sx={{
                                     display: "grid",
                                     gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
                                     gap: "20px"
                                 }}>
-                                    <Box>
-                                        <Typography>Full Name</Typography>
-                                        <Typography sx={{
-                                            border: "1px solid #bbbb",
-                                            p: "10px",
-                                            bgcolor: "#E7E7E7",
-                                            borderRadius: "10px"
-                                        }}>
-                                            {profileData?.name || "N/A"}
-                                        </Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography>Gender</Typography>
-                                        <Typography sx={{
-                                            border: "1px solid #bbbb",
-                                            p: "10px",
-                                            bgcolor: "#E7E7E7",
-                                            borderRadius: "10px"
-                                        }}>
-                                            {profileData?.gender || "N/A"}
-                                        </Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography>Division</Typography>
-                                        <Typography
-                                            sx={{
-                                                border: "1px solid #bbbb",
-                                                p: "10px",
-                                                bgcolor: "#E7E7E7",
-                                                borderRadius: "10px"
-                                            }}>
-                                            {profileData?.location?.division || "N/A"}
-                                        </Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography>District</Typography>
-                                        <Typography
-                                            sx={{
-                                                border: "1px solid #bbbb",
-                                                p: "10px",
-                                                bgcolor: "#E7E7E7",
-                                                borderRadius: "10px"
-                                            }}>
-                                            {profileData?.location?.district || "N/A"}
-                                        </Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography>Upazilla</Typography>
-                                        <Typography
-                                            sx={{
-                                                border: "1px solid #bbbb",
-                                                p: "10px",
-                                                bgcolor: "#E7E7E7",
-                                                borderRadius: "10px"
-                                            }}>
-                                            {profileData?.location?.upazila || "N/A"}
-                                        </Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography>Address</Typography>
-                                        <Typography
-                                            sx={{
-                                                border: "1px solid #bbbb",
-                                                p: "10px",
-                                                bgcolor: "#E7E7E7",
-                                                borderRadius: "10px"
-                                            }}>
-                                            {profileData?.location?.address || "N/A"}
-                                        </Typography>
-                                    </Box>
+                                    {
+                                        profileDataLoading ? (
+                                            <>
+                                                <Skeleton variant="rectangular" width={"100%"} height={40} />
+                                                <Skeleton variant="rectangular" width={"100%"} height={40} />
+                                                <Skeleton variant="rectangular" width={"100%"} height={40} />
+                                                <Skeleton variant="rectangular" width={"100%"} height={40} />
+                                                <Skeleton variant="rectangular" width={"100%"} height={40} />
+                                                <Skeleton variant="rectangular" width={"100%"} height={40} />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Box>
+                                                    <Typography>Full Name</Typography>
+                                                    <Typography sx={{
+                                                        border: "1px solid #bbbb",
+                                                        p: "10px",
+                                                        bgcolor: "#E7E7E7",
+                                                        borderRadius: "10px"
+                                                    }}>
+                                                        {profileData?.name || "N/A"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography>Gender</Typography>
+                                                    <Typography sx={{
+                                                        border: "1px solid #bbbb",
+                                                        p: "10px",
+                                                        bgcolor: "#E7E7E7",
+                                                        borderRadius: "10px"
+                                                    }}>
+                                                        {profileData?.gender || "N/A"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography>Division</Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            border: "1px solid #bbbb",
+                                                            p: "10px",
+                                                            bgcolor: "#E7E7E7",
+                                                            borderRadius: "10px"
+                                                        }}>
+                                                        {profileData?.location?.division || "N/A"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography>District</Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            border: "1px solid #bbbb",
+                                                            p: "10px",
+                                                            bgcolor: "#E7E7E7",
+                                                            borderRadius: "10px"
+                                                        }}>
+                                                        {profileData?.location?.district || "N/A"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography>Upazilla</Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            border: "1px solid #bbbb",
+                                                            p: "10px",
+                                                            bgcolor: "#E7E7E7",
+                                                            borderRadius: "10px"
+                                                        }}>
+                                                        {profileData?.location?.upazila || "N/A"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography>Address</Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            border: "1px solid #bbbb",
+                                                            p: "10px",
+                                                            bgcolor: "#E7E7E7",
+                                                            borderRadius: "10px"
+                                                        }}>
+                                                        {profileData?.location?.address || "N/A"}
+                                                    </Typography>
+                                                </Box>
+                                            </>
+                                        )
+                                    }
+
                                 </Box>
                             </Box>
                         )
