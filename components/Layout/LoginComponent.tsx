@@ -1,5 +1,5 @@
 "use client"
-import { Box, Button, Checkbox, CircularProgress, Container, Divider, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, CircularProgress, Container, Divider, Stack, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -20,6 +20,28 @@ const LoginComponent = () => {
 
     const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false);
+    const [emailValue, setEmailValue] = useState<string>("");
+    const [passwordValue, setPasswordValue] = useState<string>("");
+    const [selecteRole, setSelectRole] = useState<string>("");
+
+    const handleSelectRole = (role: string) => {
+        if (role === "admin") {
+            setEmailValue("admin@gmail.com");
+            setPasswordValue("adminMaster@@");
+        }
+        if (role === "volunteer") {
+            setEmailValue("volunteer@gmail.com");
+            setPasswordValue("volunteerMaster@@");
+        }
+        if (role === "donor") {
+            setEmailValue("donor@gmail.com");
+            setPasswordValue("donor@@");
+        }
+        if (role === "receiver") {
+            setEmailValue("receiver@gmail.com");
+            setPasswordValue("receiver@@");
+        }
+    }
 
     const {
         register,
@@ -59,7 +81,8 @@ const LoginComponent = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "600px"
+                // height: "600px"
+                my: "5%"
             }}
         >
             <Box
@@ -79,8 +102,99 @@ const LoginComponent = () => {
                             gap: "10px"
                         }}
                     >
-                        <TextField {...register("email", { required: true })} id="outlined-basic" label="Email" variant="outlined" />
-                        <TextField {...register("password", { required: true })} id="outlined-basic" type='password' label="Password" variant="outlined" />
+                        <Box
+                            sx={{
+                                display: "flex",
+                                gap: "5px"
+                            }}
+                        >
+                            <Typography
+                                onClick={() => handleSelectRole("admin")}
+                                sx={{
+                                    border: "1px solid #fb8500",
+                                    // bgcolor: "#fb8500",
+                                    transition: "background-color 0.4s ease, color 0.4s ease",
+                                    '&:hover': {
+                                        bgcolor: "#fb8500",
+                                        color: "white",
+                                        transform: 'scale(1.05)',
+                                        // transition: 'transform 0.5s ease-in-out',
+                                    },
+                                    color: "black",
+                                    p: "5px",
+                                    width: "20%",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                    textAlign: "center"
+                                }}>
+                                Admin
+                            </Typography>
+                            <Typography
+                                onClick={() => handleSelectRole("volunteer")}
+                                sx={{
+                                    border: "1px solid #fb8500",
+                                    // bgcolor: "#fb8500",
+                                    transition: "background-color 0.4s ease, color 0.4s ease",
+                                    '&:hover': {
+                                        bgcolor: "#fb8500",
+                                        color: "white",
+                                        transform: 'scale(1.05)',
+                                        // transition: 'transform 0.5s ease-in-out',
+                                    },
+                                    color: "black",
+                                    p: "5px",
+                                    width: "20%",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                    textAlign: "center"
+                                }}>
+                                Volunteer
+                            </Typography>
+                            <Typography
+                                onClick={() => handleSelectRole("receiver")}
+                                sx={{
+                                    border: "1px solid #fb8500",
+                                    // bgcolor: "#fb8500",
+                                    transition: "background-color 0.4s ease, color 0.4s ease",
+                                    '&:hover': {
+                                        bgcolor: "#fb8500",
+                                        color: "white",
+                                        transform: 'scale(1.05)',
+                                        // transition: 'transform 0.5s ease-in-out',
+                                    },
+                                    color: "black",
+                                    p: "5px",
+                                    width: "20%",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                    textAlign: "center"
+                                }}>
+                                Receiver
+                            </Typography>
+                            <Typography
+                                onClick={() => handleSelectRole("donor")}
+                                sx={{
+                                    border: "1px solid #fb8500",
+                                    // bgcolor: "#fb8500",
+                                    transition: "background-color 0.4s ease, color 0.4s ease",
+                                    '&:hover': {
+                                        bgcolor: "#fb8500",
+                                        color: "white",
+                                        transform: 'scale(1.05)',
+                                        // transition: 'transform 0.5s ease-in-out',
+                                    },
+                                    color: "black",
+                                    p: "5px",
+                                    width: "20%",
+                                    borderRadius: "5px",
+                                    cursor: "pointer",
+                                    textAlign: "center"
+                                }}>
+                                Donor
+                            </Typography>
+                        </Box>
+                        <TextField value={emailValue} {...register("email", { required: true })} id="outlined-basic" label="Email" variant="outlined" />
+                        <TextField value={passwordValue} {...register("password", { required: true })} id="outlined-basic" type='password' label="Password" variant="outlined" />
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <Box sx={{ display: "flex", alignItems: "center" }} >
                                 <Checkbox />
