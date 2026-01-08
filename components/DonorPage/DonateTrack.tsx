@@ -1,27 +1,33 @@
 "use client"
 
-import { Box, Button, Container, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { useState } from "react";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Box,  Container, Paper,  Typography } from "@mui/material";
 import { useDonateTrackQuery } from "@/state/services/donorService/donorService";
 import { useSession } from "next-auth/react";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Link from "next/link";
 
 const columns: GridColDef[] = [
     {
         field: 'image',
         headerName: 'Image',
         width: 70,
-        renderCell: (params) => (
-            <img
-                src={params.value}
-                alt="Campaign"
-                style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-            />
-        ),
+        renderCell: (params) => {
+            console.log("checking params value", params)
+            return (
+                <>
+                    <Link href={`/campaigns/${params.id}`}>
+                        <img
+                            src={params.value}
+                            alt="Campaign"
+                            style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+                        />
+                    </Link>
+
+                </>
+            )
+        }
     },
     { field: 'campaign_name', headerName: 'Campaign Name', width: 250 },
     { field: 'category', headerName: 'Category', width: 130 },
@@ -165,7 +171,7 @@ const DonateTrack = () => {
     const donateData = donateTrack?.data
     // Data Grid Rows
     const rows = donateData?.map((data: any, index: number) => ({
-        id: index + 1,
+        id: data._id,
         image: data.image,
         campaign_name: data.title,
         category: data.category,
