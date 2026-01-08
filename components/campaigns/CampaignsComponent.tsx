@@ -37,7 +37,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                         <>
                             {
                                 [...Array(loadingCard)].map((_, index) => (
-                                    <Card sx={{ border: "1px solid #bbbb" }}>
+                                    <Card key={index} sx={{ border: "1px solid #bbbb" }}>
                                         <Skeleton variant="rectangular" sx={{
                                             width: "100%",
                                             height: "200px"
@@ -209,9 +209,24 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                     </Box>
                 )
             }
+            {
+                totalCampaign?.data?.data.length < 1 && (
+                    <Box sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "400px"
+                    }}>
+                        <Box>
+                            <Typography sx={{ fontSize: "30px" }}>Data not found.</Typography>
+                            <img className="w-60" src="/Campaign/no_data.png" alt="" />
+                        </Box>
+                    </Box>
+                )
+            }
             {/* Pagination */}
             {
-                totalCampaign?.data?.data && (
+                totalCampaign?.data?.data && totalCampaign?.data?.data.length > 0 && (
                     <Box sx={{
                         my: 5,
                         display: "flex",
@@ -223,6 +238,25 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                             onChange={(e, value) => setPage(value)}
                             variant="outlined"
                             shape="rounded"
+                            size="large"
+                            sx={{
+                                '& .MuiPaginationItem-root': {
+                                    // backgroundColor: '#e0e0e0',
+                                    color: '#333',
+                                    border: "1px solid #fb8500",
+                                    '&:hover': {
+                                        backgroundColor: '#C2833C',
+                                        color: '#333'
+                                    },
+                                },
+                                '& .Mui-selected': {
+                                    backgroundColor: '#fb8500 !important',
+                                    color: '#fff',
+                                    '&:hover': {
+                                        backgroundColor: '#a37b27 !important',
+                                    },
+                                },
+                            }}
 
                         />
                     </Box>
