@@ -54,22 +54,24 @@ const Sidebar = ({ isToggle, handleToggleDrawer }: sidebarProps) => {
                     }
                 </Stack>
             </Box>
-            <Box sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                p: 1,
-                borderRadius: 1,
-                cursor: "pointer",
-                transition: "0.3s",
-                "&:hover": {
-                    bgcolor: "#C4DDD9",
-                },
-                border: "1px solid #C4DDD9"
-            }}>
-                <HomeIcon />
-                <Typography>Home</Typography>
-            </Box>
+            <Link href={"/"}>
+                <Box sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    p: 1,
+                    borderRadius: 1,
+                    cursor: "pointer",
+                    transition: "0.3s",
+                    "&:hover": {
+                        bgcolor: "#C4DDD9",
+                    },
+                    border: "1px solid #C4DDD9"
+                }}>
+                    <HomeIcon />
+                    <Typography>Home</Typography>
+                </Box>
+            </Link>
         </Stack>
     );
 
