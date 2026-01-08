@@ -55,7 +55,7 @@ const CampaignDetails = () => {
                                 {
                                     detailsData?.image?.map((image: string) => (
                                         <SwiperSlide>
-                                            <img className="w-full h-[250px] lg:h-[450px] rounded-2xl" src={image} alt="" />
+                                            <img className="w-full h-62.5 lg:h-112.5 rounded-2xl" src={image} alt="" />
                                         </SwiperSlide>
                                     ))
                                 }

@@ -2,6 +2,7 @@
 import { useBikashPaymentMutation, useJoinCampaignMutation, useSslCommerzPaymentMutation } from '@/state/services/donorService/donorService';
 import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -274,7 +275,13 @@ const CampaignDetailsDonate = () => {
                         </Box>
                     </Box>
                     <Box sx={{ width: "90%" }}>
-                        <img className='w-full rounded-xl' src="https://i.ibb.co.com/qLgmpgCn/donate.jpg" alt="" />
+                        <Image
+                            className='w-full rounded-xl h-105'
+                            src="/Campaign/donate.jpg"
+                            width={500}
+                            height={300}
+                            alt=""
+                        />
                     </Box>
                 </Box>
             </form>
