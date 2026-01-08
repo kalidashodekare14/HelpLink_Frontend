@@ -178,42 +178,47 @@ const ProfileComponent = () => {
                                         < AccountCircleIcon sx={{ fontSize: "132px", borderRadius: "100%" }} />
                                     )
                                 }
-                                {
-                                    imageLoading ? (
-                                        <Box
-                                            sx={{
-                                                position: "absolute",
-                                                right: "15px",
-                                                bottom: "15px",
-                                                bgcolor: "white",
-                                                fontSize: "35px",
-                                                p: "5px",
-                                                borderRadius: "100%",
-                                            }}
-                                        >
-                                            <CircularProgress
-                                                size="30px"
-                                                color="success"
-                                            />
-                                        </Box>
 
-                                    ) : (
-                                        <Box
-                                            onClick={() => (document.querySelector('input[type="file"]') as HTMLInputElement)?.click()}
-                                        >
-                                            <CameraAltIcon sx={{
-                                                position: "absolute",
-                                                right: "15px",
-                                                bottom: "15px",
-                                                bgcolor: "white",
-                                                fontSize: "35px",
-                                                p: "5px",
-                                                borderRadius: "100%",
-                                                cursor: "pointer"
-                                            }} />
-                                            <input hidden onChange={(event) => handleImageUpload(event)} type="file" />
-                                        </Box>
+
+                                {
+                                    infoToggle && (
+                                        imageLoading ? (
+                                            <Box
+                                                sx={{
+                                                    position: "absolute",
+                                                    right: "15px",
+                                                    bottom: "15px",
+                                                    bgcolor: "white",
+                                                    fontSize: "2px",
+                                                    p: "5px",
+                                                    borderRadius: "100%",
+                                                }}
+                                            >
+                                                <CircularProgress
+                                                    size="30px"
+                                                    color="success"
+                                                />
+                                            </Box>
+
+                                        ) : (
+                                            <Box
+                                                onClick={() => (document.querySelector('input[type="file"]') as HTMLInputElement)?.click()}
+                                            >
+                                                <CameraAltIcon sx={{
+                                                    position: "absolute",
+                                                    right: "15px",
+                                                    bottom: "15px",
+                                                    bgcolor: "white",
+                                                    fontSize: "35px",
+                                                    p: "5px",
+                                                    borderRadius: "100%",
+                                                    cursor: "pointer"
+                                                }} />
+                                                <input hidden onChange={(event) => handleImageUpload(event)} type="file" />
+                                            </Box>
+                                        )
                                     )
+
                                 }
 
                             </Box>
@@ -256,7 +261,7 @@ const ProfileComponent = () => {
                                     gap: "20px",
                                 }}>
                                     <TextField
-                                        {...register("name", { required: true })}
+                                        {...register("name",)}
                                         fullWidth
                                         defaultValue={profileData.name || ""}
                                         error={!!errors?.name}
@@ -268,7 +273,7 @@ const ProfileComponent = () => {
                                     <FormControl error={!!errors?.gender} size="small" fullWidth>
                                         <InputLabel id="demo-simple-select-label">Male</InputLabel>
                                         <Select
-                                            {...register("gender", { required: true })}
+                                            {...register("gender",)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             defaultValue={profileData?.gender}
@@ -287,7 +292,7 @@ const ProfileComponent = () => {
                                     <FormControl error={!!errors?.division} size="small" fullWidth>
                                         <InputLabel id="demo-simple-select-label">Division</InputLabel>
                                         <Select
-                                            {...register("division", { required: true })}
+                                            {...register("division",)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             defaultValue={profileData?.location?.division}
@@ -308,7 +313,7 @@ const ProfileComponent = () => {
                                     <FormControl error={!!errors?.division} size="small" fullWidth disabled={!division}>
                                         <InputLabel id="demo-simple-select-label">District</InputLabel>
                                         <Select
-                                            {...register("district", { required: true })}
+                                            {...register("district",)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             defaultValue={profileData?.location?.district}
@@ -329,7 +334,7 @@ const ProfileComponent = () => {
                                     <FormControl error={!!errors?.upazila} size="small" fullWidth disabled={!district}>
                                         <InputLabel id="demo-simple-select-label">Upazila</InputLabel>
                                         <Select
-                                            {...register("upazila", { required: true })}
+                                            {...register("upazila",)}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             defaultValue={profileData?.location?.upazila}
@@ -348,7 +353,7 @@ const ProfileComponent = () => {
                                         {errors.upazila && <FormHelperText>Upazila is Required</FormHelperText>}
                                     </FormControl>
                                     <TextField
-                                        {...register("address", { required: true })}
+                                        {...register("address",)}
                                         error={!!errors?.address}
                                         helperText={errors?.address && "Address is required"}
                                         defaultValue={profileData?.location?.address || ""}
