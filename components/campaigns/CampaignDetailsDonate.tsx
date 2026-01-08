@@ -82,27 +82,29 @@ const CampaignDetailsDonate = () => {
         formState: { errors },
     } = useForm<Inputs>()
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        // Payment method filed validation
+        if (isPaymentMethod.length < 1) {
+            setPaymentError(true);
+            return
+        } else {
+            setPaymentError(false);
+        }
+        // Form Information
+        const donorData = {
+            campaign_id: id,
+            donor_name: data.name,
+            phone_number: Number(data.phone_number),
+            donor_email: data.email,
+            message: data.message,
+            amount: data.amount,
+            payment_status: "Pending",
+            payment_method: isPaymentMethod || ""
+        }
         try {
-            // Payment method filed validation
-            if (isPaymentMethod.length < 1) {
-                setPaymentError(true);
-            } else {
-                setPaymentError(false);
-            }
-            // Form Information
-            const donorData = {
-                campaign_id: id,
-                donor_name: data.name,
-                phone_number: Number(data.phone_number),
-                donor_email: data.email,
-                message: data.message,
-                amount: data.amount,
-                payment_status: "Pending",
-                payment_method: isPaymentMethod || ""
-            }
             setPaymentLoading(true);
             // Bikash Payment System
             if (bikash) {
+
                 const res = await bikashPayment(donorData).unwrap();
                 if ("data" in res) {
                     console.log('checking data', res);
@@ -111,6 +113,7 @@ const CampaignDetailsDonate = () => {
                     }
 
                 }
+                return
             }
             // SSLCommerz Payment System
             if (sslCommerz) {
@@ -121,11 +124,11 @@ const CampaignDetailsDonate = () => {
                         window.location.href = res.data.GatewayPageURL
                     }
                 }
+                return
             }
 
         } catch (error) {
             console.log('Payment Error', error);
-        } finally {
             setPaymentLoading(false);
         }
 
