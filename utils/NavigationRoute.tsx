@@ -3,7 +3,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 export const AdminRoutes = [
     {
         id: 1,
@@ -22,6 +22,12 @@ export const AdminRoutes = [
         name: "Manage Campaign",
         path: "/admin_dashboard/manage_campaign",
         icon: CampaignIcon
+    },
+    {
+        id: 3,
+        name: "Manage Donation",
+        path: "/admin_dashboard/manage_donation",
+        icon: CurrencyExchangeIcon
     },
 ]
 export const VolunteerRoutes = [

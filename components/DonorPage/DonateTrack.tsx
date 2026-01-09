@@ -123,17 +123,9 @@ const columns: GridColDef[] = [
                                     )
                                 }
                             </>
-                            // <Typography key={index}>{value}</Typography>
                         ))
                     ) : (
-                        // <>
-                        //     {
-                        //         params.value === "SSLCommerz" && (
-                        //             <Typography sx={{bgcolor: "#2859A6", color: "white"}}>{params.value}</Typography>
-                        //         )
-                        //     }
-
-                        // </>
+                        
                         <span>{params.value}</span>
                     )}
                 </Box>

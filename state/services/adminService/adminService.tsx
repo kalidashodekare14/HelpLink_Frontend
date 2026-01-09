@@ -65,7 +65,18 @@ export const adminService = baseApi.injectEndpoints({
                 body: { delivery_status }
             }),
             invalidatesTags: ["admin"]
-        })
+        }),
+
+        // Donation Management
+        totalDonationManage: builder.query<any, { search: string, payment_status: string, payment_method: string }>({
+            query: (params) => ({
+                url: "/api/v1/admin/total_donation",
+                method: "GET",
+                params
+            }),
+            providesTags: ["admin"]
+        }),
+
     })
 })
 
@@ -77,5 +88,6 @@ export const {
     useUserStatusManageMutation,
     useTotalCamgaignManageQuery,
     useCampaignRequestStatusManageMutation,
-    useCampaignDeliveryStatusManageMutation
+    useCampaignDeliveryStatusManageMutation,
+    useTotalDonationManageQuery
 } = adminService;
