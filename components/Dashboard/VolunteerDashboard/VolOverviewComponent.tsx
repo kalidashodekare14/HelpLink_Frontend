@@ -1,13 +1,13 @@
 "use client"
 
 import { useVolOverviewManageQuery } from "@/state/services/volunteerService/volunteerService";
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import CampaignIcon from '@mui/icons-material/Campaign';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 
 const VolOverviewComponent = () => {
 
-    const { data: overviewInfo, isLoading, error } = useVolOverviewManageQuery();
+    const { data: overviewInfo, isLoading: overviewDataLoading, error } = useVolOverviewManageQuery();
     const overviewData = overviewInfo?.data
 
     return (
@@ -30,7 +30,13 @@ const VolOverviewComponent = () => {
                         <CampaignIcon sx={{ fontSize: "20px" }} />
                         <Typography sx={{ fontSize: "15px" }}>Total Campaign</Typography>
                     </Box>
-                    <Typography sx={{ fontSize: "25px" }}>{overviewData?.totalCampaign | 0}</Typography>
+                    {
+                        overviewDataLoading ? (
+                            <Skeleton variant="rectangular" width={150} height={30} />
+                        ) : (
+                            <Typography sx={{ fontSize: "25px" }}>{overviewData?.totalCampaign | 0}</Typography>
+                        )
+                    }
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", p: "10px", borderRadius: "10px", border: "1px solid #bbbb" }}>
                     <Box sx={{
@@ -43,10 +49,16 @@ const VolOverviewComponent = () => {
                         <VolunteerActivismIcon sx={{ fontSize: "20px" }} />
                         <Typography sx={{ fontSize: "15px" }}>Total Donate</Typography>
                     </Box>
-                    <Typography sx={{ fontSize: "25px" }}>${overviewData?.totalAmount | 0}</Typography>
+                    {
+                        overviewDataLoading ? (
+                            <Skeleton variant="rectangular" width={150} height={30} />
+                        ) : (
+                            <Typography sx={{ fontSize: "25px" }}>${overviewData?.totalAmount | 0}</Typography>
+                        )
+                    }
                 </Box>
             </Box>
-        </Box>
+        </Box >
     );
 };
 
