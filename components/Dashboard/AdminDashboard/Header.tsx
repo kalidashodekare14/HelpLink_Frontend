@@ -16,9 +16,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
 
     const { data: session } = useSession();
     // user backend data
-    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery(undefined, {
-        skip: status !== "authenticated"
-    });
+    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery();
     const userInfo = roleData?.data
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

@@ -5,6 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { useUserRoleQuery } from "@/state/services/userRole/userRole";
 
 type THeader = {
     handleToggleDrawer: (newOpen: boolean) => () => void
@@ -13,7 +14,9 @@ type THeader = {
 const Header = ({ handleToggleDrawer }: THeader) => {
 
     const { data: session } = useSession();
-
+    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery();
+    const userInfo = roleData?.data
+    
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,8 +58,9 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
                         sx={{ cursor: 'pointer' }}
                     >
+
                         {session?.user?.image ? (
-                            <img src={session?.user?.image} alt='' />
+                            <img src={userInfo.image} alt='' />
                         ) : (
                             <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
                         )
