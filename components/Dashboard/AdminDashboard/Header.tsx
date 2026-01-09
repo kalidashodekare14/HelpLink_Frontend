@@ -7,7 +7,7 @@ import { useState } from "react";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { toggleSidebar } from "@/utils/ResponsiveToggle";
 import { useUserRoleQuery } from "@/state/services/userRole/userRole";
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
 type THeader = {
     handleToggleDrawer: (newOpen: boolean) => () => void
 }
@@ -18,7 +18,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
     // user backend data
     const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery();
     const userInfo = roleData?.data
-
+    // Avatar
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,6 +28,16 @@ const Header = ({ handleToggleDrawer }: THeader) => {
         setAnchorEl(null);
     };
 
+    // Notification 
+    const [notificationEl, setNotificationEl] = useState<null | HTMLElement>(null);
+    const openNotification = Boolean(notificationEl);
+    const handleNotiClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setNotificationEl(event.currentTarget);
+    };
+    const handleNotiClose = () => {
+        setNotificationEl(null);
+    };
+    // Logout
     const handleLogout = () => {
         handleClose();
         signOut()
@@ -49,9 +59,31 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                 alignItems: "center",
                 gap: "15px"
             }}>
-                <Badge sx={{ cursor: "pointer" }} badgeContent={4} color="primary">
+                <Badge onClick={handleNotiClick} sx={{ cursor: "pointer" }} badgeContent={4} color="primary">
                     <NotificationsNoneIcon color="action" />
                 </Badge>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={notificationEl}
+                    open={openNotification}
+                    onClose={handleNotiClose}
+                    PaperProps={{
+                        sx: {
+                            width: 200,      // or "50vw"
+                            height: 250,  // or "60vh"
+                        },
+                    }}
+                    slotProps={{
+                        list: {
+                            'aria-labelledby': 'basic-button',
+                        },
+                    }}
+                >
+                    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: 150 }}>
+                        <NotificationsIcon />
+                        <Typography>No notification</Typography>
+                    </Box>
+                </Menu>
                 <Box>
                     <Avatar
                         id="basic-button"
