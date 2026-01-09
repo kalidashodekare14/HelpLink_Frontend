@@ -243,7 +243,7 @@ const ManageDonation = () => {
                         noResultsOverlay: CustomNoResultsOverlay,
                     }}
                     localeText={{
-                        noRowsLabel: "No Campaigns Found",
+                        noRowsLabel: "No Donatation Found",
                     }}
                     initialState={{ pagination: { paginationModel } }}
                     pageSizeOptions={[5, 10]}

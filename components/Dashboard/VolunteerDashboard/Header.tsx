@@ -74,7 +74,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         }}
                     >
                         <MenuItem sx={{ fontSize: "15px" }}>Profile</MenuItem>
-                        <MenuItem sx={{ fontSize: "15px" }}>Logout</MenuItem>
+                        <MenuItem onClick={handleLogout} sx={{ fontSize: "15px" }}>Logout</MenuItem>
                     </Menu>
                 </Box>
             </Box>
