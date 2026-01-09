@@ -21,12 +21,6 @@ const xLabels = [
     'Page G',
 ];
 
-const data = [
-    { label: 'Group A', value: 400, color: '#0088FE' },
-    { label: 'Group B', value: 300, color: '#00C49F' },
-    { label: 'Group C', value: 300, color: '#FFBB28' },
-    { label: 'Group D', value: 200, color: '#FF8042' },
-];
 
 const sizing = {
     margin: { right: 5 },
@@ -34,18 +28,25 @@ const sizing = {
     height: 200,
     hideLegend: true,
 };
-const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
 
-const getArcLabel = (params: DefaultizedPieValueType) => {
-    const percent = params.value / TOTAL;
-    return `${(percent * 100).toFixed(0)}%`;
-};
 
 const OverviewComponent = () => {
 
     const { data: overviewInfo, isLoading, error } = useOverviewManageQuery();
     const overviewData = overviewInfo?.data
+    console.log("checking datas", overviewData);
+    const data = [
+        { label: 'Users', value: overviewData?.totalUser, color: '#0088FE' },
+        { label: 'Campaigns', value: overviewData?.totalCampaign, color: '#00C49F' },
+        { label: 'Donates', value: overviewData?.totalAmount, color: '#FFBB28' },
+    ];
 
+    const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
+
+    const getArcLabel = (params: DefaultizedPieValueType) => {
+        const percent = params.value / TOTAL;
+        return `${(percent * 100).toFixed(0)}%`;
+    };
 
     return (
         <Box sx={{ mx: "10px", my: "10px" }}>

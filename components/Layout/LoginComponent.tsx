@@ -193,8 +193,8 @@ const LoginComponent = () => {
                                 Donor
                             </Typography>
                         </Box>
-                        <TextField value={emailValue} {...register("email", { required: true })} id="outlined-basic" label="Email" variant="outlined" />
-                        <TextField value={passwordValue} {...register("password", { required: true })} id="outlined-basic" type='password' label="Password" variant="outlined" />
+                        <TextField defaultValue={emailValue} {...register("email", { required: true })} id="outlined-basic" label="Email" variant="outlined" />
+                        <TextField defaultValue={passwordValue} {...register("password", { required: true })} id="outlined-basic" type='password' label="Password" variant="outlined" />
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <Box sx={{ display: "flex", alignItems: "center" }} >
                                 <Checkbox />

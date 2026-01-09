@@ -189,10 +189,10 @@ const Navbar = () => {
                                                 userInfo?.role === "receiver" && (
                                                     <>
                                                         <Link href={"/help_request"}>
-                                                            <MenuItem>Help Request</MenuItem>
+                                                            <MenuItem onClick={handleClose}>Help Request</MenuItem>
                                                         </Link>
                                                         <Link href={"/request_track"}>
-                                                            <MenuItem>Request Track</MenuItem>
+                                                            <MenuItem onClick={handleClose}>Request Track</MenuItem>
                                                         </Link>
                                                     </>
                                                 )
@@ -206,7 +206,7 @@ const Navbar = () => {
                                                 userInfo?.role === "donor" && (
                                                     <>
                                                         <Link href={"/donate_track"}>
-                                                            <MenuItem>Donate Track</MenuItem>
+                                                            <MenuItem onClick={handleClose}>Donate Track</MenuItem>
                                                         </Link>
                                                     </>
                                                 )
@@ -220,7 +220,7 @@ const Navbar = () => {
                                                 userInfo?.role === "admin" && (
                                                     <>
                                                         <Link href={"/admin_dashboard"}>
-                                                            <MenuItem>Dashboard</MenuItem>
+                                                            <MenuItem onClick={handleClose}>Dashboard</MenuItem>
                                                         </Link>
                                                     </>
                                                 )
@@ -234,7 +234,7 @@ const Navbar = () => {
                                                 userInfo?.role === "volunteer" && (
                                                     <>
                                                         <Link href={"/volunteer_dashboard"}>
-                                                            <MenuItem>Dashboard</MenuItem>
+                                                            <MenuItem onClick={handleClose}>Dashboard</MenuItem>
                                                         </Link>
                                                     </>
                                                 )

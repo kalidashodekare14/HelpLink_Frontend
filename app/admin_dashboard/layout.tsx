@@ -26,7 +26,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 <Header handleToggleDrawer={handleToggleDrawer} />
                 {children}
             </Box>
-        </Box >
+        </Box>
     );
 };
 

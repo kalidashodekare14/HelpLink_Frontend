@@ -96,7 +96,7 @@ const CampaignDetailsDonate = () => {
             phone_number: Number(data.phone_number),
             donor_email: data.email,
             message: data.message,
-            amount: data.amount,
+            amount: Number(data.amount),
             payment_status: "Pending",
             payment_method: isPaymentMethod || ""
         }
