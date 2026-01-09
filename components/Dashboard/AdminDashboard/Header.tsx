@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { toggleSidebar } from "@/utils/ResponsiveToggle";
+import { useUserRoleQuery } from "@/state/services/userRole/userRole";
 
 type THeader = {
     handleToggleDrawer: (newOpen: boolean) => () => void
@@ -14,6 +15,11 @@ type THeader = {
 const Header = ({ handleToggleDrawer }: THeader) => {
 
     const { data: session } = useSession();
+    // user backend data
+    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery(undefined, {
+        skip: status !== "authenticated"
+    });
+    const userInfo = roleData?.data
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -25,6 +31,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
     };
 
     const handleLogout = () => {
+        handleClose();
         signOut()
     }
 
@@ -57,7 +64,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         sx={{ cursor: 'pointer' }}
                     >
                         {session?.user?.image ? (
-                            <img src={session?.user?.image} alt='' />
+                            <img src={userInfo.image} alt='' />
                         ) : (
                             <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
                         )
@@ -74,8 +81,8 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                             },
                         }}
                     >
-                        <MenuItem sx={{ fontSize: "15px" }}>Profile</MenuItem>
-                        <MenuItem sx={{ fontSize: "15px" }}>Logout</MenuItem>
+                        <MenuItem onClick={handleClose} sx={{ fontSize: "15px" }}>Profile</MenuItem>
+                        <MenuItem onClick={handleLogout} sx={{ fontSize: "15px" }}>Logout</MenuItem>
                     </Menu>
                 </Box>
             </Box>

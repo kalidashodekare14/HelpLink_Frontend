@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
@@ -32,7 +32,7 @@ const sizing = {
 
 const OverviewComponent = () => {
 
-    const { data: overviewInfo, isLoading, error } = useOverviewManageQuery();
+    const { data: overviewInfo, isLoading: overviewDataLoading, error } = useOverviewManageQuery();
     const overviewData = overviewInfo?.data
     console.log("checking datas", overviewData);
     const data = [
@@ -68,7 +68,13 @@ const OverviewComponent = () => {
                         <PeopleAltIcon sx={{ fontSize: "20px" }} />
                         <Typography sx={{ fontSize: "15px" }}>Total Users</Typography>
                     </Box>
-                    <Typography sx={{ fontSize: "25px" }}>{overviewData?.totalUser | 0}</Typography>
+                    {
+                        overviewDataLoading ? (
+                            <Skeleton variant="rectangular" width={150} height={30} />
+                        ) : (
+                            <Typography sx={{ fontSize: "25px" }}>{overviewData?.totalUser | 0}</Typography>
+                        )
+                    }
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", p: "10px", borderRadius: "10px", border: "1px solid #bbbb" }}>
                     <Box sx={{
@@ -81,7 +87,13 @@ const OverviewComponent = () => {
                         <CampaignIcon sx={{ fontSize: "20px" }} />
                         <Typography sx={{ fontSize: "15px" }}>Total Campaign</Typography>
                     </Box>
-                    <Typography sx={{ fontSize: "25px" }}>{overviewData?.totalCampaign | 0}</Typography>
+                    {
+                        overviewDataLoading ? (
+                            <Skeleton variant="rectangular" width={150} height={30} />
+                        ) : (
+                            <Typography sx={{ fontSize: "25px" }}>{overviewData?.totalCampaign | 0}</Typography>
+                        )
+                    }
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "10px", p: "10px", borderRadius: "10px", border: "1px solid #bbbb" }}>
                     <Box sx={{
@@ -94,7 +106,13 @@ const OverviewComponent = () => {
                         <VolunteerActivismIcon sx={{ fontSize: "20px" }} />
                         <Typography sx={{ fontSize: "15px" }}>Total Donate</Typography>
                     </Box>
-                    <Typography sx={{ fontSize: "25px" }}>${overviewData?.totalAmount | 0}</Typography>
+                    {
+                        overviewDataLoading ? (
+                            <Skeleton variant="rectangular" width={150} height={30} />
+                        ) : (
+                            <Typography sx={{ fontSize: "25px" }}>৳{overviewData?.totalAmount | 0}</Typography>
+                        )
+                    }
                 </Box>
             </Box>
             <Box
@@ -117,24 +135,38 @@ const OverviewComponent = () => {
                         yAxis={[{ width: 50 }]}
                     />
                 </Box>
-                <Box>
-                    <PieChart
-                        series={[
-                            {
-                                outerRadius: 100,
-                                data,
-                                arcLabel: getArcLabel,
-                            },
-                        ]}
-                        sx={{
-                            [`& .${pieArcLabelClasses.root}`]: {
-                                fill: 'white',
-                                fontSize: 14,
-                            },
-                        }}
-                        {...sizing}
-                    />
-                </Box>
+                {
+                    overviewDataLoading ? (
+                        <Skeleton
+                            variant="rectangular"
+                            width={300}
+                            height={235}
+                            sx={{
+                                borderRadius: "50%"
+                            }}
+                        />
+                    ) : (
+                        <Box>
+                            <PieChart
+                                series={[
+                                    {
+                                        outerRadius: 100,
+                                        data,
+                                        arcLabel: getArcLabel,
+                                    },
+                                ]}
+                                sx={{
+                                    [`& .${pieArcLabelClasses.root}`]: {
+                                        fill: 'white',
+                                        fontSize: 14,
+                                    },
+                                }}
+                                {...sizing}
+                            />
+                        </Box>
+                    )
+                }
+
             </Box>
         </Box>
     );
