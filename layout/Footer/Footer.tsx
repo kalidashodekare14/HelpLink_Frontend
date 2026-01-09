@@ -15,7 +15,11 @@ import { usePathname } from 'next/navigation';
 
 const Footer = () => {
     const pathname = usePathname();
-    const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
+    const isDashboardRoute = pathname.startsWith('/admin_dashboard')
+        || pathname.startsWith("/volunteer_dashboar")
+        || pathname.startsWith("/access_denied")
+        || pathname.startsWith("/signup")
+        || pathname.startsWith("/signin")
 
     return (
         <Box className={"footer_image"} sx={{

@@ -18,7 +18,11 @@ const Navbar = () => {
     // Pathname hook
     const pathname = usePathname();
     // dashboard route track
-    const isDashboardRoute = pathname.startsWith('/admin_dashboard') || pathname.startsWith("/volunteer_dashboar") || pathname.startsWith("/access_denied")
+    const isDashboardRoute = pathname.startsWith('/admin_dashboard')
+        || pathname.startsWith("/volunteer_dashboar")
+        || pathname.startsWith("/access_denied")
+        || pathname.startsWith("/signup")
+        || pathname.startsWith("/signin")
     // Session Data
     const { data: session, status } = useSession();
     // user backend data

@@ -72,7 +72,7 @@ const RegisterComponent = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "600px"
+                my: "20px"
             }}
         >
             <Box
@@ -92,9 +92,32 @@ const RegisterComponent = () => {
                             gap: "10px"
                         }}
                     >
-                        <TextField {...register("name", { required: true })} id="outlined-basic" label="Name" variant="outlined" />
-                        <TextField {...register("email", { required: true })} id="outlined-basic" type='email' label="Email" variant="outlined" />
-                        <TextField {...register("password", { required: true })} id="outlined-basic" type='password' label="Password" variant="outlined" />
+                        <TextField
+                            {...register("name", { required: true })}
+                            error={!!errors.name}
+                            helperText={errors.name ? "Name is required" : ""}
+                            id="outlined-basic"
+                            label="Name"
+                            variant="outlined"
+                        />
+                        <TextField
+                            {...register("email",
+                                { required: true })}
+                            error={!!errors.email}
+                            helperText={errors.email ? "Email is required" : ""}
+                            id="outlined-basic"
+                            type='email'
+                            label="Email"
+                            variant="outlined" />
+                        <TextField
+                            {...register("password",
+                                { required: true })}
+                            error={!!errors.password}
+                            helperText={errors.password ? "Password is required" : ""}
+                            id="outlined-basic"
+                            type='password'
+                            label="Password"
+                            variant="outlined" />
                         <Box>
                             <Typography>Who are you?</Typography>
                             <Box sx={{ display: "flex", justifyContent: "", alignItems: "center" }}>

@@ -193,8 +193,27 @@ const LoginComponent = () => {
                                 Donor
                             </Typography>
                         </Box>
-                        <TextField defaultValue={emailValue} {...register("email", { required: true })} id="outlined-basic" label="Email" variant="outlined" />
-                        <TextField defaultValue={passwordValue} {...register("password", { required: true })} id="outlined-basic" type='password' label="Password" variant="outlined" />
+                        <TextField
+                            defaultValue={emailValue}
+                            {...register("email", { required: true })}
+                            error={!!errors.email}
+                            helperText={errors.email ? "Email is required" : ""}
+
+                            InputLabelProps={{ shrink: true }}
+                            id="outlined-basic"
+                            label="Email"
+                            variant="outlined" />
+                        <TextField
+                            defaultValue={passwordValue}
+                            {...register("password",
+                                { required: true })}
+                            error={!!errors.password}
+                            helperText={errors.password ? "Password is required" : ""}
+                            InputLabelProps={{ shrink: true }}
+                            id="outlined-basic"
+                            type='password'
+                            label="Password"
+                            variant="outlined" />
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <Box sx={{ display: "flex", alignItems: "center" }} >
                                 <Checkbox />
@@ -233,35 +252,6 @@ const LoginComponent = () => {
                         <Typography sx={{ my: "5px" }}>Don't have an account? <Link href={"/signup"}>Sign Up Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
                         <SocialLogin />
-                        {/* <Typography sx={{ textAlign: "center" }}>Or Continue With Account</Typography>
-                        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}>
-                            <Box sx={{
-                                border: "1px solid #bbbb",
-                                p: "10px",
-                                borderRadius: "100%",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
-                                <GoogleIcon
-                                    // onClick={() =>handle}
-                                    sx={{
-                                        color: "#4285F4",
-                                        cursor: "pointer"
-                                    }}
-                                />
-                            </Box>
-                            <Box sx={{
-                                border: "1px solid #bbbb",
-                                p: "10px",
-                                borderRadius: "100%",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
-                                <FacebookIcon />
-                            </Box>
-                        </Box> */}
                     </Box>
                 </form>
             </Box>
