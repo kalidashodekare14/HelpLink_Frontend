@@ -22,7 +22,7 @@ const LoginComponent = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [emailValue, setEmailValue] = useState<string>("");
     const [passwordValue, setPasswordValue] = useState<string>("");
-    const [selecteRole, setSelectRole] = useState<string>("");
+    const [errorHandle, setErrorHandle] = useState<boolean>(false);
 
     const handleSelectRole = (role: string) => {
         if (role === "admin") {
@@ -46,6 +46,7 @@ const LoginComponent = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<Inputs>()
 
@@ -59,12 +60,15 @@ const LoginComponent = () => {
             setLoading(true);
             const res = await signIn('credentials', loginData)
             if (res?.status === 200) {
+                reset()
                 toast.success('Login Successfully 🎉');
                 router.push("/")
             }
             if (res?.ok === false || res?.status === 401) {
+                reset()
                 console.log("Sign In Error")
-                toast.error('Login Failed ❌');
+                toast.error('The email or password is incorrect. ❌');
+                setErrorHandle(true);
             }
         } catch (error) {
             console.log(error);
@@ -214,6 +218,15 @@ const LoginComponent = () => {
                             type='password'
                             label="Password"
                             variant="outlined" />
+                        {
+                            errorHandle && (
+                                <Typography sx={{
+                                    color: "#FF0000"
+                                }}>
+                                    The email or password is incorrect. ❌
+                                </Typography>
+                            )
+                        }
                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             <Box sx={{ display: "flex", alignItems: "center" }} >
                                 <Checkbox />
