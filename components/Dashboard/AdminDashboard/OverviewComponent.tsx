@@ -112,30 +112,41 @@ const OverviewComponent = () => {
                     my: "20px"
                 }}
             >
-                <Box sx={{ width: '100%', height: 500, }}>
-                    <ResponsiveContainer width="100%" height="80%">
-                        <AreaChart
+                {
+                    overviewDataLoading ? (
+                        <Skeleton
+                            variant="rectangular"
+                            width={"100%"}
+                            height={400}
+                        />
+                    ) : (
+                        <Box sx={{ width: '100%', height: 500, }}>
+                            <ResponsiveContainer width="100%" height="80%">
+                                <AreaChart
 
-                            responsive
-                            data={overviewData?.chartData}
-                            margin={{
-                                top: 20,
-                                right: 0,
-                                left: 0,
-                                bottom: 0,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis width="auto" />
-                            <Tooltip />
-                            <Area type="monotone" dataKey="users" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                            <Area type="monotone" dataKey="campaigns" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                            <Area type="monotone" dataKey="donations" stackId="1" stroke="#ffc658" fill="#ffc658" />
-                            {/* <RechartsDevtools /> */}
-                        </AreaChart>
-                    </ResponsiveContainer>
-                </Box>
+                                    responsive
+                                    data={overviewData?.chartData}
+                                    margin={{
+                                        top: 20,
+                                        right: 0,
+                                        left: 0,
+                                        bottom: 0,
+                                    }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis width="auto" />
+                                    <Tooltip />
+                                    <Area type="monotone" dataKey="users" stackId="1" stroke="#8884d8" fill="#8884d8" />
+                                    <Area type="monotone" dataKey="campaigns" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+                                    <Area type="monotone" dataKey="donations" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                                    {/* <RechartsDevtools /> */}
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </Box>
+                    )
+                }
+
                 {
                     overviewDataLoading ? (
                         <Skeleton
