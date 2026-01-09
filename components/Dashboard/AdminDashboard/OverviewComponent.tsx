@@ -4,23 +4,10 @@ import { Box, Skeleton, Typography } from "@mui/material";
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import { BarChart } from '@mui/x-charts/BarChart';
 import { DefaultizedPieValueType } from '@mui/x-charts/models';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 import { useOverviewManageQuery } from "@/state/services/adminService/adminService";
-
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-    'Page A',
-    'Page B',
-    'Page C',
-    'Page D',
-    'Page E',
-    'Page F',
-    'Page G',
-];
-
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 const sizing = {
     margin: { right: 5 },
@@ -125,15 +112,29 @@ const OverviewComponent = () => {
                     my: "20px"
                 }}
             >
-                <Box sx={{ width: '100%', height: 400 }}>
-                    <BarChart
-                        series={[
-                            { data: pData, label: 'pv', id: 'pvId' },
-                            { data: uData, label: 'uv', id: 'uvId' },
-                        ]}
-                        xAxis={[{ data: xLabels }]}
-                        yAxis={[{ width: 50 }]}
-                    />
+                <Box sx={{ width: '100%', height: 500, }}>
+                    <ResponsiveContainer width="100%" height="80%">
+                        <AreaChart
+
+                            responsive
+                            data={overviewData?.chartData}
+                            margin={{
+                                top: 20,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                            }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis width="auto" />
+                            <Tooltip />
+                            <Area type="monotone" dataKey="users" stackId="1" stroke="#8884d8" fill="#8884d8" />
+                            <Area type="monotone" dataKey="campaigns" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
+                            <Area type="monotone" dataKey="donations" stackId="1" stroke="#ffc658" fill="#ffc658" />
+                            {/* <RechartsDevtools /> */}
+                        </AreaChart>
+                    </ResponsiveContainer>
                 </Box>
                 {
                     overviewDataLoading ? (

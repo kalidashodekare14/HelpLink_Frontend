@@ -29,6 +29,7 @@
     "react-hot-toast": "^2.6.0",
     "react-leaflet": "^5.0.0-rc.2",
     "react-redux": "^9.2.0",
+    "recharts": "^3.6.0",
     "sweetalert2": "^11.26.3",
     "swiper": "^12.0.3"
   },
