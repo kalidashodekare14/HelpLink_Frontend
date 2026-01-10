@@ -1,5 +1,5 @@
 "use client"
-import { Avatar, Badge, Box, Menu, MenuItem, Typography } from "@mui/material";
+import { Avatar, Badge, Box, Menu, MenuItem, Skeleton, Typography } from "@mui/material";
 import HorizontalSplitRoundedIcon from '@mui/icons-material/HorizontalSplitRounded';
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -84,7 +84,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         <Typography>No notification</Typography>
                     </Box>
                 </Menu>
-                <Box>
+                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
                     <Avatar
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
@@ -114,6 +114,16 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         <MenuItem onClick={handleClose} sx={{ fontSize: "15px" }}>Profile</MenuItem>
                         <MenuItem onClick={handleLogout} sx={{ fontSize: "15px" }}>Logout</MenuItem>
                     </Menu>
+                    <Box>
+                        <Typography>Hello,</Typography>
+                        {
+                            userInfo?.name ? (
+                                <Typography sx={{ fontSize: "15px", color: "#6A6A6A" }}>{userInfo?.name}</Typography>
+                            ) : (
+                                <Skeleton variant="rectangular" width={140} height={20} />
+                            )
+                        }
+                    </Box>
                 </Box>
             </Box>
         </Box>
