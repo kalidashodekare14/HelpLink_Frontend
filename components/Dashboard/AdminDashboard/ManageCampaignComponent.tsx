@@ -376,7 +376,7 @@ const ManageCampaignComponent = () => {
     return (
         <Box sx={{ p: "20px" }}>
             <Typography fontSize={25}>User Campaign</Typography>
-            <Typography>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
+            <Typography sx={{color: "#6A6A6A"}}>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
             <Box sx={{
                 display: "flex",
                 flexDirection: { xs: "column", lg: "row" },

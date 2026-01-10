@@ -1,6 +1,6 @@
 "use client"
 
-import {useTotalDonationManageQuery } from "@/state/services/adminService/adminService";
+import { useTotalDonationManageQuery } from "@/state/services/adminService/adminService";
 import { Box, FormControl, InputLabel, MenuItem, Paper, Select, styled, TextField, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState } from "react";
@@ -84,17 +84,18 @@ const ManageDonation = () => {
         createdDate: donation?.createdAt,
         email: donation?.donor_email,
         phone_number: donation?.phone_number,
+        amount: donation?.amount,
         payment_status: donation?.payment_status,
         payment_method: donation?.payment_method
     }))
 
     const columns: GridColDef[] = [
-        { field: 'paymentID', headerName: 'P_ID', width: 160 },
-        { field: 'donor_name', headerName: 'Donor Name', width: 140 },
+        { field: 'paymentID', headerName: 'P_ID', width: 140 },
+        { field: 'donor_name', headerName: 'Donor Name', width: 130 },
         {
             field: 'email',
             headerName: 'Email',
-            width: 190,
+            width: 150,
             renderCell: (params) => (
                 <span>{params?.value}</span>
             )
@@ -105,6 +106,14 @@ const ManageDonation = () => {
             width: 130,
             renderCell: (params) => (
                 <span>{params?.value}</span>
+            )
+        },
+        {
+            field: 'amount',
+            headerName: 'Amount',
+            width: 100,
+            renderCell: (params) => (
+                <span>৳{params?.value}</span>
             )
         },
         {
@@ -186,8 +195,8 @@ const ManageDonation = () => {
 
     return (
         <Box sx={{ p: "20px" }}>
-            <Typography fontSize={25}>User Campaign</Typography>
-            <Typography>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
+            <Typography fontSize={25}>Total Donation</Typography>
+            <Typography sx={{color: "#6A6A6A"}}>Manage all donations in one place. Control access, and monitor activity across your platform.</Typography>
             <Box sx={{
                 display: "flex",
                 flexDirection: { xs: "column", lg: "row" },
