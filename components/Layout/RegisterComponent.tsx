@@ -77,7 +77,7 @@ const RegisterComponent = () => {
         >
             <Box
                 sx={{
-                    width: "40%",
+                    width: { xs: "100%", lg: "40%" },
                     border: "1px solid #bbbb",
                     p: "20px",
                     borderRadius: "5px"
@@ -157,7 +157,7 @@ const RegisterComponent = () => {
                                 {loading ? <CircularProgress size={30} color="inherit" /> : "Register"}
                             </Button>
                         </Box>
-                        <Typography sx={{ my: "5px" }}>Already have an account? <Link href={"/signin"}>Sign In Here</Link></Typography>
+                        <Typography sx={{ my: "5px" }}>Already have an account? <Link className='text-[#FB8500]' href={"/signin"}>Sign In Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
                         <SocialLogin />
                     </Box>

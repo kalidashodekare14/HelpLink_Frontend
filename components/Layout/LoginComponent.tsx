@@ -91,7 +91,7 @@ const LoginComponent = () => {
         >
             <Box
                 sx={{
-                    width: "40%",
+                    width: { xs: "100%", lg: "40%" },
                     border: "1px solid #bbbb",
                     p: "20px",
                     borderRadius: "5px"
@@ -126,7 +126,6 @@ const LoginComponent = () => {
                                     },
                                     color: "black",
                                     p: "5px",
-                                    width: "20%",
                                     borderRadius: "5px",
                                     cursor: "pointer",
                                     textAlign: "center"
@@ -147,7 +146,6 @@ const LoginComponent = () => {
                                     },
                                     color: "black",
                                     p: "5px",
-                                    width: "20%",
                                     borderRadius: "5px",
                                     cursor: "pointer",
                                     textAlign: "center"
@@ -168,7 +166,6 @@ const LoginComponent = () => {
                                     },
                                     color: "black",
                                     p: "5px",
-                                    width: "20%",
                                     borderRadius: "5px",
                                     cursor: "pointer",
                                     textAlign: "center"
@@ -189,7 +186,6 @@ const LoginComponent = () => {
                                     },
                                     color: "black",
                                     p: "5px",
-                                    width: "20%",
                                     borderRadius: "5px",
                                     cursor: "pointer",
                                     textAlign: "center"
@@ -262,7 +258,7 @@ const LoginComponent = () => {
                                 {loading ? <CircularProgress size={30} color="inherit" /> : "Login"}
                             </Button>
                         </Box>
-                        <Typography sx={{ my: "5px" }}>Don't have an account? <Link href={"/signup"}>Sign Up Here</Link></Typography>
+                        <Typography sx={{ my: "5px" }}>Don't have an account? <Link className='text-[#FB8500]' href={"/signup"}>Sign Up Here</Link></Typography>
                         <Divider sx={{ my: "5px" }} />
                         <SocialLogin />
                     </Box>
