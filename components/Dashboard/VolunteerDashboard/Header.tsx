@@ -95,7 +95,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         sx={{ cursor: 'pointer' }}
                     >
 
-                        {session?.user?.image ? (
+                        {userInfo?.image ? (
                             <img src={userInfo.image} alt='' />
                         ) : (
                             <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
@@ -113,7 +113,9 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                             },
                         }}
                     >
-                        <MenuItem sx={{ fontSize: "15px" }}>Profile</MenuItem>
+                        <Link href={"/volunteer_dashboard/profile"}>
+                            <MenuItem sx={{ fontSize: "15px" }}>Profile</MenuItem>
+                        </Link>
                         <MenuItem onClick={handleLogout} sx={{ fontSize: "15px" }}>Logout</MenuItem>
                     </Menu>
                     <Box>
