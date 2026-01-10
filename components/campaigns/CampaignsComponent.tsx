@@ -114,7 +114,7 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                             right: "5px"
                                         }}>
                                             <Typography>Severity:</Typography>
-                                            <Typography>Low</Typography>
+                                            <Typography>{campaign?.situation?.severity}</Typography>
                                         </Box>
                                     </Box>
                                     <Box sx={{
