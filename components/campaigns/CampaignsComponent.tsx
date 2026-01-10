@@ -1,9 +1,9 @@
 "use client"
 import { Box, Button, Card, Container, Divider, Pagination, Skeleton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LabelIcon from '@mui/icons-material/Label';
+import LocationPinIcon from '@mui/icons-material/LocationPin';
+import HomeIcon from '@mui/icons-material/Home';
+import PinDropIcon from '@mui/icons-material/PinDrop';
 import Image from "next/image";
 type campaignChindren = {
     totalCampaign: any,
@@ -90,79 +90,89 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                         totalCampaign?.data?.data && (
                             totalCampaign?.data?.data.map((campaign: any) => (
                                 <Card key={campaign._id} sx={{ maxWidth: 345 }}>
-                                    <Image
-                                        src={campaign?.image[0]}
-                                        alt={campaign?.title}
-                                        width={500}
-                                        height={300}
-                                        className="h-52 w-full object-cover"
-                                    />
+                                    <Box sx={{ position: "relative" }}>
+                                        <Box>
+                                            <Image
+                                                src={campaign?.image[0]}
+                                                alt={campaign?.title}
+                                                width={500}
+                                                height={300}
+                                                className="h-52 w-full object-cover"
+                                            />
+                                        </Box>
+                                        <Box sx={{
+                                            bgcolor: "#FB8500",
+                                            color: "white",
+                                            borderRadius: "10px",
+                                            px: "5px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                            position: "absolute",
+                                            bottom: "5px",
+                                            right: "5px"
+                                        }}>
+                                            <Typography>Severity:</Typography>
+                                            <Typography>Low</Typography>
+                                        </Box>
+                                    </Box>
                                     <Box sx={{
                                         p: "10px"
                                     }}>
                                         <Typography gutterBottom fontWeight={"bold"} fontSize={"18px"} component="div">
                                             {campaign?.title}
                                         </Typography>
-                                        <Typography sx={{ color: 'text.secondary', fontSize: "16px" }}>
+                                        <Typography sx={{ color: 'text.secondary', fontSize: "15px" }}>
                                             {campaign?.description.slice(0, 80)}...
                                         </Typography>
-                                        <Divider></Divider>
+                                        <Divider sx={{ my: "5px" }} />
                                         <Box sx={{
 
                                         }}>
                                             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", my: "5px" }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <LocationOnIcon sx={{ fontSize: "21px", color: "#FB8500" }} />
-                                                    <Typography sx={{ fontSize: "16px" }}>Location</Typography>
+                                                <Box sx={{ display: "flex", alignItems: "center", my: "5px" }}>
+                                                    {/* <LocationOnIcon sx={{ fontSize: "21px", color: "#FB8500" }} /> */}
+                                                    <Typography sx={{ fontSize: "16px", fontWeight: 400 }}>Location Details</Typography>
                                                 </Box>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    {/* <LabelIcon sx={{ fontSize: "21px", color: "#FB8500" }} /> */}
-                                                    <Stack direction="row" alignItems={"center"} spacing={"5px"}>
-                                                        <Typography>Severity:</Typography>
-                                                        <Typography sx={{ color: 'text.secondary' }}>{campaign?.situation?.severity}</Typography>
-                                                        {
-                                                            campaign?.situation?.severity === "High" && (
-                                                                <Typography className="h-5 w-5 rounded-full bg-red-500"></Typography>
-                                                            )
-                                                        }
-                                                        {
-                                                            campaign?.situation?.severity === "Medium" && (
-                                                                <Typography className="h-5 w-5 rounded-full bg-[#ffb703]"></Typography>
-                                                            )
-                                                        }
-                                                        {
-                                                            campaign?.situation?.severity === "Low" && (
-                                                                <Typography className="h-5 w-5 rounded-full bg-[#0077b6]"></Typography>
-                                                            )
-                                                        }
-                                                    </Stack>
-                                                </Box>
+
 
                                             </Box>
                                             <Box>
-                                                <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
+                                                <Box sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    gap: "10px",
+                                                    color: 'text.secondary',
+
+                                                }}>
                                                     <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                        <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                        <LocationPinIcon sx={{ fontSize: "22px" }} />
                                                         <Typography sx={{ fontSize: "15px" }}>Division:</Typography>
                                                     </Box>
                                                     <Typography sx={{ fontSize: "15px", }}>{campaign.location.division}</Typography>
                                                 </Box>
+                                                <Divider sx={{ my: "3px" }} />
                                                 <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
                                                     <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                        <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                        <PinDropIcon sx={{ fontSize: "20px" }} />
                                                         <Typography>District:</Typography>
                                                     </Box>
                                                     <Typography sx={{ fontSize: "15px" }}>{campaign.location.district}</Typography>
                                                 </Box>
+                                                <Divider sx={{ my: "3px" }} />
                                                 <Box sx={{ display: "flex", alignItems: "center", gap: "10px", color: 'text.secondary' }}>
                                                     <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                        <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                        <PinDropIcon sx={{ fontSize: "20px" }} />
                                                         <Typography>Upazila:</Typography>
                                                     </Box>
                                                     <Typography sx={{ fontSize: "15px" }}>{campaign.location.upazila}</Typography>
                                                 </Box>
-                                                <Box sx={{ display: "flex", alignItems: "center", gap: "2px", color: 'text.secondary' }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
+                                                <Divider sx={{ my: "3px" }} />
+                                                <Box sx={{ display: "flex", flexDirection: "row", gap: "5px", color: 'text.secondary' }}>
+                                                    <Box sx={{ display: "flex", alignItems: "center", }}>
+                                                        <HomeIcon sx={{ fontSize: "20px" }} />
+                                                    </Box>
                                                     <Typography sx={{ fontSize: "15px" }}>{campaign.location.address}</Typography>
                                                 </Box>
                                             </Box>
