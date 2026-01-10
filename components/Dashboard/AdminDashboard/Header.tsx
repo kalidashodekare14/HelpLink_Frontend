@@ -69,7 +69,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                     onClose={handleNotiClose}
                     PaperProps={{
                         sx: {
-                            width: 200,      // or "50vw"
+                            width: 200,    // or "50vw"
                             height: 250,  // or "60vh"
                         },
                     }}

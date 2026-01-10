@@ -7,6 +7,7 @@ import { Avatar, Box, Button, Container, Menu, MenuItem, Skeleton, Typography } 
 import CloseIcon from '@mui/icons-material/Close';
 import { signOut, useSession } from 'next-auth/react';
 import { useUserRoleQuery } from '@/state/services/userRole/userRole';
+import Image from 'next/image';
 
 
 const Navbar = () => {
@@ -122,7 +123,12 @@ const Navbar = () => {
                         justifyItems: "center",
                         gap: "80px"
                     }}>
-                    <h1 className='text-3xl'>HelpLink</h1>
+                    <Link href={"/"}>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            <Image className='w-10' src={"/logo.png"} width={500} height={300} alt='' />
+                            <h1 className='text-3xl'>HelpLink</h1>
+                        </Box>
+                    </Link>
                     <ul className='hidden lg:flex items-center gap-5 text-[16px]'>
                         {
                             navgicaton.map((navi) => (

@@ -4,6 +4,7 @@ import { AdminRoutes } from "@/utils/NavigationRoute";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HomeIcon from '@mui/icons-material/Home';
+import Image from "next/image";
 type sidebarProps = {
     isToggle: boolean,
     handleToggleDrawer: (newOpen: boolean) => () => void
@@ -27,7 +28,12 @@ const Sidebar = ({ isToggle, handleToggleDrawer }: sidebarProps) => {
         >
             <Box>
                 <Box sx={{ textAlign: 'center' }}>
-                    <Typography sx={{ fontSize: "25px", p: 1, }}>HelpLink</Typography>
+                    <Link href={"/"}>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: "2px" }}>
+                            <Image className='w-10' src={"/logo.png"} width={500} height={300} alt='' />
+                            <Typography sx={{ fontSize: "25px", p: 1, }}>HelpLink</Typography>
+                        </Box>
+                    </Link>
                 </Box>
                 <Stack spacing={1}>
                     {
