@@ -93,7 +93,7 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                         onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
                         sx={{ cursor: 'pointer' }}
                     >
-                        {session?.user?.image ? (
+                        {userInfo?.image ? (
                             <img src={userInfo.image} alt='' />
                         ) : (
                             <Typography>{session?.user?.name ? session?.user?.name[0] : null}</Typography>
@@ -111,7 +111,9 @@ const Header = ({ handleToggleDrawer }: THeader) => {
                             },
                         }}
                     >
-                        <MenuItem onClick={handleClose} sx={{ fontSize: "15px" }}>Profile</MenuItem>
+                        <Link href={"/admin_dashboard/profile"}>
+                            <MenuItem onClick={handleClose} sx={{ fontSize: "15px" }}>Profile</MenuItem>
+                        </Link>
                         <MenuItem onClick={handleLogout} sx={{ fontSize: "15px" }}>Logout</MenuItem>
                     </Menu>
                     <Box>
