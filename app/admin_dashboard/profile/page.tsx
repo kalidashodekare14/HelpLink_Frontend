@@ -1,10 +1,10 @@
-import AdminProfile from "@/components/Dashboard/AdminDashboard/AdminProfile";
+import UseProfile from "@/hooks/UseProfile";
 
 
 const adminProfile = () => {
     return (
         <div>
-            <AdminProfile />
+            <UseProfile />
         </div>
     );
 };

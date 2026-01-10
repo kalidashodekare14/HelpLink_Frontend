@@ -5,11 +5,14 @@ export const ROLE_ROUTES: Record<string, string[]> = {
         "/admin_dashboard",
         "/admin_dashboard/manage_user",
         "/admin_dashboard/manage_campaign",
+        "/admin_dashboard/manage_donation",
+        "/admin_dashboard/profile"
     ],
     volunteer: [
         "/volunteer_dashboard",
         "/volunteer_dashboard/verify_request",
-        "/volunteer_dashboard/manage_delivery"
+        "/volunteer_dashboard/manage_delivery",
+        "/volunteer_dashboard/profile"
     ],
     donor: [
         "/profile",

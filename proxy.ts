@@ -49,6 +49,9 @@ export const config = {
         "/volunteer_dashboard",
         "/volunteer_dashboard/verify_request",
         "/volunteer_dashboard/manage_delivery",
+        "/admin_dashboard/manage_donation",
+        "/admin_dashboard/profile",
+        "/volunteer_dashboard/profile"
     ]
     ,
 };
