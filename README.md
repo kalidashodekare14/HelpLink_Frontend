@@ -1,7 +1,7 @@
 
 # HelpLink
 
-## 🔗 Live Link: [HealthCare](https://helplink-frontend.vercel.app)
+## 🔗 Live Link: [HelpLink](https://helplink-frontend.vercel.app)
 
 ## Overview
 Every year, during winter, floods and cyclones in Bangladesh, underprivileged people suffer. Many donors want to help but do not know who to help. This project is a MERN Stack web platform that connects donors, recipients, volunteers and administrators to ensure timely relief distribution.
