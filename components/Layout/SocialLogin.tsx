@@ -5,6 +5,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
+import Image from 'next/image';
 
 const SocialLogin = () => {
 
@@ -33,36 +34,26 @@ const SocialLogin = () => {
             }}>
                 <Box sx={{
                     border: "1px solid #bbbb",
-                    p: "10px",
+                    p: "5px",
                     borderRadius: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    cursor: "pointer"
                 }}>
-                    <GoogleIcon
-                        onClick={() => handleSocialLogin("google")}
-                        sx={{
-                            color: "#4285F4",
-                            cursor: "pointer"
-                        }}
-                    />
+                    <Image onClick={() => handleSocialLogin("google")} className='w-9' src={"/auth/google.png"} width={500} height={300} alt='google' />
                 </Box>
-                <Box sx={{
+                {/* <Box sx={{
                     border: "1px solid #bbbb",
-                    p: "10px",
+                    p: "5px",
                     borderRadius: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    cursor: "pointer"
                 }}>
-                    <FacebookIcon
-                        onClick={() => handleSocialLogin("facebook")}
-                        sx={{
-                            color: "#4285F4",
-                            cursor: "pointer"
-                        }}
-                    />
-                </Box>
+                    <Image onClick={() => handleSocialLogin("facebook")} className='w-9' src={"/auth/facebook.png"} width={500} height={300} alt='facebook' />
+                </Box> */}
             </Box>
             <Toaster />
         </div>
