@@ -16,23 +16,12 @@ Every year, during winter, floods and cyclones in Bangladesh, underprivileged pe
 
 - AI-assisted emergency detection: When a receiver posts a request, the system analyzes the title to determine the emergency status. Highly urgent requests can be automatically approved to ensure rapid relief distribution.
 
-- Role-Based Access & Authorization
-- **JWT Authorization:** Every user is securely authorized using JWT tokens. Each role can only access the data and routes they are permitted to.  
-
-- **Receiver:**  
-  - Post requests for help.  
-  - View, update, and delete only their own requests.  
-
-- **Donor:**  
-  - View the requests they have donated to.  
-
-- **Admin:**  
-  - Access a dedicated dashboard.  
-  - Manage users, campaigns, and donations.  
-
-- **Volunteer:**  
-  - Access a separate dashboard.  
-  - View and manage assigned campaigns.  
+- **Role-Based Access & Authorization:**  
+  Every user is securely authorized using **JWT tokens**. Each role can only access the data and routes they are allowed to.  
+  - **Receiver:** Post requests for help; view, update, and delete only their own requests.  
+  - **Donor:** View the requests they have donated to.  
+  - **Admin:** Access a dedicated dashboard; manage users, campaigns, and donations.  
+  - **Volunteer:** Access a separate dashboard; view and manage assigned campaigns.  
 
 
 ## Technologies
