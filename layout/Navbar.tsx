@@ -63,7 +63,7 @@ const Navbar = () => {
         },
         {
             "id": 3,
-            "name": "Weather Risk Track",
+            "name": "Weather Risk Tracker",
             "path": "/weather_track"
         },
         {
