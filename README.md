@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# HelpLink
 
-First, run the development server:
+## 🔗 Live Link: [HealthCare](https://helplink-frontend.vercel.app)
+
+## Overview
+Every year, during winter, floods and cyclones in Bangladesh, underprivileged people suffer. Many donors want to help but do not know who to help. This project is a MERN Stack web platform that connects donors, recipients, volunteers and administrators to ensure timely relief distribution.
+
+
+
+## Features
+
+- Donor-Recipient Connection: Recipients can post their issues and donors can easily view these posts and provide assistance by donating. This makes it easy and transparent to help others.
+
+- Real-time Hazard Map: The platform uses the weather API to show the disaster risk for each district. Color-coded map markers help donors, volunteer and admin quickly see which areas need urgent attention.
+
+- AI-assisted emergency detection: When a receiver posts a request, the system analyzes the title to determine the emergency status. Highly urgent requests can be automatically approved to ensure rapid relief distribution.
+
+- Role-Based Access & Authorization
+- **JWT Authorization:** Every user is securely authorized using JWT tokens. Each role can only access the data and routes they are permitted to.  
+
+- **Receiver:**  
+  - Post requests for help.  
+  - View, update, and delete only their own requests.  
+
+- **Donor:**  
+  - View the requests they have donated to.  
+
+- **Admin:**  
+  - Access a dedicated dashboard.  
+  - Manage users, campaigns, and donations.  
+
+- **Volunteer:**  
+  - Access a separate dashboard.  
+  - View and manage assigned campaigns.  
+
+
+## Technologies
+[![My Skills](https://skillicons.dev/icons?i=ts,nextjs,tailwind,nodejs,express,mongodb)](https://skillicons.dev)
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://link-to-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd my-project
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+  npm run start / dev
+```
