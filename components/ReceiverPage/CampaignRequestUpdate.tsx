@@ -61,8 +61,13 @@ const CampaignRequestUpdate = () => {
     }, [campaignRequestData?.data?.location?.district])
     // set upazila useEffect
     useEffect(() => {
-        setUpazila(campaignRequestData?.data?.location?.upazila || "");
-    }, [campaignRequestData?.data?.location?.upazila])
+        if (
+            campaignRequestData?.data?.location?.upazila &&
+            upazilas.length > 0
+        ) {
+            setUpazila(campaignRequestData?.data?.location?.upazila || "");
+        }
+    }, [campaignRequestData?.data?.location?.upazila, upazilas])
     // set images useEffect
     useEffect(() => {
         setSelectedImages(campaignRequestData?.data?.image || []);
@@ -99,7 +104,27 @@ const CampaignRequestUpdate = () => {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<Inputs>()
+    } = useForm<Inputs>({
+        defaultValues: {
+            title: "",
+            category: "",
+            description: "",
+            address: ""
+        }
+    }
+    )
+
+    useEffect(() => {
+        if (!campaignRequestData?.data) return;
+
+        reset({
+            title: campaignRequestData.data.title ?? "",
+            category: isCategory ?? "",
+            description: campaignRequestData.data.description ?? "",
+            address: campaignRequestData.data.location?.address ?? "",
+        });
+    }, [campaignRequestData, isCategory, reset]);
+
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
             if (selectedImages.length === 0) {
@@ -188,7 +213,8 @@ const CampaignRequestUpdate = () => {
                                     sx={{
                                         width: "100%"
                                     }}
-                                    defaultValue={campaignRequestData?.data?.title}
+                                    InputLabelProps={{ shrink: true }}
+                                    // defaultValue={campaignRequestData?.data?.title}
                                     {...register("title", { required: true })}
                                 />
                                 <FormControl fullWidth>
@@ -214,12 +240,13 @@ const CampaignRequestUpdate = () => {
                                 </FormControl>
                             </Box>
                             <TextField
-                                defaultValue={campaignRequestData?.data?.description}
+                                // defaultValue={campaignRequestData?.data?.description}
                                 error={errors.description ? true : false}
                                 id="outlined-multiline-static"
                                 label="Description"
                                 multiline
                                 rows={4}
+                                InputLabelProps={{ shrink: true }}
                                 {...register("description", { required: true })}
                             />
                         </FormGroup>
@@ -286,12 +313,13 @@ const CampaignRequestUpdate = () => {
                             sx={{ width: "100%" }}
                         >
                             <TextField
-                                defaultValue={campaignRequestData?.data?.location?.address}
+                                // defaultValue={campaignRequestData?.data?.location?.address}
                                 error={errors.address ? true : false}
                                 id="outlined-multiline-static"
                                 label="Address"
                                 multiline
                                 rows={2}
+                                InputLabelProps={{ shrink: true }}
                                 sx={{ width: "100%" }}
                                 {...register("address", { required: true })}
                             />
