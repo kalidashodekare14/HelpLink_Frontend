@@ -89,6 +89,22 @@ const ManageUserComponent = () => {
     const [userStatusManage, { isLoading: statusLoading, error: statusError }] = useUserStatusManageMutation()
 
     const columns: GridColDef[] = [
+        {
+            field: 'image',
+            headerName: 'Image',
+            width: 90,
+            renderCell: (params) => (
+                <>
+                    {
+                        params.value ? (
+                            <img className="w-12 rounded-full" src={params?.value} alt="" />
+                        ) : (
+                            <img className="w-12 rounded-full" src="https://i.postimg.cc/85kctPQH/user.png" alt="" />
+                        )
+                    }
+                </>
+            )
+        },
         { field: 'name', headerName: 'Full Name', width: 130 },
         { field: 'email', headerName: 'Email', width: 200 },
         {
@@ -309,7 +325,7 @@ const ManageUserComponent = () => {
     return (
         <Box sx={{ p: "20px" }}>
             <Typography fontSize={25}>User Management</Typography>
-            <Typography sx={{color: "#6A6A6A"}}>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
+            <Typography sx={{ color: "#6A6A6A" }}>Manage all users in one place. Control access, assign roles, and monitor activity across your platform.</Typography>
             <Box sx={{
                 display: "flex",
                 flexDirection: { xs: "column", lg: "row" },
