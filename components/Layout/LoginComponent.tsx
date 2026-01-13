@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SocialLogin from './SocialLogin';
 
 
@@ -48,7 +48,21 @@ const LoginComponent = () => {
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<Inputs>()
+    } = useForm<Inputs>({
+        defaultValues: {
+            email: "",
+            password: ""
+        }
+    })
+
+    useEffect(() => {
+        if (emailValue && passwordValue) {
+            reset({
+                email: emailValue,
+                password: passwordValue
+            })
+        }
+    }, [emailValue, passwordValue, reset])
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
@@ -194,7 +208,7 @@ const LoginComponent = () => {
                             </Typography>
                         </Box>
                         <TextField
-                            defaultValue={emailValue}
+                            // defaultValue={emailValue}
                             {...register("email", { required: true })}
                             error={!!errors.email}
                             helperText={errors.email ? "Email is required" : ""}
@@ -204,7 +218,7 @@ const LoginComponent = () => {
                             label="Email"
                             variant="outlined" />
                         <TextField
-                            defaultValue={passwordValue}
+                            // defaultValue={passwordValue}
                             {...register("password",
                                 { required: true })}
                             error={!!errors.password}
