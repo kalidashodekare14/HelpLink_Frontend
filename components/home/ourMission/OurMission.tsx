@@ -2,9 +2,15 @@
 
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import Link from "next/link";
 import Image from "next/image";
+
+import { motion, scale } from "motion/react"
+
+const MotionTypography = motion(Typography);
+const MotionButton = motion(Button);
+const MotionBox = motion(Box);
+
 const OurMission = () => {
     return (
         <Container maxWidth={"lg"} sx={{ my: "40px" }}>
@@ -52,57 +58,143 @@ const OurMission = () => {
 
                 }}
                 >
-                    <Typography variant="h6" sx={{
-                        fontSize: "16px",
-                        my: "10px",
-                        color: "#fb8500",
-                    }}>
+                    <MotionTypography
+                        initial={{ y: -50, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        variant="h6"
+                        sx={{
+                            fontSize: "16px",
+                            my: "10px",
+                            color: "#fb8500",
+                        }}>
                         Supportting Our Cause Together
-                    </Typography>
-                    <Typography variant="h3" sx={{
-                        my: "10px",
-                    }}>
+                    </MotionTypography>
+                    <MotionTypography
+                        initial={{ y: -50, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        variant="h3"
+                        sx={{
+                            my: "10px",
+                        }}>
                         Support Our Mission and Make a Difference
-                    </Typography>
-                    <Typography variant="h6" sx={{
-                        fontSize: "15px",
-                        color: "#4e4e4e",
-                        fontWeight: "400",
-                    }}>
+                    </MotionTypography>
+                    <MotionTypography
+                        initial={{ y: -50, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        variant="h6"
+                        sx={{
+                            fontSize: "15px",
+                            color: "#4e4e4e",
+                            fontWeight: "400",
+                        }}>
                         Business tailored it design, management & support services business agency elit, sed do eiusmod tempor.
-                    </Typography>
+                    </MotionTypography>
                     <Divider sx={{ my: "20px" }} />
                     <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", my: "30px" }}>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            <Typography>Giving Hope, Changing Lives</Typography>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.5 }}
+                            >
+                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                            </MotionBox>
+                            <MotionTypography
+                                initial={{ x: 50, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.6 }}
+                            >Giving Hope, Changing Lives</MotionTypography>
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            <Typography>Empower Through Charity</Typography>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.7 }}
+
+                            >
+                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                            </MotionBox>
+                            <MotionTypography
+                                initial={{ x: 50, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.8 }}
+                            >
+                                Empower Through Charity
+                            </MotionTypography>
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            <Typography>Together We Can</Typography>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.8 }}
+                            >
+                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                            </MotionBox>
+                            <MotionTypography
+                                initial={{ x: 50, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.9 }}
+                            >
+                                Together We Can
+                            </MotionTypography>
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            <Typography>Healing Communities</Typography>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 2.1 }}
+                            >
+                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                            </MotionBox>
+                            <MotionTypography
+                                initial={{ x: 50, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 1.2 }}
+                            >
+                                Healing Communities
+                            </MotionTypography>
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            <Typography>Every Act Counts</Typography>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 1.3 }}
+                            >
+                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                            </MotionBox>
+                            <MotionTypography
+                                initial={{ x: 50, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 1.4 }}
+                            >
+                                Every Act Counts
+                            </MotionTypography>
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            <Typography>Compassion in Action</Typography>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 1.5 }}
+                            >
+                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                            </MotionBox>
+                            <MotionTypography
+                                initial={{ x: 50, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 1.6 }}
+                            >
+                                Compassion in Action
+                            </MotionTypography>
                         </Box>
                     </Box>
                     <Link href={"/about"}>
                         <Button
                             variant='outlined'
                             sx={{
-                                // bgcolor: "#fb8500",
+                                bgcolor: "#fb8500",
                                 borderColor: "#fb8500",
                                 color: "black",
                                 p: "10px 30px",

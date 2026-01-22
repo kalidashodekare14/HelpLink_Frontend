@@ -10,8 +10,10 @@ import { Box, Button, Container, Typography } from '@mui/material';
 // Custom CSS
 import './Banner.css';
 import Link from 'next/link';
+import { motion } from "motion/react"
 
-
+const MotionTypography = motion(Typography);
+const MotionButton = motion(Button);
 const Banner = () => {
 
     const bannerInfo = [
@@ -69,7 +71,10 @@ const Banner = () => {
 
                                 }}>
                                     <Box sx={{ width: { xs: "90%", lg: "60%" } }}>
-                                        <Typography
+                                        <MotionTypography
+                                            initial={{ y: -50, opacity: 0 }}
+                                            whileInView={{ y: 0, opacity: 1 }}
+                                            transition={{ duration: 0.5, delay: 0.2 }}
                                             variant='h6'
                                             sx={{
                                                 color: "#fb8500",
@@ -77,26 +82,39 @@ const Banner = () => {
                                             }}
                                         >
                                             {info.subTittle}
-                                        </Typography>
-                                        <Typography sx={{
-                                            fontSize: { xs: "30px", lg: "60px" },
-                                            color: "white",
-                                            fontWeight: "bold",
-                                            lineHeight: "1.2",
+                                        </MotionTypography>
+                                        <MotionTypography
+                                            initial={{ y: -50, opacity: 0 }}
+                                            whileInView={{ y: 0, opacity: 1 }}
+                                            transition={{ duration: 0.5, delay: 0.3 }}
+                                            sx={{
+                                                fontSize: { xs: "30px", lg: "60px" },
+                                                color: "white",
+                                                fontWeight: "bold",
+                                                lineHeight: "1.2",
 
 
-                                        }}>
+                                            }}>
                                             {info.title}
-                                        </Typography>
-                                        <Typography sx={{
-                                            fontSize: { xs: "10px", lg: "18px" },
-                                            color: "#C8C8C8",
-                                            my: "20px",
-                                        }}>{info.description}</Typography>
+                                        </MotionTypography>
+                                        <MotionTypography
+                                            initial={{ y: -50, opacity: 0 }}
+                                            whileInView={{ y: 0, opacity: 1 }}
+                                            transition={{ duration: 0.5, delay: 0.3 }}
+                                            sx={{
+                                                fontSize: { xs: "10px", lg: "18px" },
+                                                color: "#C8C8C8",
+                                                my: "20px",
+                                            }}>
+                                            {info.description}
+                                        </MotionTypography>
                                     </Box>
                                     <Box sx={{ my: "20px" }}>
                                         <Link href={"/campaigns"}>
-                                            <Button
+                                            <MotionButton
+                                                initial={{ y: -50, opacity: 0 }}
+                                                whileInView={{ y: 0, opacity: 1 }}
+                                                transition={{ duration: 0.5, delay: 0.3 }}
                                                 variant='outlined'
                                                 sx={{
                                                     // bgcolor: "#fb8500",
@@ -110,7 +128,7 @@ const Banner = () => {
                                                 }}
                                             >
                                                 Donate Now
-                                            </Button>
+                                            </MotionButton>
                                         </Link>
                                     </Box>
                                 </Container>
