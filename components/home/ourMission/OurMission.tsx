@@ -191,7 +191,10 @@ const OurMission = () => {
                         </Box>
                     </Box>
                     <Link href={"/about"}>
-                        <Button
+                        <MotionButton
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 0.5, delay: 1.7 }}
                             variant='outlined'
                             sx={{
                                 bgcolor: "#fb8500",
@@ -206,7 +209,7 @@ const OurMission = () => {
                             }}
                         >
                             About More
-                        </Button>
+                        </MotionButton>
                     </Link>
                 </Box>
             </Box>

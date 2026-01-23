@@ -6,8 +6,13 @@ import ChatIcon from '@mui/icons-material/Chat';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import CountUp from 'react-countup';
+import UseCounter from "@/hooks/UseCounter";
+
 
 const SuccessInfo = () => {
+
+
+
     return (
         <Container maxWidth={"lg"}>
             <Box sx={{
@@ -61,7 +66,8 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        <CountUp start={0} end={1200} />+
+                        {/* <UseCounter count={1200} /> */}
+                          <CountUp start={0} end={300} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Client's Review
