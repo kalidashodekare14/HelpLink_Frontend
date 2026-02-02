@@ -91,7 +91,7 @@ const OurMission = () => {
                             color: "#4e4e4e",
                             fontWeight: "400",
                         }}>
-                        Business tailored it design, management & support services business agency elit, sed do eiusmod tempor.
+                        Support our mission to bring positive change to people’s lives. Your donation helps us provide essential support, resources, and hope to those in need. Every contribution, big or small, makes a real difference.
                     </MotionTypography>
                     <MotionDivider
                         initial={{ y: -50, opacity: 0 }}
@@ -109,7 +109,7 @@ const OurMission = () => {
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
                             </Box>
-                            <Typography>Giving Hope, Changing Lives</Typography>
+                            <Typography>Support communities in need</Typography>
                         </MotionBox>
                         <MotionBox
                             initial={{ y: -50, opacity: 0 }}
@@ -121,7 +121,7 @@ const OurMission = () => {
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
                             </Box>
                             <Typography>
-                                Empower Through Charity
+                               Provide essential resources
                             </Typography>
                         </MotionBox>
                         <MotionBox
@@ -134,7 +134,7 @@ const OurMission = () => {
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
                             </Box>
                             <Typography>
-                                Together We Can
+                                Create lasting impact
                             </Typography>
                         </MotionBox>
                         <MotionBox
@@ -147,7 +147,7 @@ const OurMission = () => {
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
                             </Box>
                             <Typography>
-                                Healing Communities
+                               Support education & health
                             </Typography>
                         </MotionBox>
                         <MotionBox
@@ -160,7 +160,7 @@ const OurMission = () => {
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
                             </Box>
                             <Typography>
-                                Every Act Counts
+                               Spread hope and kindness
                             </Typography>
                         </MotionBox>
                         <MotionBox
@@ -173,7 +173,7 @@ const OurMission = () => {
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
                             </Box>
                             <MotionTypography>
-                                Compassion in Action
+                                Make a real difference
                             </MotionTypography>
                         </MotionBox>
                     </Box>
