@@ -12,6 +12,7 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import Link from 'next/link';
+import { motion } from 'motion/react'
 
 const ServiceInfo = () => {
 

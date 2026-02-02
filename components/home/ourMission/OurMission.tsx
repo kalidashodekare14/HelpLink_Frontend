@@ -25,6 +25,7 @@ const OurMission = () => {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.9, }}
+                        viewport={{ once: true }}
                         sx={{ display: "flex", alignItems: "center", }}>
                         <Box>
                             <Image
@@ -59,6 +60,7 @@ const OurMission = () => {
                         initial={{ y: -50, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
+                        viewport={{ once: true }}
                         variant="h6"
                         sx={{
                             fontSize: "16px",
@@ -71,6 +73,7 @@ const OurMission = () => {
                         initial={{ y: -50, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.3 }}
+                        viewport={{ once: true }}
                         variant="h3"
                         sx={{
                             my: "10px",
@@ -81,6 +84,7 @@ const OurMission = () => {
                         initial={{ y: -50, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
+                        viewport={{ once: true }}
                         variant="h6"
                         sx={{
                             fontSize: "15px",
@@ -93,12 +97,14 @@ const OurMission = () => {
                         initial={{ y: -50, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
+                        viewport={{ once: true }}
                         sx={{ my: "20px" }} />
                     <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", my: "30px" }}>
                         <MotionBox
                             initial={{ y: -50, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
                             sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
@@ -109,6 +115,7 @@ const OurMission = () => {
                             initial={{ y: -50, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
                             sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
@@ -121,6 +128,7 @@ const OurMission = () => {
                             initial={{ y: -50, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
                             sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
@@ -133,6 +141,7 @@ const OurMission = () => {
                             initial={{ y: -50, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
                             sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
@@ -145,6 +154,7 @@ const OurMission = () => {
                             initial={{ y: -50, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
                             sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
@@ -157,6 +167,7 @@ const OurMission = () => {
                             initial={{ y: -50, opacity: 0 }}
                             whileInView={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
+                            viewport={{ once: true }}
                             sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
                             <Box>
                                 <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
@@ -167,25 +178,24 @@ const OurMission = () => {
                         </MotionBox>
                     </Box>
                     <Link href={"/about"}>
-                        <MotionButton
+                        <motion.button
                             initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            variant='outlined'
-                            sx={{
-                                bgcolor: "#fb8500",
-                                borderColor: "#fb8500",
-                                color: "black",
-                                p: "10px 30px",
-                                my: "20px",
-                                '&:hover': {
-                                    bgcolor: "#fb8500",
-                                    borderColor: "#fb8500",
-                                }
+                            whileInView={{
+                                y: 0,
+                                opacity: 1,
                             }}
+                            whileHover={{
+                                scale: 1.1
+                            }}
+                            whileTap={{
+                                scale: 1.01
+                            }}
+                            transition={{ duration: 0.2 }}
+                            viewport={{ once: true }}
+                            className="bg-[#fb8500] font-medium px-6 py-3 cursor-pointer rounded-xl"
                         >
                             About More
-                        </MotionButton>
+                        </motion.button>
                     </Link>
                 </Box>
             </Box>
