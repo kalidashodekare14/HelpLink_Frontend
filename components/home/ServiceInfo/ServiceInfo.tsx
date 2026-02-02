@@ -14,6 +14,10 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import Link from 'next/link';
 import { motion } from 'motion/react'
 
+const MotionTypography = motion(Typography);
+const MotionButton = motion(Button);
+const MotionBox = motion(Box);
+
 const ServiceInfo = () => {
 
     const serviceData = [
@@ -48,27 +52,39 @@ const ServiceInfo = () => {
             <Box sx={{
                 p: { xs: "20px", md: "40px" },
             }}>
-                <Typography variant="h4" sx={{
-                    fontSize: "20px",
-                    fontWeight: "700",
-                    textAlign: "center",
-                    my: "10px",
-                    color: "#fb8500",
-                }}>
+                <MotionTypography
+                    variant="h4"
+                    initial={{ y: -50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    sx={{
+                        fontSize: "20px",
+                        fontWeight: "700",
+                        textAlign: "center",
+                        my: "10px",
+                        color: "#fb8500",
+                    }}>
                     Our Services
-                </Typography>
-                <Typography variant="h6" sx={{
-                    fontSize: "30px",
-                    fontWeight: "400",
-                    textAlign: "center",
-                    mb: "20px",
-                    px: { xs: "10px", md: "100px" },
-                    width: "70%",
-                    margin: "0 auto",
+                </MotionTypography>
+                <MotionTypography
+                    initial={{ y: -50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    variant="h6"
+                    sx={{
+                        fontSize: "30px",
+                        fontWeight: "400",
+                        textAlign: "center",
+                        mb: "20px",
+                        px: { xs: "10px", md: "100px" },
+                        width: "70%",
+                        margin: "0 auto",
 
-                }}>
+                    }}>
                     Providing Humanitarian services to all people is What we do
-                </Typography>
+                </MotionTypography>
             </Box>
             <Swiper
                 slidesPerView={1}
@@ -97,27 +113,28 @@ const ServiceInfo = () => {
                 {
                     serviceData.map(service => (
                         <SwiperSlide>
-                            <Box sx={{
-                                bgcolor: "white",
-                                p: "20px",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "10px",
-                                textAlign: "center",
-                                my: "50px",
-                                position: "relative",
-                                borderRadius: "10px",
-                                transition: "all 0.3s ease-in-out",
-                                '&:hover': {
-                                    bgcolor: '#B76200',
-
-                                },
-                                '&:hover .chil-text': {
-                                    color: 'white',
-                                },
-                            }}>
+                            <MotionBox
+                                initial={{ opacity: 0 }}
+                                whileInView={{
+                                    y: 0,
+                                    opacity: 1,
+                                }}
+                                transition={{ duration: 0.5, delay: 0.4 }}
+                                viewport={{ once: true }}
+                                sx={{
+                                    bgcolor: "white",
+                                    p: "20px",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    textAlign: "center",
+                                    my: "50px",
+                                    position: "relative",
+                                    borderRadius: "10px",
+                                    transition: "all 0.3s ease-in-out",
+                                }}>
                                 <Box className="icon-wapper" sx={{
                                     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                                     borderRadius: "50%",
@@ -138,21 +155,26 @@ const ServiceInfo = () => {
 
                                 <Typography className='chil-text' sx={{ color: "#4e4e4e", }}>{service.description}</Typography>
                                 <Link href={`/service-details/${service.id}`}>
-                                    <Button
-                                        variant='outlined'
-                                        sx={{
-                                            bgcolor: "#fb8500",
-                                            color: "white",
-                                            border: "none",
-                                            borderRadius: "20px",
-                                            p: "10px 30px",
-                                            my: "20px",
+                                    <motion.button
+                                        initial={{ y: -50, opacity: 0 }}
+                                        whileInView={{
+                                            y: 0,
+                                            opacity: 1,
                                         }}
+                                        whileHover={{
+                                            scale: 1.1
+                                        }}
+                                        whileTap={{
+                                            scale: 1.01
+                                        }}
+                                        transition={{ duration: 0.2 }}
+                                        viewport={{ once: true }}
+                                        className="bg-[#fb8500] font-medium text-white px-6 py-3 cursor-pointer rounded-[20px]"
                                     >
-                                        Learn More
-                                    </Button>
+                                        About More
+                                    </motion.button>
                                 </Link>
-                            </Box>
+                            </MotionBox>
                         </SwiperSlide>
                     ))
                 }

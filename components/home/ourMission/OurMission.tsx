@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Link from "next/link";
 import Image from "next/image";
 
-import { motion, scale } from "motion/react"
+import { motion } from "motion/react"
 
 const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
