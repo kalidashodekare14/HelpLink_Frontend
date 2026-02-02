@@ -7,6 +7,7 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import CountUp from 'react-countup';
 import UseCounter from "@/hooks/UseCounter";
+import Counter from "./Counter";
 
 
 const SuccessInfo = () => {
@@ -41,7 +42,8 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        <CountUp start={0} end={500} />+
+                        <Counter counter={100} />+
+                        {/* <CountUp start={0} end={500} />+ */}
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Team Members
@@ -66,8 +68,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        {/* <UseCounter count={1200} /> */}
-                          <CountUp start={0} end={300} />+
+                        <Counter counter={300} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Client's Review
@@ -92,7 +93,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        <CountUp start={0} end={100} />+
+                        <Counter counter={200} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Winning Awards
@@ -117,7 +118,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                        <CountUp start={0} end={100} />+
+                       <Counter counter={150} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Happy Clients
