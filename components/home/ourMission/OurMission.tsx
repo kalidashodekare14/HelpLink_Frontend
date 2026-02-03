@@ -1,11 +1,12 @@
 "use client";
 
-import { Box, Button, Container, Divider, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Stack, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Link from "next/link";
 import Image from "next/image";
 
 import { motion } from "motion/react"
+import { useState } from "react";
 
 const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
@@ -13,6 +14,9 @@ const MotionBox = motion(Box);
 const MotionDivider = motion(Divider);
 
 const OurMission = () => {
+
+    const [aboutToggle, setAboutToggle] = useState<string>("history");
+
     return (
         <Container maxWidth={"lg"} sx={{ my: "40px" }}>
             <Box sx={{
@@ -20,11 +24,12 @@ const OurMission = () => {
                 flexDirection: { xs: "column", md: "row" },
                 gap: "20px"
             }}>
+                {/* Left Side Image */}
                 <Box sx={{ position: "relative" }}>
                     <MotionBox
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        transition={{ duration: 0.9, }}
+                        transition={{ duration: 0.9, delay: 0.3 }}
                         viewport={{ once: true }}
                         sx={{ display: "flex", alignItems: "center", }}>
                         <Box>
@@ -51,9 +56,9 @@ const OurMission = () => {
                         </Box>
                     </MotionBox>
                 </Box>
+                {/* Right Side Info */}
                 <Box sx={{
                     width: { xs: "100%", md: "50%" },
-
                 }}
                 >
                     <MotionTypography
@@ -67,7 +72,7 @@ const OurMission = () => {
                             my: "10px",
                             color: "#fb8500",
                         }}>
-                        Supportting Our Cause Together
+                        About us
                     </MotionTypography>
                     <MotionTypography
                         initial={{ y: -50, opacity: 0 }}
@@ -98,85 +103,79 @@ const OurMission = () => {
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                         viewport={{ once: true }}
-                        sx={{ my: "20px" }} />
-                    <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", my: "30px" }}>
-                        <MotionBox
-                            initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <Box>
-                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            </Box>
-                            <Typography>Support communities in need</Typography>
-                        </MotionBox>
-                        <MotionBox
-                            initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <Box>
-                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            </Box>
-                            <Typography>
-                               Provide essential resources
-                            </Typography>
-                        </MotionBox>
-                        <MotionBox
-                            initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <Box>
-                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            </Box>
-                            <Typography>
-                                Create lasting impact
-                            </Typography>
-                        </MotionBox>
-                        <MotionBox
-                            initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <Box>
-                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            </Box>
-                            <Typography>
-                               Support education & health
-                            </Typography>
-                        </MotionBox>
-                        <MotionBox
-                            initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <Box>
-                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            </Box>
-                            <Typography>
-                               Spread hope and kindness
-                            </Typography>
-                        </MotionBox>
-                        <MotionBox
-                            initial={{ y: -50, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                            <Box>
-                                <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
-                            </Box>
-                            <MotionTypography>
-                                Make a real difference
-                            </MotionTypography>
-                        </MotionBox>
+                        sx={{ my: "20px" }}
+                    />
+                    <Box sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "30px"
+                    }}>
+                        <Box
+                            onClick={() => setAboutToggle("history")}
+                            sx={{
+                                border: aboutToggle === "history" ? "1px solid #FB8500" : "",
+                                bgcolor: aboutToggle === "history" ? "#FEF3E6" : "",
+                                p: "10px",
+                                borderRadius: "30px",
+                                cursor: "pointer"
+                            }}>
+                            <Typography>Our History</Typography>
+                        </Box>
+                        <Box
+                            onClick={() => setAboutToggle("mission")}
+                            sx={{
+                                border: aboutToggle === "mission" ? "1px solid #FB8500" : "",
+                                bgcolor: aboutToggle === "mission" ? "#FEF3E6" : "",
+                                p: "10px",
+                                borderRadius: "30px",
+                                cursor: "pointer"
+                            }}>
+                            <Typography>Our Mission</Typography>
+                        </Box>
+                        <Box
+                            onClick={() => setAboutToggle("vission")}
+                            sx={{
+                                border: aboutToggle === "vission" ? "1px solid #FB8500" : "",
+                                bgcolor: aboutToggle === "vission" ? "#FEF3E6" : "",
+                                p: "10px",
+                                borderRadius: "30px",
+                                cursor: "pointer"
+                            }}>
+                            <Typography>Our Vission</Typography>
+                        </Box>
                     </Box>
+                    {
+                        aboutToggle === "history" && (
+                            <Stack
+                                spacing={1}
+                                my={2}
+                            >
+                                <Typography sx={{ color: "#4e4e4e" }}>Our journey began with a simple goal: to help people in need and create lasting positive change through collective support.</Typography>
+                                <MotionBox
+                                    sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                    <Box>
+                                        <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                                    </Box>
+                                    <Typography sx={{ color: "#4e4e4e" }}>Started with a small but dedicated team</Typography>
+                                </MotionBox>
+                                <MotionBox
+                                    sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                    <Box>
+                                        <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                                    </Box>
+                                    <Typography sx={{ color: "#4e4e4e" }}>Grew through community trust and support</Typography>
+                                </MotionBox>
+                                <MotionBox
+                                    sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                                    <Box>
+                                        <CheckCircleOutlineIcon sx={{ color: "#fb8500" }} />
+                                    </Box>
+                                    <Typography sx={{ color: "#4e4e4e" }}>Grew through community trust and support</Typography>
+                                </MotionBox>
+                            </Stack>
+                        )
+                    }
+
                     <Link href={"/about"}>
                         <motion.button
                             initial={{ y: -50, opacity: 0 }}

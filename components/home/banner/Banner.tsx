@@ -75,6 +75,7 @@ const Banner = () => {
                                             initial={{ y: -50, opacity: 0 }}
                                             whileInView={{ y: 0, opacity: 1 }}
                                             transition={{ duration: 0.5, delay: 0.2 }}
+                                             viewport={{ once: true }}
                                             variant='h6'
                                             sx={{
                                                 color: "#fb8500",
@@ -87,6 +88,7 @@ const Banner = () => {
                                             initial={{ y: -50, opacity: 0 }}
                                             whileInView={{ y: 0, opacity: 1 }}
                                             transition={{ duration: 0.5, delay: 0.3 }}
+                                             viewport={{ once: true }}
                                             sx={{
                                                 fontSize: { xs: "30px", lg: "60px" },
                                                 color: "white",
@@ -101,6 +103,7 @@ const Banner = () => {
                                             initial={{ y: -50, opacity: 0 }}
                                             whileInView={{ y: 0, opacity: 1 }}
                                             transition={{ duration: 0.5, delay: 0.3 }}
+                                             viewport={{ once: true }}
                                             sx={{
                                                 fontSize: { xs: "10px", lg: "18px" },
                                                 color: "#C8C8C8",
@@ -115,6 +118,7 @@ const Banner = () => {
                                                 initial={{ y: -50, opacity: 0 }}
                                                 whileInView={{ y: 0, opacity: 1 }}
                                                 transition={{ duration: 0.5, delay: 0.3 }}
+                                                 viewport={{ once: true }}
                                                 variant='outlined'
                                                 sx={{
                                                     // bgcolor: "#fb8500",
