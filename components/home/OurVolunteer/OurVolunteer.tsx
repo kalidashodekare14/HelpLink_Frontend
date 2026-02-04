@@ -121,12 +121,12 @@ const OurVolunteer = () => {
 
 
     return (
-        <Container maxWidth={"lg"}>
-            <Box sx={{ textAlign: "center" }}>
-                <Typography sx={{ color: "#FB8500" }}>Our Volunteer</Typography>
+        <Container maxWidth={"lg"} sx={{mt: "60px"}}>
+            <Box sx={{ textAlign: "center", }}>
+                {/* <Typography sx={{ color: "#FB8500", fontSize: "20px" }}>Our Volunteer</Typography> */}
                 <Typography sx={{ fontSize: "30px", fontWeight: "500" }}>Our Passionate Volunteers</Typography>
             </Box>
-            <Box sx={{ my: "20px" }}>
+            <Box sx={{ my: "50px" }}>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
@@ -141,7 +141,7 @@ const OurVolunteer = () => {
                         },
                         1024: {
                             slidesPerView: 4,
-                            spaceBetween: 20,
+                            spaceBetween: 30,
                         },
                     }}
                     modules={[Pagination]}
@@ -151,6 +151,9 @@ const OurVolunteer = () => {
                         volunteerData.map(volunteer => (
                             <SwiperSlide>
                                 <Box className="duration-300" sx={{
+                                    bgcolor: "#bbbb",
+                                    p: "5px",
+                                    borderRadius: "20px",
                                     position: "relative",
                                     transform: "1s",
                                     "&:hover .vInfo": {
@@ -159,57 +162,34 @@ const OurVolunteer = () => {
                                     }
                                 }}>
                                     <Image
-                                        className="w-full h-75 z-10 rounded-3xl"
+                                        className="w-full h-65 z-10 rounded-2xl"
                                         src={volunteer.image}
                                         width={500}
                                         height={300}
                                         alt=""
                                     />
-                                    <Box className={"vInfo"} sx={{
-                                        position: "absolute",
-                                        bottom: "10px",
-                                        left: "50%",
-                                        transform: "translateX(-50%)",
+                                   <Box sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
                                         bgcolor: "white",
-                                        px: 5,
-                                        py: 1,
-                                        textAlign: "center",
-                                        borderRadius: "5px",
-                                        boxShadow: "0 0 5px rgba(0,0,0,0.2)",
-                                        whiteSpace: "nowrap",
-                                        // visibility: "hidden",
-                                        opacity: 0
-
-                                    }}>
-                                        <Typography sx={{ fontSize: "19px", fontWeight: "500", my: "5px" }}>{volunteer?.name}</Typography>
-                                        <Typography sx={{ my: "5px" }}>{volunteer?.title}</Typography>
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                            <FacebookIcon sx={{
-                                                fontSize: "40px",
-                                                border: "1px solid #fb8500",
-                                                boxShadow: 3,
-                                                color: "#000000",
-                                                borderRadius: "50%",
-                                                p: "5px"
-                                            }} />
-                                            <TwitterIcon sx={{
-                                                fontSize: "40px",
-                                                border: "1px solid #fb8500",
-                                                boxShadow: 3,
-                                                color: "#000000",
-                                                borderRadius: "50%",
-                                                p: "5px"
-                                            }} />
-                                            <InstagramIcon sx={{
-                                                fontSize: "40px",
-                                                border: "1px solid #fb8500",
-                                                boxShadow: 3,
-                                                color: "#000000",
-                                                borderRadius: "50%",
-                                                p: "5px"
-                                            }} />
-                                        </Box>
-                                    </Box>
+                                        m: "8px",
+                                        p: "10px",
+                                        borderRadius: "20px"
+                                   }}>
+                                        <Typography sx={{
+                                            fontSize: "20px",
+                                            color: "#FB8500",
+                                            fontWeight: "500"
+                                        }}>{volunteer.name}</Typography>
+                                        <Typography sx={{
+                                            color: "#4e4e4e"
+                                        }}>{volunteer.title}</Typography>
+                                   </Box>
+                                   <Box>
+                                        
+                                   </Box>
                                 </Box>
                             </SwiperSlide>
                         ))
