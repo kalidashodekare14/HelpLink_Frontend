@@ -13,35 +13,71 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Image from "next/image";
-import { useState } from "react";
 import { motion } from 'motion/react';
 
 const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
 
 const parentVariants = {
-    hover: {
-        transition: {
-            duration: 0.8
-        }
-    }
+    initial: {},
+    hover: {},
+    animate: {}
 }
 
 const childVariants = {
-    initial: { opacity: "0" },
+    initial: {
+        opacity: 0,
+        y: 8
+    },
     hover: {
-        opacity: "1",
+        opacity: 1,
+        y: 0,
         transition: {
-            duration: 0.8
+            duration: 0.3
         }
     },
 
 
 }
 
+const childInfoVariants = {
+    initial: {
+        backgroundColor: "#FFFFFF"
+    },
+    hover: {
+        backgroundColor: "#fb8500",
+        transition: {
+            duration: 0.3
+        }
+    }
+}
+
+const childNameVariants = {
+    initial: {
+        color: "#fb8500"
+    },
+    hover: {
+        color: "#FFFFFF",
+        transition: {
+            duration: 0.3
+        }
+    }
+}
+const childTitleVariants = {
+    initial: {
+        color: "#fb8500"
+    },
+    hover: {
+        color: "#FFFFFF",
+        transition: {
+            duration: 0.3
+        }
+    }
+}
+
+
 const OurVolunteer = () => {
 
-    const [isHovered, setIsHovered] = useState<boolean>(false);
-    console.log(isHovered);
 
     const volunteerData = [
         {
@@ -177,23 +213,15 @@ const OurVolunteer = () => {
                     {
                         volunteerData.map(volunteer => (
                             <SwiperSlide>
-                                <MotionBox className="duration-300"
+                                <MotionBox
+                                    variants={parentVariants}
+                                    initial="initial"
+                                    whileHover="hover"
                                     sx={{
                                         bgcolor: "#bbbb",
                                         p: "5px",
                                         borderRadius: "20px",
                                         position: "relative",
-                                        transform: "1s",
-                                        "&:hover .vInfo": {
-                                            opacity: "100%",
-                                            transform: "1s",
-                                        }
-                                    }}
-                                    variants={parentVariants}
-                                    initial="initial"
-                                    whileHover={"hover"}
-                                    transition={{
-                                        duration: 0.3
                                     }}
                                 >
                                     <Image
@@ -203,25 +231,36 @@ const OurVolunteer = () => {
                                         height={300}
                                         alt=""
                                     />
-                                    <Box sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        bgcolor: "white",
-                                        m: "8px",
-                                        p: "10px",
-                                        borderRadius: "20px"
-                                    }}>
-                                        <Typography sx={{
-                                            fontSize: "20px",
-                                            color: "#FB8500",
-                                            fontWeight: "500"
-                                        }}>{volunteer.name}</Typography>
-                                        <Typography sx={{
-                                            color: "#4e4e4e"
-                                        }}>{volunteer.title}</Typography>
-                                    </Box>
+                                    <MotionBox
+                                        variants={childInfoVariants}
+                                        // initial="initial"
+                                        // whileHover="hover"
+                                        sx={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            bgcolor: "white",
+                                            m: "8px",
+                                            p: "10px",
+                                            borderRadius: "20px"
+                                        }}>
+                                        <MotionTypography
+                                            variants={childNameVariants}
+                                            sx={{
+                                                fontSize: "20px",
+                                                // color: "#FB8500",
+                                                fontWeight: "500"
+                                            }}>
+                                            {volunteer.name}
+                                        </MotionTypography>
+                                        <Typography
+                                            sx={{
+                                                color: "#4e4e4e"
+                                            }}>
+                                            {volunteer.title}
+                                        </Typography>
+                                    </MotionBox>
                                     <MotionBox
                                         variants={childVariants}
                                         sx={{
@@ -232,42 +271,65 @@ const OurVolunteer = () => {
                                             position: "absolute",
                                             bottom: "110px",
                                             left: "24%",
-                                            // opacity: isHovered ? "1": "0"
                                         }}
                                     >
-                                        <Box sx={{
-                                            bgcolor: "white",
-                                            width: "40px",
-                                            height: "40px",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            borderRadius: "50%"
-                                        }}>
+                                        <MotionBox
+                                            whileHover={{
+                                                scale: 1.2
+                                            }}
+                                            whileTap={{
+                                                scale: 1.1
+                                            }}
+                                            sx={{
+                                                bgcolor: "white",
+                                                width: "40px",
+                                                height: "40px",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                borderRadius: "50%",
+                                                cursor: "pointer"
+                                            }}>
                                             <FacebookIcon />
-                                        </Box>
-                                        <Box sx={{
-                                            bgcolor: "white",
-                                            width: "40px",
-                                            height: "40px",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            borderRadius: "50%"
-                                        }}>
+                                        </MotionBox>
+                                        <MotionBox
+                                            whileHover={{
+                                                scale: 1.2
+                                            }}
+                                            whileTap={{
+                                                scale: 1.1
+                                            }}
+                                            sx={{
+                                                bgcolor: "white",
+                                                width: "40px",
+                                                height: "40px",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                borderRadius: "50%",
+                                                cursor: "pointer"
+                                            }}>
                                             <InstagramIcon />
-                                        </Box>
-                                        <Box sx={{
-                                            bgcolor: "white",
-                                            width: "40px",
-                                            height: "40px",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            borderRadius: "50%"
-                                        }}>
+                                        </MotionBox>
+                                        <MotionBox
+                                            whileHover={{
+                                                scale: 1.2
+                                            }}
+                                            whileTap={{
+                                                scale: 1.1
+                                            }}
+                                            sx={{
+                                                bgcolor: "white",
+                                                width: "40px",
+                                                height: "40px",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                borderRadius: "50%",
+                                                cursor: "pointer"
+                                            }}>
                                             <TwitterIcon />
-                                        </Box>
+                                        </MotionBox>
                                     </MotionBox>
                                 </MotionBox>
                             </SwiperSlide>
