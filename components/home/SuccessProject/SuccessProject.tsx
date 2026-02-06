@@ -19,43 +19,43 @@ const SuccessProject = () => {
     const successPro = [
         {
             "id": 1,
-            "image": "https://i.postimg.cc/MHqcjbS1/charity-foodbank-volunteer-group-(1).jpg",
+            "image": "/Home/success_project/img1.jpeg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 2,
-            "image": "https://i.postimg.cc/kGs2N6Jk/medium-shot-people-with-food-donations.jpg",
+            "image": "/Home/success_project/img2.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 3,
-            "image": "https://i.postimg.cc/cL3k6C5w/img1.jpg",
+            "image": "/Home/success_project/img3.jpg",
             "title": "Health Support Project Completed",
             "description": "Our health donation project provided medical support, supplies, and care to those who needed it most, improving well-being and saving lives."
         },
         {
             "id": 4,
-            "image": "https://i.postimg.cc/V5QMhf9n/img2.jpg",
+            "image": "/Home/success_project/img4.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 5,
-            "image": "https://i.postimg.cc/Rq5fYS11/img3.jpg",
+            "image": "/Home/success_project/img5.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 6,
-            "image": "https://i.postimg.cc/d1fG8mhQ/diverse-people-refugee-camps.jpg",
+            "image": "/Home/success_project/img6.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 7,
-            "image": "https://i.postimg.cc/gJ73vqx0/fdfdf.jpg",
+            "image": "/Home/success_project/img7.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
