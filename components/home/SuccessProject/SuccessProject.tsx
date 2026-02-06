@@ -16,33 +16,48 @@ import Image from "next/image";
 const SuccessProject = () => {
 
 
-
-
-
-
-
-
-
     const successPro = [
         {
             "id": 1,
-            "image": "https://i.postimg.cc/cL3k6C5w/img1.jpg"
+            "image": "https://i.postimg.cc/MHqcjbS1/charity-foodbank-volunteer-group-(1).jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 2,
-            "image": "https://i.postimg.cc/V5QMhf9n/img2.jpg"
+            "image": "https://i.postimg.cc/kGs2N6Jk/medium-shot-people-with-food-donations.jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 3,
-            "image": "https://i.postimg.cc/Rq5fYS11/img3.jpg"
+            "image": "https://i.postimg.cc/cL3k6C5w/img1.jpg",
+            "title": "Health Support Project Completed",
+            "description": "Our health donation project provided medical support, supplies, and care to those who needed it most, improving well-being and saving lives."
         },
         {
             "id": 4,
-            "image": "https://i.postimg.cc/d1fG8mhQ/diverse-people-refugee-camps.jpg"
+            "image": "https://i.postimg.cc/V5QMhf9n/img2.jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
             "id": 5,
-            "image": "https://i.postimg.cc/gJ73vqx0/fdfdf.jpg"
+            "image": "https://i.postimg.cc/Rq5fYS11/img3.jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
+        },
+        {
+            "id": 6,
+            "image": "https://i.postimg.cc/d1fG8mhQ/diverse-people-refugee-camps.jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
+        },
+        {
+            "id": 7,
+            "image": "https://i.postimg.cc/gJ73vqx0/fdfdf.jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
     ]
 
@@ -52,7 +67,10 @@ const SuccessProject = () => {
 
 
     return (
-        <Container maxWidth="lg" sx={{ mb: "80px" }}>
+        <Box sx={{
+            py: "80px",
+            bgcolor: "#F5F5F5"
+        }}>
             <Box>
                 <Typography sx={{
                     color: "#fb8500",
@@ -85,7 +103,7 @@ const SuccessProject = () => {
                             spaceBetween: 10,
                         },
                         1024: {
-                            slidesPerView: 4,
+                            slidesPerView: 3,
                             spaceBetween: 10,
                         },
                     }}
@@ -95,21 +113,48 @@ const SuccessProject = () => {
                     {
                         successPro.map(success => (
                             <SwiperSlide key={success.id}>
-                                <Box>
+                                <Box
+                                    sx={{
+                                        position: "relative"
+                                    }}
+                                >
                                     <Image
-                                        className="h-72 w-full rounded-2xl"
+                                        className="h-[70vh] w-full rounded-xl"
                                         src={success?.image}
                                         width={500}
                                         height={300}
                                         alt="Success"
                                     />
+                                    {/* <div className="h-32 w-full bg-[#00000034]">
+
+                                    </div> */}
+                                    <Box
+                                        sx={{
+                                            position: "absolute",
+                                            bottom: 15,
+                                            left: 22,
+                                            backdropFilter: 'blur(30px)',
+                                            bgcolor: "#00000034",
+                                            borderRadius: "10px",
+                                            color: "white",
+                                            maxWidth: "90%",
+                                            p: "20px"
+                                        }}
+                                    >
+                                        <Typography sx={{
+                                            fontSize: "22px",
+                                            fontWeight: "500",
+                                            color: "#FB8500"
+                                        }}>{success?.title}</Typography>
+                                        <Typography>{success?.description}</Typography>
+                                    </Box>
                                 </Box>
                             </SwiperSlide>
                         ))
                     }
                 </Swiper>
             </Box>
-        </Container>
+        </Box>
     );
 };
 
