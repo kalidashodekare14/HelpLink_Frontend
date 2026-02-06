@@ -31,14 +31,27 @@ const childImageVariants = {
         scale: 1,
         transition: {
             duration: 0.3,
-            // ease: [0.4, 0, 0.2, 1],
         },
     },
     hover: {
         scale: 1.1,
         transition: {
             duration: 0.3,
-            // ease: [0.4, 0, 0.2, 1],
+        }
+    }
+}
+
+const childButtonVariants = {
+    initial: {
+        display: "none",
+        transition: {
+            duration: 0.3,
+        },
+    },
+    hover: {
+        display: "visible",
+        transition: {
+            duration: 0.3,
         }
     }
 }
@@ -169,29 +182,28 @@ const SuccessProject = () => {
                                         height={300}
                                         alt="Success"
                                     />
-                                    {/* <div className="h-32 w-full bg-[#00000010]">
-
-                                    </div> */}
-                                    <Box
+                                    <MotionBox
                                         sx={{
                                             position: "absolute",
                                             bottom: 15,
                                             left: 22,
-                                            backdropFilter: 'blur(10px)',
+                                            backdropFilter: 'blur(20px)',
                                             bgcolor: "#00000010",
                                             borderRadius: "10px",
                                             color: "white",
                                             maxWidth: "90%",
-                                            p: "20px"
+                                            p: "20px",
+                                            pointerEvents: "none"
                                         }}
                                     >
                                         <Typography sx={{
                                             fontSize: "22px",
                                             fontWeight: "500",
-                                            color: "#FB8500"
+                                            color: "#FB8500",
+                                            my: "5px"
                                         }}>{success?.title}</Typography>
                                         <Typography>{success?.description}</Typography>
-                                    </Box>
+                                    </MotionBox>
                                 </MotionBox>
                             </SwiperSlide>
                         ))
