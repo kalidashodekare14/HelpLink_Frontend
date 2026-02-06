@@ -12,6 +12,37 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination } from 'swiper/modules';
 import Image from "next/image";
+import { motion } from "motion/react";
+
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
+const MotionImage = motion(Image);
+
+
+const parentVariants = {
+    initial: {},
+    hover: {},
+    animate: {}
+}
+
+
+const childImageVariants = {
+    initial: {
+        scale: 1,
+        transition: {
+            duration: 0.3,
+            // ease: [0.4, 0, 0.2, 1],
+        },
+    },
+    hover: {
+        scale: 1.1,
+        transition: {
+            duration: 0.3,
+            // ease: [0.4, 0, 0.2, 1],
+        }
+    }
+}
+
 
 const SuccessProject = () => {
 
@@ -19,34 +50,35 @@ const SuccessProject = () => {
     const successPro = [
         {
             "id": 1,
-            "image": "/Home/success_project/img1.jpeg",
-            "title": "Food Donation Completed",
-            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
-        },
-        {
-            "id": 2,
-            "image": "/Home/success_project/img2.jpg",
-            "title": "Food Donation Completed",
-            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
-        },
-        {
-            "id": 3,
             "image": "/Home/success_project/img3.jpg",
-            "title": "Health Support Project Completed",
+            "title": "Health Project Completed",
             "description": "Our health donation project provided medical support, supplies, and care to those who needed it most, improving well-being and saving lives."
         },
         {
-            "id": 4,
+            "id": 2,
             "image": "/Home/success_project/img4.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
         {
-            "id": 5,
+            "id": 3,
             "image": "/Home/success_project/img5.jpg",
             "title": "Food Donation Completed",
             "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
         },
+        {
+            "id": 4,
+            "image": "/Home/success_project/img1.jpeg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
+        },
+        {
+            "id": 5,
+            "image": "/Home/success_project/img2.jpg",
+            "title": "Food Donation Completed",
+            "description": "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community."
+        },
+
         {
             "id": 6,
             "image": "/Home/success_project/img6.jpg",
@@ -113,19 +145,31 @@ const SuccessProject = () => {
                     {
                         successPro.map(success => (
                             <SwiperSlide key={success.id}>
-                                <Box
+                                <MotionBox
+                                    variants={parentVariants}
+                                    initial="initial"
+                                    whileHover={"hover"}
                                     sx={{
-                                        position: "relative"
+                                        position: "relative",
+                                        borderRadius: "12px",
+                                        overflow: "hidden"
                                     }}
                                 >
-                                    <Image
+                                    <MotionImage
+                                        variants={childImageVariants}
+                                        initial="initial"
+                                        whileHover={"hover"}
+                                        transition={{
+                                            duration: 0.3,
+                                            ease: "easeInOut"
+                                        }}
                                         className="h-[70vh] w-full rounded-xl"
                                         src={success?.image}
                                         width={500}
                                         height={300}
                                         alt="Success"
                                     />
-                                    {/* <div className="h-32 w-full bg-[#00000034]">
+                                    {/* <div className="h-32 w-full bg-[#00000010]">
 
                                     </div> */}
                                     <Box
@@ -133,8 +177,8 @@ const SuccessProject = () => {
                                             position: "absolute",
                                             bottom: 15,
                                             left: 22,
-                                            backdropFilter: 'blur(30px)',
-                                            bgcolor: "#00000034",
+                                            backdropFilter: 'blur(10px)',
+                                            bgcolor: "#00000010",
                                             borderRadius: "10px",
                                             color: "white",
                                             maxWidth: "90%",
@@ -148,7 +192,7 @@ const SuccessProject = () => {
                                         }}>{success?.title}</Typography>
                                         <Typography>{success?.description}</Typography>
                                     </Box>
-                                </Box>
+                                </MotionBox>
                             </SwiperSlide>
                         ))
                     }
