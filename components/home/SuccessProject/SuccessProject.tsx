@@ -117,19 +117,28 @@ const SuccessProject = () => {
             bgcolor: "#F5F5F5"
         }}>
             <Box>
-                <Typography sx={{
-                    color: "#fb8500",
-                    textAlign: "center",
-                    fontSize: "18px"
-                }}>Complete Project</Typography>
-                <Typography
+                <MotionTypography
+                    initial={{ y: -50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    sx={{
+                        color: "#fb8500",
+                        textAlign: "center",
+                        fontSize: "18px"
+                    }}>Complete Project</MotionTypography>
+                <MotionTypography
+                    initial={{ y: -50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    viewport={{ once: true }}
                     sx={{
                         textAlign: "center",
                         fontSize: "30px",
                         fontWeight: "400",
                         my: "5px"
                     }}
-                >Our Recent Project</Typography>
+                >Our Recent Project</MotionTypography>
             </Box>
             <Box sx={{ my: "20px" }}>
                 <Swiper
@@ -159,50 +168,57 @@ const SuccessProject = () => {
                         successPro.map(success => (
                             <SwiperSlide key={success.id}>
                                 <MotionBox
-                                    variants={parentVariants}
-                                    initial="initial"
-                                    whileHover={"hover"}
-                                    sx={{
-                                        position: "relative",
-                                        borderRadius: "12px",
-                                        overflow: "hidden"
-                                    }}
+                                    initial={{ y: -50, opacity: 0 }}
+                                    whileInView={{ y: 0, opacity: 1 }}
+                                    transition={{ duration: 0.5, delay: 0.4 }}
+                                    viewport={{ once: true }}
                                 >
-                                    <MotionImage
-                                        variants={childImageVariants}
+                                    <MotionBox
+                                        variants={parentVariants}
                                         initial="initial"
                                         whileHover={"hover"}
-                                        transition={{
-                                            duration: 0.3,
-                                            ease: "easeInOut"
-                                        }}
-                                        className="h-[70vh] w-full rounded-xl"
-                                        src={success?.image}
-                                        width={500}
-                                        height={300}
-                                        alt="Success"
-                                    />
-                                    <MotionBox
                                         sx={{
-                                            position: "absolute",
-                                            bottom: 15,
-                                            left: 22,
-                                            backdropFilter: 'blur(20px)',
-                                            bgcolor: "#00000010",
-                                            borderRadius: "10px",
-                                            color: "white",
-                                            maxWidth: "90%",
-                                            p: "20px",
-                                            pointerEvents: "none"
+                                            position: "relative",
+                                            borderRadius: "12px",
+                                            overflow: "hidden"
                                         }}
                                     >
-                                        <Typography sx={{
-                                            fontSize: "22px",
-                                            fontWeight: "500",
-                                            color: "#FB8500",
-                                            my: "5px"
-                                        }}>{success?.title}</Typography>
-                                        <Typography>{success?.description}</Typography>
+                                        <MotionImage
+                                            variants={childImageVariants}
+                                            initial="initial"
+                                            whileHover={"hover"}
+                                            transition={{
+                                                duration: 0.3,
+                                                ease: "easeInOut"
+                                            }}
+                                            className="h-[70vh] w-full rounded-xl"
+                                            src={success?.image}
+                                            width={500}
+                                            height={300}
+                                            alt="Success"
+                                        />
+                                        <MotionBox
+                                            sx={{
+                                                position: "absolute",
+                                                bottom: 15,
+                                                left: 22,
+                                                backdropFilter: 'blur(20px)',
+                                                bgcolor: "#00000010",
+                                                borderRadius: "10px",
+                                                color: "white",
+                                                maxWidth: "90%",
+                                                p: "20px",
+                                                pointerEvents: "none"
+                                            }}
+                                        >
+                                            <Typography sx={{
+                                                fontSize: "22px",
+                                                fontWeight: "500",
+                                                color: "#FB8500",
+                                                my: "5px"
+                                            }}>{success?.title}</Typography>
+                                            <Typography>{success?.description}</Typography>
+                                        </MotionBox>
                                     </MotionBox>
                                 </MotionBox>
                             </SwiperSlide>
