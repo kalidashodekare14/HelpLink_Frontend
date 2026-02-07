@@ -9,7 +9,11 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination } from 'swiper/modules';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import { motion } from "motion/react";
 
+
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
 
 const Feedback = () => {
 
@@ -90,8 +94,18 @@ const Feedback = () => {
     return (
         <Container sx={{ my: "80px", py: "20px", bgcolor: "#F5F5F5" }} maxWidth={"lg"}>
             <Box >
-                <Typography sx={{ color: "#FB8500" }}>Testimonials</Typography>
-                <Typography sx={{ fontSize: "30px", fontWeight: "500" }}>Some Clients Feedback?</Typography>
+                <MotionTypography
+                    initial={{ y: -50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.9, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    sx={{ color: "#FB8500" }}>Testimonials</MotionTypography>
+                <MotionTypography
+                    initial={{ y: -50, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.9, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    sx={{ fontSize: "30px", fontWeight: "500" }}>Some Clients Feedback?</MotionTypography>
             </Box>
             <Box sx={{ my: "30px" }}>
                 <Swiper
@@ -118,15 +132,20 @@ const Feedback = () => {
                     {
                         reviewData.map(review => (
                             <SwiperSlide>
-                                <Box sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    gap: "10px",
-                                    border: "1px solid #bbbb",
-                                    p: "10px",
-                                    borderRadius: "5px",
-                                    bgcolor: "white"
-                                }}>
+                                <MotionBox
+                                    initial={{ y: -50, opacity: 0 }}
+                                    whileInView={{ y: 0, opacity: 1 }}
+                                    transition={{ duration: 0.9, delay: 0.5 }}
+                                    viewport={{ once: true }}
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "10px",
+                                        border: "1px solid #bbbb",
+                                        p: "10px",
+                                        borderRadius: "5px",
+                                        bgcolor: "white"
+                                    }}>
                                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                                         <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                             <img className="w-16 rounded-full border-4 border-[#FB8500]" src={review.image} alt="" />
@@ -143,7 +162,7 @@ const Feedback = () => {
                                             <Rating name="read-only" value={review.rating} readOnly />
                                         </Box>
                                     </Box>
-                                </Box>
+                                </MotionBox>
                             </SwiperSlide>
                         ))
                     }
