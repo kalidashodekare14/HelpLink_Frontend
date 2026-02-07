@@ -5,10 +5,38 @@ import LocationPinIcon from '@mui/icons-material/LocationPin';
 import HomeIcon from '@mui/icons-material/Home';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import Image from "next/image";
-type campaignChindren = {
-    totalCampaign: any,
-    setPage: (event: number) => void
+import { motion } from 'motion/react';
+
+const MotionCard = motion(Card);
+const MotionTypography = motion(Typography);
+const MotionBox = motion(Box);
+const MotionImage = motion(Image);
+
+
+
+// type campaignChindren = {
+//     totalCampaign: any,
+//     setPage: (event: number) => void
+// }
+
+
+const parentVariants = {
+    initial: {},
+    hover: {}
 }
+
+const childImageVariants = {
+    initial: {
+        // scale: 0
+    },
+    hover: {
+        scale: 1.1,
+        transition: {
+            duration: 0.3
+        }
+    }
+}
+
 
 
 const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) => {
@@ -21,17 +49,18 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
         <Container>
             <Box sx={{ width: "25%" }}>
             </Box>
-            <Box sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                    xs: "1fr",
-                    sm: "1fr 1fr",
-                    md: "1fr 1fr 1fr",
-                    lg: "1fr 1fr 1fr 1fr",
-                },
-                gap: "10px",
-                my: "20px"
-            }}>
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: {
+                        xs: "1fr",
+                        sm: "1fr 1fr",
+                        md: "1fr 1fr 1fr",
+                        lg: "1fr 1fr 1fr 1fr",
+                    },
+                    gap: "10px",
+                    my: "20px"
+                }}>
                 {
                     campaignLoading ? (
                         <>
@@ -89,10 +118,25 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                     ) : (
                         totalCampaign?.data?.data && (
                             totalCampaign?.data?.data.map((campaign: any) => (
-                                <Card key={campaign._id} sx={{ maxWidth: 345 }}>
+                                <MotionCard
+                                    variants={parentVariants}
+                                    initial="initial"
+                                    whileHover="hover"
+                                    key={campaign._id}
+                                    sx={{
+                                        maxWidth: 345,
+                                    }}>
                                     <Box sx={{ position: "relative" }}>
-                                        <Box>
-                                            <Image
+                                        <Box
+                                            sx={{
+                                                overflow: "hidden"
+                                            }}>
+                                            <MotionImage
+                                                variants={childImageVariants}
+                                                transition={{
+                                                    ease: "easeInOut",
+                                                    duration: 0.3
+                                                }}
                                                 src={campaign?.image[0]}
                                                 alt={campaign?.title}
                                                 width={500}
@@ -180,25 +224,27 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                     </Box>
                                     <Box sx={{ my: "10px", mx: "10px" }}>
                                         <Link href={`/campaigns/${campaign?._id}`}>
-                                            <Button
-                                                variant='outlined'
-                                                sx={{
-                                                    width: "100%",
-                                                    bgcolor: "#fb8500",
-                                                    borderColor: "#fb8500",
-                                                    color: "white",
-                                                    p: "10px 30px",
-                                                    '&:hover': {
-                                                        bgcolor: "#fb8500",
-                                                        borderColor: "#fb8500",
-                                                    }
+                                            <motion.button
+                                                initial={{ y: -50, opacity: 0 }}
+                                                whileInView={{
+                                                    y: 0,
+                                                    opacity: 1,
                                                 }}
+                                                whileHover={{
+                                                    scale: 1.05
+                                                }}
+                                                whileTap={{
+                                                    scale: 1.01
+                                                }}
+                                                transition={{ duration: 0.2 }}
+                                                viewport={{ once: true }}
+                                                className="bg-[#fb8500] text-white font-medium px-6 py-3 w-full cursor-pointer rounded-xl"
                                             >
                                                 Donate Now
-                                            </Button>
+                                            </motion.button>
                                         </Link>
                                     </Box>
-                                </Card>
+                                </MotionCard>
                             ))
                         )
                     )
