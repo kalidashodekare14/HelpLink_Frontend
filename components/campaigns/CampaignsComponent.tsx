@@ -230,9 +230,6 @@ const CampaignsComponent = ({ totalCampaign, campaignLoading, setPage }: any) =>
                                                     y: 0,
                                                     opacity: 1,
                                                 }}
-                                                whileHover={{
-                                                    scale: 1.05
-                                                }}
                                                 whileTap={{
                                                     scale: 1.01
                                                 }}
