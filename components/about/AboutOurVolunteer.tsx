@@ -76,7 +76,7 @@ const childTitleVariants = {
 }
 
 
-const OurVolunteer = () => {
+const AboutOurVolunteer = () => {
 
 
     const volunteerData = [
@@ -365,4 +365,4 @@ const OurVolunteer = () => {
     );
 };
 
-export default OurVolunteer;
+export default AboutOurVolunteer;

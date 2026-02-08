@@ -14,7 +14,7 @@ const MotionBox = motion(Box);
 const MotionDivider = motion(Divider);
 const MotionStack = motion(Stack);
 
-const OurMission = () => {
+const AboutMission = () => {
 
     const [aboutToggle, setAboutToggle] = useState<string>("history");
 
@@ -290,4 +290,4 @@ const OurMission = () => {
     );
 };
 
-export default OurMission;
+export default AboutMission;
