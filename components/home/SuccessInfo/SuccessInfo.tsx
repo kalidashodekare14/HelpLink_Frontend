@@ -118,7 +118,7 @@ const SuccessInfo = () => {
                         fontSize: "30px",
                         fontWeight: "600",
                     }}>
-                       <Counter counter={150} />+
+                        <Counter counter={150} />+
                     </Typography>
                     <Typography variant="h6" sx={{ fontSize: "18px", fontWeight: "20" }}  >
                         Happy Clients
