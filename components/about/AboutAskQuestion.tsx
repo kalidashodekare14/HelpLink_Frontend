@@ -1,12 +1,12 @@
 "use client"
 
-import { Accordion, AccordionActions, AccordionDetails, AccordionSummary, Box, Button, Container, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Typography } from "@mui/material";
 import { GridExpandMoreIcon } from "@mui/x-data-grid";
 import Image from "next/image";
 import { motion } from 'motion/react'
 
 const MotionTypography = motion(Typography);
-const MotionButton = motion(Button);
+// const MotionButton = motion(Button);
 const MotionBox = motion(Box);
 const MotionAccordion = motion(Accordion);
 
