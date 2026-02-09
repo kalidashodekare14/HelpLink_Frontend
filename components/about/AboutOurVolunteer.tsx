@@ -63,24 +63,13 @@ const childNameVariants = {
         }
     }
 }
-const childTitleVariants = {
-    initial: {
-        color: "#fb8500"
-    },
-    hover: {
-        color: "#FFFFFF",
-        transition: {
-            duration: 0.3
-        }
-    }
-}
-
 
 const AboutOurVolunteer = () => {
 
 
     const volunteerData = [
         {
+            "id": 1,
             "name": "Ariful Hasan",
             "title": "Volunteer",
             "image": "/Home/volunteer/img1.jpg",
@@ -91,6 +80,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 2,
             "name": "Nusrat Jahan",
             "title": "Volunteer",
             "image": "/Home/volunteer/img2.jpg",
@@ -101,6 +91,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 3,
             "name": "Rakibul Islam",
             "title": "Volunteer",
             "image": "/Home/volunteer/img3.jpg",
@@ -111,6 +102,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 4,
             "name": "Sharmin Akter",
             "title": "Volunteer",
             "image": "/Home/volunteer/img4.jpg",
@@ -121,6 +113,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 5,
             "name": "Mahmudul Karim",
             "title": "Volunteer",
             "image": "/Home/volunteer/img5.jpg",
@@ -131,6 +124,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 6,
             "name": "Tanvir Rahman",
             "title": "Volunteer",
             "image": "/Home/volunteer/img6.jpg",
@@ -141,6 +135,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 7,
             "name": "Sabrina Hossain",
             "title": "Volunteer",
             "image": "/Home/volunteer/img7.jpg",
@@ -151,6 +146,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 8,
             "name": "Shakil Ahmed",
             "title": "Volunteer",
             "image": "/Home/volunteer/img8.jpg",
@@ -161,6 +157,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 9,
             "name": "Rifat Islam",
             "title": "Volunteer",
             "image": "/Home/volunteer/img9.jpg",
@@ -171,6 +168,7 @@ const AboutOurVolunteer = () => {
             }
         },
         {
+            "id": 10,
             "name": "Fahim Ahmed",
             "title": "Volunteer",
             "image": "/Home/volunteer/img10.jpg",
@@ -226,7 +224,7 @@ const AboutOurVolunteer = () => {
                 >
                     {
                         volunteerData.map(volunteer => (
-                            <SwiperSlide>
+                            <SwiperSlide key={volunteer.id}>
                                 <MotionBox
                                     initial={{ y: -20, opacity: 0 }}
                                     whileInView={{
