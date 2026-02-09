@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Container, Divider, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Link from "next/link";
 import Image from "next/image";
@@ -9,9 +9,7 @@ import { motion } from "motion/react"
 import { useState } from "react";
 
 const MotionTypography = motion(Typography);
-const MotionButton = motion(Button);
 const MotionBox = motion(Box);
-const MotionDivider = motion(Divider);
 const MotionStack = motion(Stack);
 
 const AboutMission = () => {
