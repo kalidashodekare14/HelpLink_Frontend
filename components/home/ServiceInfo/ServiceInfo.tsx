@@ -67,7 +67,7 @@ const ProjectCard = ({ service }: any) => {
         bgcolor: "#fff",
         p: 3,
         my: 6,
-        borderRadius: 2,
+        borderRadius: 5,
         textAlign: "center",
         position: "relative",
         display: "flex",
@@ -124,33 +124,35 @@ const ProjectCard = ({ service }: any) => {
 // ================= Main Component =================
 const ServiceInfo = () => {
   return (
-    <Container maxWidth="lg" sx={{ bgcolor: "#f5f5f5", pt: 5 }}>
-      {/* Header */}
-      <SectionTitle
-        title=" Our Services"
-        sub_title="Providing Humanitarian services to all people is what we do"
-      />
+    <Box sx={{ bgcolor: "#f5f5f5" }}>
+      <Container maxWidth="lg" sx={{ pt: 5 }}>
+        {/* Header */}
+        <SectionTitle
+          title=" Our Services"
+          sub_title="Providing Humanitarian services to all people is what we do"
+        />
 
-      {/* Slider */}
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={10}
-        loop
-        pagination={{ clickable: true }}
-        breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 20 },
-          1024: { slidesPerView: 3, spaceBetween: 40 },
-        }}
-        modules={[Pagination]}
-        className="service_swiper"
-      >
-        {serviceData.map((service) => (
-          <SwiperSlide key={service.id}>
-            <ProjectCard service={service} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </Container>
+        {/* Slider */}
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={10}
+          loop
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 40 },
+          }}
+          modules={[Pagination]}
+          className="service_swiper"
+        >
+          {serviceData.map((service) => (
+            <SwiperSlide key={service.id}>
+              <ProjectCard service={service} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+    </Box>
   );
 };
 

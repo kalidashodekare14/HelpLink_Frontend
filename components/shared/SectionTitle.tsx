@@ -1,7 +1,7 @@
 "use client";
 
 // External Import
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
 //  Motion box wrap
@@ -28,7 +28,12 @@ const SectionTitle = ({
   sub_title: string;
 }) => {
   return (
-    <div>
+    <Stack
+      spacing={1}
+      sx={{
+        my: 3,
+      }}
+    >
       {/* Section Header */}
       <MotionTypography
         viewport={{ once: true }}
@@ -37,7 +42,7 @@ const SectionTitle = ({
         sx={{
           textAlign: "center",
           color: "#FB8500",
-          fontSize: 30,
+          fontSize: 33,
           fontWeight: 400,
         }}
       >
@@ -51,14 +56,14 @@ const SectionTitle = ({
         viewport={{ once: true }}
         sx={{
           textAlign: "center",
-          fontSize: 18,
+          fontSize: 17,
           mb: 4,
           color: "#6B6B6B",
         }}
       >
         {sub_title}
       </MotionTypography>
-    </div>
+    </Stack>
   );
 };
 

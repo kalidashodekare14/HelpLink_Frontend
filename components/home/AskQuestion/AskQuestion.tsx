@@ -75,7 +75,12 @@ const FAQItem = ({ faq, delay }: any) => {
 // ---------------- MAIN ----------------
 const AskQuestion = () => {
   return (
-    <Box sx={{ py: 10, bgcolor: "#F9FAFB" }}>
+    <Box
+      sx={{
+        py: 10,
+        // bgcolor: "#F9FAFB",
+      }}
+    >
       <Container>
         <Box
           sx={{

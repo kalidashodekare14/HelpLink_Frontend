@@ -156,10 +156,18 @@ const VolunteerCard = ({ volunteer }: any) => {
 // ---------------- MAIN ----------------
 const OurVolunteer = () => {
   return (
-    <Box sx={{ py: 10, bgcolor: "#F9FAFB" }}>
+    <Box
+      sx={{
+        py: 10,
+        // bgcolor: "#F9FAFB",
+      }}
+    >
       <Container>
         {/* Header */}
-        <SectionTitle title="Our Passionate Volunteers" sub_title="" />
+        <SectionTitle
+          title="Our Dedicated Volunteers"
+          sub_title="Dedicated individuals working together to support communities in need"
+        />
 
         {/* Slider */}
         <Swiper
