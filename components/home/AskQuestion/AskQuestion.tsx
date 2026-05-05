@@ -123,67 +123,99 @@ const AskQuestion = () => {
             viewport={{ once: true }}
             sx={{
               flex: 1,
+              position: "relative",
             }}
           >
+            {/* Background glow */}
             <Box
               sx={{
+                position: "absolute",
+                width: 300,
+                height: 300,
+                background:
+                  "radial-gradient(circle, rgba(251,133,0,0.15), transparent 70%)",
+                top: "-40px",
+                right: "-40px",
+                zIndex: 0,
+                filter: "blur(10px)",
+              }}
+            />
+
+            {/* Main layout */}
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: 1,
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gridTemplateRows: "200px 200px",
+                gridTemplateColumns: "1.2fr 0.8fr",
+                gridTemplateRows: "180px 180px",
                 gap: 2,
               }}
             >
-              {/* Big Image */}
+              {/* Large featured image */}
               <MotionBox
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.02 }}
                 sx={{
-                  gridColumn: "1 / 3",
-                  borderRadius: 4,
+                  gridRow: "1 / 3",
+                  borderRadius: 5,
                   overflow: "hidden",
-                  boxShadow: "0 15px 40px rgba(0,0,0,0.12)",
+                  boxShadow: "0 25px 60px rgba(0,0,0,0.15)",
+                  position: "relative",
                 }}
               >
                 <Image
                   src="/Home/question/img1.jpg"
-                  alt=""
-                  width={600}
-                  height={400}
+                  alt="helping people"
+                  width={800}
+                  height={600}
                   className="w-full h-full object-cover"
+                />
+
+                {/* overlay gradient */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to top, rgba(0,0,0,0.25), transparent)",
+                  }}
                 />
               </MotionBox>
 
-              {/* Small Image 1 */}
+              {/* Top small card */}
               <MotionBox
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ y: -5 }}
                 sx={{
                   borderRadius: 4,
                   overflow: "hidden",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                  boxShadow: "0 15px 35px rgba(0,0,0,0.12)",
+                  position: "relative",
                 }}
               >
                 <Image
                   src="/Home/question/img1.jpeg"
-                  alt=""
-                  width={300}
-                  height={200}
+                  alt="support"
+                  width={400}
+                  height={300}
                   className="w-full h-full object-cover"
                 />
               </MotionBox>
 
-              {/* Small Image 2 */}
+              {/* Bottom small card */}
               <MotionBox
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ y: -5 }}
                 sx={{
                   borderRadius: 4,
                   overflow: "hidden",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                  boxShadow: "0 15px 35px rgba(0,0,0,0.12)",
+                  position: "relative",
                 }}
               >
                 <Image
                   src="/Home/question/img2.jpg"
-                  alt=""
-                  width={300}
-                  height={200}
+                  alt="donation"
+                  width={400}
+                  height={300}
                   className="w-full h-full object-cover"
                 />
               </MotionBox>

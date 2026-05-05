@@ -1,17 +1,17 @@
 "use client";
 
+// External imports
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+// Icon to Meterial UI
+import SectionTitle from "@/components/shared/SectionTitle";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-
-// import "swiper/css";
-// import "swiper/css/pagination";
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
@@ -54,27 +54,25 @@ const fadeUp = {
 const VolunteerCard = ({ volunteer }: any) => {
   return (
     <MotionBox
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
       variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
+      sx={{
+        borderRadius: 5,
+        overflow: "hidden",
+        bgcolor: "#fff",
+        boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+      }}
     >
-      <MotionBox
-        whileHover="hover"
-        initial="rest"
-        sx={{
-          borderRadius: 4,
-          overflow: "hidden",
-          position: "relative",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-          cursor: "pointer",
-        }}
-      >
-        {/* Image */}
+      {/* IMAGE WRAPPER */}
+      <Box sx={{ position: "relative", overflow: "hidden" }}>
         <MotionBox
           variants={{
             rest: { scale: 1 },
-            hover: { scale: 1.08 },
+            hover: { scale: 1.05 },
           }}
           transition={{ duration: 0.4 }}
         >
@@ -87,7 +85,7 @@ const VolunteerCard = ({ volunteer }: any) => {
           />
         </MotionBox>
 
-        {/* Overlay */}
+        {/* SOFT GRADIENT OVERLAY */}
         <MotionBox
           variants={{
             rest: { opacity: 0 },
@@ -97,63 +95,71 @@ const VolunteerCard = ({ volunteer }: any) => {
           sx={{
             position: "absolute",
             inset: 0,
-            bgcolor: "rgba(0,0,0,0.5)",
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.1))",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: 2,
+            gap: 1.5,
           }}
         >
           {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
             <IconButton
               key={i}
               sx={{
-                bgcolor: "white",
-                "&:hover": { bgcolor: "#FB8500", color: "#fff" },
+                bgcolor: "rgba(255,255,255,0.9)",
+                color: "#333",
+                backdropFilter: "blur(6px)",
+                transition: "0.3s",
+                "&:hover": {
+                  bgcolor: "#FB8500",
+                  color: "#fff",
+                  transform: "translateY(-2px)",
+                },
               }}
             >
               <Icon />
             </IconButton>
           ))}
         </MotionBox>
+      </Box>
 
-        {/* Info */}
-        <Box
+      {/* INFO SECTION */}
+      <Box
+        sx={{
+          textAlign: "center",
+          my: 2.5,
+        }}
+      >
+        <Typography
           sx={{
-            textAlign: "center",
-            py: 2,
-            bgcolor: "#fff",
+            fontWeight: 600,
+            fontSize: 20,
+            mb: 0.3,
           }}
         >
-          <Typography fontWeight={600}>{volunteer.name}</Typography>
-          <Typography fontSize={14} color="text.secondary">
-            {volunteer.title}
-          </Typography>
-        </Box>
-      </MotionBox>
+          {volunteer.name}
+        </Typography>
+
+        <Typography
+          sx={{
+            fontSize: 17,
+            color: "text.secondary",
+          }}
+        >
+          {volunteer.title}
+        </Typography>
+      </Box>
     </MotionBox>
   );
 };
-
 // ---------------- MAIN ----------------
 const OurVolunteer = () => {
   return (
     <Box sx={{ py: 10, bgcolor: "#F9FAFB" }}>
       <Container>
         {/* Header */}
-        <MotionTypography
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          sx={{
-            textAlign: "center",
-            fontSize: 30,
-            fontWeight: 600,
-            mb: 5,
-          }}
-        >
-          Our Passionate Volunteers
-        </MotionTypography>
+        <SectionTitle title="Our Passionate Volunteers" sub_title="" />
 
         {/* Slider */}
         <Swiper
