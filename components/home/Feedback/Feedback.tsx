@@ -10,8 +10,10 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { motion } from "motion/react";
 import { Pagination } from "swiper/modules";
 
+// Custom CSS
+import "./Feedback.css";
+
 const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
 
 // --------------- Data ------------------
 const reviewData = [
@@ -106,34 +108,6 @@ const Feedback = () => {
           title="TESTIMONIALS"
           sub_title="What People Say About Us"
         />
-        {/* <Box sx={{ textAlign: "center", mb: 6 }}>
-          <MotionTypography
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            sx={{
-              color: "#FB8500",
-              fontWeight: 600,
-              letterSpacing: 1,
-            }}
-          >
-            TESTIMONIALS
-          </MotionTypography>
-
-          <MotionTypography
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            viewport={{ once: true }}
-            sx={{
-              fontSize: { xs: 24, md: 34 },
-              fontWeight: 800,
-              color: "#1F2937",
-            }}
-          >
-            What People Say About Us
-          </MotionTypography>
-        </Box> */}
 
         {/* SWIPER */}
         <Swiper
@@ -146,6 +120,7 @@ const Feedback = () => {
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
+          className="feedback-swiper"
         >
           {reviewData.map((review, i) => (
             <SwiperSlide key={i}>
