@@ -1,22 +1,18 @@
 "use client";
 
-// External imports
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Icon to Meterial UI
 import SectionTitle from "@/components/shared/SectionTitle";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
 
-// ---------------- DATA ----------------
 const volunteers = [
   {
     id: 1,
@@ -44,144 +40,101 @@ const volunteers = [
   },
 ];
 
-// ---------------- ANIMATION ----------------
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
-};
-
-// ---------------- CARD ----------------
 const VolunteerCard = ({ volunteer }: any) => {
   return (
     <MotionBox
-      initial="rest"
-      whileHover="hover"
-      animate="rest"
-      variants={fadeUp}
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.4 }}
       sx={{
+        position: "relative",
         borderRadius: 5,
         overflow: "hidden",
-        bgcolor: "#fff",
-        boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
-        cursor: "pointer",
-        transition: "all 0.3s ease",
+        height: 360,
+        boxShadow: "0 15px 40px rgba(0,0,0,0.12)",
       }}
     >
-      {/* IMAGE WRAPPER */}
-      <Box sx={{ position: "relative", overflow: "hidden" }}>
-        <MotionBox
-          variants={{
-            rest: { scale: 1 },
-            hover: { scale: 1.05 },
-          }}
-          transition={{ duration: 0.4 }}
-        >
-          <Image
-            src={volunteer.image}
-            alt={volunteer.name}
-            width={400}
-            height={400}
-            className="w-full h-75 object-cover"
-          />
-        </MotionBox>
+      {/* IMAGE */}
+      <Image
+        src={volunteer.image}
+        alt={volunteer.name}
+        fill
+        style={{ objectFit: "cover" }}
+      />
 
-        {/* SOFT GRADIENT OVERLAY */}
-        <MotionBox
-          variants={{
-            rest: { opacity: 0 },
-            hover: { opacity: 1 },
-          }}
-          transition={{ duration: 0.3 }}
-          sx={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.1))",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 1.5,
-          }}
-        >
+      {/* DARK GRADIENT */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2))",
+        }}
+      />
+
+      {/* INFO */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          width: "100%",
+          p: 3,
+          color: "#fff",
+        }}
+      >
+        <Typography sx={{ fontSize: 20, fontWeight: 700 }}>
+          {volunteer.name}
+        </Typography>
+
+        <Typography sx={{ fontSize: 13, opacity: 0.8 }}>
+          {volunteer.title}
+        </Typography>
+
+        {/* SOCIAL */}
+        <Box sx={{ display: "flex", gap: 1.5, mt: 2 }}>
           {[FacebookIcon, InstagramIcon, TwitterIcon].map((Icon, i) => (
             <IconButton
               key={i}
               sx={{
-                bgcolor: "rgba(255,255,255,0.9)",
-                color: "#333",
-                backdropFilter: "blur(6px)",
-                transition: "0.3s",
-                "&:hover": {
-                  bgcolor: "#FB8500",
-                  color: "#fff",
-                  transform: "translateY(-2px)",
-                },
+                bgcolor: "rgba(255,255,255,0.15)",
+                color: "#fff",
+                "&:hover": { bgcolor: "#FB8500" },
               }}
             >
-              <Icon />
+              <Icon fontSize="small" />
             </IconButton>
           ))}
-        </MotionBox>
-      </Box>
-
-      {/* INFO SECTION */}
-      <Box
-        sx={{
-          textAlign: "center",
-          my: 2.5,
-        }}
-      >
-        <Typography
-          sx={{
-            fontWeight: 600,
-            fontSize: 20,
-            mb: 0.3,
-          }}
-        >
-          {volunteer.name}
-        </Typography>
-
-        <Typography
-          sx={{
-            fontSize: 17,
-            color: "text.secondary",
-          }}
-        >
-          {volunteer.title}
-        </Typography>
+        </Box>
       </Box>
     </MotionBox>
   );
 };
-// ---------------- MAIN ----------------
+
 const OurVolunteer = () => {
   return (
-    <Box
-      sx={{
-        py: 10,
-      }}
-    >
+    <Box sx={{ py: 12, bgcolor: "#0F172A" }}>
       <Container>
-        {/* Header */}
+        {/* TITLE */}
         <SectionTitle
           title="Our Dedicated Volunteers"
-          sub_title="The Force Behind Every Success Story"
+          sub_title="People Who Make It Possible"
         />
 
-        {/* Slider */}
+        {/* SPOTLIGHT SWIPER */}
         <Swiper
-          slidesPerView={1}
-          spaceBetween={20}
+          slidesPerView={1.2}
+          centeredSlides={true}
+          spaceBetween={30}
+          loop={true}
           pagination={{ clickable: true }}
           modules={[Pagination]}
           breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
         >
-          {volunteers.map((volunteer) => (
-            <SwiperSlide key={volunteer.id}>
-              <VolunteerCard volunteer={volunteer} />
+          {volunteers.map((v) => (
+            <SwiperSlide key={v.id}>
+              <VolunteerCard volunteer={v} />
             </SwiperSlide>
           ))}
         </Swiper>
