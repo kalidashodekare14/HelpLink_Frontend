@@ -1,187 +1,155 @@
-"use client"
+"use client";
 
-import { useGetCampaignDetailsQuery } from "@/state/services/publicService/campaignsService";
-import { Box, Button, Container, Skeleton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useParams } from "next/navigation";
-import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CategoryIcon from '@mui/icons-material/Category';
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import CategoryIcon from "@mui/icons-material/Category";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+
+import { useGetCampaignDetailsQuery } from "@/state/services/publicService/campaignsService";
+
+const InfoRow = ({ label, value }: { label: string; value?: string }) => (
+  <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+    <ArrowRightIcon sx={{ fontSize: 18, color: "text.secondary" }} />
+    <Typography fontSize={14} fontWeight={500}>
+      {label}:
+    </Typography>
+    <Typography fontSize={14} color="text.secondary">
+      {value || "-"}
+    </Typography>
+  </Box>
+);
 
 const CampaignDetails = () => {
+  const { id } = useParams();
 
-    // Dynamic id
-    const { id } = useParams();
-    // Campaign Details RKTQuery
-    const { data: campaignDetails, isLoading: campaignLoading, error: campaignError } = useGetCampaignDetailsQuery(id ? String(id) : skipToken);
-    const detailsData = campaignDetails?.data
+  const { data, isLoading } = useGetCampaignDetailsQuery(
+    id ? String(id) : skipToken,
+  );
 
+  const details = data?.data;
 
+  return (
+    <Container sx={{ py: 6 }}>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+          gap: 4,
+        }}
+      >
+        {/* ================= LEFT: IMAGE ================= */}
+        <Paper
+          elevation={3}
+          sx={{
+            borderRadius: 3,
+            overflow: "hidden",
+            bgcolor: "white",
+          }}
+        >
+          {isLoading ? (
+            <Skeleton variant="rectangular" height={420} animation="wave" />
+          ) : (
+            <Swiper pagination modules={[Pagination]}>
+              {details?.image?.map((img: string, i: number) => (
+                <SwiperSlide key={i}>
+                  <Box
+                    component="img"
+                    src={img}
+                    alt="campaign"
+                    sx={{
+                      width: "100%",
+                      height: { xs: 260, lg: 420 },
+                      objectFit: "cover",
+                    }}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+        </Paper>
 
+        {/* ================= RIGHT: DETAILS ================= */}
+        <Stack spacing={2.5}>
+          {isLoading ? (
+            <>
+              <Skeleton height={40} />
+              <Skeleton height={80} />
+              <Skeleton height={25} width="60%" />
+              <Skeleton height={120} />
+              <Skeleton height={45} width={160} />
+            </>
+          ) : (
+            <>
+              {/* Title */}
+              <Typography variant="h4" fontWeight={700}>
+                {details?.title}
+              </Typography>
 
-    return (
-        <Container sx={{ py: 5 }}>
-            {/* Main Content */}
-            <Box sx={{
-                display: "flex",
-                flexDirection: { xs: "column", lg: "row" },
-                gap: "10px"
-            }}>
-                {/* Left Slide Content */}
-                {
-                    campaignLoading ? (
-                        <Box sx={{ width: { sx: "100%", lg: "50%" } }}>
-                            <Skeleton variant="rectangular" sx={{
-                                width: { sx: "100%", lg: "100%" },
-                                height: { xs: "250px", lg: "450px" },
-                                borderRadius: "16px"
-                            }} />
-                        </Box>
-                    ) : (
-                        <Box sx={{
-                            width: { sx: "100%", lg: "50%" },
-                            border: "1px solid #bbb",
-                            backgroundColor: "white",
-                            boxShadow: 2,
-                            borderRadius: "16px"
-                        }}>
-                            <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-                                {
-                                    detailsData?.image?.map((image: string) => (
-                                        <SwiperSlide>
-                                            <img className="w-full h-62.5 lg:h-112.5 rounded-2xl" src={image} alt="" />
-                                        </SwiperSlide>
-                                    ))
-                                }
-                            </Swiper>
-                        </Box>
-                    )
-                }
-                {/* Right Info Content */}
-                {
-                    campaignLoading ? (
-                        <Box
-                            display={"flex"}
-                            flexDirection={"column"}
-                            gap={"10px"}
-                            sx={{
-                                width: { sx: "100%", lg: "50%" },
-                            }}
-                        >
-                            <Skeleton variant="rectangular" sx={{
-                                width: { xs: "100%", lg: "100%" },
-                                height: "30px"
-                            }} />
-                            <Skeleton variant="rectangular" sx={{
-                                width: { xs: "100%", lg: "100%" },
-                                height: "80px"
-                            }}
-                            />
-                            <Skeleton variant="rectangular" sx={{
-                                width: { xs: "100%", lg: "100%" },
-                                height: "20px"
-                            }} />
-                            <Box>
-                                <Skeleton variant="rectangular" sx={{
-                                    width: { xs: "100%", lg: "100%" },
-                                    height: "20px"
-                                }}
-                                />
-                                <Box sx={{ ml: "10px", mt: "10px" }}>
-                                    <Skeleton sx={{ my: "5px", width: { xs: "100%", lg: "50%" } }} variant="rectangular" />
-                                    <Skeleton sx={{ my: "5px", width: { xs: "100%", lg: "50%" } }} variant="rectangular" />
-                                    <Skeleton sx={{ my: "5px", width: { xs: "100%", lg: "50%" } }} variant="rectangular" />
-                                    <Skeleton sx={{ my: "5px", width: { xs: "100%", lg: "50%" } }} variant="rectangular" />
-                                </Box>
-                            </Box>
-                            <Skeleton variant="rectangular" width={200} sx={{ borderRadius: "5px" }} height={50} />
-                        </Box>
-                    ) : (
-                        <Box sx={{
-                            width: { sx: "100%", lg: "50%" },
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "15px"
-                        }}>
-                            <Typography fontSize={"30px"}>{detailsData?.title}</Typography>
-                            <Typography fontSize={"16px"} color="#605F5F">{detailsData?.description}</Typography>
-                            <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                                <CategoryIcon />
-                                <Typography fontSize={"16px"}>Category: {detailsData?.category}</Typography>
-                            </Box>
-                            {
-                                detailsData?.location ? (
-                                    <Box>
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: "5px", fontWeight: "500" }}>
-                                            <LocationOnIcon />
-                                            <Typography fontSize={"16px"}>Location</Typography>
-                                        </Box>
-                                        <Stack spacing={1} color="#605F5F" sx={{ ml: "20px", mt: "5px" }}>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography sx={{ fontSize: "15px" }}>Division:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{detailsData?.location?.division}</Typography>
-                                            </Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography sx={{ fontSize: "15px" }}>District:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{detailsData?.location?.district}</Typography>
-                                            </Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography sx={{ fontSize: "15px" }}>Upazila:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{detailsData?.location?.upazila}</Typography>
-                                            </Box>
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: "10px", }}>
-                                                <Box sx={{ display: "flex", alignItems: "center", }}>
-                                                    <ArrowRightIcon sx={{ fontSize: "20px" }} />
-                                                    <Typography sx={{ fontSize: "15px" }}>Address:</Typography>
-                                                </Box>
-                                                <Typography sx={{ fontSize: "15px" }}>{detailsData?.location?.address}</Typography>
-                                            </Box>
-                                        </Stack>
-                                    </Box>
-                                ) : (
-                                    ""
-                                )
-                            }
-                            {/* <Button
-                                variant='outlined'
-                                sx={{
-                                    width: "50%",
-                                    bgcolor: "#fb8500",
-                                    borderColor: "#fb8500",
-                                    color: "white",
-                                    p: "10px 30px",
-                                    '&:hover': {
-                                        bgcolor: "#fb8500",
-                                        borderColor: "#fb8500",
-                                    },
-                                    boxShadow: "5px 5px 10px #797979"
-                                }}
-                            >
-                                Donate Now
-                            </Button> */}
-                        </Box>
-                    )
-                }
+              {/* Description */}
+              <Typography color="text.secondary" fontSize={15}>
+                {details?.description}
+              </Typography>
 
-            </Box>
+              {/* Category */}
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <CategoryIcon fontSize="small" />
+                <Typography fontSize={15}>{details?.category}</Typography>
+              </Box>
 
-        </Container>
-    );
+              {/* Location */}
+              {details?.location && (
+                <Paper sx={{ p: 2, borderRadius: 2 }} variant="outlined">
+                  <Box sx={{ display: "flex", gap: 1, mb: 1 }}>
+                    <LocationOnIcon />
+                    <Typography fontWeight={600}>Location</Typography>
+                  </Box>
+
+                  <Stack spacing={1}>
+                    <InfoRow
+                      label="Division"
+                      value={details.location.division}
+                    />
+                    <InfoRow
+                      label="District"
+                      value={details.location.district}
+                    />
+                    <InfoRow label="Upazila" value={details.location.upazila} />
+                    <InfoRow label="Address" value={details.location.address} />
+                  </Stack>
+                </Paper>
+              )}
+
+              {/* Action */}
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: "#fb8500",
+                  py: 1.2,
+                  fontWeight: 600,
+                  "&:hover": { bgcolor: "#e67600" },
+                }}
+              >
+                Donate Now
+              </Button>
+            </>
+          )}
+        </Stack>
+      </Box>
+    </Container>
+  );
 };
 
 export default CampaignDetails;
