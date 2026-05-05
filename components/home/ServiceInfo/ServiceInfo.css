@@ -1,0 +1,13 @@
+.service_swiper .swiper-pagination-bullet {
+  background: #ccc;
+  opacity: 1;
+}
+
+.service_swiper .swiper-pagination-bullet-active {
+  background: #fb8500;
+}
+
+.service_swiper {
+  position: relative;
+  padding-bottom: 5px !important;
+}
