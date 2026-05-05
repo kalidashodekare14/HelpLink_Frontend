@@ -102,7 +102,7 @@ const AskQuestion = () => {
               whileInView="show"
               transition={{ delay: 0.1 }}
               sx={{
-                fontSize: { xs: 28, md: 36 },
+                fontSize: { md: 50, sm: 30 },
                 fontWeight: 600,
                 mb: 3,
               }}
