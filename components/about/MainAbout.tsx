@@ -1,6 +1,6 @@
 import AskQuestion from "../home/AskQuestion/AskQuestion";
+import InfoSection from "../home/InfoSection/InfoSection";
 import OurVolunteer from "../home/OurVolunteer/OurVolunteer";
-import SuccessInfo from "../home/SuccessInfo/SuccessInfo";
 import AboutBanner from "./AboutBanner/AboutBanner";
 import AboutMission from "./AboutMission";
 
@@ -9,9 +9,11 @@ const MainAbout = () => {
     <div>
       <AboutBanner />
       <AboutMission />
-      <SuccessInfo />
-      <OurVolunteer />
+      <InfoSection />
       <AskQuestion />
+      <div className="mb-10">
+        <OurVolunteer />
+      </div>
     </div>
   );
 };
