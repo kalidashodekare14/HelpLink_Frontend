@@ -169,6 +169,7 @@ const SuccessProject = () => {
             1024: { slidesPerView: 3 },
           }}
           style={{ paddingBottom: "40px" }}
+          className="success-swiper"
         >
           {projects.map((project) => (
             <SwiperSlide key={project.id}>

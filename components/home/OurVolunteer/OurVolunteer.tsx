@@ -159,14 +159,13 @@ const OurVolunteer = () => {
     <Box
       sx={{
         py: 10,
-        // bgcolor: "#F9FAFB",
       }}
     >
       <Container>
         {/* Header */}
         <SectionTitle
           title="Our Dedicated Volunteers"
-          sub_title="Dedicated individuals working together to support communities in need"
+          sub_title="The Force Behind Every Success Story"
         />
 
         {/* Slider */}

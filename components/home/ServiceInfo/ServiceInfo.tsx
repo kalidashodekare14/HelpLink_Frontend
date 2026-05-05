@@ -129,7 +129,7 @@ const ServiceInfo = () => {
         {/* Header */}
         <SectionTitle
           title=" Our Services"
-          sub_title="Providing Humanitarian services to all people is what we do"
+          sub_title="Helping People in Every Possible Way"
         />
 
         {/* Slider */}
