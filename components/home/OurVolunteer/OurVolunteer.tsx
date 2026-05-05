@@ -6,13 +6,14 @@ import Image from "next/image";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import SectionTitle from "@/components/shared/SectionTitle";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
 
+// ------------- DATA -------------
 const volunteers = [
   {
     id: 1,
@@ -40,6 +41,7 @@ const volunteers = [
   },
 ];
 
+// ------------- Card -------------
 const VolunteerCard = ({ volunteer }: any) => {
   return (
     <MotionBox
@@ -109,27 +111,52 @@ const VolunteerCard = ({ volunteer }: any) => {
   );
 };
 
+// --------------- Main ------------------
 const OurVolunteer = () => {
   return (
     <Box sx={{ py: 12, bgcolor: "#0F172A" }}>
       <Container>
         {/* TITLE */}
-        <SectionTitle
-          title="Our Dedicated Volunteers"
-          sub_title="People Who Make It Possible"
-        />
+        <Box sx={{ textAlign: "center", mb: 6 }}>
+          <MotionTypography
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            sx={{
+              color: "#FB8500",
+              fontWeight: 600,
+              letterSpacing: 1,
+            }}
+          >
+            Our Dedicated Volunteers
+          </MotionTypography>
+
+          <MotionTypography
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+            sx={{
+              fontSize: { xs: 24, md: 34 },
+              fontWeight: 800,
+              color: "white",
+            }}
+          >
+            Helping People in Every Possible Way
+          </MotionTypography>
+        </Box>
 
         {/* SPOTLIGHT SWIPER */}
         <Swiper
           slidesPerView={1.2}
-          centeredSlides={true}
+          // centeredSlides={true}
           spaceBetween={30}
           loop={true}
           pagination={{ clickable: true }}
           modules={[Pagination]}
           breakpoints={{
             768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
           }}
         >
           {volunteers.map((v) => (
