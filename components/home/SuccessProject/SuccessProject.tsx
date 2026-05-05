@@ -1,20 +1,16 @@
 "use client";
 
-// Extranal Imports
 import { Box, Container, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Custom CSS
 import SectionTitle from "@/components/shared/SectionTitle";
 import "./SuccessProject.css";
 
 const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
 
-// ---------------- DATA ----------------
 const projects = [
   {
     id: 1,
@@ -58,7 +54,6 @@ const projects = [
     description:
       "We successfully completed our food donation project, providing nutritious meals to families in need and helping fight hunger in the community.",
   },
-
   {
     id: 6,
     image: "/Home/success_project/img6.jpg",
@@ -75,83 +70,105 @@ const projects = [
   },
 ];
 
-// ---------------- ANIMATIONS ----------------
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0 },
-};
-
-const imageHover = {
-  rest: { scale: 1 },
-  hover: { scale: 1.08 },
-};
-
-// ---------------- COMPONENT ----------------
 const ProjectCard = ({ project }: any) => {
   return (
     <MotionBox
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
-      sx={{ borderRadius: 3, overflow: "hidden" }}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+      sx={{
+        borderRadius: 4,
+        overflow: "hidden",
+        position: "relative",
+        boxShadow: "0 12px 35px rgba(0,0,0,0.12)",
+        height: 360,
+        cursor: "pointer",
+      }}
     >
-      <MotionBox initial="rest" whileHover="hover">
-        {/* Image */}
-        <MotionBox variants={imageHover} transition={{ duration: 0.4 }}>
-          <Image
-            src={project.image}
-            alt={project.title}
-            width={500}
-            height={350}
-            className="w-full h-80 object-cover"
-          />
-        </MotionBox>
+      {/* IMAGE */}
+      <Box sx={{ position: "absolute", inset: 0 }}>
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          style={{ objectFit: "cover" }}
+        />
+      </Box>
 
-        {/* Overlay */}
+      {/* GRADIENT OVERLAY */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2), transparent)",
+        }}
+      />
+
+      {/* CONTENT */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          p: 3,
+          color: "#fff",
+        }}
+      >
+        {/* Badge */}
         <Box
           sx={{
-            position: "absolute",
-            bottom: 16,
-            left: 16,
-            right: 16,
-            backdropFilter: "blur(12px)",
-            bgcolor: "rgba(0,0,0,0.4)",
-            borderRadius: 2,
-            p: 2,
-            color: "#fff",
+            display: "inline-block",
+            px: 2,
+            py: 0.5,
+            mb: 1,
+            borderRadius: "999px",
+            bgcolor: "#FB8500",
+            fontSize: 12,
+            fontWeight: 600,
           }}
         >
-          <Typography
-            sx={{ color: "#FB8500", fontWeight: 600, fontSize: 20, mb: 1 }}
-          >
-            {project.title}
-          </Typography>
-          <Typography fontSize={14}>{project.description}</Typography>
+          Completed Project
         </Box>
-      </MotionBox>
+
+        <Typography sx={{ fontSize: 22, fontWeight: 700 }}>
+          {project.title}
+        </Typography>
+
+        <Typography
+          sx={{
+            fontSize: 15,
+            color: "rgba(255,255,255,0.85)",
+            mt: 1,
+            lineHeight: 1.6,
+          }}
+        >
+          {project.description}
+        </Typography>
+      </Box>
     </MotionBox>
   );
 };
 
-// ---------------- MAIN ----------------
 const SuccessProject = () => {
   return (
-    <Box sx={{ py: 10, bgcolor: "#F7F7F7" }}>
+    <Box sx={{ py: 12, bgcolor: "#F6F8FB" }}>
       <Container>
-        {/* Header */}
-        <SectionTitle title=" Completed Projects" sub_title="Our Recent Work" />
-        {/* Slider */}
+        {/* SECTION TITLE */}
+        <SectionTitle
+          title="Completed Projects"
+          sub_title="Our Impact Stories"
+        />
+
+        {/* SWIPER */}
         <Swiper
           slidesPerView={1}
-          spaceBetween={16}
+          spaceBetween={25}
           pagination={{ clickable: true }}
           modules={[Pagination]}
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
-          className="success-swiper"
+          style={{ paddingBottom: "40px" }}
         >
           {projects.map((project) => (
             <SwiperSlide key={project.id}>

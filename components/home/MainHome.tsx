@@ -15,7 +15,6 @@ const MainHome = () => {
       <Banner />
       <OurMission />
       <ServiceInfo />
-      {/* <SuccessInfoComponent /> */}
       <SuccessProject />
       <InfoSection />
       <AskQuestion />
