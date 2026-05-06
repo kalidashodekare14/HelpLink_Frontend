@@ -1,15 +1,12 @@
 "use client";
 
+import Counter from "@/components/shared/Counter";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { Box, Container, Typography } from "@mui/material";
-import {
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useSpring,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import InfoModal from "./InfoModal";
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
@@ -22,40 +19,13 @@ const stats = [
   { id: 4, value: 35000, suffix: "+", label: "Team Support" },
 ];
 
-// ---------------- COUNTER COMPONENT ----------------
-const Counter = ({
-  value,
-  suffix = "",
-}: {
-  value: number;
-  suffix?: string;
-}) => {
-  const motionValue = useMotionValue(0);
-
-  const spring = useSpring(motionValue, {
-    stiffness: 100,
-    damping: 20,
-  });
-
-  const [display, setDisplay] = useState(0);
-
-  useMotionValueEvent(spring, "change", (latest) => {
-    setDisplay(Math.floor(latest));
-  });
-
-  useEffect(() => {
-    motionValue.set(value);
-  }, [value, motionValue]);
-
-  return (
-    <span>
-      {display.toLocaleString()}
-      {suffix}
-    </span>
-  );
-};
 // ---------------- MAIN ----------------
 const InfoSection = () => {
+  // Modal state
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Box sx={{ bgcolor: "#1F2937", py: 8 }}>
       <Container>
@@ -116,9 +86,8 @@ const InfoSection = () => {
                       color: index % 2 === 0 ? "#FB8500" : "#fff",
                     }}
                   >
-                    <Counter value={item.value} suffix={item.suffix} />
+                    <Counter counter={item.value} suffix={item.suffix} />
                   </Typography>
-
                   <Typography
                     sx={{
                       fontSize: 13,
@@ -156,6 +125,7 @@ const InfoSection = () => {
             >
               {/* Main Button */}
               <MotionBox
+                onClick={handleOpen}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
@@ -194,6 +164,7 @@ const InfoSection = () => {
             </MotionBox>
           </Box>
         </Box>
+        <InfoModal open={open} handleClose={handleClose} />
       </Container>
     </Box>
   );
