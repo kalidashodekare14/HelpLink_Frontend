@@ -151,7 +151,7 @@ const ProfileComponent = () => {
 
   return (
     <Box bgcolor={"#f4f6f8"}>
-      <Container>
+      <Container sx={{ pb: 5 }}>
         {/* Profile Banner */}
         <Box
           sx={{
