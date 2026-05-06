@@ -124,7 +124,7 @@ const OurMission = () => {
           <MotionBox
             initial={{ y: -50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
             viewport={{ once: true }}
             sx={{
               display: "flex",
@@ -178,7 +178,7 @@ const OurMission = () => {
             <MotionStack
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
               viewport={{ once: true }}
               spacing={1}
               my={2}
@@ -311,24 +311,31 @@ const OurMission = () => {
           )}
 
           <Link href={"/about"}>
-            <motion.button
-              initial={{ y: -50, opacity: 0 }}
-              whileInView={{
-                y: 0,
-                opacity: 1,
-              }}
-              whileHover={{
-                scale: 1.1,
-              }}
-              whileTap={{
-                scale: 1.01,
-              }}
-              transition={{ duration: 0.2 }}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
               viewport={{ once: true }}
-              className="bg-[#fb8500] text-white font-medium px-6 py-3 cursor-pointer rounded-xl"
             >
-              About More
-            </motion.button>
+              <motion.button
+                initial={{ y: -50, opacity: 0 }}
+                whileInView={{
+                  y: 0,
+                  opacity: 1,
+                }}
+                whileHover={{
+                  scale: 1.1,
+                }}
+                whileTap={{
+                  scale: 1.01,
+                }}
+                transition={{ duration: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-[#fb8500] text-white font-medium px-6 py-3 cursor-pointer rounded-xl"
+              >
+                About More
+              </motion.button>
+            </motion.div>
           </Link>
         </Box>
       </Box>
