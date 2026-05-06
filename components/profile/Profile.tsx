@@ -150,457 +150,470 @@ const ProfileComponent = () => {
   };
 
   return (
-    <Container>
-      {/* Profile Banner */}
-      <Box
-        sx={{
-          height: "200px",
-          backgroundImage: "url('/Profile/profile.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          p: "10px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          px: "20%",
-          mb: "3%",
-        }}
-      >
-        <Typography sx={{ fontSize: { lg: "40px", sm: "15px" } }}>
-          Profile
-        </Typography>
-      </Box>
-      {/* Profile Info */}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box>
-          {/* Top image, name, email, edit button box */}
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: { xs: "start", lg: "center" },
-            }}
-          >
+    <Box bgcolor={"#f4f6f8"}>
+      <Container>
+        {/* Profile Banner */}
+        <Box
+          sx={{
+            height: "200px",
+            backgroundImage: "url('/Profile/profile.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            p: "10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            px: "20%",
+            mb: "3%",
+          }}
+        >
+          <Typography sx={{ fontSize: { lg: "40px", sm: "15px" } }}>
+            Profile
+          </Typography>
+        </Box>
+        {/* Profile Info */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box>
+            {/* Top image, name, email, edit button box */}
             <Box
               sx={{
                 display: "flex",
-                flexDirection: { xs: "column", lg: "row" },
-                alignItems: "center",
-                gap: "10px",
+                justifyContent: "space-between",
+                alignItems: { xs: "start", lg: "center" },
+                bgcolor: "white",
+                p: 3,
+                borderRadius: 3,
               }}
             >
-              {profileDataLoading ? (
-                <Skeleton variant="circular" width={120} height={120} />
-              ) : (
-                <Box sx={{ position: "relative" }}>
-                  {profileData?.image ? (
-                    <Avatar
-                      alt={profileData?.name}
-                      src={profileData?.image}
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        border: "1px solid #bbbb",
-                      }}
-                    />
-                  ) : (
-                    <AccountCircleIcon
-                      sx={{ fontSize: "132px", borderRadius: "100%" }}
-                    />
-                  )}
-
-                  {infoToggle &&
-                    (imageLoading ? (
-                      <Box
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", lg: "row" },
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                {profileDataLoading ? (
+                  <Skeleton variant="circular" width={120} height={120} />
+                ) : (
+                  <Box sx={{ position: "relative" }}>
+                    {profileData?.image ? (
+                      <Avatar
+                        alt={profileData?.name}
+                        src={profileData?.image}
                         sx={{
-                          position: "absolute",
-                          right: "15px",
-                          bottom: "15px",
-                          bgcolor: "white",
-                          fontSize: "2px",
-                          p: "5px",
-                          borderRadius: "100%",
+                          width: 120,
+                          height: 120,
+                          border: "1px solid #bbbb",
                         }}
-                      >
-                        <CircularProgress size="30px" color="success" />
-                      </Box>
+                      />
                     ) : (
-                      <Box
-                        onClick={() =>
-                          (
-                            document.querySelector(
-                              'input[type="file"]',
-                            ) as HTMLInputElement
-                          )?.click()
-                        }
-                      >
-                        <CameraAltIcon
+                      <AccountCircleIcon
+                        sx={{ fontSize: "132px", borderRadius: "100%" }}
+                      />
+                    )}
+
+                    {infoToggle &&
+                      (imageLoading ? (
+                        <Box
                           sx={{
                             position: "absolute",
                             right: "15px",
                             bottom: "15px",
                             bgcolor: "white",
-                            fontSize: "35px",
+                            fontSize: "2px",
                             p: "5px",
                             borderRadius: "100%",
-                            cursor: "pointer",
                           }}
-                        />
-                        <input
-                          hidden
-                          onChange={(event) => handleImageUpload(event)}
-                          type="file"
-                        />
-                      </Box>
-                    ))}
-                </Box>
-              )}
-              {profileDataLoading ? (
-                <Stack spacing={1}>
-                  <Skeleton variant="rectangular" width={210} height={30} />
-                  <Skeleton variant="rectangular" width={230} height={30} />
-                </Stack>
-              ) : (
-                <Box sx={{}}>
-                  <Typography fontSize={"25px"}>{profileData?.name}</Typography>
-                  <Typography
-                    sx={{
-                      mt: "5px",
-                      color: "#bbbbb",
-                    }}
+                        >
+                          <CircularProgress size="30px" color="success" />
+                        </Box>
+                      ) : (
+                        <Box
+                          onClick={() =>
+                            (
+                              document.querySelector(
+                                'input[type="file"]',
+                              ) as HTMLInputElement
+                            )?.click()
+                          }
+                        >
+                          <CameraAltIcon
+                            sx={{
+                              position: "absolute",
+                              right: "15px",
+                              bottom: "15px",
+                              bgcolor: "white",
+                              fontSize: "35px",
+                              p: "5px",
+                              borderRadius: "100%",
+                              cursor: "pointer",
+                            }}
+                          />
+                          <input
+                            hidden
+                            onChange={(event) => handleImageUpload(event)}
+                            type="file"
+                          />
+                        </Box>
+                      ))}
+                  </Box>
+                )}
+                {profileDataLoading ? (
+                  <Stack spacing={1}>
+                    <Skeleton variant="rectangular" width={210} height={30} />
+                    <Skeleton variant="rectangular" width={230} height={30} />
+                  </Stack>
+                ) : (
+                  <Box sx={{}}>
+                    <Typography fontSize={"25px"}>
+                      {profileData?.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        mt: "5px",
+                        color: "#bbbbb",
+                      }}
+                    >
+                      {profileData?.email}
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+              {/* Butttons */}
+              <Box>
+                {infoToggle && (
+                  <Box
+                    sx={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
-                    {profileData?.email}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-            {/* Butttons */}
-            <Box>
-              {infoToggle && (
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: "10px" }}
-                >
-                  <Button
-                    sx={{ bgcolor: "#FB8500", color: "white", border: "0" }}
-                    type="submit"
-                    variant="outlined"
-                  >
-                    Save
-                  </Button>
-                  <Button
-                    sx={{
-                      color: "black",
-                      fontWeight: "400",
-                      border: "1px solid #FB8500",
-                    }}
-                    onClick={() => setInfoToggle(false)}
-                    variant="outlined"
-                  >
-                    Cancel
-                  </Button>
-                </Box>
-              )}
-              {!infoToggle && (
-                <>
-                  {!profileDataLoading && (
                     <Button
                       sx={{ bgcolor: "#FB8500", color: "white", border: "0" }}
-                      onClick={handleToggle}
+                      type="submit"
                       variant="outlined"
                     >
-                      Edit
+                      Save
                     </Button>
-                  )}
-                </>
-              )}
-            </Box>
-          </Box>
-          {/* Daynamic Toggle  */}
-          {infoToggle ? (
-            // Update Info fieild
-            <Box sx={{ my: "20px" }}>
-              <Typography fontSize={20} my={1}>
-                Personal Info
-              </Typography>
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-                  gap: "20px",
-                }}
-              >
-                <TextField
-                  {...register("name")}
-                  fullWidth
-                  defaultValue={profileData.name || ""}
-                  error={!!errors?.name}
-                  helperText={errors?.name && "Name is required"}
-                  size="small"
-                  id="outlined-basic"
-                  label="Full Name"
-                  variant="outlined"
-                />
-                <FormControl error={!!errors?.gender} size="small" fullWidth>
-                  <InputLabel id="demo-simple-select-label">Male</InputLabel>
-                  <Select
-                    {...register("gender")}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    defaultValue={profileData?.gender}
-                    label="Age"
-                    // onChange={handleChange}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"Male"}>Male</MenuItem>
-                    <MenuItem value={"Female"}>Female</MenuItem>
-                    <MenuItem value={"Others"}>Others</MenuItem>
-                  </Select>
-                  {errors.gender && (
-                    <FormHelperText>Gender is Required</FormHelperText>
-                  )}
-                </FormControl>
-                <FormControl error={!!errors?.division} size="small" fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Division
-                  </InputLabel>
-                  <Select
-                    {...register("division")}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    defaultValue={profileData?.location?.division}
-                    label="Age"
-                    onChange={(e) => setDivision(e.target.value)}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {divisions.map((div: string) => (
-                      <MenuItem key={div} value={div}>
-                        {div}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  {errors.division && (
-                    <FormHelperText>Division is Required</FormHelperText>
-                  )}
-                </FormControl>
-                <FormControl
-                  error={!!errors?.division}
-                  size="small"
-                  fullWidth
-                  disabled={!division}
-                >
-                  <InputLabel id="demo-simple-select-label">
-                    District
-                  </InputLabel>
-                  <Select
-                    {...register("district")}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    defaultValue={profileData?.location?.district}
-                    label="Age"
-                    onChange={(e) => setDistrict(e.target.value)}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {districts.map((div: string) => (
-                      <MenuItem key={div} value={div}>
-                        {div}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  {errors.district && (
-                    <FormHelperText>District is Required</FormHelperText>
-                  )}
-                </FormControl>
-                <FormControl
-                  error={!!errors?.upazila}
-                  size="small"
-                  fullWidth
-                  disabled={!district}
-                >
-                  <InputLabel id="demo-simple-select-label">Upazila</InputLabel>
-                  <Select
-                    {...register("upazila")}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    defaultValue={profileData?.location?.upazila}
-                    label="Age"
-                    onChange={(e) => setUpazila(e.target.value)}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    {upazilas.map((div: string) => (
-                      <MenuItem key={div} value={div}>
-                        {div}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  {errors.upazila && (
-                    <FormHelperText>Upazila is Required</FormHelperText>
-                  )}
-                </FormControl>
-                <TextField
-                  {...register("address")}
-                  error={!!errors?.address}
-                  helperText={errors?.address && "Address is required"}
-                  defaultValue={profileData?.location?.address || ""}
-                  size="small"
-                  id="outlined-multiline-static"
-                  label="Address"
-                  multiline
-                  rows={1}
-                />
-              </Box>
-            </Box>
-          ) : (
-            // Profile Info
-            <Box sx={{ my: "20px" }}>
-              {profileDataLoading ? (
-                <Skeleton
-                  sx={{ mb: "10px" }}
-                  variant="rectangular"
-                  width={"20%"}
-                  height={30}
-                />
-              ) : (
-                <Typography fontSize={20} my={1}>
-                  Personal Info
-                </Typography>
-              )}
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-                  gap: "20px",
-                }}
-              >
-                {profileDataLoading ? (
+                    <Button
+                      sx={{
+                        color: "black",
+                        fontWeight: "400",
+                        border: "1px solid #FB8500",
+                      }}
+                      onClick={() => setInfoToggle(false)}
+                      variant="outlined"
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                )}
+                {!infoToggle && (
                   <>
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={40}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={40}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={40}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={40}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={40}
-                    />
-                    <Skeleton
-                      variant="rectangular"
-                      width={"100%"}
-                      height={40}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Box>
-                      <Typography>Full Name</Typography>
-                      <Typography
-                        sx={{
-                          border: "1px solid #bbbb",
-                          p: "10px",
-                          bgcolor: "#E7E7E7",
-                          borderRadius: "10px",
-                        }}
+                    {!profileDataLoading && (
+                      <Button
+                        sx={{ bgcolor: "#FB8500", color: "white", border: "0" }}
+                        onClick={handleToggle}
+                        variant="outlined"
                       >
-                        {profileData?.name || "N/A"}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography>Gender</Typography>
-                      <Typography
-                        sx={{
-                          border: "1px solid #bbbb",
-                          p: "10px",
-                          bgcolor: "#E7E7E7",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {profileData?.gender || "N/A"}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography>Division</Typography>
-                      <Typography
-                        sx={{
-                          border: "1px solid #bbbb",
-                          p: "10px",
-                          bgcolor: "#E7E7E7",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {profileData?.location?.division || "N/A"}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography>District</Typography>
-                      <Typography
-                        sx={{
-                          border: "1px solid #bbbb",
-                          p: "10px",
-                          bgcolor: "#E7E7E7",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {profileData?.location?.district || "N/A"}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography>Upazilla</Typography>
-                      <Typography
-                        sx={{
-                          border: "1px solid #bbbb",
-                          p: "10px",
-                          bgcolor: "#E7E7E7",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {profileData?.location?.upazila || "N/A"}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography>Address</Typography>
-                      <Typography
-                        sx={{
-                          border: "1px solid #bbbb",
-                          p: "10px",
-                          bgcolor: "#E7E7E7",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        {profileData?.location?.address || "N/A"}
-                      </Typography>
-                    </Box>
+                        Edit
+                      </Button>
+                    )}
                   </>
                 )}
               </Box>
             </Box>
-          )}
-        </Box>
-      </form>
-      <Toaster />
-    </Container>
+            {/* Daynamic Toggle  */}
+            {infoToggle ? (
+              // Update Info fieild
+              <Box sx={{ my: "20px", bgcolor: "white", p: 3 }}>
+                <Typography fontSize={20} my={1}>
+                  Personal Info
+                </Typography>
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+                    gap: "20px",
+                  }}
+                >
+                  <TextField
+                    {...register("name")}
+                    fullWidth
+                    defaultValue={profileData.name || ""}
+                    error={!!errors?.name}
+                    helperText={errors?.name && "Name is required"}
+                    size="medium"
+                    id="outlined-basic"
+                    label="Full Name"
+                    variant="outlined"
+                  />
+                  <FormControl error={!!errors?.gender} size="medium" fullWidth>
+                    <InputLabel id="demo-simple-select-label">Male</InputLabel>
+                    <Select
+                      {...register("gender")}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      defaultValue={profileData?.gender}
+                      label="Age"
+                      // onChange={handleChange}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={"Male"}>Male</MenuItem>
+                      <MenuItem value={"Female"}>Female</MenuItem>
+                      <MenuItem value={"Others"}>Others</MenuItem>
+                    </Select>
+                    {errors.gender && (
+                      <FormHelperText>Gender is Required</FormHelperText>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    error={!!errors?.division}
+                    size="medium"
+                    fullWidth
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                      Division
+                    </InputLabel>
+                    <Select
+                      {...register("division")}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      defaultValue={profileData?.location?.division}
+                      label="Age"
+                      onChange={(e) => setDivision(e.target.value)}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      {divisions.map((div: string) => (
+                        <MenuItem key={div} value={div}>
+                          {div}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {errors.division && (
+                      <FormHelperText>Division is Required</FormHelperText>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    error={!!errors?.division}
+                    size="medium"
+                    fullWidth
+                    disabled={!division}
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                      District
+                    </InputLabel>
+                    <Select
+                      {...register("district")}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      defaultValue={profileData?.location?.district}
+                      label="Age"
+                      onChange={(e) => setDistrict(e.target.value)}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      {districts.map((div: string) => (
+                        <MenuItem key={div} value={div}>
+                          {div}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {errors.district && (
+                      <FormHelperText>District is Required</FormHelperText>
+                    )}
+                  </FormControl>
+                  <FormControl
+                    error={!!errors?.upazila}
+                    size="medium"
+                    fullWidth
+                    disabled={!district}
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                      Upazila
+                    </InputLabel>
+                    <Select
+                      {...register("upazila")}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      defaultValue={profileData?.location?.upazila}
+                      label="Age"
+                      onChange={(e) => setUpazila(e.target.value)}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      {upazilas.map((div: string) => (
+                        <MenuItem key={div} value={div}>
+                          {div}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {errors.upazila && (
+                      <FormHelperText>Upazila is Required</FormHelperText>
+                    )}
+                  </FormControl>
+                  <TextField
+                    {...register("address")}
+                    error={!!errors?.address}
+                    helperText={errors?.address && "Address is required"}
+                    defaultValue={profileData?.location?.address || ""}
+                    size="medium"
+                    id="outlined-multiline-static"
+                    label="Address"
+                    multiline
+                    rows={1}
+                  />
+                </Box>
+              </Box>
+            ) : (
+              // Profile Info
+              <Box sx={{ my: "20px", bgcolor: "white", p: 3, borderRadius: 2 }}>
+                {profileDataLoading ? (
+                  <Skeleton
+                    sx={{ mb: "10px" }}
+                    variant="rectangular"
+                    width={"20%"}
+                    height={30}
+                  />
+                ) : (
+                  <Typography fontSize={20} my={1}>
+                    Personal Info
+                  </Typography>
+                )}
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+                    gap: "20px",
+                  }}
+                >
+                  {profileDataLoading ? (
+                    <>
+                      <Skeleton
+                        variant="rectangular"
+                        width={"100%"}
+                        height={40}
+                      />
+                      <Skeleton
+                        variant="rectangular"
+                        width={"100%"}
+                        height={40}
+                      />
+                      <Skeleton
+                        variant="rectangular"
+                        width={"100%"}
+                        height={40}
+                      />
+                      <Skeleton
+                        variant="rectangular"
+                        width={"100%"}
+                        height={40}
+                      />
+                      <Skeleton
+                        variant="rectangular"
+                        width={"100%"}
+                        height={40}
+                      />
+                      <Skeleton
+                        variant="rectangular"
+                        width={"100%"}
+                        height={40}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Box>
+                        <Typography>Full Name</Typography>
+                        <Typography
+                          sx={{
+                            border: "1px solid #bbbb",
+                            p: "10px",
+                            bgcolor: "#E7E7E7",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {profileData?.name || "N/A"}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography>Gender</Typography>
+                        <Typography
+                          sx={{
+                            border: "1px solid #bbbb",
+                            p: "10px",
+                            bgcolor: "#E7E7E7",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {profileData?.gender || "N/A"}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography>Division</Typography>
+                        <Typography
+                          sx={{
+                            border: "1px solid #bbbb",
+                            p: "10px",
+                            bgcolor: "#E7E7E7",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {profileData?.location?.division || "N/A"}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography>District</Typography>
+                        <Typography
+                          sx={{
+                            border: "1px solid #bbbb",
+                            p: "10px",
+                            bgcolor: "#E7E7E7",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {profileData?.location?.district || "N/A"}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography>Upazilla</Typography>
+                        <Typography
+                          sx={{
+                            border: "1px solid #bbbb",
+                            p: "10px",
+                            bgcolor: "#E7E7E7",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {profileData?.location?.upazila || "N/A"}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography>Address</Typography>
+                        <Typography
+                          sx={{
+                            border: "1px solid #bbbb",
+                            p: "10px",
+                            bgcolor: "#E7E7E7",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {profileData?.location?.address || "N/A"}
+                        </Typography>
+                      </Box>
+                    </>
+                  )}
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </form>
+        <Toaster />
+      </Container>
+    </Box>
   );
 };
 
