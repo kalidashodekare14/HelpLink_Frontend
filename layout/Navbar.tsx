@@ -1,341 +1,350 @@
-"use client"
-import HorizontalSplitIcon from '@mui/icons-material/HorizontalSplit';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { Avatar, Box, Button, Container, Menu, MenuItem, Skeleton, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { signOut, useSession } from 'next-auth/react';
-import { useUserRoleQuery } from '@/state/services/userRole/userRole';
-import Image from 'next/image';
-
+"use client";
+import { useUserRoleQuery } from "@/state/services/userRole/userRole";
+import CloseIcon from "@mui/icons-material/Close";
+import HorizontalSplitIcon from "@mui/icons-material/HorizontalSplit";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Menu,
+  MenuItem,
+  Skeleton,
+  Typography,
+} from "@mui/material";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  // Responsive toggle state
+  const [toggle, setToggle] = useState<boolean>(false);
+  //  Sticky State
+  const [isSticky, setIsSticky] = useState<boolean>(false);
+  // Pathname hook
+  const pathname = usePathname();
+  // dashboard route track
+  const isDashboardRoute =
+    pathname.startsWith("/admin_dashboard") ||
+    pathname.startsWith("/volunteer_dashboar") ||
+    pathname.startsWith("/access_denied") ||
+    pathname.startsWith("/signup") ||
+    pathname.startsWith("/signin");
+  // Session Data
+  const { data: session, status } = useSession();
+  // user backend data
+  const {
+    data: roleData,
+    isLoading: roleLoading,
+    error: roleError,
+  } = useUserRoleQuery(undefined, {
+    skip: status !== "authenticated",
+  });
+  const userInfo = roleData?.data;
+  // Dropdown state and function
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  // Logout function
+  const handleLogout = () => {
+    signOut();
+  };
 
-    // Responsive toggle state
-    const [toggle, setToggle] = useState<boolean>(false);
-    //  Sticky State 
-    const [isSticky, setIsSticky] = useState<boolean>(false);
-    // Pathname hook
-    const pathname = usePathname();
-    // dashboard route track
-    const isDashboardRoute = pathname.startsWith('/admin_dashboard')
-        || pathname.startsWith("/volunteer_dashboar")
-        || pathname.startsWith("/access_denied")
-        || pathname.startsWith("/signup")
-        || pathname.startsWith("/signin")
-    // Session Data
-    const { data: session, status } = useSession();
-    // user backend data
-    const { data: roleData, isLoading: roleLoading, error: roleError } = useUserRoleQuery(undefined, {
-        skip: status !== "authenticated"
-    });
-    const userInfo = roleData?.data
-    // Dropdown state and function
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+  // Toggle function
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
+  // Page routes
+  const navgicaton = [
+    {
+      id: 1,
+      name: "Home",
+      path: "/",
+    },
+    {
+      id: 2,
+      name: "Campaigns",
+      path: "/campaigns",
+    },
+    {
+      id: 4,
+      name: "About Us",
+      path: "/about",
+    },
+    {
+      id: 5,
+      name: "Contact",
+      path: "/contact",
+    },
+  ];
+
+  // Sticky useEffect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isTop = window.scrollY < 150;
+      setIsSticky(!isTop);
     };
-    const handleClose = () => {
-        setAnchorEl(null);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
-    // Logout function
-    const handleLogout = () => {
-        signOut()
-    }
+  }, []);
 
-    // Toggle function
-    const handleToggle = () => {
-        setToggle(!toggle)
-    }
-    // Page routes
-    const navgicaton = [
-        {
-            "id": 1,
-            "name": "Home",
-            "path": "/"
-        },
-        {
-            "id": 2,
-            "name": "Campaigns",
-            "path": "/campaigns"
-        },
-        {
-            "id": 3,
-            "name": "Weather Risk Tracker",
-            "path": "/weather_track"
-        },
-        {
-            "id": 4,
-            "name": "About Us",
-            "path": "/about"
-        },
-        {
-            "id": 5,
-            "name": "Contact",
-            "path": "/contact"
-        },
-
-    ]
-
-    // Sticky useEffect
-    useEffect(() => {
-        const handleScroll = () => {
-            const isTop = window.scrollY < 150;
-            setIsSticky(!isTop)
-        }
-        window.addEventListener("scroll", handleScroll)
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
-
-
-    return (
+  return (
+    <Box
+      sx={{
+        position: isSticky ? "sticky" : "static",
+        top: isSticky ? 0 : "auto",
+        zIndex: isSticky ? 50 : "auto",
+        backgroundColor: isSticky ? "rgba(255, 255, 255, 0.73)" : "white",
+        boxShadow: isSticky ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
+        backdropFilter: isSticky ? "blur(12px)" : "none",
+        transition: "all 0.3s ease",
+        opacity: isSticky ? 1 : 1,
+        bgcolor: "white",
+        display: isDashboardRoute ? "none" : "block",
+      }}
+    >
+      <Container
+        maxWidth={"lg"}
+        sx={{
+          zIndex: "50",
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          py: "12px",
+        }}
+      >
         <Box
-            sx={{
-                position: isSticky ? "sticky" : "static",
-                top: isSticky ? 0 : "auto",
-                zIndex: isSticky ? 50 : "auto",
-                backgroundColor: isSticky ? "rgba(255, 255, 255, 0.73)" : "white",
-                boxShadow: isSticky ? "0 4px 20px rgba(0,0,0,0.15)" : "none",
-                backdropFilter: isSticky ? "blur(12px)" : "none",
-                transition: "all 0.3s ease",
-                opacity: isSticky ? 1 : 1,
-                bgcolor: "white",
-                display: isDashboardRoute ? "none" : "block"
-            }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            justifyItems: "center",
+            gap: "80px",
+          }}
         >
-            <Container
-                maxWidth={"lg"}
-                sx={{
-                    zIndex: "50",
+          <Link href={"/"}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Image
+                className="w-10"
+                src={"/logo.png"}
+                width={500}
+                height={300}
+                alt=""
+              />
+              <h1 className="text-3xl">HelpLink</h1>
+            </Box>
+          </Link>
+          <ul className="hidden lg:flex items-center gap-5 text-[16px]">
+            {navgicaton.map((navi) => (
+              <Link
+                className={`${pathname == navi.path && "text-[#FB8500] border-b-2 border-[#FB8500]"} hover:text-[#FB8500]`}
+                key={navi.id}
+                href={navi.path}
+              >
+                <li className="font-rubik">{navi.name}</li>
+              </Link>
+            ))}
+          </ul>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyItems: "center",
+            alignItems: "center",
+            gap: "10px",
+            fontSize: "19px",
+          }}
+        >
+          {/* Avatar Toggle */}
+          <Box>
+            {session ? (
+              <>
+                <Avatar
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={(event: React.MouseEvent<HTMLElement>) =>
+                    setAnchorEl(event.currentTarget)
+                  }
+                  sx={{ cursor: "pointer" }}
+                >
+                  {userInfo?.image ? (
+                    <img src={userInfo?.image} alt="" />
+                  ) : (
+                    <Typography sx={{ fontSize: "20px", color: "black" }}>
+                      {userInfo?.name ? userInfo.name[0] : null}
+                    </Typography>
+                  )}
+                </Avatar>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  slotProps={{
+                    list: {
+                      "aria-labelledby": "basic-button",
+                    },
+                  }}
+                >
+                  {roleLoading ? (
+                    <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                  ) : (
+                    (userInfo?.role === "receiver" ||
+                      userInfo?.role === "donor") && (
+                      <Link href={"/profile"}>
+                        <MenuItem>Profile</MenuItem>
+                      </Link>
+                    )
+                  )}
+
+                  {roleLoading ? (
+                    <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                  ) : (
+                    userInfo?.role === "receiver" && (
+                      <>
+                        <Link href={"/help_request"}>
+                          <MenuItem onClick={handleClose}>
+                            Help Request
+                          </MenuItem>
+                        </Link>
+                        <Link href={"/request_track"}>
+                          <MenuItem onClick={handleClose}>
+                            Request Track
+                          </MenuItem>
+                        </Link>
+                      </>
+                    )
+                  )}
+                  {roleLoading ? (
+                    <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                  ) : (
+                    userInfo?.role === "donor" && (
+                      <>
+                        <Link href={"/donate_track"}>
+                          <MenuItem onClick={handleClose}>
+                            Donate Track
+                          </MenuItem>
+                        </Link>
+                      </>
+                    )
+                  )}
+                  {roleLoading ? (
+                    <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                  ) : (
+                    userInfo?.role === "admin" && (
+                      <>
+                        <Link href={"/admin_dashboard"}>
+                          <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                        </Link>
+                      </>
+                    )
+                  )}
+                  {roleLoading ? (
+                    <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
+                  ) : (
+                    userInfo?.role === "volunteer" && (
+                      <>
+                        <Link href={"/volunteer_dashboard"}>
+                          <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                        </Link>
+                      </>
+                    )
+                  )}
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Link href={"/signin"}>
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  sx={{
                     width: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    py: "12px"
-                }}>
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        justifyItems: "center",
-                        gap: "80px"
-                    }}>
-                    <Link href={"/"}>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <Image className='w-10' src={"/logo.png"} width={500} height={300} alt='' />
-                            <h1 className='text-3xl'>HelpLink</h1>
-                        </Box>
-                    </Link>
-                    <ul className='hidden lg:flex items-center gap-5 text-[16px]'>
-                        {
-                            navgicaton.map((navi) => (
-                                <Link className={`${pathname == navi.path && "text-[#FB8500] border-b-2 border-[#FB8500]"} hover:text-[#FB8500]`} key={navi.id} href={navi.path}>
-                                    <li className='font-rubik'>{navi.name}</li>
-                                </Link>
-                            ))
-                        }
-                    </ul>
-                </Box>
-
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyItems: "center",
-                        alignItems: "center",
-                        gap: "10px",
-                        fontSize: "19px"
-                    }}>
-                    {/* Avatar Toggle */}
-                    <Box>
-                        {
-                            session ? (
-                                <>
-                                    <Avatar
-                                        id="basic-button"
-                                        aria-controls={open ? 'basic-menu' : undefined}
-                                        aria-haspopup="true"
-                                        aria-expanded={open ? 'true' : undefined}
-                                        onClick={(event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget)}
-                                        sx={{ cursor: 'pointer' }}
-                                    >
-                                        {userInfo?.image ? (
-                                            <img src={userInfo?.image} alt='' />
-                                        ) : (
-                                            <Typography sx={{ fontSize: "20px", color: "black" }}>{userInfo?.name ? userInfo.name[0] : null}</Typography>
-                                        )
-                                        }
-                                    </Avatar>
-                                    <Menu
-                                        id="basic-menu"
-                                        anchorEl={anchorEl}
-                                        open={open}
-                                        onClose={handleClose}
-                                        slotProps={{
-                                            list: {
-                                                'aria-labelledby': 'basic-button',
-                                            },
-                                        }}
-                                    >
-                                        {
-                                            roleLoading ? (
-                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
-                                            ) : (
-                                                (userInfo?.role === "receiver" || userInfo?.role === "donor") && (
-                                                    <Link href={"/profile"}>
-                                                        <MenuItem>Profile</MenuItem>
-                                                    </Link>
-                                                )
-
-                                            )
-                                        }
-
-                                        {
-                                            roleLoading ? (
-                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
-                                            ) : (
-                                                userInfo?.role === "receiver" && (
-                                                    <>
-                                                        <Link href={"/help_request"}>
-                                                            <MenuItem onClick={handleClose}>Help Request</MenuItem>
-                                                        </Link>
-                                                        <Link href={"/request_track"}>
-                                                            <MenuItem onClick={handleClose}>Request Track</MenuItem>
-                                                        </Link>
-                                                    </>
-                                                )
-                                            )
-
-                                        }
-                                        {
-                                            roleLoading ? (
-                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
-                                            ) : (
-                                                userInfo?.role === "donor" && (
-                                                    <>
-                                                        <Link href={"/donate_track"}>
-                                                            <MenuItem onClick={handleClose}>Donate Track</MenuItem>
-                                                        </Link>
-                                                    </>
-                                                )
-                                            )
-
-                                        }
-                                        {
-                                            roleLoading ? (
-                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
-                                            ) : (
-                                                userInfo?.role === "admin" && (
-                                                    <>
-                                                        <Link href={"/admin_dashboard"}>
-                                                            <MenuItem onClick={handleClose}>Dashboard</MenuItem>
-                                                        </Link>
-                                                    </>
-                                                )
-                                            )
-
-                                        }
-                                        {
-                                            roleLoading ? (
-                                                <Skeleton width={"100%"} height={30} sx={{ px: "5px" }} />
-                                            ) : (
-                                                userInfo?.role === "volunteer" && (
-                                                    <>
-                                                        <Link href={"/volunteer_dashboard"}>
-                                                            <MenuItem onClick={handleClose}>Dashboard</MenuItem>
-                                                        </Link>
-                                                    </>
-                                                )
-                                            )
-
-                                        }
-                                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                                    </Menu>
-                                </>
-                            ) : (
-                                <Link href={"/signin"}>
-                                    <Button
-                                        type='submit'
-                                        variant='outlined'
-                                        sx={{
-                                            width: "100%",
-                                            bgcolor: "#fb8500",
-                                            borderColor: "#fb8500",
-                                            color: "white",
-                                            '&:hover': {
-                                                bgcolor: "#fb8500",
-                                                borderColor: "#fb8500",
-                                            },
-                                        }}
-                                    >
-                                        Login
-                                    </Button>
-                                </Link>
-                            )
-                        }
-                    </Box>
-                    {/*Toggle Icon */}
-                    <Box>
-                        {
-                            toggle ? (
-                                <CloseIcon
-                                    onClick={handleToggle}
-                                    sx={{
-                                        display: {
-
-                                            sm: "inline-block",
-                                            md: "inline-block",
-                                            lg: "none"
-                                        }
-                                    }}
-                                />
-                            ) : (
-                                <HorizontalSplitIcon
-                                    onClick={handleToggle}
-                                    sx={{
-                                        display: {
-                                            sm: "inline-block",
-                                            md: "inline-block",
-                                            lg: "none"
-                                        }
-                                    }}
-                                />
-                            )
-                        }
-                    </Box>
-                </Box>
-                {/* Response Routes */}
-                <Box
-                    sx={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        height: "100vh",
-                        width: "75%",
-                        background: "#B26E20",
-                        color: "white",
-                        zIndex: 999,
-                        p: "25px",
-                        display: { xs: "flex", lg: "none" },
-                        flexDirection: "column",
-                        gap: "30px",
-                        fontSize: "19px",
-                        transform: toggle ? "translateX(0)" : "translateX(-100%)",
-                        transition: "transform 0.7s ease"
-                    }}>
-                    {
-                        navgicaton.map((navi) => (
-                            <Link className={`${pathname == navi.path && "text-white border-b-2 border-[#000000]"} hover:text-[#FB8500]`} key={navi.id} href={navi.path}>
-                                <Typography className='font-rubik'>{navi.name}</Typography>
-                            </Link>
-                        ))
-                    }
-                </Box>
-            </Container >
-        </Box >
-    );
+                    bgcolor: "#fb8500",
+                    borderColor: "#fb8500",
+                    color: "white",
+                    "&:hover": {
+                      bgcolor: "#fb8500",
+                      borderColor: "#fb8500",
+                    },
+                  }}
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
+          </Box>
+          {/*Toggle Icon */}
+          <Box>
+            {toggle ? (
+              <CloseIcon
+                onClick={handleToggle}
+                sx={{
+                  display: {
+                    sm: "inline-block",
+                    md: "inline-block",
+                    lg: "none",
+                  },
+                }}
+              />
+            ) : (
+              <HorizontalSplitIcon
+                onClick={handleToggle}
+                sx={{
+                  display: {
+                    sm: "inline-block",
+                    md: "inline-block",
+                    lg: "none",
+                  },
+                }}
+              />
+            )}
+          </Box>
+        </Box>
+        {/* Response Routes */}
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            height: "100vh",
+            width: "75%",
+            background: "#B26E20",
+            color: "white",
+            zIndex: 999,
+            p: "25px",
+            display: { xs: "flex", lg: "none" },
+            flexDirection: "column",
+            gap: "30px",
+            fontSize: "19px",
+            transform: toggle ? "translateX(0)" : "translateX(-100%)",
+            transition: "transform 0.7s ease",
+          }}
+        >
+          {navgicaton.map((navi) => (
+            <Link
+              className={`${pathname == navi.path && "text-white border-b-2 border-[#000000]"} hover:text-[#FB8500]`}
+              key={navi.id}
+              href={navi.path}
+            >
+              <Typography className="font-rubik">{navi.name}</Typography>
+            </Link>
+          ))}
+        </Box>
+      </Container>
+    </Box>
+  );
 };
 
 export default Navbar;
