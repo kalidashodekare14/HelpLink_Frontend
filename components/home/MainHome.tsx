@@ -2,6 +2,7 @@
 
 import AskQuestion from "./AskQuestion/AskQuestion";
 import Banner from "./banner/Banner";
+import Chatbot from "./Chatbot/Chatbot";
 import Feedback from "./Feedback/Feedback";
 import InfoSection from "./InfoSection/InfoSection";
 import OurMission from "./ourMission/OurMission";
@@ -20,6 +21,8 @@ const MainHome = () => {
       <AskQuestion />
       <OurVolunteer />
       <Feedback />
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   );
 };
