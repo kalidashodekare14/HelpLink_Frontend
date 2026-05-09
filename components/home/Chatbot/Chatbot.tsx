@@ -11,6 +11,7 @@ import {
   Paper,
   Stack,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -65,26 +66,43 @@ const Chatbot = () => {
     <>
       {/* Floating Button */}
       {!open && (
-        <Fab
-          onClick={() => setOpen(true)}
-          sx={{
-            position: "fixed",
-            right: 25,
-            bottom: "50%",
-            transform: "translateY(50%)",
-            bgcolor: "#FB8500",
-            color: "white",
-            zIndex: 9999,
-            width: 65,
-            height: 65,
-            boxShadow: "0px 10px 30px rgba(251,133,0,0.4)",
-            "&:hover": {
-              bgcolor: "#e97700",
+        <Tooltip
+          title="Chatbot"
+          describeChild
+          placement="left"
+          slotProps={{
+            tooltip: {
+              sx: {
+                fontSize: "0.8rem",
+                bgcolor: "#fef3e6",
+                color: "black",
+                p: 1,
+                border: "1px solid #FB8500",
+              },
             },
           }}
         >
-          <SmartToyIcon sx={{ fontSize: 32 }} />
-        </Fab>
+          <Fab
+            onClick={() => setOpen(true)}
+            sx={{
+              position: "fixed",
+              right: 25,
+              bottom: "50%",
+              transform: "translateY(50%)",
+              bgcolor: "#FB8500",
+              color: "white",
+              zIndex: 9999,
+              width: 65,
+              height: 65,
+              boxShadow: "0px 10px 30px rgba(251,133,0,0.4)",
+              "&:hover": {
+                bgcolor: "#e97700",
+              },
+            }}
+          >
+            <SmartToyIcon sx={{ fontSize: 40 }} />
+          </Fab>
+        </Tooltip>
       )}
 
       {/* Chat Box */}
@@ -94,9 +112,12 @@ const Chatbot = () => {
           sx={{
             position: "fixed",
             right: 25,
-            bottom: 25,
+            bottom: {
+              xs: 0,
+              sm: 50,
+            },
             width: { xs: "90%", sm: 380 },
-            height: 500,
+            height: "500px",
             borderRadius: "24px",
             overflow: "hidden",
             zIndex: 9999,
