@@ -2,7 +2,6 @@
 
 import {
   useBikashPaymentMutation,
-  useJoinCampaignMutation,
   useSslCommerzPaymentMutation,
 } from "@/state/services/donorService/donorService";
 import CloseIcon from "@mui/icons-material/Close";
@@ -55,9 +54,6 @@ interface DI {
 const DonateModal = ({ open, handleOpen, handleClose }: DI) => {
   // User info session
   const { data: session } = useSession();
-  // Campaign Join RKTQuery
-  const [joinCampaign, { isLoading, isSuccess, error }] =
-    useJoinCampaignMutation();
   // Bikash Payment RKtQuery
   const [
     bikashPayment,
